@@ -27,6 +27,10 @@ dependencies:
   lottie: ^2.7.0
   material_segmented_control: ^5.0.0 
   sms_autofill: ^2.3.0
+  flutter_dash: ^1.0.0
+  flutter_localizations:
+    sdk: flutter
+
 
 
 dev_dependencies:
