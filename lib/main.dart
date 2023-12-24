@@ -29,23 +29,18 @@ class MainApp extends StatelessWidget {
           providers: [
             BlocProvider<MapBloc>(create: (context) => MapBloc()),
           ],
-          child: MaterialApp(
-            locale: const Locale('ar'),
-            localizationsDelegates: const [
+          child: const MaterialApp(
+            locale: Locale('ar'),
+            localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: const [
+            supportedLocales: [
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
-            builder: (context, child) {
-              return const Directionality(
-                textDirection: TextDirection.rtl,
-                child: GoogleMapScreen(),
-              );
-            },
+            home: GoogleMapScreen(),
           ));
     });
   }

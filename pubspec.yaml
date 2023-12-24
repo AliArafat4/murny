@@ -19,7 +19,8 @@ dependencies:
   geocoding: ^2.1.1
   location: ^5.0.3
   flutter_typeahead: ^5.0.1
-  google_maps_webservice: ^0.0.20-nullsafety.5
+#  google_maps_webservice: ^0.0.20-nullsafety.5
+  flutter_google_maps_webservices: ^1.1.1
   image_picker: ^1.0.4
   bloc_concurrency: ^0.2.2
   responsive_sizer: ^3.2.0
@@ -28,6 +29,7 @@ dependencies:
   material_segmented_control: ^5.0.0 
   sms_autofill: ^2.3.0
   flutter_dash: ^1.0.0
+  http: ^1.1.0
   flutter_localizations:
     sdk: flutter
 
