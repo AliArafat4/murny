@@ -26,12 +26,15 @@ class GolfCartDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  Image.asset("assets/images/golf_cart_icon.png"),
-                  Text(numberOfSeat),
-                  Text(price)
-                ],
+              Expanded(
+                child: Column(
+                  children: [
+                    Flexible(
+                        child: Image.asset("assets/images/golf_cart_icon.png")),
+                    Text(numberOfSeat),
+                    Text(price)
+                  ],
+                ),
               )
             ],
           ),
