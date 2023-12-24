@@ -8,11 +8,11 @@ class PaymentMethod extends StatelessWidget {
     String iconPath = "";
     switch (paymentMethod) {
       case "نقداً":
-        iconPath = "assets/money_icon.png";
+        iconPath = "assets/images/money_icon.png";
       case "البطاقة الائتمانية":
-        iconPath = "assets/credit_card_icon.png";
+        iconPath = "assets/images/credit_card_icon.png";
       case "ابل باي":
-        iconPath = "assets/appel_pay_icon.png";
+        iconPath = "assets/images/appel_pay_icon.png";
     }
     return Row(
       children: [

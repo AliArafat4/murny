@@ -38,4 +38,5 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/appel_pay_icon.png
     - .env
