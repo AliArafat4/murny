@@ -2,8 +2,11 @@ import 'package:murny_final_project/api/end_points/functions/Authentication.dart
 import 'package:murny_final_project/api/end_points/functions/chat.dart';
 import 'package:murny_final_project/api/end_points/end_points.dart';
 import 'package:murny_final_project/api/end_points/functions/common.dart';
+import 'package:murny_final_project/api/end_points/functions/public.dart';
 import 'end_points/enums.dart';
+import 'end_points/functions/driver.dart';
 import 'end_points/functions/profile.dart';
+import 'end_points/functions/user.dart';
 
 class MurnyApi {
   final String url = "https://murny-api.onrender.com";
@@ -49,44 +52,41 @@ class MurnyApi {
 
   user({
     required Map<String, dynamic> body,
-    required Chat function,
+    required User function,
     required String token,
   }) {
-    final url = this.url + endPoints.chatRoute;
-    // ChatFunc().chatFunctionsSelector(
-    //     function: function,
-    //     url: url,
-    //     endPoints: endPoints,
-    //     body: body,
-    //     token: token);
+    final url = this.url + endPoints.userRoute;
+    UserFunc().userFunctionsSelector(
+        function: function,
+        url: url,
+        endPoints: endPoints,
+        body: body,
+        token: token);
   }
 
   driver({
     required Map<String, dynamic> body,
-    required Chat function,
+    required Driver function,
     required String token,
   }) {
-    final url = this.url + endPoints.chatRoute;
-    // ChatFunc().chatFunctionsSelector(
-    //     function: function,
-    //     url: url,
-    //     endPoints: endPoints,
-    //     body: body,
-    //     token: token);
+    final url = this.url + endPoints.driverRoute;
+    DriverFunc().driverFunctionsSelector(
+        function: function,
+        url: url,
+        endPoints: endPoints,
+        body: body,
+        token: token);
   }
 
   public({
-    required Map<String, dynamic> body,
-    required Chat function,
-    required String token,
+    required Public function,
   }) {
-    final url = this.url + endPoints.chatRoute;
-    // ChatFunc().chatFunctionsSelector(
-    //     function: function,
-    //     url: url,
-    //     endPoints: endPoints,
-    //     body: body,
-    //     token: token);
+    final url = this.url + endPoints.publicRoute;
+    PublicFunc().publicFunctionsSelector(
+      function: function,
+      url: url,
+      endPoints: endPoints,
+    );
   }
 
   common({
