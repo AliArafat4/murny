@@ -46,6 +46,11 @@ class ProfileFunc {
         await uploadProfileData(url, endPoints.uploadAvatar, token, body);
         break;
 
+      //TODO: FIX DELETE
+      case Profile.deleteUserAccount:
+        // await uploadProfileData(url, endPoints.deleteAccount, token, body);
+        break;
+
       default:
         throw "exception";
     }

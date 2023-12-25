@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:murny_final_project/api/end_points/end_points.dart';
-import 'package:murny_final_project/models/sign_up_model.dart';
+import 'package:murny_final_project/main.dart';
+import 'package:murny_final_project/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../enums.dart';
@@ -26,7 +27,10 @@ class Authentication {
         return await signUp(url: url + endPoints.signInWithGoogle, body: body);
 
       case Auth.otp:
-        return await signUp(url: url + endPoints.otp, body: body);
+        final uri = Uri.parse(url + endPoints.otp);
+        await http.post(uri, body: jsonEncode(body));
+        print("otp sent successfully");
+        break;
 
       case Auth.signIn:
         return await signUp(url: url + endPoints.signIn, body: body);
@@ -35,15 +39,16 @@ class Authentication {
     }
   }
 
-  Future<SignUpModel> signUp({
+  Future<UserModel> signUp({
     required String url,
     required Map<String, dynamic> body,
   }) async {
     final uri = Uri.parse(url);
     final response = await http.post(uri, body: jsonEncode(body));
 
-    final SignUpModel signUpModel =
-        SignUpModel.fromJson(jsonDecode(response.body));
-    return signUpModel;
+    final UserModel userModel = UserModel.fromJson(jsonDecode(response.body));
+    pref.setUser(userModel);
+
+    return userModel;
   }
 }

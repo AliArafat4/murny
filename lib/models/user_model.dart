@@ -1,18 +1,18 @@
-class SignUpModel {
+class UserModel {
   String? message;
   String? token;
   int? expiresAt;
   String? refreshToken;
   String? tokenType;
 
-  SignUpModel(
+  UserModel(
       {this.message,
       this.token,
       this.expiresAt,
       this.refreshToken,
       this.tokenType});
 
-  SignUpModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     token = json['token'];
     expiresAt = json['expires_at'];
