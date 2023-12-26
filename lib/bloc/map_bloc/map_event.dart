@@ -17,3 +17,5 @@ class MapGetMarkerLocationEvent extends MapEvent {
 }
 
 class MapResetMarkersEvent extends MapEvent {}
+
+class MapGetDriversMarkerEvent extends MapEvent {}

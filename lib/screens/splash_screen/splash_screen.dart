@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/api/end_points/enums.dart';
+import 'package:murny_final_project/api/mury_api.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -25,7 +27,6 @@ class SplashScreen extends StatelessWidget {
             height: 30,
           ),
           Image.asset(
-            
             'assets/images/carRight.png',
           ),
           Container(
@@ -35,6 +36,11 @@ class SplashScreen extends StatelessWidget {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        MurnyApi().signIn(
+            body: {"email": "dezykowi@tutuapp.bid", "otp": "100458"},
+            function: Auth.signIn);
+      }),
     );
   }
 }

@@ -28,3 +28,9 @@ class MapGetMarkerLocationState extends MapState {
 
   MapGetMarkerLocationState({required this.location});
 }
+
+class MapGetDriversMarkerState extends MapState {
+  final List<DriverModel> driverModelList;
+
+  MapGetDriversMarkerState({required this.driverModelList});
+}
