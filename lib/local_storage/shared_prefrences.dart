@@ -28,7 +28,8 @@ class SharedPref {
   }
 
   String getUser() {
-    return _preferences.getString("user") ?? jsonEncode(UserModel);
+    UserModel user = UserModel();
+    return _preferences.getString("user") ?? jsonEncode(user);
   }
 
   void cleanUser() async {

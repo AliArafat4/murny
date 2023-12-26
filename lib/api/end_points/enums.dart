@@ -9,7 +9,7 @@ enum Auth {
 
 enum Chat { getMessages, sendMessages }
 
-enum Common { getOrder }
+enum Common { getOrder, getDrivers }
 
 enum Driver { responseToOrder, getRating }
 
