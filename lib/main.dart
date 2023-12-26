@@ -20,7 +20,7 @@ void main() async {
   await FlutterConfig.loadEnvVariables();
   await dotenv.load(fileName: ".env");
 
-  pref.initializePref();
+  await pref.initializePref();
 
   runApp(const MainApp());
 }
@@ -30,13 +30,18 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: FIX, USE REQUEST
     final UserModel currentUser =
         UserModel.fromJson(jsonDecode(pref.getUser()));
+    final convertedTime = DateTime.fromMillisecondsSinceEpoch(
+        (currentUser.expiresAt ?? 0) * 1000);
 
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return MultiBlocProvider(
           providers: [
-            BlocProvider<MapBloc>(create: (context) => MapBloc()),
+            BlocProvider<MapBloc>(
+                create: (context) =>
+                    MapBloc()..add(MapGetCurrentLocationEvent())),
           ],
           child: MaterialApp(
             locale: const Locale('ar'),
@@ -49,10 +54,9 @@ class MainApp extends StatelessWidget {
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
-            home: ((currentUser.expiresAt ?? 0) >
-                    DateTime.now().millisecondsSinceEpoch)
-                ? const SplashScreen()
-                : const GoogleMapScreen(),
+            home: (convertedTime.compareTo(DateTime.now()) > 0)
+                ? const GoogleMapScreen()
+                : const SplashScreen(),
           ));
     });
   }

@@ -21,6 +21,7 @@ dependencies:
   flutter_typeahead: ^5.0.1
 #  google_maps_webservice: ^0.0.20-nullsafety.5
   flutter_google_maps_webservices: ^1.1.1
+  google_map_polyline_new: ^0.3.0+2
   image_picker: ^1.0.4
   bloc_concurrency: ^0.2.2
   responsive_sizer: ^3.2.0
