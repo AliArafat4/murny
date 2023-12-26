@@ -48,5 +48,16 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/appel_pay_icon.png
+
     - .env
+    - assets/images/carMurny.png
+    - assets/images/carMurny.svg
+    - assets/images/satellite.svg
+    - assets/images/imageDrawer.svg
+    - assets/images/imageSearch.svg
+    - assets/images/imageVoice.svg
+    - assets/images/imageCall.svg
+    - assets/images/imageContactusWhatsapp.svg
+
+    - assets/images/appel_pay_icon.png
+

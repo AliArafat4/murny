@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
+import 'package:murny_final_project/widgets/segment_control.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
-enum UserType { user, driver }
-
-class SplashSignInSignUpScreen extends StatefulWidget {
+class SplashSignInSignUpScreen extends StatelessWidget {
   const SplashSignInSignUpScreen({super.key});
-
-  @override
-  State<SplashSignInSignUpScreen> createState() =>
-      _SplashSignInSignUpScreenState();
-}
-
-class _SplashSignInSignUpScreenState extends State<SplashSignInSignUpScreen> {
-  UserType typeView = UserType.user;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +17,12 @@ class _SplashSignInSignUpScreenState extends State<SplashSignInSignUpScreen> {
         children: [
           Stack(
             children: [
-              Image.asset("assets/images/splashImage.png"),
+              Image.asset(
+                "assets/images/splashImage.png",
+              ),
               Positioned(
-                  top: 134,
-                  left: 210,
+                  top: 45.5.sp,
+                  left: 60.5.sp,
                   child: Image.asset("assets/images/carRight.png")),
             ],
           ),
@@ -40,44 +35,50 @@ class _SplashSignInSignUpScreenState extends State<SplashSignInSignUpScreen> {
               ),
             ),
             Positioned(
-              top: 88,
-              left: 20,
-              child: SegmentedButton<UserType>(
-                showSelectedIcon: false,
-                style: const ButtonStyle(
-                    side: MaterialStatePropertyAll(BorderSide(
-                        style: BorderStyle.solid,
-                        color: Color.fromARGB(171, 0, 0, 0))),
-                    overlayColor: MaterialStatePropertyAll(
-                        Color.fromARGB(166, 37, 44, 99)),
-                    foregroundColor:
-                        MaterialStatePropertyAll(Color.fromARGB(217, 0, 0, 0)),
-                    backgroundColor:
-                        MaterialStatePropertyAll(Colors.transparent)),
-                segments: const <ButtonSegment<UserType>>[
-                  ButtonSegment<UserType>(
-                    value: UserType.user,
-                    label: Text('User'),
-                  ),
-                  ButtonSegment<UserType>(
-                    value: UserType.driver,
-                    label: Text('Drivier'),
-                  ),
-                ],
-                selected: <UserType>{typeView},
-                onSelectionChanged: (Set<UserType> newSelection) {
-                  setState(() {
-                    // By default there is only a single segment that can be
-                    // selected at one time, so its value is always the first
-                    // item in the selected set.
-                    typeView = newSelection.first;
-                  });
-                },
+              top: 30.sp,
+              left: 48.sp,
+              child: SegmentControl(
+                textOne: 'مستخدم',
+                textTwo: 'سائق',
+                colorSelected: const Color(0xff525884),
               ),
+
+              // child: SegmentedButton<UserType>(
+              //   showSelectedIcon: false,
+              //   style: const ButtonStyle(
+              //       side: MaterialStatePropertyAll(BorderSide(
+              //           style: BorderStyle.solid,
+              //           color: Color.fromARGB(171, 0, 0, 0))),
+              //       overlayColor: MaterialStatePropertyAll(
+              //           Color.fromARGB(166, 37, 44, 99)),
+              //       foregroundColor:
+              //           MaterialStatePropertyAll(Color.fromARGB(217, 0, 0, 0)),
+              //       backgroundColor:
+              //           MaterialStatePropertyAll(Colors.transparent)),
+              //   segments: const <ButtonSegment<UserType>>[
+              //     ButtonSegment<UserType>(
+              //       value: UserType.user,
+              //       label: Text('User'),
+              //     ),
+              //     ButtonSegment<UserType>(
+              //       value: UserType.driver,
+              //       label: Text('Drivier'),
+              //     ),
+              //   ],
+              //   selected: <UserType>{typeView},
+              //   onSelectionChanged: (Set<UserType> newSelection) {
+              //     setState(() {
+              //       // By default there is only a single segment that can be
+              //       // selected at one time, so its value is always the first
+              //       // item in the selected set.
+              //       typeView = newSelection.first;
+              //     });
+              //   },
+              // ),
             ),
             Positioned(
-              height: 54,
-              width: 340,
+              height: 6.h,
+              width: 85.w,
               top: 150,
               child: ElevatedButton(
                   style: ButtonStyle(
@@ -95,12 +96,12 @@ class _SplashSignInSignUpScreenState extends State<SplashSignInSignUpScreen> {
                   },
                   child: const Text(
                     'إنشاء حساب',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, color: Color(0xffFFFFFF)),
                   )),
             ),
             Positioned(
-                height: 54,
-                width: 340,
+                height: 6.h,
+                width: 85.w,
                 top: 220,
                 child: ElevatedButton(
                     style: ButtonStyle(
@@ -117,8 +118,7 @@ class _SplashSignInSignUpScreenState extends State<SplashSignInSignUpScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignInScreen()),
+                        MaterialPageRoute(builder: (context) => SignInScreen()),
                       );
                     },
                     child: const Text(
