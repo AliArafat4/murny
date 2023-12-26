@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/widgets/account_text.dart';
+import 'package:murny_final_project/widgets/button_gmail_apple.dart';
+import 'package:murny_final_project/widgets/divider_signin_signup.dart';
+import 'package:murny_final_project/widgets/text_field.dart';
+import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -8,266 +14,148 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
+TextEditingController conName = TextEditingController();
+TextEditingController conPhone = TextEditingController();
+TextEditingController conEmail = TextEditingController();
+TextEditingController conPass = TextEditingController();
+
 class _SignUpScreenState extends State<SignUpScreen> {
   int selectedOption = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFFFFFF),
-      body: Padding(
-        padding: const EdgeInsets.all(21),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 72, left: 16),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Image.asset(
-                      'assets/images/carLeft.png',
-                      width: 125,
-                      height: 120,
-                    ),
-                  ),
+        backgroundColor: const Color(0xffFFFFFF),
+        body: Padding(
+            padding: EdgeInsets.all(20.sp),
+            child: SingleChildScrollView(
+              child: Column(children: [
+                const UpSideSigninSignup(
+                  visibleImage: true,
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: const Row(
-                    children: [
-                      Text(
-                        'رجوع',
+                const Align(
+                    alignment: Alignment.topRight,
+                    child: Text('إنشاء حساب',
                         style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
+                          fontSize: 28,
+                          color: Color(0xff252C63),
+                        ))),
+                SizedBox(
+                  height: 3.h,
                 ),
-              ],
-            ),
-            const Align(
-                alignment: Alignment.topRight,
-                child: Text('إنشاء حساب',
-                    style: TextStyle(
-                      fontSize: 28,
-                      color: Color(0xff252C63),
-                    )
-                    //fontWeight: FontWeight.bold),
-                    )),
-            SizedBox(
-              height: 4.h,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xff252C63)),
-                      borderRadius: BorderRadius.circular(8)),
-                  disabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xff252C63)),
-                      borderRadius: BorderRadius.circular(8)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xff252C63)),
-                      borderRadius: BorderRadius.circular(8)),
-                  hintText: 'الإسم الثلاثي',
-                  // hintStyle: const TextStyle(fontSize: 18),
-                  hintTextDirection: TextDirection.rtl),
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            TextField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xff252C63)),
-                      borderRadius: BorderRadius.circular(8)),
-                  disabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xff252C63)),
-                      borderRadius: BorderRadius.circular(8)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Color(0xff252C63)),
-                      borderRadius: BorderRadius.circular(8)),
-                  hintText: 'ادخل رقم جوالك',
-                  // hintStyle: const TextStyle(fontSize: 18),
-                  hintTextDirection: TextDirection.rtl),
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Text(
-                  '.بالإشتراك أنت توافق على شروط الخدمة وسياسة الخصوصية',
-                  style: TextStyle(color: Color(0xff000000), fontSize: 12),
+                TextFieldWidget(
+                  text: 'الإسم الثلاثي',
+                  typeKeyboard: TextInputType.name,
+                  scure: false,
+                  visiblePhone: false,
+                  controller: conName,
                 ),
-                Radio(
-                  value: 1,
-                  activeColor: const Color(0xff252C63),
-                  groupValue: selectedOption,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedOption = value!;
-                      print("Button value: $value");
-                    });
-                  },
+                SizedBox(
+                  height: 1.h,
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            SizedBox(
-              height: 54,
-              width: 340,
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8))),
-                      backgroundColor:
-                          MaterialStateProperty.all(const Color(0xff252C63))),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUpScreen()),
-                    );
-                  },
-                  child: const Text('اشتراك')),
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            Row(children: [
-              Expanded(
-                child: Container(
-                    margin: const EdgeInsets.only(left: 10.0, right: 10),
-                    child: const Divider(
-                      thickness: 1,
-                      color: Color(0xffB8B8B8),
-                      height: 24,
-                    )),
-              ),
-              const Text(
-                "أو",
-                style: TextStyle(color: Color(0xffB8B8B8)),
-              ),
-              Expanded(
-                child: Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10.0),
-                    child: const Divider(
-                      thickness: 1,
-                      color: Color(0xffB8B8B8),
-                      height: 24,
-                    )),
-              ),
-            ]),
-            SizedBox(
-              height: 1.h,
-            ),
-            SizedBox(
-                height: 48,
-                width: 353,
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xff000000)),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xffFFFFFF)),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    side: const BorderSide(
-                                        color: Color(0xff252C63))))),
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const SignInScreen()),
-                      // );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('قم بالتسجيل باستخدام Gmail',
-                            textDirection: TextDirection.rtl),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Image.asset('assets/images/Gmail.png'),
-                      ],
-                    ))),
-            const SizedBox(
-              height: 8,
-            ),
-            SizedBox(
-                height: 48,
-                width: 353,
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xff000000)),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xffFFFFFF)),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    side: const BorderSide(
-                                        color: Color(0xff252C63))))),
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const SignInScreen()),
-                      // );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('قم بالتسجيل باستخدام ابل',
-                            textDirection: TextDirection.rtl),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Image.asset('assets/images/Apple.png'),
-                      ],
-                    ))),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                GestureDetector(
-                    onTap: () {},
-                    child: const Text("تسجيل الدخول",
-                        textDirection: TextDirection.rtl,
+                TextFieldWidget(
+                  text: 'ادخل رقم جوالك',
+                  typeKeyboard: TextInputType.phone,
+                  scure: false,
+                  visiblePhone: true,
+                  controller: conPhone,
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                TextFieldWidget(
+                  text: 'ادخل ايميلك',
+                  typeKeyboard: TextInputType.emailAddress,
+                  scure: false,
+                  visiblePhone: false,
+                  controller: conEmail,
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                TextFieldWidget(
+                  text: 'ادخل كلمة المرور',
+                  typeKeyboard: TextInputType.visiblePassword,
+                  scure: true,
+                  visiblePhone: false,
+                  controller: conPass,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Radio(
+                      value: 1,
+                      activeColor: const Color(0xff252C63),
+                      groupValue: selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedOption = value!;
+                          print("Button value: $value");
+                        });
+                      },
+                    ),
+                    const Text(
+                      'بالإشتراك أنت توافق على شروط الخدمة وسياسة الخصوصية.',
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(color: Color(0xff000000), fontSize: 12),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                SizedBox(
+                  height: 54,
+                  width: 340,
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8))),
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color(0xff252C63))),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpScreen()),
+                        );
+                      },
+                      child: const Text(
+                        'اشتراك',
                         style:
-                            TextStyle(fontSize: 16, color: Color(0xff252C63)))),
-                const SizedBox(
-                  width: 5,
+                            TextStyle(color: Color(0xffFFFFFF), fontSize: 20),
+                      )),
                 ),
-                const Text(" هل لديك حساب؟",
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        fontFamily: 'Mulish-Reg',
-                        color: Color(0xff000000))),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+                SizedBox(
+                  height: 1.h,
+                ),
+                const DividerSigninSignup(),
+                SizedBox(
+                  height: 1.h,
+                ),
+                ButtonGmailApple(
+                  text: 'قم بالتسجيل باستخدام Gmail',
+                  image: 'assets/images/Gmail.png',
+                  leftSpace: 0.0,
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                ButtonGmailApple(
+                  text: 'قم بالتسجيل باستخدام ابل',
+                  image: 'assets/images/Apple.png',
+                  leftSpace: 23,
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                const AccountText(
+                  firstText: 'تسجيل الدخول',
+                  secondText: 'هل لديك حساب؟',
+                ),
+              ]),
+            )));
   }
 }

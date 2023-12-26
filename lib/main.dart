@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
+import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
+import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
 import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/home/home_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/otp_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 late SharedPreferences prefs;
 void main() async {
@@ -26,27 +34,23 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return MultiBlocProvider(
-          providers: [
-            BlocProvider<MapBloc>(create: (context) => MapBloc()),
+        providers: [
+          BlocProvider<MapBloc>(create: (context) => MapBloc()),
+        ],
+        child: MaterialApp(
+          locale: Locale('ar'),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
-          child: MaterialApp(
-            locale: const Locale('ar'),
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('ar'), // Arabic
-            ],
-            debugShowCheckedModeBanner: false,
-            builder: (context, child) {
-              return const Directionality(
-                textDirection: TextDirection.rtl,
-                child: GoogleMapScreen(),
-              );
-            },
-          ));
+          supportedLocales: const [
+            Locale('ar'), // Arabic
+          ],
+          debugShowCheckedModeBanner: false,
+          home: EditAccount(),
+        ),
+      );
     });
   }
 }

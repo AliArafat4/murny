@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -14,20 +15,25 @@ class SplashScreen extends StatelessWidget {
             'مُرني',
             style: TextStyle(color: Color(0xff232B69), fontSize: 64),
           ),
-          const Padding(
-            padding: EdgeInsets.only(right: 50),
-            child: Text(
+          Padding(
+            padding: EdgeInsets.only(right: 30.sp),
+            child: const Text(
               'Murny',
               style: TextStyle(color: Color(0xff232B69), fontSize: 24),
             ),
           ),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: 3.h,
           ),
-          Image.asset(
-            
-            'assets/images/carRight.png',
-          ),
+          Stack(children: [
+            Image.asset(
+              'assets/images/splashImage.png',
+            ),
+            Positioned(
+                top: 48.5.sp,
+                right: 62.sp,
+                child: Image.asset('assets/images/carRight.png'))
+          ]),
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 6,

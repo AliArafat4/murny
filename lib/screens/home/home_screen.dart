@@ -1,8 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
+import 'package:murny_final_project/widgets/segment_control.dart';
+import 'package:murny_final_project/widgets/text_field_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,18 +13,6 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-}
-
-int? _currentSelection = 0;
-Map<int, Widget> _children = {
-  0: const Text('العربية'),
-  1: const Text('English'),
-};
-
-List<int> _disabledIndices = [];
-
-int _randomInt() {
-  return Random.secure().nextInt(_children.length);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -83,8 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const EditAccount()),
+                      MaterialPageRoute(builder: (context) => EditAccount()),
                     );
                   },
                   child: Row(
@@ -216,31 +206,37 @@ class _HomeScreenState extends State<HomeScreen> {
                 thickness: 1,
               ),
               SizedBox(
-                // height: 23,
-                child: MaterialSegmentedControl(
-                    horizontalPadding:
-                        EdgeInsets.only(left: 50.sp, right: 20, top: 20.sp),
-                    children: _children,
-                    selectionIndex: _currentSelection,
-                    borderColor: const Color(0xff000000),
-                    selectedColor: const Color(0xff000000),
-                    unselectedColor: Colors.white,
-                    selectedTextStyle:
-                        const TextStyle(color: Color(0xffFFFFFF), fontSize: 14),
-                    unselectedTextStyle:
-                        const TextStyle(color: Color(0xff000000), fontSize: 14),
-                    borderWidth: 0.7,
-                    borderRadius: 6.0,
-                    disabledChildren: _disabledIndices,
-                    verticalOffset: 8.0,
-                    onSegmentTapped: (index) {
-                      setState(() {
-                        _currentSelection = index;
-                      });
-                    }),
-              ),
+                  // height: 23,
+                  child: SegmentControl(
+                textOne: 'العربية',
+                textTwo: 'English',
+                colorSelected: const Color(0xff000000),
+              )
+
+                  // MaterialSegmentedControl(
+                  //     horizontalPadding:
+                  //         EdgeInsets.only(left: 50.sp, right: 20, top: 20.sp),
+                  //     children: _children,
+                  //     selectionIndex: _currentSelection,
+                  //     borderColor: const Color(0xff000000),
+                  //     selectedColor: const Color(0xff000000),
+                  //     unselectedColor: Colors.white,
+                  //     selectedTextStyle:
+                  //         const TextStyle(color: Color(0xffFFFFFF), fontSize: 14),
+                  //     unselectedTextStyle:
+                  //         const TextStyle(color: Color(0xff000000), fontSize: 14),
+                  //     borderWidth: 0.7,
+                  //     borderRadius: 6.0,
+                  //     disabledChildren: _disabledIndices,
+                  //     verticalOffset: 8.0,
+                  //     onSegmentTapped: (index) {
+                  //       setState(() {
+                  //         _currentSelection = index;
+                  //       });
+                  //     }),
+                  ),
               SizedBox(
-                height: 35.sp,
+                height: 30.sp,
               ),
               Padding(
                 padding: EdgeInsets.only(top: 15.sp, left: 64.sp),
@@ -256,62 +252,12 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: EdgeInsets.all(8.0.sp),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () => _scaffoldKey.currentState!.openDrawer(),
-                      child: Container(
-                        width: 8.w,
-                        height: 4.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: const Color(0xffFFFFFF)),
-                        child: Image.asset(
-                          'assets/images/drawerImage.png',
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 2.w,
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                      width: 84.w,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            suffixIcon: const Icon(Icons.search),
-                            prefixIcon:
-                                const Icon(Icons.keyboard_voice_outlined),
-                            contentPadding: const EdgeInsets.all(0),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(20)),
-                            hintText: 'ابحث عن وجهتك',
-                            hintStyle:
-                                const TextStyle(color: Color(0xff000000)),
-                            filled: true,
-                            fillColor: const Color(0xffFFFFFF)),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 8.w,
-                height: 4.h,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: const Color(0xffFFFFFF)),
-                child: Image.asset(
-                  'assets/images/drawerImage.png',
-                ),
+              TextFieldSearch(
+                fun: () => _scaffoldKey.currentState!.openDrawer(),
               ),
               Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 26.h,
+                  height: 20.h,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(12),
@@ -322,8 +268,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       Positioned(
                         child: Center(
                           child: SizedBox(
-                            height: 8.h,
-                            width: 88.w,
+                            height: 6.h,
+                            width: 85.w,
                             child: ElevatedButton(
                                 style: ButtonStyle(
                                     shape: MaterialStateProperty.all<
@@ -334,7 +280,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     backgroundColor: MaterialStateProperty.all(
                                         const Color(0xff252C63))),
                                 onPressed: () {},
-                                child: const Text('اطلب الآن')),
+                                child: const Text(
+                                  'اطلب الآن',
+                                  style: TextStyle(
+                                      color: Color(0xffFFFFFF), fontSize: 20),
+                                )),
                           ),
                         ),
                       ),
