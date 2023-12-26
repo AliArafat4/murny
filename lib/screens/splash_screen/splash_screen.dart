@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import 'package:murny_final_project/api/end_points/enums.dart';
+import 'package:murny_final_project/api/mury_api.dart';
+
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -22,6 +27,7 @@ class SplashScreen extends StatelessWidget {
               style: TextStyle(color: Color(0xff232B69), fontSize: 24),
             ),
           ),
+
           SizedBox(
             height: 3.h,
           ),
@@ -41,6 +47,11 @@ class SplashScreen extends StatelessWidget {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        MurnyApi().signIn(
+            body: {"email": "dezykowi@tutuapp.bid", "otp": "100458"},
+            function: Auth.signIn);
+      }),
     );
   }
 }
