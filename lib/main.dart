@@ -19,7 +19,6 @@ import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_s
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'package:murny_final_project/screens/home.dart';
 import 'package:murny_final_project/screens/voice_search/search.dart';
 
@@ -27,7 +26,6 @@ import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 
 import 'local_storage/shared_prefrences.dart';
 import 'models/user_model.dart';
@@ -49,7 +47,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     //TODO: FIX, USE REQUEST
     final UserModel currentUser =
         UserModel.fromJson(jsonDecode(pref.getUser()));
@@ -58,31 +55,26 @@ class MainApp extends StatelessWidget {
 
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return MultiBlocProvider(
-
-
           providers: [
             BlocProvider<MapBloc>(
                 create: (context) =>
                     MapBloc()..add(MapGetCurrentLocationEvent())),
           ],
-          child: const MaterialApp(
-            locale: Locale('ar'),
-            localizationsDelegates: [
+          child: MaterialApp(
+            locale: const Locale('ar'),
+            localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: [
+            supportedLocales: const [
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
-
             home: (convertedTime.compareTo(DateTime.now()) > 0)
-                ? const GoogleMapScreen()
+                ? GoogleMapScreen()
                 : const SplashScreen(),
           ));
-
     });
-
   }
 }
