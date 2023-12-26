@@ -21,11 +21,12 @@ dependencies:
   flutter_typeahead: ^5.0.1
 #  google_maps_webservice: ^0.0.20-nullsafety.5
   flutter_google_maps_webservices: ^1.1.1
-  google_map_polyline_new: ^0.3.0+2
+  flutter_polyline_points: ^2.0.0
   image_picker: ^1.0.4
   bloc_concurrency: ^0.2.2
   responsive_sizer: ^3.2.0
   flutter_svg: ^2.0.9
+  the_widget_marker: ^1.0.0
   lottie: ^2.7.0
   material_segmented_control: ^5.0.0 
   sms_autofill: ^2.3.0
@@ -58,6 +59,7 @@ flutter:
     - assets/images/imageVoice.svg
     - assets/images/imageCall.svg
     - assets/images/imageContactusWhatsapp.svg
+    - assets/images/
 
     - assets/images/appel_pay_icon.png
 
