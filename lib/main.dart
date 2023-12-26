@@ -6,7 +6,12 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/screens/google_maps_screen.dart';
+
+import 'package:murny_final_project/screens/home.dart';
+import 'package:murny_final_project/screens/voice_search/search.dart';
+
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
+
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -30,6 +35,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     //TODO: FIX, USE REQUEST
     final UserModel currentUser =
         UserModel.fromJson(jsonDecode(pref.getUser()));
@@ -38,26 +44,29 @@ class MainApp extends StatelessWidget {
 
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return MultiBlocProvider(
+
           providers: [
             BlocProvider<MapBloc>(
                 create: (context) =>
                     MapBloc()..add(MapGetCurrentLocationEvent())),
           ],
-          child: MaterialApp(
-            locale: const Locale('ar'),
-            localizationsDelegates: const [
+          child: const MaterialApp(
+            locale: Locale('ar'),
+            localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: const [
+            supportedLocales: [
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
+
             home: (convertedTime.compareTo(DateTime.now()) > 0)
                 ? const GoogleMapScreen()
                 : const SplashScreen(),
           ));
     });
+
   }
 }

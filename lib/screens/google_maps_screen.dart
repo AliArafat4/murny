@@ -28,6 +28,46 @@ class GoogleMapScreen extends StatelessWidget {
     LatLng currentLocation = LatLng(0, 0);
     Polyline distance = Polyline(polylineId: PolylineId('0'));
     return Scaffold(
+// <<<<<<< lujain
+//       body: Column(
+//         children: [
+//           SizedBox(
+//             height: MediaQuery.of(context).size.height,
+//             width: double.infinity,
+//             child: BlocConsumer<MapBloc, MapState>(
+//               builder: (context, state) {
+//                 return GoogleMap(
+//                   compassEnabled: true,
+//                   mapToolbarEnabled: true,
+//                   myLocationEnabled: true,
+//                   myLocationButtonEnabled: true,
+//                   mapType: MapType.satellite,
+//                   onLongPress: (onPressedDestination) {
+//                     userMarker = [];
+//                     context.read<MapBloc>().add(
+//                         MapGetLocationEvent(location: onPressedDestination));
+//                   },
+//                   markers: state is MapSetMarkersState
+//                       ? Set.from(state.userMarker)
+//                       : Set.from(userMarker),
+//                   initialCameraPosition: CameraPosition(
+//                       target: state is MapGetCurrentLocationState
+//                           ? userLocation = state.userLocation
+//                           : userLocation),
+//                   onMapCreated: (GoogleMapController controller) {
+//                     googleMapController = controller;
+//                   },
+//                 );
+//               },
+//               listener: (BuildContext context, MapState state) {
+//                 state is MapSetMarkersState
+//                     ? userMarker.add(state.userMarker.first)
+//                     : const SizedBox();
+//                 state is MapGetCurrentLocationState
+//                     ? userLocation = state.userLocation
+//                     : const SizedBox();
+//               },
+// =======
       body: SafeArea(
         child: Stack(
           children: [
@@ -83,6 +123,7 @@ class GoogleMapScreen extends StatelessWidget {
                   }
                 },
               ),
+// >>>>>>> main
             ),
             //TODO: ADD WIDGETS HERE
             // ElevatedButton(
@@ -95,8 +136,13 @@ class GoogleMapScreen extends StatelessWidget {
           ],
         ),
       ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButton: const OrderBottomSheet(),
+
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       // floatingActionButton: const OrderBottomSheet(),
+
     );
   }
 }
