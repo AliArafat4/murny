@@ -14,8 +14,6 @@ class BookDetil extends StatelessWidget {
         iconPath = "assets/images/money_icon.png";
       case "البطاقة الائتمانية":
         iconPath = "assets/images/credit_card_icon.png";
-      case "ابل باي":
-        iconPath = "assets/images/appel_pay_icon.png";
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

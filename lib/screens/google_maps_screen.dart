@@ -24,7 +24,7 @@ class GoogleMapScreen extends StatelessWidget {
     List<Marker> userMarker = [];
     LatLng userLocation = const LatLng(0, 0);
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height,
@@ -67,6 +67,8 @@ class GoogleMapScreen extends StatelessWidget {
           //TODO: ADD WIDGETS HERE
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButton: const OrderBottomSheet(),
     );
   }
 }

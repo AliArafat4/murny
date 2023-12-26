@@ -5,10 +5,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/home.dart';
-import 'package:murny_final_project/widgets/accept_order_bottom_sheet.dart';
-import 'package:murny_final_project/widgets/order_bottom_sheet.dart';
-import 'package:murny_final_project/widgets/search_cart_bottom_sheet.dart';
-import 'package:murny_final_project/widgets/successful_trip_bottom_sheet.dart';
+import 'package:murny_final_project/screens/voice_search/search.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -28,22 +26,30 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<MapBloc>(create: (context) => MapBloc()),
-      ],
-      child: const MaterialApp(
-          locale: Locale('ar'),
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<MapBloc>(create: (context) => MapBloc()),
           ],
-          supportedLocales: [
-            Locale('ar'), // Arabic
-          ],
-          debugShowCheckedModeBanner: false,
-          home: Home()),
+          child: const MaterialApp(
+            locale: Locale('ar'),
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale('ar'), // Arabic
+            ],
+            debugShowCheckedModeBanner: false,
+            home: Directionality(
+              textDirection: TextDirection.rtl,
+              child: (SearchScreen()),
+            ),
+          ),
+        );
+      },
     );
   }
 }
