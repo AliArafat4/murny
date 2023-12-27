@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/method/show_dialog_success_add_balanc.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
+import 'package:murny_final_project/widgets/text_field.dart';
 
 class BalanceAddScreen extends StatelessWidget {
-  const BalanceAddScreen({super.key});
-
+  BalanceAddScreen({super.key});
+  TextEditingController balanceController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: const Text("إضافة رصيد")),
       body: Column(
         children: [
@@ -17,16 +20,28 @@ class BalanceAddScreen extends StatelessWidget {
                 EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
             child: const Align(
               alignment: Alignment.topRight,
-              child: Text("إضافة رصيد"),
+              child: Text("اضافة رصيد"),
             ),
           ),
-          //add text filed here
-          SizedBox(height: MediaQuery.of(context).size.height * 0.2),
-
-          SizedBox(height: MediaQuery.of(context).size.height * 0.3),
+          Padding(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width / 32),
+            child: TextFieldWidget(
+              text: 'ادخل المبلغ',
+              typeKeyboard: TextInputType.number,
+              scure: false,
+              visiblePhone: false,
+              controller: balanceController,
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.4),
           PrimaryButton(
             title: "تأكيد",
-            onPressed: () {},
+            onPressed: () {
+              if (balanceController.text.isNotEmpty) {
+                showSuccessAddBalanceDiolg(
+                    context: context, balance: balanceController.text);
+              }
+            },
           )
         ],
       ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/method/show_dialog_survy.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/cart_detil.dart';
 import 'package:murny_final_project/widgets/custom_divider.dart';
 import 'package:murny_final_project/widgets/driver_info.dart';
+import 'package:murny_final_project/widgets/payment_method.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:murny_final_project/widgets/trip_detil.dart';
 
@@ -79,6 +81,7 @@ showAcceptOrderBottomSheet({required BuildContext context}) {
               const Divider(
                 color: Color(0xffF4F4F4),
               ),
+              PaymentMethod(paymentMethod: "نقداً"),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 140,
               ),
@@ -90,7 +93,7 @@ showAcceptOrderBottomSheet({required BuildContext context}) {
                 child: SecondButton(
                   title: "إلغاء الطلب",
                   onPressed: () {
-                    showSurvyDiolg(context: context);
+                    showConfirmDiolg(context: context);
                   },
                   color: const Color(0xffF21D53),
                 ),

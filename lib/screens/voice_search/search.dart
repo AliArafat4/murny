@@ -4,7 +4,8 @@ import 'package:murny_final_project/widgets/location_search.dart';
 import 'package:murny_final_project/widgets/location_search_result.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+  SearchScreen({super.key});
+  TextEditingController currentLocation = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class SearchScreen extends StatelessWidget {
             LocationSearchResult(
               buildingName: "كلية علوم الحاسب والمعلوماتA3",
               cityName: "الرياض، محافظة الرياض، المملكة العربية السعودية",
-            )
+            ),
           ],
         ),
       ),
