@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/button_gmail_apple.dart';
 import 'package:murny_final_project/widgets/divider_signin_signup.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -113,29 +114,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 1.h,
                     ),
                     SizedBox(
-                      height: 54,
-                      width: 340,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8))),
-                              backgroundColor: MaterialStateProperty.all(
-                                  const Color(0xff252C63))),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignUpScreen()),
-                            );
-                          },
-                          child: const Text(
-                            'اشتراك',
-                            style: TextStyle(
-                                color: Color(0xffFFFFFF), fontSize: 20),
-                          )),
-                    ),
+                        child: PrimaryButton(
+                      isText: true,
+                      title: "اشتراك",
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpScreen()),
+                        );
+                      },
+                    )),
                     SizedBox(
                       height: 1.h,
                     ),
@@ -143,18 +132,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(
                       height: 1.h,
                     ),
-                    ButtonGmailApple(
-                      text: 'قم بالتسجيل باستخدام Gmail',
-                      image: 'assets/images/Gmail.png',
-                      leftSpace: 0.0,
+                    PrimaryButton(
+                      onPressed: () {},
+                      isText: false,
                     ),
                     SizedBox(
                       height: 1.h,
                     ),
-                    ButtonGmailApple(
-                      text: 'قم بالتسجيل باستخدام ابل',
-                      image: 'assets/images/Apple.png',
-                      leftSpace: 23,
+                    PrimaryButton(
+                      onPressed: () {},
+                      isText: false,
                     ),
                     SizedBox(
                       height: 2.h,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
@@ -5,6 +7,11 @@ import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+
+import 'package:murny_final_project/api/end_points/enums.dart';
+import 'package:murny_final_project/api/mury_api.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,16 +21,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  double move = 37.h;
+
   late CheckTokenCubit numberGenerator;
 
   @override
   void initState() {
+    Timer.periodic(const Duration(milliseconds: 15), (timer) {
+      setState(() {
+        move -= 5;
+      });
     context.read<CheckTokenCubit>().checkTokenValidity();
     selectRoute(context);
+
     super.initState();
   }
 
   @override
+
   void didChangeDependencies() {
     numberGenerator = context.read<CheckTokenCubit>();
     super.didChangeDependencies();
@@ -36,6 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffEEF0F2),
@@ -63,8 +79,8 @@ class _SplashScreenState extends State<SplashScreen> {
               fit: BoxFit.cover,
             ),
             Positioned(
-                top: 49.7.sp,
-                right: 62.sp,
+                top: 48.7.sp,
+                right: move,
                 child: Image.asset('assets/images/carRight.png'))
           ]),
           Container(

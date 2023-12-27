@@ -104,6 +104,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
                                 (Route route) => false);
                           }
                         },
+                        isText: true,
                       )
                     ],
                   ),

@@ -44,6 +44,7 @@ class BalanceAddScreen extends StatelessWidget {
                     context: context, balance: balanceController.text);
               }
             },
+            isText: true,
           )
         ],
       ),

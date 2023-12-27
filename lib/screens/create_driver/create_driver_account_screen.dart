@@ -172,12 +172,11 @@ class _CreatAccountState extends State<CreatDriverAccountScreen> {
                 height: 4.h,
               ),
               PrimaryButton(
-                  title: "اشتراك",
-                  onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => SignInScreen()),
-                        (Route route) => false);
-                  })
+                title: "اشتراك",
+                onPressed: () {},
+                isText: true,
+              )
+
             ],
           ),
         ),

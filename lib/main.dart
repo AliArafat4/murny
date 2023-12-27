@@ -7,6 +7,10 @@ import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 import 'package:murny_final_project/screens/home.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'bloc/profile_bloc/profile_bloc.dart';
@@ -47,11 +51,12 @@ class MainApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-
             supportedLocales: [
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
+
+            home: SignUpScreen(),
 
           ));
     });
