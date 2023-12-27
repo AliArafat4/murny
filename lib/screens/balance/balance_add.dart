@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/method/show_dialog_success_add_balanc.dart';
+import 'package:murny_final_project/widgets/app_bar.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
 
+// ignore: must_be_immutable
 class BalanceAddScreen extends StatelessWidget {
   BalanceAddScreen({super.key});
   TextEditingController balanceController = TextEditingController();
@@ -10,7 +12,7 @@ class BalanceAddScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: const Text("إضافة رصيد")),
+      appBar: customAppBar("اضافة رصيد"),
       body: Column(
         children: [
           const Divider(),

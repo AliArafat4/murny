@@ -35,7 +35,10 @@ class _OTPScreenState extends State<OTPScreen> {
           child: Column(children: [
             Padding(
               padding: EdgeInsets.only(right: 20.sp),
-              child: const UpSideSigninSignup(
+              child: UpSideSigninSignup(
+                onTap: () {
+                  Navigator.pop(context);
+                },
                 visibleImage: false,
               ),
             ),

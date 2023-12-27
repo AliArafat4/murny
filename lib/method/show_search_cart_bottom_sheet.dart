@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
+import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/cart_detil.dart';
 import 'package:murny_final_project/widgets/payment_method.dart';
@@ -86,7 +87,13 @@ showSearchCartBottomSheet({required BuildContext context}) {
                 child: SecondButton(
                   title: "إلغاء الطلب",
                   onPressed: () {
-                    showConfirmDiolg(context: context);
+                    showConfirmDiolg(
+                        context: context,
+                        title: 'هل انت متأكد انك تريد الغاء الطلب',
+                        acceptFun: () {
+                          Navigator.pop(context);
+                          showOrderBottomSheet(context: context);
+                        });
                   },
                   color: const Color(0xffF21D53),
                 ),

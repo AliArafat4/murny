@@ -34,8 +34,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: EdgeInsets.all(20.sp),
                 child: SingleChildScrollView(
                   child: Column(children: [
-                    const UpSideSigninSignup(
+                    UpSideSigninSignup(
                       visibleImage: true,
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                     ),
                     const Align(
                         alignment: Alignment.topRight,

@@ -24,7 +24,10 @@ class SignInScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const UpSideSigninSignup(
+                    UpSideSigninSignup(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       visibleImage: true,
                     ),
                     const Align(
