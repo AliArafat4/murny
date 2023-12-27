@@ -21,7 +21,7 @@ class VoiceSearch extends StatelessWidget {
                 icon: const Icon(Icons.close),
               ),
             ),
-            searchBar(
+            SearchBarWidget(
               hint: "الى أين تريد/ين الذهاب",
               controller: searchController,
             ),

@@ -11,17 +11,25 @@ class CheckTokenCubit extends Cubit<CheckTokenState> {
   CheckTokenCubit() : super(CheckTokenInitial());
 
   checkTokenValidity() async {
-    final UserModel currentUser =
-        UserModel.fromJson(jsonDecode(pref.getUser()));
+    final checkUser = pref.getUser();
 
-    if (currentUser.token == null) {
-      return false;
-    } else {
-      final response = await MurnyApi().common(
-          body: {}, function: Common.getOrder, token: currentUser.token!);
-      if (response == false) {
-        return response;
+    if (checkUser.isNotEmpty) {
+      final UserModel currentUser = UserModel.fromJson(jsonDecode(checkUser));
+
+      if (currentUser.token == null) {
+        emit(InvalidTokenState());
+      } else {
+        final response = await MurnyApi().common(
+            body: {}, function: Common.getOrder, token: currentUser.token!);
+        if (response == false) {
+          pref.clearUser();
+          emit(InvalidTokenState());
+        } else {
+          emit(ValidTokenState());
+        }
       }
+    } else {
+      emit(InvalidTokenState());
     }
   }
 }

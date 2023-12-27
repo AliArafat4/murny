@@ -8,8 +8,8 @@ class TextFieldSearch extends StatelessWidget {
     super.key,
     required this.fun,
   });
-  Function fun;
-  TextEditingController conSearch = TextEditingController();
+  final Function fun;
+  final TextEditingController conSearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(

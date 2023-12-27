@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class searchBar extends StatelessWidget {
-  searchBar({super.key, required this.hint, required this.controller});
+class SearchBarWidget extends StatelessWidget {
+  const SearchBarWidget(
+      {super.key, required this.hint, required this.controller});
 
   final String hint;
-  TextEditingController? controller;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
