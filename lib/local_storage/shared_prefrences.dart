@@ -32,7 +32,7 @@ class SharedPref {
     return _preferences.getString("user") ?? jsonEncode(user);
   }
 
-  void cleanUser() async {
+  void clearUser() async {
     await _preferences.setString("user", "");
   }
 

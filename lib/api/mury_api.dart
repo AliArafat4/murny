@@ -18,8 +18,10 @@ class MurnyApi {
       await Authentication().authFunctionsSelector(
           function: function, body: body, endPoints: endPoints, url: url);
       print("done");
+      return true;
     } catch (err) {
       print(err);
+      return false;
     }
   }
 

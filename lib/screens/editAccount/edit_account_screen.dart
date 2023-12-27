@@ -7,7 +7,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 class EditAccount extends StatelessWidget {
   EditAccount({super.key});
-  TextEditingController conFullName = TextEditingController();
+  final TextEditingController conFullName = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
