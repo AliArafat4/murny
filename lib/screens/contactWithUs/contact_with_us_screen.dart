@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:murny_final_project/method/alert_dialog.dart';
+import 'package:murny_final_project/method/alert_dialog_account.dart';
+
 import 'package:murny_final_project/screens/contactWithUs/component/call_phone_whatsapp.dart';
 import 'package:murny_final_project/widgets/arrow_back_circle_container.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -13,8 +14,9 @@ class ContactWithUs extends StatelessWidget {
       backgroundColor: const Color(0xffFFFFFF),
       body: SafeArea(
         child: Column(children: [
-          const ArrowBackCircleContainer(
+          ArrowBackCircleContainer(
             text: 'للتواصل معنا',
+            textSpace: 37.sp,
           ),
           Padding(
             padding: EdgeInsets.only(top: 30.sp),
@@ -23,15 +25,21 @@ class ContactWithUs extends StatelessWidget {
                 CallPhoneWhatsapp(
                   text: 'الإتصال بنا',
                   image: 'assets/images/imageCall.svg',
-                  funAlert: () {},
+                  funAlert: () {
+                    alertDialogAccount(
+                      context: context,
+                      title: 'اتصل بنا على رقمنا',
+                      subtitle: '0565553090',
+                      textButton1: 'اتصل',
+                      textButton2: 'إلغاء',
+                    );
+                  },
                 ),
                 const Divider(),
                 CallPhoneWhatsapp(
                   text: 'تواصل معنا',
                   image: 'assets/images/imageContactusWhatsapp.svg',
-                  funAlert: () {
-                    //     alertDialog(context, 'اتصل بنا على رقمنا', 'اتصل', 'إلغاء');
-                  },
+                  funAlert: () {},
                 ),
               ],
             ),

@@ -5,7 +5,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 
-
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
@@ -27,16 +26,17 @@ class SplashScreen extends StatelessWidget {
               style: TextStyle(color: Color(0xff232B69), fontSize: 24),
             ),
           ),
-
           SizedBox(
             height: 3.h,
           ),
           Stack(children: [
             Image.asset(
               'assets/images/splashImage.png',
+              width: 430.w,
+              fit: BoxFit.cover,
             ),
             Positioned(
-                top: 48.5.sp,
+                top: 49.7.sp,
                 right: 62.sp,
                 child: Image.asset('assets/images/carRight.png'))
           ]),
