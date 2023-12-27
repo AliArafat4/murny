@@ -5,7 +5,7 @@ import 'package:murny_final_project/widgets/location_search_result.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
-  TextEditingController currentLocation = TextEditingController();
+  final TextEditingController currentLocation = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

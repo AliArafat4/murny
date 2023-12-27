@@ -6,15 +6,15 @@ class TextFieldWidget extends StatelessWidget {
     super.key,
     this.text,
     required this.typeKeyboard,
-    required this.scure,
-    required this.visiblePhone,
+    this.scure = false,
+    this.visiblePhone = false,
     required this.controller,
   });
-  String? text;
+  final String? text;
   final TextInputType typeKeyboard;
-  bool scure = false;
-  bool visiblePhone = false;
-  TextEditingController controller;
+  final bool scure;
+  final bool visiblePhone;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return TextField(

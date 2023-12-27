@@ -4,7 +4,7 @@ import 'package:murny_final_project/screens/voice_search/search_bar.dart';
 class LocationSearch extends StatelessWidget {
   LocationSearch({super.key});
 
-  TextEditingController currentLocation = TextEditingController();
+  final TextEditingController currentLocation = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,7 +21,7 @@ class LocationSearch extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 42,
               ),
-              searchBar(
+              SearchBarWidget(
                 hint: "موقعك الحالي",
                 controller: currentLocation,
               ),
@@ -59,7 +59,7 @@ class LocationSearch extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 42,
               ),
-              searchBar(
+              SearchBarWidget(
                 hint: "الى أين تريد/ين الذهاب",
                 controller: currentLocation,
               ),

@@ -7,6 +7,9 @@ import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 import 'package:murny_final_project/screens/home.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'bloc/profile_bloc/profile_bloc.dart';
 import 'local_storage/shared_prefrences.dart';
 
 SharedPref pref = SharedPref();
@@ -34,19 +37,22 @@ class MainApp extends StatelessWidget {
                     MapBloc()..add(MapGetCurrentLocationEvent())),
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
+            BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
           ],
-          child: MaterialApp(
-            locale: const Locale('ar'),
-            localizationsDelegates: const [
+
+          child: const MaterialApp(
+            locale: Locale('ar'),
+            localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: const [
+
+            supportedLocales: [
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
-            home: home(),
+
           ));
     });
   }
