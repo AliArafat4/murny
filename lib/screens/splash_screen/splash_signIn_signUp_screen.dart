@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/segment_control.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 

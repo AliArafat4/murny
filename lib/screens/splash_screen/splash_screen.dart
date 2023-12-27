@@ -8,10 +8,8 @@ import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_s
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,10 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Timer.periodic(const Duration(milliseconds: 15), (timer) {
-      setState(() {
-        move -= 5;
-      });
+    moveCart();
+
     context.read<CheckTokenCubit>().checkTokenValidity();
     selectRoute(context);
 
@@ -38,7 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-
   void didChangeDependencies() {
     numberGenerator = context.read<CheckTokenCubit>();
     super.didChangeDependencies();
@@ -50,8 +45,15 @@ class _SplashScreenState extends State<SplashScreen> {
     super.dispose();
   }
 
-  @override
+  moveCart() {
+    Timer.periodic(const Duration(milliseconds: 15), (timer) {
+      setState(() {
+        move -= 5;
+      });
+    });
+  }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffEEF0F2),
