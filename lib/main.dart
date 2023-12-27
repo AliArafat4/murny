@@ -10,7 +10,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'bloc/profile_bloc/profile_bloc.dart';
@@ -43,7 +42,6 @@ class MainApp extends StatelessWidget {
                 create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
           ],
-
           child: const MaterialApp(
             locale: Locale('ar'),
             localizationsDelegates: [
@@ -55,9 +53,7 @@ class MainApp extends StatelessWidget {
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
-
-            home: SignUpScreen(),
-
+            home: SplashScreen(),
           ));
     });
   }
