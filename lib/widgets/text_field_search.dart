@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TextFieldSearch extends StatelessWidget {
-  const TextFieldSearch({super.key, required this.fun});
-  final Function()? fun;
+  TextFieldSearch({
+    super.key,
+    required this.fun,
+  });
+  Function fun;
+  TextEditingController conSearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +20,7 @@ class TextFieldSearch extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                onTap: () => fun,
+                onTap: () => fun(),
                 child: Container(
                   width: 8.w,
                   height: 4.h,
@@ -36,46 +41,53 @@ class TextFieldSearch extends StatelessWidget {
                 height: 5.h,
                 width: 84.w,
                 child: TextField(
+                  controller: conSearch,
                   decoration: InputDecoration(
+                      hintText: 'ابحث عن وجهتك',
                       suffixIcon: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VoiceSearch()),
+                          );
+                        },
                         color: const Color(0xff000000),
                         icon: const Icon(
                           Icons.keyboard_voice_outlined,
                           size: 24,
                         ),
                       ),
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.only(right: 15.sp),
-                        child: Row(
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: SvgPicture.asset(
-                                'assets/images/imageSearch.svg',
-                                colorFilter: const ColorFilter.mode(
-                                    Color(0xff000000), BlendMode.srcIn),
-                                fit: BoxFit.none,
+                      prefixIcon: SizedBox(
+                        width: 12.w,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 15.sp),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: SvgPicture.asset(
+                                  'assets/images/imageSearch.svg',
+                                  colorFilter: const ColorFilter.mode(
+                                      Color(0xff000000), BlendMode.srcIn),
+                                  fit: BoxFit.none,
+                                ),
                               ),
-                            ),
-                            const VerticalDivider(
-                              thickness: 1,
-                              indent: 13,
-                              endIndent: 13,
-                              color: Color(0xffCDCED3),
-                            ),
-                            const Text(
-                              'ابحث عن وجهتك',
-                              style: TextStyle(
-                                  color: Color(0xff000000), fontSize: 15),
-                            )
-                          ],
+                              const VerticalDivider(
+                                thickness: 1,
+                                indent: 13,
+                                endIndent: 13,
+                                color: Color(0xffCDCED3),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(20)),
-                      hintStyle: const TextStyle(color: Color(0xff000000)),
+                      hintStyle:
+                          TextStyle(color: Color(0xff000000), height: 0.1.h),
                       filled: true,
                       fillColor: const Color(0xffFFFFFF)),
                 ),

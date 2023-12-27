@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/segment_control.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -19,11 +20,15 @@ class SplashSignInSignUpScreen extends StatelessWidget {
             children: [
               Image.asset(
                 "assets/images/splashImage.png",
+                width: 430.w,
+                fit: BoxFit.cover,
               ),
               Positioned(
-                  top: 45.5.sp,
-                  left: 60.5.sp,
-                  child: Image.asset("assets/images/carRight.png")),
+                  top: 49.7.sp,
+                  left: 61.5.sp,
+                  child: Image.asset(
+                    "assets/images/carRight.png",
+                  )),
             ],
           ),
           Stack(alignment: Alignment.center, children: [

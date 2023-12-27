@@ -35,9 +35,11 @@ class SplashScreen extends StatelessWidget {
           Stack(children: [
             Image.asset(
               'assets/images/splashImage.png',
+              width: 430.w,
+              fit: BoxFit.cover,
             ),
             Positioned(
-                top: 48.5.sp,
+                top: 49.7.sp,
                 right: 62.sp,
                 child: Image.asset('assets/images/carRight.png'))
           ]),
