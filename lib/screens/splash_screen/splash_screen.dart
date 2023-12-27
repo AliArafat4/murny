@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 
-
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<CheckTokenCubit>().checkTokenValidity();
     return Scaffold(
       backgroundColor: const Color(0xffEEF0F2),
       body: Column(
@@ -27,7 +29,6 @@ class SplashScreen extends StatelessWidget {
               style: TextStyle(color: Color(0xff232B69), fontSize: 24),
             ),
           ),
-
           SizedBox(
             height: 3.h,
           ),
@@ -49,7 +50,7 @@ class SplashScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         MurnyApi().signIn(
-            body: {"email": "dezykowi@tutuapp.bid", "otp": "100458"},
+            body: {"email": "dezykowi@tutuapp.bid", "otp": "777187"},
             function: Auth.signIn);
       }),
     );
