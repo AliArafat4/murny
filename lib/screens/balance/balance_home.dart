@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/method/show_dialog_success_add_balanc.dart';
+
 import 'package:murny_final_project/widgets/arrow_back_circle_container.dart';
+
+import 'package:murny_final_project/screens/balance/balance_add.dart';
+
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -40,5 +44,6 @@ class HomeBalanceScreen extends StatelessWidget {
         ],
       ),
     ));
+
   }
 }

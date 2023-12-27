@@ -29,8 +29,11 @@ class CommonFunc {
           }
 
           return orderModelList;
+        } on FormatException catch (err) {
+          print(err.message);
+          return false;
         } catch (err) {
-          print(err);
+          return false;
         }
       case Common.getDrivers:
         try {
@@ -47,6 +50,7 @@ class CommonFunc {
           return driverModelList;
         } catch (err) {
           print(err);
+          return false;
         }
 
       default:

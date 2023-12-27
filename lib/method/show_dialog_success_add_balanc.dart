@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/screens/balance/balance_home.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 
 showSuccessAddBalanceDiolg(
@@ -45,7 +46,12 @@ showSuccessAddBalanceDiolg(
               SizedBox(height: MediaQuery.of(context).size.height / 32),
               SecondButton(
                   title: "الرجوع",
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => HomeBalanceScreen()),
+                        (Route route) => false);
+                  },
                   color: const Color(0xff252C63))
             ],
           ),

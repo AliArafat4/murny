@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/method/show_main_bottom_sheet.dart';
 import 'package:murny_final_project/widgets/book_detil.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
@@ -52,7 +53,10 @@ showSuccessfulTripBottomSheet({required BuildContext context}) {
                   height: MediaQuery.of(context).size.height / 200,
                 ),
                 SecondButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                      showMainBottomSheet(context: context);
+                    },
                     title: "إنهاء الرحلة",
                     color: Color(0xff252C63))
               ],

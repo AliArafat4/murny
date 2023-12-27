@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
-import 'package:google_map_polyline_new/google_map_polyline_new.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart' as geocoding;
 import 'package:geolocator/geolocator.dart';
@@ -78,16 +78,46 @@ Future<bool> userPermission() async {
   }
 }
 
+//
 calculateDistance(
     {required LatLng userLocation, required LatLng driverLocation}) async {
   if (await userPermission()) {
-    GoogleMapPolyline googleMapPolyline =
-        GoogleMapPolyline(apiKey: "AIzaSyA5DlFq4L9onyOBAeXU77hRqE_U--38PXM");
-    final result = await googleMapPolyline.getCoordinatesWithLocation(
-        origin: LatLng(userLocation.latitude, userLocation.longitude),
-        destination: LatLng(driverLocation.latitude, driverLocation.longitude),
-        mode: RouteMode.driving);
+    PolylinePoints polylinePoints = PolylinePoints();
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        dotenv.env['GoogleMapsApiKey']!,
+        PointLatLng(userLocation.latitude, userLocation.longitude),
+        PointLatLng(driverLocation.latitude, driverLocation.longitude));
+    print(result.points);
+
     print(result);
     // PolylineResult result = await PolylinePoints().getRouteBetweenCoordinates();
   }
+}
+
+_addPolyLine(polylineCoordinates, polylines) {
+  PolylineId id = PolylineId("poly");
+  Polyline polyline =
+      Polyline(polylineId: id, color: Colors.red, points: polylineCoordinates);
+  polylines[id] = polyline;
+  return polylines;
+}
+
+Future<Map<PolylineId, Polyline>> getPolyline(
+    {required LatLng userLocation, required LatLng driverLocation}) async {
+  PolylinePoints polylinePoints = PolylinePoints();
+  List<LatLng> polylineCoordinates = [];
+  Map<PolylineId, Polyline> polylines = {};
+
+  PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      dotenv.env['GoogleMapsApiKey']!,
+      PointLatLng(userLocation.latitude, userLocation.longitude),
+      PointLatLng(driverLocation.latitude, driverLocation.longitude),
+      travelMode: TravelMode.driving,
+      wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]);
+  if (result.points.isNotEmpty) {
+    result.points.forEach((PointLatLng point) {
+      polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+    });
+  }
+  return _addPolyLine(polylineCoordinates, polylines);
 }

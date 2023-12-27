@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
+import 'package:murny_final_project/method/show_accept_order_bottom_sheet.dart';
 
 class GoogleMapScreen extends StatelessWidget {
   const GoogleMapScreen({
@@ -10,6 +11,7 @@ class GoogleMapScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Marker> driversMarker = [];
     //TODO: USER PERMISSION
     // final isAllowed = await userPermission();
     // if (isAllowed) {
@@ -21,53 +23,12 @@ class GoogleMapScreen extends StatelessWidget {
     // }
     GoogleMapController? googleMapController;
 
-    List<Marker> driversMarker = [];
     CameraPosition initialCameraPosition;
     initialCameraPosition =
-        const CameraPosition(target: LatLng(0, 0), zoom: 15);
-    LatLng currentLocation = LatLng(0, 0);
-    Polyline distance = Polyline(polylineId: PolylineId('0'));
+        const CameraPosition(target: LatLng(0, 0), zoom: 10);
+    Map<PolylineId, Polyline> distance = {};
+
     return Scaffold(
-// <<<<<<< lujain
-//       body: Column(
-//         children: [
-//           SizedBox(
-//             height: MediaQuery.of(context).size.height,
-//             width: double.infinity,
-//             child: BlocConsumer<MapBloc, MapState>(
-//               builder: (context, state) {
-//                 return GoogleMap(
-//                   compassEnabled: true,
-//                   mapToolbarEnabled: true,
-//                   myLocationEnabled: true,
-//                   myLocationButtonEnabled: true,
-//                   mapType: MapType.satellite,
-//                   onLongPress: (onPressedDestination) {
-//                     userMarker = [];
-//                     context.read<MapBloc>().add(
-//                         MapGetLocationEvent(location: onPressedDestination));
-//                   },
-//                   markers: state is MapSetMarkersState
-//                       ? Set.from(state.userMarker)
-//                       : Set.from(userMarker),
-//                   initialCameraPosition: CameraPosition(
-//                       target: state is MapGetCurrentLocationState
-//                           ? userLocation = state.userLocation
-//                           : userLocation),
-//                   onMapCreated: (GoogleMapController controller) {
-//                     googleMapController = controller;
-//                   },
-//                 );
-//               },
-//               listener: (BuildContext context, MapState state) {
-//                 state is MapSetMarkersState
-//                     ? userMarker.add(state.userMarker.first)
-//                     : const SizedBox();
-//                 state is MapGetCurrentLocationState
-//                     ? userLocation = state.userLocation
-//                     : const SizedBox();
-//               },
-// =======
       body: SafeArea(
         child: Stack(
           children: [
@@ -81,68 +42,74 @@ class GoogleMapScreen extends StatelessWidget {
                     mapToolbarEnabled: true,
                     myLocationEnabled: true,
                     myLocationButtonEnabled: true,
-                    mapType: MapType.satellite,
-                    polylines: {distance},
+                    mapType: MapType.satellite, //MapType.normal,
+                    polylines: Set<Polyline>.of(distance.values),
                     markers: Set.from(driversMarker),
                     initialCameraPosition: initialCameraPosition,
                     onMapCreated: (GoogleMapController controller) {
                       googleMapController = controller;
-                      // context.read<MapBloc>().add(MapGetCurrentLocationEvent());
-
                       context.read<MapBloc>().add(MapGetDriversMarkerEvent());
                     },
                     onTap: (location) async {
-                      print("distance1");
-
-                      distance = await calculateDistance(
-                          userLocation: currentLocation,
-                          driverLocation: location);
-                      print(distance);
-                      print("distance");
+                      // distance = await getPolyline(
+                      //     userLocation: const LatLng(24.788661, 46.639270),
+                      //     driverLocation: const LatLng(20.787648, 46.637006));
+                      // print(distance.values);
+                      // print("distance");
+                      print("location");
+                      print(location);
                     },
                   );
                 },
-                listener: (BuildContext context, MapState state) {
-                  print(state);
+                listener: (BuildContext context, MapState state) async {
+                  //GO TO USER LOCATION
                   if (state is MapGetCurrentLocationState) {
-                    currentLocation = LatLng(state.userLocation.latitude,
-                        state.userLocation.longitude);
                     googleMapController?.animateCamera(
                         CameraUpdate.newLatLngZoom(
                             LatLng(state.userLocation.latitude,
                                 state.userLocation.longitude),
-                            15));
+                            10));
+                  } else {
+                    context.read<MapBloc>().add(MapGetDriversMarkerEvent());
                   }
 
-                  if (state is MapGetDriversMarkerState) {
+                  //Add drivers markers to the map
+                  if (state is MapGetDriversMarkerState &&
+                      driversMarker.length < state.driverModelList.length) {
                     for (var marker in state.driverModelList) {
+                      var customIcon;
+
+                      await BitmapDescriptor.fromAssetImage(
+                              const ImageConfiguration(),
+                              "assets/images/markerX3.png")
+                          .then((d) {
+                        customIcon = d;
+
+                        Future.delayed(const Duration(seconds: 2));
+                      });
+
                       driversMarker.add(Marker(
                           markerId: MarkerId((marker.id.toString())),
-                          position: LatLng(marker.lat!, marker.lng!)));
+                          position: LatLng(marker.lat!, marker.lng!),
+                          icon: customIcon,
+                          onTap: () {
+                            print(marker.lat!);
+                            print(marker.lng!);
+                            print("marker.lng!");
+                            showAcceptOrderBottomSheet(context: context);
+                          }));
+
+                      print("driversMarker");
+                      print(driversMarker);
                     }
                   }
                 },
               ),
-// >>>>>>> main
             ),
             //TODO: ADD WIDGETS HERE
-            // ElevatedButton(
-            //     onPressed: () async {
-            //       final x = await MurnyApi().signIn(
-            //           function: Auth.signIn,
-            //           body: {"email": "dezykowi@tutuapp.bid", "otp": "549485"});
-            //     },
-            //     child: const Text("Button"))
           ],
         ),
       ),
-
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      //floatingActionButton: const OrderBottomSheet(),
-
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: const OrderBottomSheet(),
-
     );
   }
 }

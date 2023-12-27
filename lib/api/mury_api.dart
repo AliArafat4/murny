@@ -17,6 +17,7 @@ class MurnyApi {
       final url = this.url + endPoints.authRoute;
       await Authentication().authFunctionsSelector(
           function: function, body: body, endPoints: endPoints, url: url);
+      print("done");
     } catch (err) {
       print(err);
     }
