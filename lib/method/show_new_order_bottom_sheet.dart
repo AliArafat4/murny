@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/method/show_confirm_dilog.dart';
+import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:murny_final_project/widgets/user_info.dart';
@@ -54,12 +56,22 @@ showNewOrderBottomSheet({required BuildContext context}) {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SecondButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       title: "قبول",
                       color: const Color(0xff252C63),
                     ),
                     SecondButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showConfirmDiolg(
+                            context: context,
+                            title: 'هل انت متأكد انك تريد الغاء الطلب',
+                            acceptFun: () {
+                              Navigator.pop(context);
+                              showOrderBottomSheet(context: context);
+                            });
+                      },
                       title: "رفض",
                       color: const Color(0xffD7053A),
                     ),

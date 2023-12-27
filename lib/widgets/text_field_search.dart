@@ -8,8 +8,8 @@ class TextFieldSearch extends StatelessWidget {
     super.key,
     required this.fun,
   });
-  Function fun;
-  TextEditingController conSearch = TextEditingController();
+  final Function fun;
+  final TextEditingController conSearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,8 +25,9 @@ class TextFieldSearch extends StatelessWidget {
                   width: 8.w,
                   height: 4.h,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: const Color(0xffFFFFFF)),
+                    borderRadius: BorderRadius.circular(5),
+                    color: const Color(0xffFFFFFF),
+                  ),
                   child: SvgPicture.asset(
                     'assets/images/imageDrawer.svg',
                     colorFilter: const ColorFilter.mode(
@@ -84,8 +85,9 @@ class TextFieldSearch extends StatelessWidget {
                         ),
                       ),
                       border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(20)),
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       hintStyle:
                           TextStyle(color: Color(0xff000000), height: 0.1.h),
                       filled: true,
@@ -104,7 +106,9 @@ class TextFieldSearch extends StatelessWidget {
                   width: 9.w,
                   height: 4.h,
                   decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Color(0xffFFFFFF)),
+                    shape: BoxShape.circle,
+                    color: Color(0xffFFFFFF),
+                  ),
                   child: SvgPicture.asset(
                     'assets/images/satellite.svg',
                     colorFilter: const ColorFilter.mode(

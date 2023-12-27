@@ -30,7 +30,6 @@ class CommonFunc {
 
           return orderModelList;
         } on FormatException catch (err) {
-          print(err.message);
           return false;
         } catch (err) {
           return false;

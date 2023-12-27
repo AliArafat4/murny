@@ -3,11 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,19 +22,37 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   double move = 37.h;
+
+  late CheckTokenCubit numberGenerator;
+
   @override
   void initState() {
     Timer.periodic(const Duration(milliseconds: 15), (timer) {
       setState(() {
         move -= 5;
       });
-    });
+    context.read<CheckTokenCubit>().checkTokenValidity();
+    selectRoute(context);
+
     super.initState();
   }
 
   @override
+
+  void didChangeDependencies() {
+    numberGenerator = context.read<CheckTokenCubit>();
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    numberGenerator.close;
+    super.dispose();
+  }
+
+  @override
+
   Widget build(BuildContext context) {
-    final cubit = context.read<CheckTokenCubit>().checkTokenValidity();
     return Scaffold(
       backgroundColor: const Color(0xffEEF0F2),
       body: Column(
@@ -68,11 +90,24 @@ class _SplashScreenState extends State<SplashScreen> {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        MurnyApi().signIn(
-            body: {"email": "dezykowi@tutuapp.bid", "otp": "777187"},
-            function: Auth.signIn);
-      }),
     );
+  }
+
+  //Check user token & route
+  Future<void> selectRoute(BuildContext context) async {
+    await Future.delayed(const Duration(seconds: 2), () {
+      context.read<CheckTokenCubit>().state is InvalidTokenState
+          ? Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const SplashSignInSignUpScreen()),
+              (route) => false,
+            )
+          : Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const GoogleMapScreen()),
+              (route) => false,
+            );
+    });
   }
 }

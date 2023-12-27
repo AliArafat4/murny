@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 
 class AddCreditCardScreen extends StatefulWidget {
@@ -54,7 +55,6 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
                 expiryDate: expiryDate,
                 cardHolderName: cardHolderName,
                 cvvCode: cvvCode,
-                //bankName: 'Alahli Bank',
                 showBackView: isCvvFocused,
                 obscureCardNumber: true,
                 obscureCardCvv: true,
@@ -97,7 +97,12 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
                       PrimaryButton(
                         title: "ادفع الان",
                         onPressed: () {
-                          if (formKey.currentState!.validate()) {}
+                          if (formKey.currentState!.validate()) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => GoogleMapScreen()),
+                                (Route route) => false);
+                          }
                         },
                         isText: true,
                       )
