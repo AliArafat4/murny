@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/button_gmail_apple.dart';
 import 'package:murny_final_project/widgets/city_dropdown_menu.dart';
@@ -33,8 +36,14 @@ class _CreatAccountState extends State<CreatDriverAccountScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const UpSideSigninSignup(
+              UpSideSigninSignup(
                 visibleImage: true,
+                onTap: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => SplashSignInSignUpScreen()),
+                      (Route route) => false);
+                },
               ),
               const Align(
                   alignment: Alignment.topRight,
@@ -162,7 +171,13 @@ class _CreatAccountState extends State<CreatDriverAccountScreen> {
               SizedBox(
                 height: 4.h,
               ),
-              PrimaryButton(title: "اشتراك", onPressed: () {})
+              PrimaryButton(
+                  title: "اشتراك",
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => SignInScreen()),
+                        (Route route) => false);
+                  })
             ],
           ),
         ),

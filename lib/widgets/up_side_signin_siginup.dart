@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class UpSideSigninSignup extends StatelessWidget {
-  const UpSideSigninSignup({super.key, required this.visibleImage});
+  const UpSideSigninSignup(
+      {super.key, required this.visibleImage, required this.onTap});
   final bool visibleImage;
+  final Function() onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,9 +16,7 @@ class UpSideSigninSignup extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
+                onTap: onTap,
                 child: const Row(
                   children: [
                     Icon(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/screens/voice_search/search.dart';
 import 'package:murny_final_project/screens/voice_search/search_bar.dart';
 import 'package:murny_final_project/screens/voice_search/voice_button.dart';
 
@@ -17,7 +18,11 @@ class VoiceSearch extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => SearchScreen()),
+                      (Route route) => false);
+                },
                 icon: const Icon(Icons.close),
               ),
             ),

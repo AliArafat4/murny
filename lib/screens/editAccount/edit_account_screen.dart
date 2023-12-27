@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/screens/editAccount/component/delete_logout_account.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:murny_final_project/widgets/arrow_back_circle_container.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -137,15 +140,43 @@ class EditAccount extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const DeleteLogoutAccount(
-                    text: 'حذف الحساب',
-                    image: 'assets/images/imageDelete.svg',
+                  InkWell(
+                    onTap: () {
+                      showConfirmDiolg(
+                          context: context,
+                          title: 'هل متأكد من حذف الحساب',
+                          acceptFun: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SplashSignInSignUpScreen()),
+                                (Route route) => false);
+                          });
+                    },
+                    child: const DeleteLogoutAccount(
+                      text: 'حذف الحساب',
+                      image: 'assets/images/imageDelete.svg',
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 60.sp),
-                    child: const DeleteLogoutAccount(
-                      text: 'تسجيل الخروج',
-                      image: 'assets/images/imageLogout.svg',
+                    child: InkWell(
+                      onTap: () {
+                        showConfirmDiolg(
+                            context: context,
+                            title: 'هل متأكد من تسجيل الخروج',
+                            acceptFun: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          SplashSignInSignUpScreen()),
+                                  (Route route) => false);
+                            });
+                      },
+                      child: const DeleteLogoutAccount(
+                        text: 'تسجيل الخروج',
+                        image: 'assets/images/imageLogout.svg',
+                      ),
                     ),
                   ),
                   SizedBox(

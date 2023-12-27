@@ -43,7 +43,9 @@ showWaitingTripBottomSheet({required BuildContext context}) {
                   height: MediaQuery.of(context).size.height / 22,
                 ),
                 SecondButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   title: "أبداء الرحلة",
                   color: Color(0xff252C63),
                 )
