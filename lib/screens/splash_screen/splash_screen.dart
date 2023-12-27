@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -10,6 +12,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<CheckTokenCubit>().checkTokenValidity();
     return Scaffold(
       backgroundColor: const Color(0xffEEF0F2),
       body: Column(

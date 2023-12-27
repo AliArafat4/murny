@@ -6,6 +6,7 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
+import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
 import 'package:murny_final_project/screens/google_maps_screen.dart';
@@ -47,33 +48,27 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: FIX, USE REQUEST
-    final UserModel currentUser =
-        UserModel.fromJson(jsonDecode(pref.getUser()));
-    final convertedTime = DateTime.fromMillisecondsSinceEpoch(
-        (currentUser.expiresAt ?? 0) * 1000);
-
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return MultiBlocProvider(
           providers: [
             BlocProvider<MapBloc>(
                 create: (context) =>
                     MapBloc()..add(MapGetCurrentLocationEvent())),
+            BlocProvider<CheckTokenCubit>(
+                create: (context) => CheckTokenCubit()),
           ],
-          child: MaterialApp(
-            locale: const Locale('ar'),
-            localizationsDelegates: const [
+          child: const MaterialApp(
+            locale: Locale('ar'),
+            localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: const [
+            supportedLocales: [
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
-            home: (convertedTime.compareTo(DateTime.now()) > 0)
-                ? GoogleMapScreen()
-                : const SplashScreen(),
+            home: SplashScreen(),
           ));
     });
   }
