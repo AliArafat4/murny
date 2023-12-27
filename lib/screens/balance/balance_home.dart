@@ -14,7 +14,6 @@ class HomeBalanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //appBar: AppBar(title: const Text("المحفظة")),
         body: SafeArea(
       child: Column(
         children: [
@@ -44,6 +43,5 @@ class HomeBalanceScreen extends StatelessWidget {
         ],
       ),
     ));
-
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
@@ -7,8 +9,24 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  double move = 37.h;
+  @override
+  void initState() {
+    Timer.periodic(const Duration(milliseconds: 15), (timer) {
+      setState(() {
+        move -= 5;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +57,8 @@ class SplashScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Positioned(
-                top: 49.7.sp,
-                right: 62.sp,
+                top: 48.7.sp,
+                right: move,
                 child: Image.asset('assets/images/carRight.png'))
           ]),
           Container(

@@ -99,6 +99,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {}
                         },
+                        isText: true,
                       )
                     ],
                   ),

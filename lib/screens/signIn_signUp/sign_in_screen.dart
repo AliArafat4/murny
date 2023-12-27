@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/button_gmail_apple.dart';
 import 'package:murny_final_project/widgets/divider_signin_signup.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -164,19 +165,18 @@ class SignInScreen extends StatelessWidget {
                     //             Image.asset('assets/images/Gmail.png'),
                     //           ],
                     //         ))),
-                    ButtonGmailApple(
-                      text: 'قم بالتسجيل باستخدام Gmail',
-                      image: 'assets/images/Gmail.png',
-                      leftSpace: 0,
-                    ),
 
-                    SizedBox(
-                      height: 1.h,
+                    PrimaryButton(
+                      onPressed: () {},
+                      text: ' قم بالتسجيل باستخدام Gmail',
+                      image: 'assets/images/Gmail.png',
+                      isText: false,
                     ),
-                    ButtonGmailApple(
+                    PrimaryButton(
+                      onPressed: () {},
                       text: 'قم بالتسجيل باستخدام ابل',
                       image: 'assets/images/Apple.png',
-                      leftSpace: 23,
+                      isText: false,
                     ),
 
                     // SizedBox(

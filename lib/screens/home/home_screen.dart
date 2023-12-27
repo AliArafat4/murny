@@ -11,14 +11,9 @@ import 'package:murny_final_project/widgets/segment_control.dart';
 import 'package:murny_final_project/widgets/text_field_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

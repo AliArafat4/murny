@@ -35,10 +35,7 @@ import 'package:murny_final_project/screens/voice_search/search.dart';
 import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-
-
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 
 import 'local_storage/shared_prefrences.dart';
 import 'models/user_model.dart';
@@ -60,8 +57,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return MultiBlocProvider(
           providers: [
@@ -71,24 +66,18 @@ class MainApp extends StatelessWidget {
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
           ],
-          child: MaterialApp(
-
-            locale: const Locale('ar'),
+          child: const MaterialApp(
+            locale: Locale('ar'),
             localizationsDelegates: [
-
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-
             supportedLocales: [
-              const Locale('ar'), // Arabic
+              Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
-
-            home: SplashScreen(),
-
-
+            home: SignUpScreen(),
           ));
     });
   }

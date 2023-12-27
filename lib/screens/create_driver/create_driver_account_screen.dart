@@ -162,7 +162,11 @@ class _CreatAccountState extends State<CreatDriverAccountScreen> {
               SizedBox(
                 height: 4.h,
               ),
-              PrimaryButton(title: "اشتراك", onPressed: () {})
+              PrimaryButton(
+                title: "اشتراك",
+                onPressed: () {},
+                isText: true,
+              )
             ],
           ),
         ),

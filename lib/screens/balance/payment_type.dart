@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/balance/payment_radio_button.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
@@ -79,6 +80,7 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
               PrimaryButton(
                 title: "تأكيد الطلب",
                 onPressed: () {},
+                isText: true,
               )
             ],
           ),
