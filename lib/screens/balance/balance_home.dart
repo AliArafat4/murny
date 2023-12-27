@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/method/show_dialog_success_add_balanc.dart';
+import 'package:murny_final_project/screens/balance/balance_add.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 
 class HomeBalanceScreen extends StatelessWidget {
@@ -27,8 +28,10 @@ class HomeBalanceScreen extends StatelessWidget {
             SecondButton(
                 title: "إضافة رصيد",
                 onPressed: () {
-                  showSuccessAddBalanceDiolg(
-                      context: context, balance: "50SAR");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BalanceAddScreen()),
+                  );
                 },
                 color: const Color(0xff252C63))
           ],

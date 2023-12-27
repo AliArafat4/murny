@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/screens/success/success_message.dart';
 
@@ -19,7 +20,11 @@ class SuccessScreen extends StatelessWidget {
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
             PrimaryButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => GoogleMapScreen()),
+                    (Route route) => false);
+              },
               title: "الرجوع الى الصفحة الرئيسية",
             )
           ],

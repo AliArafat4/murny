@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/voice_search/search_bar.dart';
 
 class LocationSearch extends StatelessWidget {
-  const LocationSearch({super.key});
+  LocationSearch({super.key});
 
+  TextEditingController currentLocation = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(14),
       child: Column(
         children: [
           Row(
@@ -20,10 +21,10 @@ class LocationSearch extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 42,
               ),
-              /*searchBar(
-              hint: "الى أين تريد/ين الذهاب",
-              controller: searchController,
-            ),*/
+              searchBar(
+                hint: "موقعك الحالي",
+                controller: currentLocation,
+              ),
             ],
           ),
           Row(
@@ -32,8 +33,8 @@ class LocationSearch extends StatelessWidget {
                 height: 42,
                 child: VerticalDivider(
                   thickness: 2,
-                  endIndent: 9,
-                  indent: 9,
+                  endIndent: 1,
+                  indent: 1,
                   color: Colors.black,
                 ),
               ),
@@ -58,7 +59,10 @@ class LocationSearch extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 42,
               ),
-              const Text("موقعك الحالي")
+              searchBar(
+                hint: "الى أين تريد/ين الذهاب",
+                controller: currentLocation,
+              ),
             ],
           )
         ],

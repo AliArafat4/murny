@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/method/show_dialog_survy.dart';
+import 'package:murny_final_project/screens/balance/payment_type.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/golf_cart_detail.dart';
+import 'package:murny_final_project/widgets/payment_method.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 
 showOrderBottomSheet({required BuildContext context}) {
@@ -69,7 +71,10 @@ showOrderBottomSheet({required BuildContext context}) {
                   child: SecondButton(
                     title: "اذهب للدفع",
                     onPressed: () {
-                      showSurvyDiolg(context: context);
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => PaymentTypeScreen()),
+                          (Route route) => false);
                     },
                     color: const Color(0xff252C63),
                   ),

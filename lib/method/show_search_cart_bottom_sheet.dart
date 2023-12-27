@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/cart_detil.dart';
+import 'package:murny_final_project/widgets/payment_method.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 
 showSearchCartBottomSheet({required BuildContext context}) {
@@ -49,13 +51,9 @@ showSearchCartBottomSheet({required BuildContext context}) {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 42,
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width / 20),
-                child: const BookLocation(
-                  locationFrom: "كلية الصيدلة A2",
-                  locationTo: "كلية علوم الحاسب والمعلومات A3",
-                ),
+              const BookLocation(
+                locationFrom: "كلية الصيدلة A2",
+                locationTo: "كلية علوم الحاسب والمعلومات A3",
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 42,
@@ -73,6 +71,7 @@ showSearchCartBottomSheet({required BuildContext context}) {
               const Divider(
                 color: Color(0xffF4F4F4),
               ),
+              PaymentMethod(paymentMethod: "نقداً"),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 120,
               ),
@@ -86,7 +85,9 @@ showSearchCartBottomSheet({required BuildContext context}) {
               Center(
                 child: SecondButton(
                   title: "إلغاء الطلب",
-                  onPressed: () {},
+                  onPressed: () {
+                    showConfirmDiolg(context: context);
+                  },
                   color: const Color(0xffF21D53),
                 ),
               )
