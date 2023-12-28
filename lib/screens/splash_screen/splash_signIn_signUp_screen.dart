@@ -54,9 +54,13 @@ class SplashSignInSignUpScreen extends StatelessWidget {
                 textOne: AppLocalizations.of(context)!.user,
                 textTwo: AppLocalizations.of(context)!.driver,
                 colorSelected: const Color(0xff525884),
+
+                //  isSegmentUser: true,
+
                 func: (value) {
                   selectedIndex = value;
                 },
+
               ),
             ),
             Positioned(
