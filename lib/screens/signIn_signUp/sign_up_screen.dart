@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
@@ -19,8 +20,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  int selectedOption = 1;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,6 +29,7 @@ class SignUpScreen extends StatelessWidget {
         child: Scaffold(
             backgroundColor: const Color(0xffFFFFFF),
             body: Padding(
+
               padding: EdgeInsets.all(20.sp),
               child: SingleChildScrollView(
                 child: Column(children: [
@@ -198,6 +198,7 @@ class SignUpScreen extends StatelessWidget {
                 ]),
               ),
             )));
+
   }
 }
 

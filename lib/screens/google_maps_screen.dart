@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 
 class GoogleMapScreen extends StatelessWidget {
@@ -55,8 +56,10 @@ class GoogleMapScreen extends StatelessWidget {
                       //     driverLocation: const LatLng(20.787648, 46.637006));
                       // print(distance.values);
                       // print("distance");
+
                       print("location");
                       print(location);
+                      MurnyApi().signOut(context: context);
                     },
                   );
                 },

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
+import 'package:murny_final_project/method/alert_snackbar.dart';
+import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/home/home_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/otp_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/divider_signin_signup.dart';
@@ -12,8 +18,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
-  TextEditingController conEmail = TextEditingController();
-  TextEditingController conPass = TextEditingController();
+
+  final TextEditingController conEmail = TextEditingController();
+  final TextEditingController conPass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,29 +77,45 @@ class SignInScreen extends StatelessWidget {
                       height: 4.h,
                     ),
                     SizedBox(
-                      height: 54,
-                      width: 340,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8))),
-                              backgroundColor: MaterialStateProperty.all(
-                                  const Color(0xff252C63))),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen()),
+                        height: 54,
+                        width: 340,
+                        child: BlocConsumer<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            return PrimaryButton(
+                              isText: true,
+                              title: AppLocalizations.of(context)!.signIn,
+                              isPadding: false,
+                              onPressed: () {
+                                context.read<AuthBloc>().add(AuthLoginEvent(
+                                    email: conEmail.text,
+                                    password: conPass.text));
+                              },
                             );
                           },
-                          child: Text(
-                            AppLocalizations.of(context)!.signIn,
-                            style: TextStyle(
-                                color: Color(0xffFFFFFF), fontSize: 20),
-                          )),
-                    ),
+
+                          listener: (context, state) {
+                            state is LoadingState
+                                ? showLoadingDialog(context: context)
+                                : const SizedBox();
+
+                            if (state is AuthLoginErrorState) {
+                              Navigator.pop(context);
+                              showErrorSnackBar(context, state.errorMsg);
+                            }
+
+                            state is AuthLoginSuccessState
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => OTPScreen(
+                                              email: conEmail.text,
+                                            )),
+                                  )
+                                : const SizedBox();
+                          },
+                        )
+
+
                     SizedBox(
                       height: 3.h,
                     ),

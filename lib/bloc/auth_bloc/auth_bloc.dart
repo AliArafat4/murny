@@ -91,21 +91,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthOTPEvent>((event, emit) async {
       emit(LoadingState());
       if (event.email.trim().isEmpty) {
-        emit(AuthLoginErrorState(errorMsg: "Please Enter Your Email"));
+        emit(AuthOTPErrorState(errorMsg: "Please Enter Your Email"));
       } else if (event.otp.isEmpty) {
-        emit(AuthLoginErrorState(
+        emit(AuthOTPErrorState(
             errorMsg: "Please Enter the OTP Sent to The email ${event.email}"));
       } else {
         final response = await MurnyApi().signIn(body: {
           "email": event.email,
           "otp": event.otp,
         }, function: Auth.signIn);
-
         if (response) {
-          emit(AuthLoginSuccessState());
+          emit(AuthOTPSuccessState());
         } else {
-          emit(
-              AuthLoginErrorState(errorMsg: "Email or Password are incorrect"));
+          emit(AuthOTPErrorState(errorMsg: "Email or Password are incorrect"));
         }
       }
     });
@@ -121,6 +119,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           "email": event.email,
           "password": event.password,
         }, function: Auth.otp);
+        print(response);
 
         if (response) {
           emit(AuthLoginSuccessState());
