@@ -5,6 +5,7 @@ import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/segment_control.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashSignInSignUpScreen extends StatelessWidget {
   const SplashSignInSignUpScreen({super.key});
@@ -43,15 +44,15 @@ class SplashSignInSignUpScreen extends StatelessWidget {
               top: 30.sp,
               left: 48.sp,
               child: SegmentControl(
-                textOne: 'مستخدم',
-                textTwo: 'سائق',
+                textOne: AppLocalizations.of(context)!.user,
+                textTwo: AppLocalizations.of(context)!.driver,
                 colorSelected: const Color(0xff525884),
               ),
             ),
             Positioned(
                 top: 160,
                 child: PrimaryButton(
-                  title: "إنشاء حساب",
+                  title: AppLocalizations.of(context)!.signUp,
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -64,7 +65,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
             Positioned(
                 top: 220,
                 child: PrimaryButton(
-                  title: "تسجيل الدخول",
+                  title: AppLocalizations.of(context)!.signIn,
                   buttonColor: Colors.transparent,
                   textColor: const Color(0xff000000),
                   onPressed: () {

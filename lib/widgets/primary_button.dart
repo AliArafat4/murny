@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:murny_final_project/widgets/button_gmail_apple.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
@@ -35,8 +35,12 @@ class PrimaryButton extends StatelessWidget {
             foregroundColor: Colors.white),
         onPressed: onPressed,
         child: isText
-            ? Text(title ?? "",
-                style: TextStyle(color: textColor ?? const Color(0xffFFFFFF)))
+            ? Text(
+                title ?? "",
+                style: TextStyle(
+                  color: textColor ?? const Color(0xffFFFFFF),
+                ),
+              )
             : ListTile(
                 title: SvgPicture.asset(image!),
                 subtitle: Text(

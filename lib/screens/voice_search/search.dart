@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:murny_final_project/widgets/custom_divider.dart';
 import 'package:murny_final_project/widgets/location_search.dart';
 import 'package:murny_final_project/widgets/location_search_result.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
@@ -21,8 +22,8 @@ class SearchScreen extends StatelessWidget {
                 Image.asset("assets/images/select_location.png"),
                 TextButton(
                   onPressed: () {},
-                  child: const Text(
-                    "تحديد الموقع على الخريطة",
+                  child: Text(
+                    AppLocalizations.of(context)!.selectLocation,
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
