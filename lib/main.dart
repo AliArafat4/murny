@@ -89,7 +89,7 @@ class MainApp extends StatelessWidget {
             ],
             supportedLocales: L10n.all,
             debugShowCheckedModeBanner: false,
-            home: OTPScreen(),
+            home: SignUpScreen(),
           ));
     });
   }
