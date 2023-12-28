@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
@@ -134,7 +135,6 @@ class SignUpScreen extends StatelessWidget {
                             });
                       },
                       listener: (BuildContext context, AuthState state) {
-                        print(state);
                         state is LoadingState
                             ? showLoadingDialog(context: context)
                             : const SizedBox();
@@ -148,7 +148,8 @@ class SignUpScreen extends StatelessWidget {
                             ? Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeScreen()),
+                                    builder: (context) =>
+                                        const GoogleMapScreen()),
                               )
                             : const SizedBox();
                       },

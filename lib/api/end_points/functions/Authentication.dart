@@ -28,12 +28,18 @@ class Authentication {
 
       case Auth.otp:
         final uri = Uri.parse(url + endPoints.otp);
-        await http.post(uri, body: jsonEncode(body));
-        print("otp sent successfully");
-        break;
+
+        final response = await http.post(uri, body: jsonEncode(body));
+
+        if (response.statusCode >= 400 && response.statusCode < 500) {
+          throw "err";
+        } else {
+          return true;
+        }
 
       case Auth.signIn:
         return await signUp(url: url + endPoints.signIn, body: body);
+
       default:
         throw "exception";
     }

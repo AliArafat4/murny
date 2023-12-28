@@ -20,7 +20,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   double move = 37.h;
-  late CheckTokenCubit numberGenerator;
+  late CheckTokenCubit checkToken;
   late Timer cartTimer;
 
   @override
@@ -35,13 +35,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void didChangeDependencies() {
-    numberGenerator = context.read<CheckTokenCubit>();
+    checkToken = context.read<CheckTokenCubit>();
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    numberGenerator.close();
+    checkToken.close();
     cartTimer.cancel();
 
     super.dispose();

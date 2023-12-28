@@ -14,6 +14,7 @@ import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 import 'package:murny_final_project/screens/add_credit_card/add_credit_card.dart';
 
 import 'package:murny_final_project/screens/balance/balance_add.dart';
+import 'package:murny_final_project/screens/chat/chat_screen.dart';
 import 'package:murny_final_project/screens/create_driver/create_driver_account_screen.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
 import 'package:murny_final_project/screens/home.dart';
@@ -80,7 +81,9 @@ class MainApp extends StatelessWidget {
             BlocProvider<CardCubit>(create: (context) => CardCubit()),
           ],
           child: MaterialApp(
-            locale: Locale('ar'),
+
+            locale: const Locale('en'),
+
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -89,7 +92,9 @@ class MainApp extends StatelessWidget {
             ],
             supportedLocales: L10n.all,
             debugShowCheckedModeBanner: false,
-            home: OTPScreen(),
+
+            home: const SplashScreen(),
+
           ));
     });
   }

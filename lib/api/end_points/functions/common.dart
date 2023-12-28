@@ -30,8 +30,11 @@ class CommonFunc {
 
           return orderModelList;
         } on FormatException catch (err) {
+          print(err);
           return false;
         } catch (err) {
+          print(err);
+
           return false;
         }
       case Common.getDrivers:
