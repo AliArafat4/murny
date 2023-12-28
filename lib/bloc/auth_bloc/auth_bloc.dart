@@ -18,17 +18,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthRegisterUserEvent>((event, emit) async {
       emit(LoadingState());
       if (event.email.trim().isEmpty) {
-        emit(AuthRegisterErrorState(errorMsg: "Please Enter Your Email"));
+        emit(AuthUserRegisterErrorState(errorMsg: "Please Enter Your Email"));
       } else if (!event.email.trim().isValidEmail()) {
-        emit(AuthRegisterErrorState(errorMsg: "Please Enter a Valid Email"));
+        emit(
+            AuthUserRegisterErrorState(errorMsg: "Please Enter a Valid Email"));
       } else if (event.password.isEmpty) {
-        emit(AuthRegisterErrorState(errorMsg: "Please Enter Your Password"));
+        emit(
+            AuthUserRegisterErrorState(errorMsg: "Please Enter Your Password"));
       } else if (event.password.trim().length < 6) {
-        emit(AuthRegisterErrorState(
+        emit(AuthUserRegisterErrorState(
             errorMsg: "Password Must be Greater Than 6 characters"));
       } else if (event.phone.isEmpty) {
-        emit(
-            AuthRegisterErrorState(errorMsg: "Please Enter Your Phone Number"));
+        emit(AuthUserRegisterErrorState(
+            errorMsg: "Please Enter Your Phone Number"));
       } else {
         final response = await MurnyApi().signIn(body: {
           "email": event.email,
@@ -40,7 +42,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (response) {
           emit(AuthRegisterSuccessState());
         } else {
-          emit(AuthRegisterErrorState(errorMsg: response.toString()));
+          emit(AuthUserRegisterErrorState(
+              errorMsg:
+                  "A user with this email address has already been registered"));
         }
       }
     });
@@ -48,17 +52,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthRegisterDriverEvent>((event, emit) async {
       emit(LoadingState());
       if (event.email.trim().isEmpty) {
-        emit(AuthRegisterErrorState(errorMsg: "Please Enter Your Email"));
+        emit(AuthDriverRegisterErrorState(errorMsg: "Please Enter Your Email"));
       } else if (!event.email.trim().isValidEmail()) {
-        emit(AuthRegisterErrorState(errorMsg: "Please Enter a Valid Email"));
+        emit(AuthDriverRegisterErrorState(
+            errorMsg: "Please Enter a Valid Email"));
       } else if (event.password.isEmpty) {
-        emit(AuthRegisterErrorState(errorMsg: "Please Enter Your Password"));
+        emit(AuthDriverRegisterErrorState(
+            errorMsg: "Please Enter Your Password"));
       } else if (event.password.trim().length < 6) {
-        emit(AuthRegisterErrorState(
+        emit(AuthDriverRegisterErrorState(
             errorMsg: "Password Must be Greater Than 6 characters"));
       } else if (event.phone.isEmpty) {
-        emit(
-            AuthRegisterErrorState(errorMsg: "Please Enter Your Phone Number"));
+        emit(AuthDriverRegisterErrorState(
+            errorMsg: "Please Enter Your Phone Number"));
       } else {
         final response = await MurnyApi().signIn(body: {
           "email": event.email,
@@ -77,7 +83,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               token: response.token);
           emit(AuthRegisterSuccessState());
         } else {
-          emit(AuthRegisterErrorState(errorMsg: response.toString()));
+          emit(AuthDriverRegisterErrorState(errorMsg: response.toString()));
         }
       }
     });
