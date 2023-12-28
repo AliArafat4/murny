@@ -4,6 +4,7 @@ import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/screens/success/success_message.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key, required this.message});
   final String message;

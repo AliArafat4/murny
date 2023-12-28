@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:murny_final_project/screens/success/success.dart';
-import 'package:murny_final_project/screens/success/success_message.dart';
-import 'package:murny_final_project/widgets/comment_text_filed.dart';
-import 'package:murny_final_project/widgets/rating.dart';
-import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 showAcceptedOrderDiolg({required BuildContext context}) {

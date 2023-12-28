@@ -14,6 +14,7 @@ import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -40,9 +41,9 @@ class SignInScreen extends StatelessWidget {
                       },
                       visibleImage: true,
                     ),
-                    const Align(
+                    Align(
                         alignment: Alignment.topRight,
-                        child: Text('تسجيل دخول',
+                        child: Text(AppLocalizations.of(context)!.signIn,
                             style: TextStyle(
                               fontSize: 28,
                               color: Color(0xff252C63),
@@ -54,7 +55,7 @@ class SignInScreen extends StatelessWidget {
                     ),
 
                     TextFieldWidget(
-                      text: 'ادخل ايميلك',
+                      text: AppLocalizations.of(context)!.email,
                       typeKeyboard: TextInputType.emailAddress,
                       scure: false,
                       visiblePhone: false,
@@ -64,7 +65,7 @@ class SignInScreen extends StatelessWidget {
                       height: 2.h,
                     ),
                     TextFieldWidget(
-                      text: 'ادخل كلمة المرور',
+                      text: AppLocalizations.of(context)!.password,
                       typeKeyboard: TextInputType.visiblePassword,
                       scure: true,
                       visiblePhone: false,
@@ -82,7 +83,7 @@ class SignInScreen extends StatelessWidget {
                           builder: (context, state) {
                             return PrimaryButton(
                               isText: true,
-                              title: 'دخول',
+                              title: AppLocalizations.of(context)!.signIn,
                               isPadding: false,
                               onPressed: () {
                                 context.read<AuthBloc>().add(AuthLoginEvent(
@@ -91,6 +92,7 @@ class SignInScreen extends StatelessWidget {
                               },
                             );
                           },
+
                           listener: (context, state) {
                             state is LoadingState
                                 ? showLoadingDialog(context: context)
@@ -113,23 +115,7 @@ class SignInScreen extends StatelessWidget {
                           },
                         )
 
-                        // ElevatedButton(
-                        //     style: ButtonStyle(
-                        //         shape: MaterialStateProperty.all<
-                        //                 RoundedRectangleBorder>(
-                        //             RoundedRectangleBorder(
-                        //                 borderRadius: BorderRadius.circular(8))),
-                        //         backgroundColor: MaterialStateProperty.all(
-                        //             const Color(0xff252C63))),
-                        //     onPressed: () {
-                        //
-                        //     },
-                        //     child: const Text(
-                        //       'دخول',
-                        //       style: TextStyle(
-                        //           color: Color(0xffFFFFFF), fontSize: 20),
-                        //     )),
-                        ),
+
                     SizedBox(
                       height: 3.h,
                     ),
@@ -142,7 +128,7 @@ class SignInScreen extends StatelessWidget {
                     PrimaryButton(
                       buttonColor: Colors.transparent,
                       onPressed: () {},
-                      text: ' قم بالتسجيل باستخدام Gmail',
+                      text: AppLocalizations.of(context)!.signUpGmail,
                       image: 'assets/images/gmail.svg',
                       isText: false,
                       isPadding: false,
@@ -153,7 +139,7 @@ class SignInScreen extends StatelessWidget {
                     PrimaryButton(
                       buttonColor: Colors.transparent,
                       onPressed: () {},
-                      text: 'قم بالتسجيل باستخدام ابل',
+                      text: AppLocalizations.of(context)!.signUpApple,
                       image: 'assets/images/Apple.svg',
                       isText: false,
                       isPadding: true,
@@ -163,8 +149,9 @@ class SignInScreen extends StatelessWidget {
                       height: 2.h,
                     ),
                     AccountText(
-                      firstText: 'اشتراك',
-                      secondText: 'ليس لديك حساب؟',
+                      firstText: AppLocalizations.of(context)!.subscribing,
+                      secondText:
+                          AppLocalizations.of(context)!.doNotHaveAccount,
                       pushNavi: () {
                         navigation(
                           context: context,

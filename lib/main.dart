@@ -82,9 +82,11 @@ class MainApp extends StatelessWidget {
           ],
           child: MaterialApp(
 
+
             locale: const Locale('en'),
 
             localizationsDelegates: const [
+
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,

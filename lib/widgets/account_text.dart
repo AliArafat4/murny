@@ -16,7 +16,7 @@ class AccountText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(secondText,
-            textDirection: TextDirection.rtl,
+            //textDirection: TextDirection.rtl,
             style: const TextStyle(
                 fontSize: 16,
                 fontFamily: 'Mulish-Reg',
