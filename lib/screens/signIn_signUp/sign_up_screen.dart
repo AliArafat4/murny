@@ -18,8 +18,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  int selectedOption = 1;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -85,52 +83,28 @@ class SignUpScreen extends StatelessWidget {
                       visiblePhone: false,
                       controller: conPass,
                     ),
-
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.start,
-                    //   children: [
-                    //     BlocBuilder<RadiobuttonCubit, RadiobuttonState>(
-                    //       builder: (context, state) {
-                    //         return Radio(
-                    //           groupValue: 1,
-                    //           activeColor: const Color(0xff252C63),
-                    //           value: state is RadioButtonSignupSelectState
-                    //               ? state.selected
-                    //               : 0,
-                    //           onChanged: (value) {
-                    //             print(value);
-                    //            // selectedOption = int.parse(value.toString());
-                    //             print(state is RadioButtonSignupSelectState
-                    //                 ? state.selected
-                    //                 : "hhh");
-                    //             context
-                    //                 .read<RadiobuttonCubit>()
-                    //                 .radiobuttonSignup(selectedType: !value!);
-                    //           },
-                    //         );
-                    //       },
-                    //     ),
-                    //     const Text(
-                    //       'بالإشتراك أنت توافق على شروط الخدمة وسياسة الخصوصية.',
-                    //       textDirection: TextDirection.rtl,
-                    //       style:
-                    //           TextStyle(color: Color(0xff000000), fontSize: 12),
-                    //     ),
-                    //   ],
-                    // ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Radio(
-                          value: 1,
-                          activeColor: const Color(0xff252C63),
-                          groupValue: selectedOption,
-                          onChanged: (value) {
-                            // setState(() {
-                            //   selectedOption = value!;
-                            //   print("Button value: $value");
-                            // });
+                        BlocBuilder<RadiobuttonCubit, RadiobuttonState>(
+                          builder: (context, state) {
+                            return Radio(
+                              groupValue: 1,
+                              activeColor: const Color(0xff252C63),
+                              value: state is RadioButtonSignupSelectState
+                                  ? state.selected //
+                                  : 0,
+                              onChanged: (int? value) {
+                                print(value);
+                                print(state is RadioButtonSignupSelectState
+                                    ? state.selected
+                                    : "hhh");
+                                context
+                                    .read<RadiobuttonCubit>()
+                                    .radiobuttonSignup(
+                                        selectedType: value!); //0
+                              },
+                            );
                           },
                         ),
                         const Text(
@@ -179,7 +153,6 @@ class SignUpScreen extends StatelessWidget {
                             : const SizedBox();
                       },
                     ),
-
                     SizedBox(
                       height: 1.h,
                     ),

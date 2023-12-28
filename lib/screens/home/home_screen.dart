@@ -143,6 +143,7 @@ class HomeScreen extends StatelessWidget {
                     textOne: 'العربية',
                     textTwo: 'English',
                     colorSelected: const Color(0xff000000),
+                    // isSegmentUser: false,
                   )),
                   Padding(
                     padding: EdgeInsets.only(top: 60.sp, left: 61.sp),

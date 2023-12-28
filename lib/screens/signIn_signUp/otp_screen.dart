@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+//-----------------CONVERT To Bloc----------------------
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({super.key});
+  OTPScreen({super.key});
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -81,6 +84,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         const FixedColorBuilder(Color(0xffD0D0D0))),
                 codeLength: 5,
                 onCodeChanged: (value) {
+                  print(value);
                   setState(() {
                     conOtp.text = value!;
                     updateButtonVisibility();

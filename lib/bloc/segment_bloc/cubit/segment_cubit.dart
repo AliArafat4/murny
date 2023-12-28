@@ -9,4 +9,8 @@ class SegmentCubit extends Cubit<SegmentState> {
   switchSegment({required int selectedType}) {
     emit(SegmentSwichState(type: selectedType));
   }
+
+  // switchLanguageSegment({required int selectedType}) {
+  //   emit(SegmentSwichLanguageState(language: selectedType));
+  // }
 }

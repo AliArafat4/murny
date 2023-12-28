@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:murny_final_project/bloc/card_bloc/cubit/card_cubit.dart';
 import 'package:murny_final_project/bloc/dropdownlist_bloc/cubit/dropdownlist_cubit.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 
@@ -10,6 +11,7 @@ import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
+import 'package:murny_final_project/screens/add_credit_card/add_credit_card.dart';
 
 import 'package:murny_final_project/screens/balance/balance_add.dart';
 import 'package:murny_final_project/screens/create_driver/create_driver_account_screen.dart';
@@ -35,13 +37,13 @@ import 'package:murny_final_project/screens/voice_search/search.dart';
 import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'bloc/profile_bloc/profile_bloc.dart';
 import 'local_storage/shared_prefrences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 SharedPref pref = SharedPref();
 
@@ -69,29 +71,25 @@ class MainApp extends StatelessWidget {
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
-              BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
+            BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
             BlocProvider<DropdownlistCubit>(
                 create: (context) => DropdownlistCubit()),
             BlocProvider<RadiobuttonCubit>(
                 create: (context) => RadiobuttonCubit()),
-
             BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+            BlocProvider<CardCubit>(create: (context) => CardCubit()),
           ],
           child: MaterialApp(
-            locale: Locale('en'),
-            localizationsDelegates: [
+            locale: Locale('ar'),
+            localizationsDelegates: const [
               AppLocalizations.delegate,
-
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-
-
             supportedLocales: L10n.all,
-
             debugShowCheckedModeBanner: false,
-            home: SignUpScreen(),
+            home: OTPScreen(),
           ));
     });
   }
