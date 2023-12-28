@@ -4,7 +4,6 @@ import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
-import 'package:murny_final_project/widgets/button_gmail_apple.dart';
 import 'package:murny_final_project/widgets/city_dropdown_menu.dart';
 import 'package:murny_final_project/widgets/divider_signin_signup.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
@@ -141,9 +140,9 @@ class _CreatAccountState extends State<CreatDriverAccountScreen> {
               SizedBox(
                 height: 2.h,
               ),
-              Align(
+              const Align(
                 alignment: Alignment.topRight,
-                child: const Text(
+                child: Text(
                   "ارفق رخصة القيادة",
                   style: TextStyle(fontSize: 20),
                 ),
@@ -175,8 +174,8 @@ class _CreatAccountState extends State<CreatDriverAccountScreen> {
                 title: "اشتراك",
                 onPressed: () {},
                 isText: true,
+                isPadding: false,
               )
-
             ],
           ),
         ),

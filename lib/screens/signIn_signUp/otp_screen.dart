@@ -94,9 +94,10 @@ class _OTPScreenState extends State<OTPScreen> {
             Visibility(
                 child: isVisible
                     ? Container()
-                    : const AccountText(
+                    : AccountText(
                         firstText: 'إعادة إرساله مرة أخرى',
                         secondText: 'لم تتلق الرمز؟',
+                        pushNavi: () {},
                       )),
             const SizedBox(
               height: 100,

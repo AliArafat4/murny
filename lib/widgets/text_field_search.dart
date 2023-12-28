@@ -62,7 +62,7 @@ class TextFieldSearch extends StatelessWidget {
                       prefixIcon: SizedBox(
                         width: 12.w,
                         child: Padding(
-                          padding: EdgeInsets.only(right: 15.sp),
+                          padding: EdgeInsets.only(right: 14.sp),
                           child: Row(
                             children: [
                               InkWell(

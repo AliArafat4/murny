@@ -28,6 +28,7 @@ class SuccessScreen extends StatelessWidget {
               },
               title: AppLocalizations.of(context)!.backToHome,
               isText: true,
+              isPadding: false,
             )
           ],
         ),

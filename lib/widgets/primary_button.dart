@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton(
+  PrimaryButton(
       {super.key,
       this.title,
       required this.onPressed,
@@ -11,7 +14,8 @@ class PrimaryButton extends StatelessWidget {
       this.text,
       this.textColor,
       this.buttonColor,
-      required this.isText});
+      required this.isText,
+      required this.isPadding});
   final String? title;
   final String? text;
   final String? image;
@@ -19,6 +23,7 @@ class PrimaryButton extends StatelessWidget {
   final Color? textColor;
   final Color? buttonColor;
   final bool isText;
+  bool isPadding = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,21 +40,27 @@ class PrimaryButton extends StatelessWidget {
             foregroundColor: Colors.white),
         onPressed: onPressed,
         child: isText
-            ? Text(
-                title ?? "",
-                style: TextStyle(
-                  color: textColor ?? const Color(0xffFFFFFF),
-                ),
-              )
-            : ListTile(
-                title: SvgPicture.asset(image!),
-                subtitle: Text(
-                  text!,
-                  textDirection: TextDirection.rtl,
-                  style: const TextStyle(color: Color(0xff8E98A8)),
-                ),
 
-                //  Image.asset(image),
+            ? Text(title ?? "",
+                style: TextStyle(color: textColor ?? const Color(0xffFFFFFF)))
+            : Padding(
+                padding: isPadding
+                    ? EdgeInsets.only(left: 20.sp)
+                    : EdgeInsets.only(left: 0.sp),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(image!),
+                    SizedBox(
+                      width: 2.w,
+                    ),
+                    Text(
+                      text!,
+                      style: const TextStyle(color: Color(0xff8E98A8)),
+                    ),
+                  ],
+
+                ),
               ),
       ),
     );

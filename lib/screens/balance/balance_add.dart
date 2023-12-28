@@ -45,6 +45,7 @@ class BalanceAddScreen extends StatelessWidget {
               }
             },
             isText: true,
+            isPadding: false,
           )
         ],
       ),

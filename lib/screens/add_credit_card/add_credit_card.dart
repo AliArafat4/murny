@@ -105,6 +105,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
                           }
                         },
                         isText: true,
+                        isPadding: false,
                       )
                     ],
                   ),

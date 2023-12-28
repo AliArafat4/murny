@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/navigations/navigation_methods.dart';
+import 'package:murny_final_project/screens/home/home_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
-import 'package:murny_final_project/widgets/button_gmail_apple.dart';
 import 'package:murny_final_project/widgets/divider_signin_signup.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
@@ -61,24 +63,10 @@ class SignInScreen extends StatelessWidget {
                       visiblePhone: false,
                       controller: conPass,
                     ),
-                    // TextField(
-                    //   keyboardType: TextInputType.number,
-                    //   decoration: InputDecoration(
-                    //       focusedBorder: OutlineInputBorder(
-                    //           borderSide: const BorderSide(color: Color(0xff252C63)),
-                    //           borderRadius: BorderRadius.circular(8)),
-                    //       disabledBorder: OutlineInputBorder(
-                    //           borderSide: const BorderSide(color: Color(0xff252C63)),
-                    //           borderRadius: BorderRadius.circular(8)),
-                    //       enabledBorder: OutlineInputBorder(
-                    //           borderSide: const BorderSide(color: Color(0xff252C63)),
-                    //           borderRadius: BorderRadius.circular(8)),
-                    //       hintText: 'ادخل رقم جوالك',
-                    //       // hintStyle: const TextStyle(fontSize: 18),
-                    //       hintTextDirection: TextDirection.rtl),
+
                     // ),
                     SizedBox(
-                      height: 6.h,
+                      height: 4.h,
                     ),
                     SizedBox(
                       height: 54,
@@ -92,11 +80,11 @@ class SignInScreen extends StatelessWidget {
                               backgroundColor: MaterialStateProperty.all(
                                   const Color(0xff252C63))),
                           onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => const SignUpScreen()),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()),
+                            );
                           },
                           child: const Text(
                             'دخول',
@@ -108,142 +96,45 @@ class SignInScreen extends StatelessWidget {
                       height: 3.h,
                     ),
                     const DividerSigninSignup(),
-                    // Row(children: [
-                    //   Expanded(
-                    //     child: Container(
-                    //         margin: const EdgeInsets.only(left: 10.0, right: 10),
-                    //         child: const Divider(
-                    //           thickness: 1,
-                    //           color: Color(0xffB8B8B8),
-                    //           height: 24,
-                    //         )),
-                    //   ),
-                    //   const Text(
-                    //     "أو",
-                    //     style: TextStyle(color: Color(0xffB8B8B8)),
-                    //   ),
-                    //   Expanded(
-                    //     child: Container(
-                    //         margin: const EdgeInsets.only(left: 10, right: 10.0),
-                    //         child: const Divider(
-                    //           thickness: 1,
-                    //           color: Color(0xffB8B8B8),
-                    //           height: 24,
-                    //         )),
-                    //   ),
-                    // ]),
+
                     SizedBox(
                       height: 3.h,
                     ),
-                    // SizedBox(
-                    //     height: 48,
-                    //     width: 353,
-                    //     child: ElevatedButton(
-                    //         style: ButtonStyle(
-                    //             foregroundColor: MaterialStateProperty.all<Color>(
-                    //                 const Color(0xff000000)),
-                    //             backgroundColor: MaterialStateProperty.all<Color>(
-                    //                 const Color(0xffFFFFFF)),
-                    //             shape:
-                    //                 MaterialStateProperty.all<RoundedRectangleBorder>(
-                    //                     RoundedRectangleBorder(
-                    //                         borderRadius: BorderRadius.circular(8),
-                    //                         side: const BorderSide(
-                    //                             color: Color(0xff252C63))))),
-                    //         onPressed: () {
-                    //           // Navigator.push(
-                    //           //   context,
-                    //           //   MaterialPageRoute(
-                    //           //       builder: (context) => const SignInScreen()),
-                    //           // );
-                    //         },
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           children: [
-                    //             const Text('قم بالتسجيل باستخدام Gmail',
-                    //                 textDirection: TextDirection.rtl),
-                    //             const SizedBox(
-                    //               width: 12,
-                    //             ),
-                    //             Image.asset('assets/images/Gmail.png'),
-                    //           ],
-                    //         ))),
 
                     PrimaryButton(
+                      buttonColor: Colors.transparent,
                       onPressed: () {},
                       text: ' قم بالتسجيل باستخدام Gmail',
-                      image: 'assets/images/Gmail.png',
+                      image: 'assets/images/gmail.svg',
                       isText: false,
+                      isPadding: false,
+                    ),
+                    SizedBox(
+                      height: 1.h,
                     ),
                     PrimaryButton(
+                      buttonColor: Colors.transparent,
                       onPressed: () {},
                       text: 'قم بالتسجيل باستخدام ابل',
-                      image: 'assets/images/Apple.png',
+                      image: 'assets/images/Apple.svg',
                       isText: false,
+                      isPadding: true,
                     ),
 
-                    // SizedBox(
-                    //     height: 48,
-                    //     width: 353,
-                    //     child: ElevatedButton(
-                    //         style: ButtonStyle(
-                    //             foregroundColor: MaterialStateProperty.all<Color>(
-                    //                 const Color(0xff000000)),
-                    //             backgroundColor: MaterialStateProperty.all<Color>(
-                    //                 const Color(0xffFFFFFF)),
-                    //             shape:
-                    //                 MaterialStateProperty.all<RoundedRectangleBorder>(
-                    //                     RoundedRectangleBorder(
-                    //                         borderRadius: BorderRadius.circular(8),
-                    //                         side: const BorderSide(
-                    //                             color: Color(0xff252C63))))),
-                    //         onPressed: () {
-                    //           // Navigator.push(
-                    //           //   context,
-                    //           //   MaterialPageRoute(
-                    //           //       builder: (context) => const SignInScreen()),
-                    //           // );
-                    //         },
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           children: [
-                    //             const Text('قم بالتسجيل باستخدام ابل',
-                    //                 textDirection: TextDirection.rtl),
-                    //             const SizedBox(
-                    //               width: 12,
-                    //             ),
-                    //             Image.asset('assets/images/Apple.png'),
-                    //           ],
-                    //         ))),
                     SizedBox(
                       height: 2.h,
                     ),
-                    const AccountText(
+                    AccountText(
                       firstText: 'اشتراك',
                       secondText: 'ليس لديك حساب؟',
+                      pushNavi: () {
+                        navigation(
+                          context: context,
+                          type: 'push',
+                          screen: SignUpScreen(),
+                        );
+                      },
                     ),
-
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: <Widget>[
-                    //     GestureDetector(
-                    //         onTap: () {},
-                    //         child: const Text("اشتراك",
-                    //             textDirection: TextDirection.rtl,
-                    //             style: TextStyle(
-                    //                 fontSize: 16, color: Color(0xff252C63)))),
-                    //     const SizedBox(
-                    //       width: 5,
-                    //     ),
-                    //     const Text(" ليس لديك حساب؟",
-                    //         textDirection: TextDirection.rtl,
-                    //         style: TextStyle(
-                    //             fontWeight: FontWeight.bold,
-                    //             fontSize: 16,
-                    //             fontFamily: 'Mulish-Reg',
-                    //             color: Color(0xff000000))),
-                    //   ],
-                    // )
                   ],
                 ),
               ),
