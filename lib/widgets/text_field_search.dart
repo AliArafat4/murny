@@ -50,7 +50,7 @@ class TextFieldSearch extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => VoiceSearch()),
+                                builder: (context) => VoiceSearchScreen()),
                           );
                         },
                         color: const Color(0xff000000),

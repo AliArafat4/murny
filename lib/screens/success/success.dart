@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/screens/success/success_message.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key, required this.message});
@@ -25,7 +26,7 @@ class SuccessScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => GoogleMapScreen()),
                     (Route route) => false);
               },
-              title: "الرجوع الى الصفحة الرئيسية",
+              title: AppLocalizations.of(context)!.backToHome,
               isText: true,
               isPadding: false,
             )

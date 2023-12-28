@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/voice_search/search_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LocationSearch extends StatelessWidget {
   LocationSearch({super.key});
@@ -22,7 +23,7 @@ class LocationSearch extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / 42,
               ),
               SearchBarWidget(
-                hint: "موقعك الحالي",
+                hint: AppLocalizations.of(context)!.currentLocation,
                 controller: currentLocation,
               ),
             ],
@@ -60,7 +61,7 @@ class LocationSearch extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / 42,
               ),
               SearchBarWidget(
-                hint: "الى أين تريد/ين الذهاب",
+                hint: AppLocalizations.of(context)!.destination,
                 controller: currentLocation,
               ),
             ],

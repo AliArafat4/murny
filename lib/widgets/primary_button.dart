@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 class PrimaryButton extends StatelessWidget {
   PrimaryButton(
       {super.key,
@@ -37,6 +40,7 @@ class PrimaryButton extends StatelessWidget {
             foregroundColor: Colors.white),
         onPressed: onPressed,
         child: isText
+
             ? Text(title ?? "",
                 style: TextStyle(color: textColor ?? const Color(0xffFFFFFF)))
             : Padding(
@@ -55,6 +59,7 @@ class PrimaryButton extends StatelessWidget {
                       style: const TextStyle(color: Color(0xff8E98A8)),
                     ),
                   ],
+
                 ),
               ),
       ),
