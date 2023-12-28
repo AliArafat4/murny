@@ -6,9 +6,21 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
+import 'package:murny_final_project/l10n/10n.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/home.dart';
+import 'package:murny_final_project/screens/home/home_screen%20copy.dart';
+import 'package:murny_final_project/screens/home/home_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/otp_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
+import 'package:murny_final_project/screens/success/success.dart';
+import 'package:murny_final_project/screens/success/success_message.dart';
+import 'package:murny_final_project/screens/voice_search/search.dart';
+import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
@@ -44,18 +56,17 @@ class MainApp extends StatelessWidget {
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
             BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
           ],
-          child: const MaterialApp(
-            locale: Locale('ar'),
+          child: MaterialApp(
+            locale: Locale('en'),
             localizationsDelegates: [
+              AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: [
-              Locale('ar'), // Arabic
-            ],
+            supportedLocales: L10n.all,
             debugShowCheckedModeBanner: false,
-            home: SplashScreen(),
+            home: SignUpScreen(),
           ));
     });
   }

@@ -1,0 +1,13 @@
+{
+ "signUp": "Sign Up",
+ "signIn": "Sign In",
+ "user": "User",
+ "driver": "Driver",
+ "destination": "Where do you want to go?",
+ "selectLocation": "Determine location on map",
+ "currentLocation": "Current location",
+ "backToHome": "Back to Homepage"
+}
+
+
+
