@@ -81,6 +81,7 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
                 title: "تأكيد الطلب",
                 onPressed: () {},
                 isText: true,
+                isPadding: false,
               )
             ],
           ),

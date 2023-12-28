@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class AccountText extends StatelessWidget {
   const AccountText(
-      {super.key, required this.firstText, required this.secondText});
+      {super.key,
+      required this.firstText,
+      required this.secondText,
+      required this.pushNavi});
   final String firstText;
   final String secondText;
+  final Function() pushNavi;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class AccountText extends StatelessWidget {
           width: 5,
         ),
         GestureDetector(
-            onTap: () {},
+            onTap: () => pushNavi(),
             child: Text(firstText,
                 textDirection: TextDirection.rtl,
                 style:

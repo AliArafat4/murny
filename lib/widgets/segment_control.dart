@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
+import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
+import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
+import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class SegmentControl extends StatefulWidget {
+import '../bloc/segment_bloc/cubit/segment_cubit.dart';
+
+class SegmentControl extends StatelessWidget {
   SegmentControl(
       {super.key,
       required this.textOne,
@@ -13,38 +19,32 @@ class SegmentControl extends StatefulWidget {
   final Color colorSelected;
 
   @override
-  State<SegmentControl> createState() => _SegmentControlState();
-}
-
-class _SegmentControlState extends State<SegmentControl> {
-  int? _currentSelection = 0;
-
-  List<int> _disabledIndices = [];
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialSegmentedControl(
-        horizontalPadding: EdgeInsets.only(left: 50.sp, right: 20, top: 20.sp),
-        children: {
-          0: Text(widget.textOne),
-          1: Text(widget.textTwo),
-        },
-        selectionIndex: _currentSelection,
-        borderColor: const Color(0xff000000),
-        selectedColor: widget.colorSelected,
-        unselectedColor: Colors.white,
-        selectedTextStyle:
-            const TextStyle(color: Color(0xffFFFFFF), fontSize: 14),
-        unselectedTextStyle:
-            const TextStyle(color: Color(0xff000000), fontSize: 14),
-        borderWidth: 0.7,
-        borderRadius: 4.0,
-        disabledChildren: _disabledIndices,
-        verticalOffset: 3,
-        onSegmentTapped: (index) {
-          setState(() {
-            _currentSelection = index;
-          });
-        });
+    return BlocBuilder<SegmentCubit, SegmentState>(
+      builder: (context, state) {
+        return MaterialSegmentedControl(
+            horizontalPadding:
+                EdgeInsets.only(left: 50.sp, right: 20, top: 20.sp),
+            children: {
+              0: Text(textOne),
+              1: Text(textTwo),
+            },
+            selectionIndex: state is SegmentSwichState ? state.type : 0,
+            borderColor: const Color(0xff000000),
+            selectedColor: colorSelected,
+            unselectedColor: Colors.white,
+            selectedTextStyle:
+                const TextStyle(color: Color(0xffFFFFFF), fontSize: 14),
+            unselectedTextStyle:
+                const TextStyle(color: Color(0xff000000), fontSize: 14),
+            borderWidth: 0.7,
+            borderRadius: 4.0,
+            disabledChildren: null,
+            verticalOffset: 3,
+            onSegmentTapped: (index) {
+              context.read<SegmentCubit>().switchSegment(selectedType: index);
+            });
+      },
+    );
   }
 }

@@ -27,6 +27,7 @@ class SuccessScreen extends StatelessWidget {
               },
               title: "الرجوع الى الصفحة الرئيسية",
               isText: true,
+              isPadding: false,
             )
           ],
         ),

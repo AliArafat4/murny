@@ -20,8 +20,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   double move = 37.h;
-
   late CheckTokenCubit numberGenerator;
+  late Timer cartTimer;
 
   @override
   void initState() {
@@ -41,15 +41,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    numberGenerator.close;
+    numberGenerator.close();
+    cartTimer.cancel();
+
     super.dispose();
   }
 
-  moveCart() {
-    Timer.periodic(const Duration(milliseconds: 15), (timer) {
-      setState(() {
-        move -= 5;
-      });
+  void moveCart() {
+    cartTimer = Timer.periodic(const Duration(milliseconds: 15), (timer) {
+      if (mounted) {
+        setState(() {
+          move -= 5;
+        });
+      }
     });
   }
 

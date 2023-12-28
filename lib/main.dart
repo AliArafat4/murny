@@ -3,9 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:murny_final_project/bloc/dropdownlist_bloc/cubit/dropdownlist_cubit.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
+import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
+import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
+import 'package:murny_final_project/screens/balance/balance_add.dart';
+import 'package:murny_final_project/screens/create_driver/create_driver_account_screen.dart';
+import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
 import 'package:murny_final_project/screens/home.dart';
+import 'package:murny_final_project/screens/home/home_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -41,19 +51,24 @@ class MainApp extends StatelessWidget {
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
+            BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
+            BlocProvider<DropdownlistCubit>(
+                create: (context) => DropdownlistCubit()),
+            BlocProvider<RadiobuttonCubit>(
+                create: (context) => RadiobuttonCubit()),
           ],
-          child: const MaterialApp(
+          child: MaterialApp(
             locale: Locale('ar'),
-            localizationsDelegates: [
+            localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: [
+            supportedLocales: const [
               Locale('ar'), // Arabic
             ],
             debugShowCheckedModeBanner: false,
-            home: SplashScreen(),
+            home: SignUpScreen(),
           ));
     });
   }

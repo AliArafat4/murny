@@ -24,8 +24,8 @@ class SplashSignInSignUpScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Positioned(
-                  top: 49.7.sp,
-                  left: 61.5.sp,
+                  top: 48.7.sp,
+                  left: 60.5.sp,
                   child: Image.asset(
                     "assets/images/carRight.png",
                   )),
@@ -55,11 +55,11 @@ class SplashSignInSignUpScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUpScreen()),
+                      MaterialPageRoute(builder: (context) => SignUpScreen()),
                     );
                   },
                   isText: true,
+                  isPadding: false,
                 )),
             Positioned(
                 top: 220,
@@ -74,6 +74,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
                     );
                   },
                   isText: true,
+                  isPadding: false,
                 ))
           ])
         ],
