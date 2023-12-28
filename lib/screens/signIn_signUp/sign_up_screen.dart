@@ -118,7 +118,7 @@ class SignUpScreen extends StatelessWidget {
                     //     ),
                     //   ],
                     // ),
-                 
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -127,10 +127,10 @@ class SignUpScreen extends StatelessWidget {
                           activeColor: const Color(0xff252C63),
                           groupValue: selectedOption,
                           onChanged: (value) {
-                            setState(() {
-                              selectedOption = value!;
-                              print("Button value: $value");
-                            });
+                            // setState(() {
+                            //   selectedOption = value!;
+                            //   print("Button value: $value");
+                            // });
                           },
                         ),
                         const Text(
@@ -147,16 +147,17 @@ class SignUpScreen extends StatelessWidget {
                           current is AuthUserRegisterErrorState,
                       builder: (context, state) {
                         return PrimaryButton(
-                          isText: true,
-                          title: "اشتراك",
-                          onPressed: () {
-                            context.read<AuthBloc>().add(AuthRegisterUserEvent(
-                                phone: conPhone.text,
-                                email: conEmail.text,
-                                password: conPass.text,
-                                userName: conName.text));
-                          },
-                        );
+                            isText: true,
+                            isPadding: false,
+                            title: "اشتراك",
+                            onPressed: () {
+                              context.read<AuthBloc>().add(
+                                  AuthRegisterUserEvent(
+                                      phone: conPhone.text,
+                                      email: conEmail.text,
+                                      password: conPass.text,
+                                      userName: conName.text));
+                            });
                       },
                       listener: (BuildContext context, AuthState state) {
                         print(state);
