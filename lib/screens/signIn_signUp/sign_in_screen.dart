@@ -77,44 +77,43 @@ class SignInScreen extends StatelessWidget {
                       height: 4.h,
                     ),
                     SizedBox(
-                        height: 54,
-                        width: 340,
-                        child: BlocConsumer<AuthBloc, AuthState>(
-                          builder: (context, state) {
-                            return PrimaryButton(
-                              isText: true,
-                              title: AppLocalizations.of(context)!.signIn,
-                              isPadding: false,
-                              onPressed: () {
-                                context.read<AuthBloc>().add(AuthLoginEvent(
-                                    email: conEmail.text,
-                                    password: conPass.text));
-                              },
-                            );
-                          },
+                      height: 54,
+                      width: 340,
+                      child: BlocConsumer<AuthBloc, AuthState>(
+                        builder: (context, state) {
+                          return PrimaryButton(
+                            isText: true,
+                            title: AppLocalizations.of(context)!.signIn,
+                            isPadding: false,
+                            onPressed: () {
+                              context.read<AuthBloc>().add(AuthLoginEvent(
+                                  email: conEmail.text,
+                                  password: conPass.text));
+                            },
+                          );
+                        },
+                        listener: (context, state) {
+                          state is LoadingState
+                              ? showLoadingDialog(context: context)
+                              : const SizedBox();
 
-                          listener: (context, state) {
-                            state is LoadingState
-                                ? showLoadingDialog(context: context)
-                                : const SizedBox();
+                          if (state is AuthLoginErrorState) {
+                            Navigator.pop(context);
+                            showErrorSnackBar(context, state.errorMsg);
+                          }
 
-                            if (state is AuthLoginErrorState) {
-                              Navigator.pop(context);
-                              showErrorSnackBar(context, state.errorMsg);
-                            }
-
-                            state is AuthLoginSuccessState
-                                ? Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => OTPScreen(
-                                              email: conEmail.text,
-                                            )),
-                                  )
-                                : const SizedBox();
-                          },
-                        )
-
+                          state is AuthLoginSuccessState
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OTPScreen(
+                                            email: conEmail.text,
+                                          )),
+                                )
+                              : const SizedBox();
+                        },
+                      ),
+                    ),
 
                     SizedBox(
                       height: 3.h,

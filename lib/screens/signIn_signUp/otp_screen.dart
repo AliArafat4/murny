@@ -16,9 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //-----------------CONVERT To Bloc----------------------
 class OTPScreen extends StatefulWidget {
-
   const OTPScreen({super.key, required this.email});
-
 
   final String email;
   @override
@@ -130,14 +128,13 @@ class _OTPScreenState extends State<OTPScreen> {
                                     RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8))),
-
                             backgroundColor: MaterialStateProperty.all(
                                 const Color(0xff252C63))),
                         onPressed: () {
                           context.read<AuthBloc>().add(AuthOTPEvent(
                               email: widget.email, otp: conOtp.text));
                         },
-                        child: const Text(
+                        child: Text(
                           AppLocalizations.of(context)!.verify,
                           style:
                               TextStyle(color: Color(0xffFFFFFF), fontSize: 16),
@@ -162,7 +159,6 @@ class _OTPScreenState extends State<OTPScreen> {
                         : const SizedBox();
                   },
                 ),
-
               ),
             )
           ]),
