@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:murny_final_project/api/end_points/functions/Authentication.dart';
 import 'package:murny_final_project/api/end_points/functions/chat.dart';
 import 'package:murny_final_project/api/end_points/end_points.dart';
 import 'package:murny_final_project/api/end_points/functions/common.dart';
 import 'package:murny_final_project/api/end_points/functions/public.dart';
+import 'package:murny_final_project/main.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'end_points/enums.dart';
 import 'end_points/functions/driver.dart';
 import 'end_points/functions/profile.dart';
@@ -15,9 +19,10 @@ class MurnyApi {
   signIn({required Map<String, dynamic> body, required Auth function}) async {
     try {
       final url = this.url + endPoints.authRoute;
-      await Authentication().authFunctionsSelector(
+      final res = await Authentication().authFunctionsSelector(
           function: function, body: body, endPoints: endPoints, url: url);
       print("done");
+
       return true;
     } catch (err) {
       print(err);
@@ -28,6 +33,7 @@ class MurnyApi {
   chat({
     required Map<String, dynamic> body,
     required Chat function,
+    //TODO: REMOVE TOKEN
     required String token,
   }) {
     final url = this.url + endPoints.chatRoute;
@@ -104,5 +110,14 @@ class MurnyApi {
         endPoints: endPoints,
         body: body,
         token: token);
+  }
+
+  signOut({required BuildContext context}) {
+    pref.clearUser();
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const SplashSignInSignUpScreen()),
+        (route) => false);
   }
 }
