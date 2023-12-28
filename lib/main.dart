@@ -69,29 +69,24 @@ class MainApp extends StatelessWidget {
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
-              BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
+            BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
             BlocProvider<DropdownlistCubit>(
                 create: (context) => DropdownlistCubit()),
             BlocProvider<RadiobuttonCubit>(
                 create: (context) => RadiobuttonCubit()),
-
             BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
           ],
           child: MaterialApp(
-            locale: Locale('en'),
+            locale: Locale('ar'),
             localizationsDelegates: [
               AppLocalizations.delegate,
-
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-
-
             supportedLocales: L10n.all,
-
             debugShowCheckedModeBanner: false,
-            home: SignUpScreen(),
+            home: EditAccount(),
           ));
     });
   }

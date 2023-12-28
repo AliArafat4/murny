@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
-import 'package:murny_final_project/method/show_dialog_survy.dart';
 import 'package:murny_final_project/screens/success/success.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/cart_detil.dart';

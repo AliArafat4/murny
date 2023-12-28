@@ -3,6 +3,7 @@ import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({super.key});
@@ -49,13 +50,13 @@ class _OTPScreenState extends State<OTPScreen> {
               children: [
                 Visibility(
                   child: isVisible
-                      ? const Text(
-                          'رمز تحقق الجوال',
+                      ? Text(
+                          AppLocalizations.of(context)!.otpSuccessSend,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.w400),
                         )
-                      : const Text(
-                          'تم إرسال رمز التحقق على جوالك',
+                      : Text(
+                          AppLocalizations.of(context)!.otpSuccessSend,
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.w400),
                         ),
@@ -63,7 +64,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 SizedBox(
                   height: 1.h,
                 ),
-                const Text('أدخل رمز OTP الخاص بك',
+                Text(AppLocalizations.of(context)!.enterOTP,
                     style: TextStyle(color: Color(0xff8E98A8), fontSize: 16),
                     textDirection: TextDirection.rtl),
               ],
@@ -95,8 +96,8 @@ class _OTPScreenState extends State<OTPScreen> {
                 child: isVisible
                     ? Container()
                     : AccountText(
-                        firstText: 'إعادة إرساله مرة أخرى',
-                        secondText: 'لم تتلق الرمز؟',
+                        firstText: AppLocalizations.of(context)!.reSendOtp,
+                        secondText: AppLocalizations.of(context)!.notReceiveOtp,
                         pushNavi: () {},
                       )),
             const SizedBox(
@@ -116,8 +117,8 @@ class _OTPScreenState extends State<OTPScreen> {
                         backgroundColor:
                             MaterialStateProperty.all(const Color(0xff252C63))),
                     onPressed: () {},
-                    child: const Text(
-                      'تحقق',
+                    child: Text(
+                      AppLocalizations.of(context)!.verify,
                       style: TextStyle(color: Color(0xffFFFFFF), fontSize: 16),
                     )),
               ),

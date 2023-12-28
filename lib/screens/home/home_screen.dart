@@ -10,6 +10,7 @@ import 'package:murny_final_project/widgets/content_drawer.dart';
 import 'package:murny_final_project/widgets/segment_control.dart';
 import 'package:murny_final_project/widgets/text_field_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -57,14 +58,6 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         const Text(
-                          'الجوال',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 18),
-                        ),
-                        SizedBox(
-                          width: 1.w,
-                        ),
-                        const Text(
                           '966548784080+',
                           style: TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 18),
@@ -73,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   ContentDrawer(
-                    text: 'تعديل الحساب',
+                    text: AppLocalizations.of(context)!.editAccount,
                     imageSvg: 'assets/images/imageEditAccount.svg',
                     spaceTop: 0.sp,
                     naviPush: () {
@@ -84,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                   ContentDrawer(
-                    text: 'الدعم',
+                    text: AppLocalizations.of(context)!.support,
                     imageSvg: 'assets/images/imageSupport.svg',
                     spaceTop: 20.sp,
                     naviPush: () {
@@ -99,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                     thickness: 1,
                   ),
                   ContentDrawer(
-                    text: 'المحفظة',
+                    text: AppLocalizations.of(context)!.wallet,
                     imageSvg: 'assets/images/imageWallet.svg',
                     spaceTop: 15.sp,
                     naviPush: () {
@@ -114,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                     thickness: 1,
                   ),
                   ContentDrawer(
-                    text: 'معلومات عنا',
+                    text: AppLocalizations.of(context)!.aboutUs,
                     imageSvg: 'assets/images/imageInfo.svg',
                     spaceTop: 15.sp,
                   ),
@@ -122,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                     thickness: 1,
                   ),
                   ContentDrawer(
-                    text: 'الشروط والأحكام',
+                    text: AppLocalizations.of(context)!.termsAndConditions,
                     imageSvg: 'assets/images/imageConditions.svg',
                     spaceTop: 15.sp,
                   ),
@@ -130,7 +123,7 @@ class HomeScreen extends StatelessWidget {
                     thickness: 1,
                   ),
                   ContentDrawer(
-                    text: 'سياسة الخصوصية',
+                    text: AppLocalizations.of(context)!.privacyPolicy,
                     imageSvg: 'assets/images/imagePrivacy.svg',
                     spaceTop: 15.sp,
                   ),

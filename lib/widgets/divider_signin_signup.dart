@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DividerSigninSignup extends StatelessWidget {
   const DividerSigninSignup({super.key});
@@ -15,8 +16,8 @@ class DividerSigninSignup extends StatelessWidget {
               height: 24,
             )),
       ),
-      const Text(
-        "أو",
+      Text(
+        AppLocalizations.of(context)!.or,
         style: TextStyle(color: Color(0xffB8B8B8)),
       ),
       Expanded(

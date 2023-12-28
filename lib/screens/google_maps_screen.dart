@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
-import 'package:murny_final_project/method/show_accept_order_bottom_sheet.dart';
 
 class GoogleMapScreen extends StatelessWidget {
   const GoogleMapScreen({
@@ -96,7 +95,7 @@ class GoogleMapScreen extends StatelessWidget {
                             print(marker.lat!);
                             print(marker.lng!);
                             print("marker.lng!");
-                            showAcceptOrderBottomSheet(context: context);
+
                           }));
 
                       print("driversMarker");
