@@ -12,6 +12,7 @@ import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 
 import 'package:murny_final_project/screens/balance/balance_add.dart';
+import 'package:murny_final_project/screens/chat/chat_screen.dart';
 import 'package:murny_final_project/screens/create_driver/create_driver_account_screen.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
 import 'package:murny_final_project/screens/home.dart';
@@ -69,29 +70,24 @@ class MainApp extends StatelessWidget {
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
-              BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
+            BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
             BlocProvider<DropdownlistCubit>(
                 create: (context) => DropdownlistCubit()),
             BlocProvider<RadiobuttonCubit>(
                 create: (context) => RadiobuttonCubit()),
-
             BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
           ],
           child: MaterialApp(
-            locale: Locale('en'),
-            localizationsDelegates: [
+            locale: const Locale('en'),
+            localizationsDelegates: const [
               AppLocalizations.delegate,
-
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-
-
             supportedLocales: L10n.all,
-
             debugShowCheckedModeBanner: false,
-            home: SignUpScreen(),
+            home: const SplashScreen(),
           ));
     });
   }

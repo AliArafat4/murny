@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
+import 'package:murny_final_project/method/alert_snackbar.dart';
+import 'package:murny_final_project/method/show_loading.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
@@ -12,14 +17,14 @@ import 'package:murny_final_project/widgets/text_field.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class CreatDriverAccountScreen extends StatefulWidget {
-  const CreatDriverAccountScreen({super.key});
+class CreateDriverAccountScreen extends StatefulWidget {
+  const CreateDriverAccountScreen({super.key});
 
   @override
-  State<CreatDriverAccountScreen> createState() => _CreatAccountState();
+  State<CreateDriverAccountScreen> createState() => _CreateAccountState();
 }
 
-class _CreatAccountState extends State<CreatDriverAccountScreen> {
+class _CreateAccountState extends State<CreateDriverAccountScreen> {
   String? selectedOption = "";
   TextEditingController conName = TextEditingController();
   TextEditingController conPhone = TextEditingController();
@@ -170,12 +175,46 @@ class _CreatAccountState extends State<CreatDriverAccountScreen> {
               SizedBox(
                 height: 4.h,
               ),
-              PrimaryButton(
-                title: "اشتراك",
-                onPressed: () {},
-                isText: true,
-                isPadding: false,
-              )
+              BlocConsumer<AuthBloc, AuthState>(
+                buildWhen: (previous, current) =>
+                    current is AuthDriverRegisterErrorState,
+                builder: (context, state) {
+                  return PrimaryButton(
+                      isText: true,
+                      isPadding: false,
+                      title: "اشتراك",
+                      onPressed: () {
+                        context.read<AuthBloc>().add(AuthRegisterDriverEvent(
+                            phone: conPhone.text,
+                            email: conEmail.text,
+                            password: conPass.text,
+                            userName: conName.text,
+                            gender: selectedOption!,
+                            //TODO: GET LICENSE
+                            license: '',
+                            //TODO: GET CITY
+                            city: ''));
+                      });
+                },
+                listener: (BuildContext context, AuthState state) {
+                  state is LoadingState
+                      ? showLoadingDialog(context: context)
+                      : const SizedBox();
+
+                  if (state is AuthDriverRegisterErrorState) {
+                    Navigator.pop(context);
+                    showErrorSnackBar(context, state.errorMsg);
+                  }
+
+                  state is AuthRegisterDriverEvent
+                      ? Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const GoogleMapScreen()),
+                        )
+                      : const SizedBox();
+                },
+              ),
             ],
           ),
         ),

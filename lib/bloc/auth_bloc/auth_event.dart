@@ -33,7 +33,7 @@ class AuthRegisterDriverEvent extends AuthEvent {
       phone,
       gender,
       city;
-  final Uint8List license;
+  final String /*Uint8List*/ license;
 
   AuthRegisterDriverEvent({
     required this.email,
