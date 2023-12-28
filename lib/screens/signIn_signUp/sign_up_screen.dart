@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
+import 'package:murny_final_project/method/alert_snackbar.dart';
+import 'package:murny_final_project/method/show_loading.dart';
+import 'package:murny_final_project/screens/home/home_screen.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/button_gmail_apple.dart';
 import 'package:murny_final_project/widgets/divider_signin_signup.dart';
@@ -110,21 +115,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    SizedBox(
-                        child: PrimaryButton(
-                      isText: true,
-                      title: "اشتراك",
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpScreen()),
+                    SizedBox(height: 1.h),
+                    BlocConsumer<AuthBloc, AuthState>(
+                      buildWhen: (previous, current) =>
+                          current is AuthUserRegisterErrorState,
+                      builder: (context, state) {
+                        return PrimaryButton(
+                          isText: true,
+                          title: "اشتراك",
+                          onPressed: () {
+                            context.read<AuthBloc>().add(AuthRegisterUserEvent(
+                                phone: conPhone.text,
+                                email: conEmail.text,
+                                password: conPass.text,
+                                userName: conName.text));
+                          },
                         );
                       },
-                    )),
+                      listener: (BuildContext context, AuthState state) {
+                        print(state);
+                        state is LoadingState
+                            ? showLoadingDialog(context: context)
+                            : const SizedBox();
+
+                        if (state is AuthUserRegisterErrorState) {
+                          Navigator.pop(context);
+                          showErrorSnackBar(context, state.errorMsg);
+                        }
+
+                        state is AuthRegisterSuccessState
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen()),
+                              )
+                            : const SizedBox();
+                      },
+                    ),
                     SizedBox(
                       height: 1.h,
                     ),

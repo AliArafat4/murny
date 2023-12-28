@@ -14,9 +14,14 @@ class AuthLoginErrorState extends AuthState {
 
 class AuthRegisterSuccessState extends AuthState {}
 
-class AuthRegisterErrorState extends AuthState {
+class AuthDriverRegisterErrorState extends AuthState {
   final String errorMsg;
-  AuthRegisterErrorState({required this.errorMsg});
+  AuthDriverRegisterErrorState({required this.errorMsg});
+}
+
+class AuthUserRegisterErrorState extends AuthState {
+  final String errorMsg;
+  AuthUserRegisterErrorState({required this.errorMsg});
 }
 
 class LoadingState extends AuthState {}
