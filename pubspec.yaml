@@ -36,6 +36,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_credit_card: ^4.0.1
   flutter_staggered_animations: ^1.1.1
+  sliding_up_panel: ^2.0.0+1
   intl: any
 
 

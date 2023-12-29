@@ -42,26 +42,26 @@ showOrderBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 62,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GolfCartDetail(
-                      numberOfSeat: "8 مقاعد",
-                      price: "من 8 SAR",
-                      onTap: () {},
-                    ),
-                    GolfCartDetail(
-                      numberOfSeat: "6 مقاعد",
-                      price: "من 5 SAR",
-                      onTap: () {},
-                    ),
-                    GolfCartDetail(
-                      numberOfSeat: "4 مقاعد",
-                      price: "من 3 SAR",
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     GolfCartDetail(
+                //       numberOfSeat: "8 مقاعد",
+                //       price: "من 8 SAR",
+                //       onTap: () {},
+                //     ),
+                //     GolfCartDetail(
+                //       numberOfSeat: "6 مقاعد",
+                //       price: "من 5 SAR",
+                //       onTap: () {},
+                //     ),
+                //     GolfCartDetail(
+                //       numberOfSeat: "4 مقاعد",
+                //       price: "من 3 SAR",
+                //       onTap: () {},
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
@@ -70,8 +70,7 @@ showOrderBottomSheet({required BuildContext context}) {
                     title: "اذهب للدفع",
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => PaymentTypeScreen()),
+                          MaterialPageRoute(builder: (context) => PaymentTypeScreen()),
                           (Route route) => false);
                     },
                     color: const Color(0xff252C63),

@@ -11,17 +11,17 @@ class MapGetCurrentLocationState extends MapState {
   MapGetCurrentLocationState({required this.userLocation});
 }
 
-class MapSetMarkersState extends MapState {
-  final List<Marker> userMarker;
-
-  MapSetMarkersState({required this.userMarker});
-}
-
-class MapResetMarkersState extends MapState {
-  final LatLng userLocation;
-
-  MapResetMarkersState({required this.userLocation});
-}
+// class MapSetMarkersState extends MapState {
+//   final List<Marker> userMarker;
+//
+//   MapSetMarkersState({required this.userMarker});
+// }
+//
+// class MapResetMarkersState extends MapState {
+//   final LatLng userLocation;
+//
+//   MapResetMarkersState({required this.userLocation});
+// }
 
 class MapGetMarkerLocationState extends MapState {
   final String location;
@@ -34,3 +34,11 @@ class MapGetDriversMarkerState extends MapState {
 
   MapGetDriversMarkerState({required this.driverModelList});
 }
+
+class MapFilterDriversMarkerState extends MapState {
+  final List<DriverModel> driverModelList;
+
+  MapFilterDriversMarkerState({required this.driverModelList});
+}
+
+class MapLoadingState extends MapState {}
