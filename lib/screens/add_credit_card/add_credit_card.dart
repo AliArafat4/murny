@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:murny_final_project/bloc/card_bloc/cubit/card_cubit.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 
 class AddCreditCardScreen extends StatefulWidget {

@@ -9,6 +9,7 @@ import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/method/show_main_bottom_sheet.dart';
 import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/screens/balance/payment_type.dart';
+import 'package:murny_final_project/screens/google_maps/components/filter_bottom_sheet.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/golf_cart_detail.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
@@ -23,15 +24,6 @@ class GoogleMapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Marker> driversMarker = [];
 
-    //TODO: USER PERMISSION
-    // final isAllowed = await userPermission();
-    // if (isAllowed) {
-    //   Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //           builder: (context) =>
-    //           const GoogleMapScreen()));
-    // }
     GoogleMapController? googleMapController;
 
     CameraPosition initialCameraPosition;
@@ -50,7 +42,6 @@ class GoogleMapScreen extends StatelessWidget {
                   return SlidingUpPanel(
                     body: GoogleMap(
                       compassEnabled: true,
-                      // mapToolbarEnabled: true,
                       myLocationEnabled: true,
                       myLocationButtonEnabled: true,
                       mapType: MapType.normal, // MapType.satellite, //,
@@ -70,6 +61,7 @@ class GoogleMapScreen extends StatelessWidget {
                     ),
                     panel: const FilterSheet(),
                     maxHeight: context.getHeight(factor: 0.45),
+                    // backdropEnabled: true,
                   );
                 },
                 listener: (BuildContext context, MapState state) async {
@@ -125,71 +117,6 @@ class GoogleMapScreen extends StatelessWidget {
                         ? showLoadingDialog(context: context)
                         : const SizedBox();
                   }
-                },
-              ),
-            ),
-            //TODO: ADD WIDGETS HERE
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class FilterSheet extends StatelessWidget {
-  const FilterSheet({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    context.read<PublicCubit>().getAllCartsCubit();
-
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 42,
-            ),
-            const BookLocation(
-              locationFrom: "موقعك الحالي",
-              locationTo: "الى أين تريد/ين الذهاب",
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 42,
-            ),
-            const Text(
-              "اختر نوع العربة المناسبة لك",
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 62,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 6.5,
-              child: BlocBuilder<PublicCubit, PublicState>(
-                builder: (context, state) {
-                  return state is PublicGetCartsState
-                      ? ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: state.cartModel.length,
-                          separatorBuilder: (context, index) => SizedBox(
-                            width: MediaQuery.of(context).size.width / 20,
-                          ),
-                          itemBuilder: (context, index) => GolfCartDetail(
-                            numberOfSeat: "${state.cartModel[index].seats} مقاعد",
-                            price: "${state.cartModel[index].price} SAR",
-                            onTap: () {
-                              return index;
-                            },
-                            index: index,
-                            cartID: state.cartModel[index].id!.toString(),
-                          ),
-                        )
-                      : const Center(child: CircularProgressIndicator());
                 },
               ),
             ),

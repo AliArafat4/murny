@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
@@ -29,7 +29,6 @@ class SignUpScreen extends StatelessWidget {
         child: Scaffold(
             backgroundColor: const Color(0xffFFFFFF),
             body: Padding(
-
               padding: EdgeInsets.all(20.sp),
               child: SingleChildScrollView(
                 child: Column(children: [
@@ -94,14 +93,10 @@ class SignUpScreen extends StatelessWidget {
                           return Radio(
                             groupValue: 1,
                             activeColor: const Color(0xff252C63),
-                            value: state is RadioButtonSignupSelectState
-                                ? state.selected
-                                : 0,
+                            value: state is RadioButtonSignupSelectState ? state.selected : 0,
                             onChanged: (value) {
                               print(value);
-                              print(state is RadioButtonSignupSelectState
-                                  ? state.selected
-                                  : "hhh");
+                              print(state is RadioButtonSignupSelectState ? state.selected : "hhh");
                               context
                                   .read<RadiobuttonCubit>()
                                   .radiobuttonSignup(selectedType: value!);
@@ -112,16 +107,14 @@ class SignUpScreen extends StatelessWidget {
                       Flexible(
                         child: Text(
                           AppLocalizations.of(context)!.subscribingAgree,
-                          style:
-                              TextStyle(color: Color(0xff000000), fontSize: 12),
+                          style: TextStyle(color: Color(0xff000000), fontSize: 12),
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 1.h),
                   BlocConsumer<AuthBloc, AuthState>(
-                    buildWhen: (previous, current) =>
-                        current is AuthUserRegisterErrorState,
+                    buildWhen: (previous, current) => current is AuthUserRegisterErrorState,
                     builder: (context, state) {
                       return PrimaryButton(
                           isText: true,
@@ -149,8 +142,7 @@ class SignUpScreen extends StatelessWidget {
                       state is AuthRegisterSuccessState
                           ? Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen()),
+                              MaterialPageRoute(builder: (context) => HomeScreen()),
                             )
                           : const SizedBox();
                     },
@@ -198,7 +190,6 @@ class SignUpScreen extends StatelessWidget {
                 ]),
               ),
             )));
-
   }
 }
 

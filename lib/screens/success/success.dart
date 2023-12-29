@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/screens/success/success_message.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

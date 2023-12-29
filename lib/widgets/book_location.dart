@@ -4,8 +4,7 @@ import 'package:flutter_dash/flutter_dash.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BookLocation extends StatelessWidget {
-  const BookLocation(
-      {super.key, required this.locationFrom, required this.locationTo});
+  const BookLocation({super.key, required this.locationFrom, required this.locationTo});
   final String locationFrom;
   final String locationTo;
   @override
@@ -24,12 +23,9 @@ class BookLocation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Location(
-                  color: const Color(0xff252C63),
-                  icon: Icons.my_location,
-                  title: locationFrom),
+                  color: const Color(0xff252C63), icon: Icons.my_location, title: locationFrom),
               Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width / 28),
+                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width / 28),
                 child: Dash(
                     direction: Axis.vertical,
                     length: 1.9.h,
