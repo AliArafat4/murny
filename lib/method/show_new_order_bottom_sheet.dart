@@ -31,9 +31,7 @@ showNewOrderBottomSheet({required BuildContext context}) {
                 const Text(
                   "طلب جديد",
                   style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff252C63)),
+                      fontSize: 24, fontWeight: FontWeight.w400, color: Color(0xff252C63)),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width / 20,
@@ -69,7 +67,7 @@ showNewOrderBottomSheet({required BuildContext context}) {
                             title: 'هل انت متأكد انك تريد الغاء الطلب',
                             acceptFun: () {
                               Navigator.pop(context);
-                              showOrderBottomSheet(context: context);
+                              // showOrderBottomSheet(context: context);
                             });
                       },
                       title: "رفض",

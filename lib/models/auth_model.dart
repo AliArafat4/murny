@@ -1,23 +1,27 @@
-class UserModel {
+class AuthModel {
   String? message;
   String? token;
   int? expiresAt;
   String? refreshToken;
   String? tokenType;
+  String? userType;
 
-  UserModel(
-      {this.message,
-      this.token,
-      this.expiresAt,
-      this.refreshToken,
-      this.tokenType});
+  AuthModel({
+    this.message,
+    this.token,
+    this.expiresAt,
+    this.refreshToken,
+    this.tokenType,
+    this.userType,
+  });
 
-  UserModel.fromJson(Map<String, dynamic> json) {
+  AuthModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     token = json['token'];
     expiresAt = json['expires_at'];
     refreshToken = json['refresh_token'];
     tokenType = json['token_type'];
+    userType = json['user_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -27,6 +31,7 @@ class UserModel {
     data['expires_at'] = expiresAt;
     data['refresh_token'] = refreshToken;
     data['token_type'] = tokenType;
+    data['user_type'] = userType;
     return data;
   }
 }

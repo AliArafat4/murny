@@ -12,6 +12,7 @@ import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubi
 import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
 import 'package:murny_final_project/bloc/select_cart_bloc/select_cart_cubit.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
+import 'package:murny_final_project/bloc/user_bloc/user_cubit.dart';
 import 'package:murny_final_project/l10n/10n.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
@@ -50,6 +51,7 @@ class MainApp extends StatelessWidget {
             BlocProvider<CardCubit>(create: (context) => CardCubit()),
             BlocProvider<PublicCubit>(create: (context) => PublicCubit()..getAllCartsCubit()),
             BlocProvider<SelectCartCubit>(create: (context) => SelectCartCubit()),
+            BlocProvider<UserCubit>(create: (context) => UserCubit()),
           ],
           child: MaterialApp(
             locale: const Locale('en'),

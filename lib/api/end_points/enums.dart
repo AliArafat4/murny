@@ -1,4 +1,4 @@
-enum Auth { userSignUp, driverSignUp, signInWithApple, signInWithGoogle, otp, signIn }
+enum Auth { userSignUp, driverSignUp, signInWithApple, signInWithGoogle, otp, signIn, resendOtp }
 
 enum Chat { getMessages, sendMessages }
 

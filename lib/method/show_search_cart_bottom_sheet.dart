@@ -29,8 +29,7 @@ showSearchCartBottomSheet({required BuildContext context}) {
                 height: MediaQuery.of(context).size.height / 42,
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width / 20),
+                padding: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
                 child: const Text(
                   "العثور على أقرب عربة لتصل إلى وجهتك",
                   style: TextStyle(fontSize: 16),
@@ -92,7 +91,7 @@ showSearchCartBottomSheet({required BuildContext context}) {
                         title: 'هل انت متأكد انك تريد الغاء الطلب',
                         acceptFun: () {
                           Navigator.pop(context);
-                          showOrderBottomSheet(context: context);
+                          //      showOrderBottomSheet(context: context);
                         });
                   },
                   color: const Color(0xffF21D53),

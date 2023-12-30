@@ -19,6 +19,7 @@ class OTPScreen extends StatefulWidget {
   const OTPScreen({super.key, required this.email});
 
   final String email;
+
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
@@ -73,7 +74,8 @@ class _OTPScreenState extends State<OTPScreen> {
                 SizedBox(
                   height: 1.h,
                 ),
-                Text(AppLocalizations.of(context)!.enterOTP,
+                Text("${AppLocalizations.of(context)!.enterOTP}\nsent to ${widget.email}",
+                    textAlign: TextAlign.center,
                     style: const TextStyle(color: Color(0xff8E98A8), fontSize: 16),
                     textDirection: TextDirection.rtl),
               ],
@@ -104,10 +106,28 @@ class _OTPScreenState extends State<OTPScreen> {
             Visibility(
                 child: isVisible
                     ? Container()
-                    : AccountText(
-                        firstText: AppLocalizations.of(context)!.reSendOtp,
-                        secondText: AppLocalizations.of(context)!.notReceiveOtp,
-                        pushNavi: () {},
+                    : BlocConsumer<AuthBloc, AuthState>(
+                        listener: (context, state) {
+                          if (state is AuthResendOTPErrorState) {
+                            Navigator.pop(context);
+                            showErrorSnackBar(context, state.errorMsg);
+                          }
+
+                          if (state is AuthResendOTPSuccessState) {
+                            Navigator.pop(context);
+                            showSuccessSnackBar(
+                                context, "OTP has been re-sent to ${widget.email} successfully");
+                          }
+                        },
+                        builder: (context, state) {
+                          return AccountText(
+                            firstText: AppLocalizations.of(context)!.reSendOtp,
+                            secondText: AppLocalizations.of(context)!.notReceiveOtp,
+                            pushNavi: () {
+                              context.read<AuthBloc>().add(AuthResendOTPEvent(email: widget.email));
+                            },
+                          );
+                        },
                       )),
             const SizedBox(
               height: 100,

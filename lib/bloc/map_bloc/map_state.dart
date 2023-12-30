@@ -7,8 +7,9 @@ class MapInitial extends MapState {}
 
 class MapGetCurrentLocationState extends MapState {
   final LatLng userLocation;
+  final String locationName;
 
-  MapGetCurrentLocationState({required this.userLocation});
+  MapGetCurrentLocationState({required this.locationName, required this.userLocation});
 }
 
 // class MapSetMarkersState extends MapState {
