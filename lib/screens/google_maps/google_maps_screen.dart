@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
@@ -23,6 +25,7 @@ class GoogleMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Marker> driversMarker = [];
+    String locationName = "";
 
     GoogleMapController? googleMapController;
 
@@ -54,19 +57,37 @@ class GoogleMapScreen extends StatelessWidget {
                         context.read<MapBloc>().add(MapGetDriversMarkerEvent());
                       },
                       onTap: (location) async {
+                        // TODO: SEARCH FUNCTION
+                        // final places = GoogleMapsPlaces(apiKey: dotenv.env['GoogleMapsApiKey']);
+                        //                         PlacesSearchResponse response = await places.searchByText("Riyad");
+                        //
+                        //                         print(response.status);
+                        //                         print(response.errorMessage);
+                        //                         print(response.results.first.name);
                         print("location");
                         print(location);
+                        // TODO: SIGN OUT
                         // MurnyApi().signOut(context: context);
                       },
                     ),
-                    panel: const FilterSheet(),
-                    maxHeight: context.getHeight(factor: 0.45),
+
+                    //TODO: CHECK LAST ORDER STATE
+                    panel: ("LAST ORDER " != "CANCELED OR NULL OR DECLINED")
+                        ? const FilterSheet()
+                        : ("LAST ORDER " == "JUST CREATED")
+                            ? SizedBox() // TODO: SHOW ORDER LOADING
+                            : ("LAST ORDER " == "ACCEPTED")
+                                ? SizedBox() // TODO: SHOW DRIVING IS COMING OR NOTHING
+                                : SizedBox(), // TODO: SHOW ??
+
+                    maxHeight: ("LAST ORDER " != "ACCEPTED") ? context.getHeight(factor: 0.45) : 0,
                     // backdropEnabled: true,
                   );
                 },
                 listener: (BuildContext context, MapState state) async {
                   //GO TO USER LOCATION
                   if (state is MapGetCurrentLocationState) {
+                    locationName = state.locationName;
                     googleMapController?.animateCamera(CameraUpdate.newLatLngZoom(
                         LatLng(state.userLocation.latitude, state.userLocation.longitude), 10));
                   }
@@ -87,7 +108,12 @@ class GoogleMapScreen extends StatelessWidget {
                             print(marker.lng!);
                             print("marker.lng!");
 
-                            showOrderBottomSheet(context: context);
+                            showOrderBottomSheet(
+                                context: context,
+                                currentLocation: locationName,
+                                destination: '',
+                                cartID: marker.cartID!,
+                                driverID: marker.userId!);
                           }));
                     }
                   }
@@ -104,7 +130,12 @@ class GoogleMapScreen extends StatelessWidget {
                             icon: await BitmapDescriptor.fromAssetImage(
                                 const ImageConfiguration(), "assets/images/markerX3.png"),
                             onTap: () {
-                              showOrderBottomSheet(context: context);
+                              showOrderBottomSheet(
+                                  context: context,
+                                  currentLocation: locationName,
+                                  destination: '',
+                                  cartID: marker.cartID!,
+                                  driverID: marker.userId!);
                             }));
                       }
                     } else {

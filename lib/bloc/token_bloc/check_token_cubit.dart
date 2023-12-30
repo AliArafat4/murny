@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
-import 'package:murny_final_project/models/user_model.dart';
+import 'package:murny_final_project/models/auth_model.dart';
 import 'dart:convert';
 import 'package:murny_final_project/main.dart';
 
@@ -14,7 +14,7 @@ class CheckTokenCubit extends Cubit<CheckTokenState> {
     final checkUser = pref.getUser();
 
     if (checkUser.isNotEmpty) {
-      final UserModel currentUser = UserModel.fromJson(jsonDecode(checkUser));
+      final AuthModel currentUser = AuthModel.fromJson(jsonDecode(checkUser));
 
       if (currentUser.token == null) {
         emit(InvalidTokenState());

@@ -4,7 +4,12 @@ import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/golf_cart_detail.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 
-showOrderBottomSheet({required BuildContext context}) {
+showOrderBottomSheet(
+    {required BuildContext context,
+    required String currentLocation,
+    required String destination,
+    required String driverID,
+    required int cartID}) {
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -28,20 +33,20 @@ showOrderBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                const BookLocation(
-                  locationFrom: "موقعك الحالي",
-                  locationTo: "الى أين تريد/ين الذهاب",
+                BookLocation(
+                  locationFrom: currentLocation,
+                  locationTo: destination,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                const Text(
-                  "اختر نوع العربة المناسبة لك",
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 62,
-                ),
+                // const Text(
+                //   "اختر نوع العربة المناسبة لك",
+                //   style: TextStyle(fontSize: 18),
+                // ),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height / 62,
+                // ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 //   children: [
@@ -69,9 +74,14 @@ showOrderBottomSheet({required BuildContext context}) {
                   child: SecondButton(
                     title: "اذهب للدفع",
                     onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => PaymentTypeScreen()),
-                          (Route route) => false);
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(
+                              builder: (context) => PaymentTypeScreen(
+                                  driverID: driverID,
+                                  currentLocation: currentLocation,
+                                  destination: destination,
+                                  cartID: cartID)))
+                          .then((value) => Navigator.pop(context));
                     },
                     color: const Color(0xff252C63),
                   ),
