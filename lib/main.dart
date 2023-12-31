@@ -42,8 +42,7 @@ import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_s
 import 'package:murny_final_project/screens/success/success.dart';
 import 'package:murny_final_project/screens/success/success_message.dart';
 import 'package:murny_final_project/screens/voice_search/search.dart';
-import 'package:murny_final_project/screens/voice_search/search_bar.dart';
-import 'package:murny_final_project/screens/voice_search/voice_button.dart';
+
 import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
