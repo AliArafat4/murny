@@ -9,9 +9,11 @@ import 'package:murny_final_project/widgets/content_drawer.dart';
 import 'package:murny_final_project/widgets/segment_control.dart';
 import 'package:murny_final_project/widgets/text_field_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeScreend extends StatelessWidget {
-  HomeScreend({super.key});
+//delete this screen (drawer for driver)
+class HomeScreenDriver extends StatelessWidget {
+  HomeScreenDriver({super.key});
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -52,7 +54,7 @@ class HomeScreend extends StatelessWidget {
                     ),
                   ),
                   ContentDrawer(
-                    text: 'تعديل الحساب',
+                    text: AppLocalizations.of(context)!.editAccount,
                     imageSvg: 'assets/images/imageEditAccount.svg',
                     spaceTop: 0.sp,
                     naviPush: () {
@@ -63,14 +65,14 @@ class HomeScreend extends StatelessWidget {
                     },
                   ),
                   ContentDrawer(
-                    text: 'الدعم',
+                    text: AppLocalizations.of(context)!.support,
                     imageSvg: 'assets/images/imageSupport.svg',
                     spaceTop: 20.sp,
                     naviPush: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ContactWithUs()),
+                            builder: (context) => ContactWithUs()),
                       );
                     },
                   ),
@@ -78,7 +80,7 @@ class HomeScreend extends StatelessWidget {
                     thickness: 1,
                   ),
                   ContentDrawer(
-                    text: 'المحفظة',
+                    text: AppLocalizations.of(context)!.wallet,
                     imageSvg: 'assets/images/imageWallet.svg',
                     spaceTop: 15.sp,
                     naviPush: () {

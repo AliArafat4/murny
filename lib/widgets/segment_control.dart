@@ -9,17 +9,22 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../bloc/segment_bloc/cubit/segment_cubit.dart';
 
 class SegmentControl extends StatelessWidget {
-  SegmentControl({
-    super.key,
-    required this.textOne,
-    required this.textTwo,
-    required this.colorSelected,
-    //required this.isSegmentUser
-  });
+  const SegmentControl(
+      {super.key,
+      required this.textOne,
+      required this.textTwo,
+      required this.colorSelected,
+      //required this.isSegmentUser
+
+      this.func});
   final String textOne;
   final String textTwo;
   final Color colorSelected;
+
   //final bool isSegmentUser;
+  //TODO: make it required
+  final void Function(int val)? func;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SegmentCubit, SegmentState>(
@@ -41,10 +46,13 @@ class SegmentControl extends StatelessWidget {
                 const TextStyle(color: Color(0xff000000), fontSize: 14),
             borderWidth: 0.7,
             borderRadius: 4.0,
-            disabledChildren: null,
+            disabledChildren: [],
             verticalOffset: 3,
             onSegmentTapped: (index) {
+              print(index);
+
               context.read<SegmentCubit>().switchSegment(selectedType: index);
+              func!.call(index);
             });
       },
     );

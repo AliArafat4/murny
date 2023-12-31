@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/method/alert_dialog_account.dart';
 
 import 'package:murny_final_project/screens/contactWithUs/component/call_phone_whatsapp.dart';
@@ -6,12 +7,12 @@ import 'package:murny_final_project/widgets/arrow_back_circle_container.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ContactWithUs extends StatelessWidget {
-  const ContactWithUs({super.key});
+  ContactWithUs({super.key});
+  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffFFFFFF),
       body: SafeArea(
         child: Column(children: [
           ArrowBackCircleContainer(
@@ -24,7 +25,9 @@ class ContactWithUs extends StatelessWidget {
               children: [
                 CallPhoneWhatsapp(
                   text: 'الإتصال بنا',
-                  image: 'assets/images/imageCall.svg',
+                  image: isSwitched
+                      ? 'assets/images/contactUsImageWhite1.svg'
+                      : 'assets/images/contactUsImage1.svg',
                   funAlert: () {
                     alertDialogAccount(
                       context: context,
@@ -38,7 +41,9 @@ class ContactWithUs extends StatelessWidget {
                 const Divider(),
                 CallPhoneWhatsapp(
                   text: 'تواصل معنا',
-                  image: 'assets/images/imageContactusWhatsapp.svg',
+                  image: isSwitched
+                      ? 'assets/images/contactUsImageWhite2.svg'
+                      : 'assets/images/contactUsImage2.svg',
                   funAlert: () {},
                 ),
               ],

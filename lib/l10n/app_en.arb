@@ -6,7 +6,39 @@
  "destination": "Where do you want to go?",
  "selectLocation": "Determine location on map",
  "currentLocation": "Current location",
- "backToHome": "Back to Homepage"
+ "backToHome": "Back to Homepage",
+ "fullName": "Full name",
+ "mobilNumber": "Enter your phone number",
+  "email": "Enter your email",
+  "password": "Enter your password",
+  "subscribingAgree": "By subscribing, you agree to the Terms of Service and Privacy Policy.",
+  "subscribing": "Subscribe",
+  "signUpGmail": "Sign up with Gmail",
+  "signUpApple":"Sign up with Apple",
+  "doHaveAccount":"Do you have account?",
+  "or": "or",
+  "back": "back",
+  "doNotHaveAccount":"Do you not have account?",
+  "enterOTP":"Enter your OTP code",
+  "verify":"Verify",
+  "reSendOtp":"Resend",
+  "notReceiveOtp":"Don't receive OTP",
+  "otpSuccessSend":"Verification code sent successfully",
+  "editAccount":"Edit Account",
+  "support": "Support",
+  "wallet": "Wallet",
+  "aboutUs": "About Us",
+  "termsAndConditions": "Terms and Conditions",
+  "privacyPolicy": "Privacy Policy",
+   "userName": "User name",
+   "mobile":"Mobile",
+   "deleteAccount": "Delete Account",
+   "signOut": "Sign Out",
+   "save": "Save",
+   "deleteAccountConfirm": "Are you sure want to delete account?",
+    "signOutConfirm": "Are you sure want to sign out?"
+
+
 }
 
 

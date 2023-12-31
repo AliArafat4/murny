@@ -2,11 +2,13 @@
 
 import 'dart:convert';
 
+import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
-  late final SharedPreferences _preferences;
+  late SharedPreferences _preferences;
+
   initializePref() async {
     _preferences = await SharedPreferences.getInstance();
   }
@@ -38,5 +40,13 @@ class SharedPref {
 
   void cleanSharedPref() {
     _preferences.clear();
+  }
+
+  getCurrentTheme() {
+    return prefs.getString("theme") ?? "light";
+  }
+
+  setTheme(String themeText) async {
+    prefs.setString("theme", themeText);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpSideSigninSignup extends StatelessWidget {
   const UpSideSigninSignup(
@@ -17,16 +18,16 @@ class UpSideSigninSignup extends StatelessWidget {
             children: [
               InkWell(
                 onTap: onTap,
-                child: const Row(
+                child: Row(
                   children: [
                     Icon(
                       Icons.arrow_back_ios_new,
-                      color: Colors.black,
+                      //  color: Colors.black,
                     ),
                     Text(
-                      'رجوع',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                      AppLocalizations.of(context)!.back,
+                      //style: TextStyle(
+                      // color: Colors.black, fontWeight: FontWeight.bold) ,
                     ),
                   ],
                 ),

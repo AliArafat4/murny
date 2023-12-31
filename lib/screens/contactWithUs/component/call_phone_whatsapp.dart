@@ -21,9 +21,9 @@ class CallPhoneWhatsapp extends StatelessWidget {
           children: [
             SvgPicture.asset(
               image,
-              matchTextDirection: true,
-              colorFilter:
-                  const ColorFilter.mode(Color(0xff000000), BlendMode.srcIn),
+              matchTextDirection: false,
+              // colorFilter:
+              //     const ColorFilter.mode(Color(0xff000000), BlendMode.srcIn),
               fit: BoxFit.none,
             ),
             SizedBox(
@@ -31,7 +31,9 @@ class CallPhoneWhatsapp extends StatelessWidget {
             ),
             Text(
               text,
-              style: const TextStyle(color: Color(0xff000000), fontSize: 24),
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
             )
           ],
         ),

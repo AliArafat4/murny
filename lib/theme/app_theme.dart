@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 final Map appThemeMap = {
   "light": ThemeData(
-    scaffoldBackgroundColor: const Color(0xffF7F7F7),
+    dividerColor: Colors.black,
+    brightness: Brightness.light,
+    drawerTheme: const DrawerThemeData(backgroundColor: Color(0xffFFFFFF)),
+    //scaffoldBackgroundColor: const Color.fromARGB(239, 22, 22, 217),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
         iconColor: MaterialStateProperty.resolveWith<Color>(
@@ -17,30 +21,42 @@ final Map appThemeMap = {
     radioTheme: const RadioThemeData(
       fillColor: MaterialStatePropertyAll<Color>(Color(0xff62c1c7)),
     ),
-    iconTheme: const IconThemeData(color: Color(0xff695678), size: 20),
+    segmentedButtonTheme: const SegmentedButtonThemeData(style: ButtonStyle()),
+    iconTheme: IconThemeData(
+      color: Colors.black.withOpacity(0.8),
+    ),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(color: Colors.black),
       backgroundColor: Colors.transparent,
       elevation: 0,
     ),
-    brightness: Brightness.light,
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xff62c1c7),
         elevation: 0,
       ),
     ),
-    colorScheme: ColorScheme.light(
-        secondary: Colors.white, onPrimary: Colors.black.withOpacity(0.5)),
+    colorScheme: const ColorScheme.light(
+      onSecondary: Colors.black,
+      secondary: Color(0xff252C63),
+      onPrimary: Colors.black,
+    ),
     primaryTextTheme: TextTheme(
       titleSmall: TextStyle(color: Colors.black.withOpacity(0.6)),
     ),
   ),
   "dark": ThemeData(
       brightness: Brightness.dark,
-      colorScheme: ColorScheme.dark(
-          secondary: const Color(0xff62c1c7).withOpacity(0.1),
-          onPrimary: Colors.grey),
+      dividerColor: Colors.white,
+      segmentedButtonTheme: const SegmentedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStatePropertyAll(Color.fromARGB(255, 172, 19, 19)))),
+      colorScheme: const ColorScheme.dark(
+          onSecondary: Colors.black,
+          secondary: Colors.grey,
+          onPrimary: Colors.white),
       appBarTheme: const AppBarTheme(
         iconTheme: IconThemeData(
           color: Colors.white,

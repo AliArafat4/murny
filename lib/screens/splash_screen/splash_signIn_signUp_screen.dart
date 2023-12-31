@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
+import 'package:murny_final_project/method/alert_snackbar.dart';
+import 'package:murny_final_project/method/show_loading.dart';
+import 'package:murny_final_project/screens/create_driver/create_driver_account_screen.dart';
+import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
@@ -12,8 +18,9 @@ class SplashSignInSignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int selectedIndex = 0;
     return Scaffold(
-      backgroundColor: const Color(0xffEEF0F2),
+      // backgroundColor: const Color(0xffEEF0F2),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -21,6 +28,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
             children: [
               Image.asset(
                 "assets/images/splashImage.png",
+                color: Colors.grey,
                 width: 430.w,
                 fit: BoxFit.cover,
               ),
@@ -47,7 +55,12 @@ class SplashSignInSignUpScreen extends StatelessWidget {
                 textOne: AppLocalizations.of(context)!.user,
                 textTwo: AppLocalizations.of(context)!.driver,
                 colorSelected: const Color(0xff525884),
+
                 //  isSegmentUser: true,
+
+                func: (value) {
+                  selectedIndex = value;
+                },
               ),
             ),
             Positioned(
@@ -57,7 +70,10 @@ class SplashSignInSignUpScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUpScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => selectedIndex == 0
+                              ? SignUpScreen()
+                              : CreateDriverAccountScreen()),
                     );
                   },
                   isText: true,

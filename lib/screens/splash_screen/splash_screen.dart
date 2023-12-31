@@ -20,7 +20,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   double move = 37.h;
-  late CheckTokenCubit numberGenerator;
+  late CheckTokenCubit checkToken;
   late Timer cartTimer;
 
   @override
@@ -35,13 +35,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void didChangeDependencies() {
-    numberGenerator = context.read<CheckTokenCubit>();
+    checkToken = context.read<CheckTokenCubit>();
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    numberGenerator.close();
+    checkToken.close();
     cartTimer.cancel();
 
     super.dispose();
@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffEEF0F2),
+      //backgroundColor: const Color(0xffEEF0F2),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -81,6 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Stack(children: [
             Image.asset(
               'assets/images/splashImage.png',
+              //S  color: Colors.grey,
               width: 430.w,
               fit: BoxFit.cover,
             ),

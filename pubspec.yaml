@@ -37,6 +37,7 @@ dependencies:
   flutter_credit_card: ^4.0.1
   flutter_staggered_animations: ^1.1.1
   intl: any
+  avatar_glow: ^3.0.1
 
 
 
@@ -63,6 +64,5 @@ flutter:
     - assets/images/imageCall.svg
     - assets/images/imageContactusWhatsapp.svg
     - assets/images/
-
     - assets/images/appel_pay_icon.png
 

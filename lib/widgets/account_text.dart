@@ -15,21 +15,29 @@ class AccountText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(secondText,
-            textDirection: TextDirection.rtl,
-            style: const TextStyle(
-                fontSize: 16,
-                fontFamily: 'Mulish-Reg',
-                color: Color(0xff000000))),
+        Text(
+          secondText,
+          //textDirection: TextDirection.rtl,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+          // style: const TextStyle(
+          //     fontSize: 16,
+          //     fontFamily: 'Mulish-Reg',
+          //     color: Color(0xff000000))
+        ),
         const SizedBox(
           width: 5,
         ),
         GestureDetector(
             onTap: () => pushNavi(),
-            child: Text(firstText,
-                textDirection: TextDirection.rtl,
-                style:
-                    const TextStyle(fontSize: 16, color: Color(0xff252C63)))),
+            child: Text(
+              firstText,
+              textDirection: TextDirection.rtl,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+            )),
       ],
     );
   }

@@ -36,7 +36,7 @@ class TextFieldWidget extends StatelessWidget {
                           Flexible(
                             child: Text(
                               '966+',
-                              style: TextStyle(color: Color(0xff000000)),
+                              // style: TextStyle(color: Color(0xff000000)),
                             ),
                           ),
                           VerticalDivider(

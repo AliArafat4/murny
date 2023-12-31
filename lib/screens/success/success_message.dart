@@ -7,7 +7,9 @@ class SuccessMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       message,
-      style: TextStyle(fontSize: 22),
+      style: TextStyle(
+        fontSize: 22,
+      ),
     );
   }
 }

@@ -4,16 +4,24 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:murny_final_project/bloc/card_bloc/cubit/card_cubit.dart';
+import 'package:murny_final_project/bloc/checkfillOTP_bloc/cubit/checkfill_otp_cubit.dart';
 import 'package:murny_final_project/bloc/dropdownlist_bloc/cubit/dropdownlist_cubit.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
+import 'package:murny_final_project/bloc/theme_bloc/them_.state.dart';
+import 'package:murny_final_project/bloc/theme_bloc/them_bloc.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 import 'package:murny_final_project/screens/add_credit_card/add_credit_card.dart';
 
 import 'package:murny_final_project/screens/balance/balance_add.dart';
+import 'package:murny_final_project/screens/balance/balance_home.dart';
+import 'package:murny_final_project/screens/balance/payment_type.dart';
+import 'package:murny_final_project/screens/chat/chat_screen.dart';
+import 'package:murny_final_project/screens/contactWithUs/component/call_phone_whatsapp.dart';
+import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
 import 'package:murny_final_project/screens/create_driver/create_driver_account_screen.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
 import 'package:murny_final_project/screens/home.dart';
@@ -34,6 +42,8 @@ import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_s
 import 'package:murny_final_project/screens/success/success.dart';
 import 'package:murny_final_project/screens/success/success_message.dart';
 import 'package:murny_final_project/screens/voice_search/search.dart';
+import 'package:murny_final_project/screens/voice_search/search_bar.dart';
+import 'package:murny_final_project/screens/voice_search/voice_button.dart';
 import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -41,11 +51,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/profile_bloc/profile_bloc.dart';
 import 'local_storage/shared_prefrences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 SharedPref pref = SharedPref();
+late SharedPreferences prefs;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,6 +65,7 @@ void main() async {
   await dotenv.load(fileName: ".env");
 
   await pref.initializePref();
+  prefs = await SharedPreferences.getInstance();
 
   runApp(const MainApp());
 }
@@ -78,19 +91,28 @@ class MainApp extends StatelessWidget {
                 create: (context) => RadiobuttonCubit()),
             BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
             BlocProvider<CardCubit>(create: (context) => CardCubit()),
+            BlocProvider<CheckfillOtpCubit>(
+                create: (context) => CheckfillOtpCubit()),
+            BlocProvider(create: (context) => ThemeBloc()),
           ],
-          child: MaterialApp(
-            locale: Locale('ar'),
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: L10n.all,
-            debugShowCheckedModeBanner: false,
-            home: SignUpScreen(),
-          ));
+          child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+            if (state is GetThemeState) {
+              return MaterialApp(
+                  theme: state.themeData,
+                  locale: const Locale('ar'),
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: L10n.all,
+                  debugShowCheckedModeBanner: false,
+                  home: EditAccount());
+            } else {
+              return Container();
+            }
+          }));
     });
   }
 }
