@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showAcceptedOrderDiolg({required BuildContext context}) {
   showDialog(
@@ -19,13 +20,13 @@ showAcceptedOrderDiolg({required BuildContext context}) {
             SizedBox(
               height: 2.h,
             ),
-            const Text(
-              "تم قبول طلبك",
+            Text(
+              AppLocalizations.of(context)!.acceptedOrder,
               style: TextStyle(fontSize: 22),
             ),
-            const Text(
-              "استمتع في طريقك للوجهة المحددة",
-              style: TextStyle(color: Color(0xffCDCED3)),
+            Text(
+              AppLocalizations.of(context)!.acceptedOrderdescription,
+              style: TextStyle(color: Colors.black.withOpacity(0.4)),
             ),
             SizedBox(height: 4.h),
           ],

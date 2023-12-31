@@ -6,10 +6,14 @@ class ArrowBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Container(
       width: 8.w,
       height: 10.h,
-      margin: EdgeInsets.only(right: 17.sp),
+      margin: currentLanguage == "ar"
+          ? EdgeInsets.only(right: 17.sp)
+          : EdgeInsets.only(left: 17.sp),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),

@@ -36,8 +36,11 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_credit_card: ^4.0.1
   flutter_staggered_animations: ^1.1.1
+  sliding_up_panel: ^2.0.0+1
   intl: any
   avatar_glow: ^3.0.1
+  google_api_headers: ^1.3.0
+  awesome_snackbar_content: ^0.1.0
 
 
 
@@ -53,7 +56,6 @@ flutter:
 
   assets:
     - assets/images/
-
     - .env
     - assets/images/carMurny.png
     - assets/images/carMurny.svg

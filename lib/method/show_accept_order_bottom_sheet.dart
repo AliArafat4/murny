@@ -6,10 +6,14 @@ import 'package:murny_final_project/widgets/cart_detil.dart';
 import 'package:murny_final_project/widgets/custom_divider.dart';
 import 'package:murny_final_project/widgets/driver_info.dart';
 import 'package:murny_final_project/widgets/payment_method.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:murny_final_project/widgets/trip_detil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showAcceptOrderBottomSheet({required BuildContext context}) {
+  Locale myLocale = Localizations.localeOf(context);
+  String currentLanguage = myLocale.languageCode;
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -32,10 +36,13 @@ showAcceptOrderBottomSheet({required BuildContext context}) {
                 height: MediaQuery.of(context).size.height / 22,
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width / 20),
-                child: const Text(
-                  "عربتك في الطريق إليك",
+                padding: currentLanguage == "ar"
+                    ? EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width / 20)
+                    : EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 20),
+                child: Text(
+                  AppLocalizations.of(context)!.glofCartOnWay,
                   style: TextStyle(fontSize: 16),
                 ),
               ),
@@ -90,22 +97,25 @@ showAcceptOrderBottomSheet({required BuildContext context}) {
                 height: MediaQuery.of(context).size.height / 82,
               ),
               Center(
-                child: SecondButton(
-                  title: "إلغاء الطلب",
+                child: PrimaryButton(
+                  title: AppLocalizations.of(context)!.cancel,
                   onPressed: () {
                     showConfirmDiolg(
                         context: context,
-                        title: 'هل أنت متأكد انك تريد الغاء الطلب',
+                        title: AppLocalizations.of(context)!.cancelOrderConfirm,
                         acceptFun: () {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: (context) => const SuccessScreen(
-                                        message: "تم إلغاء طلبك بنجاح",
+                                  builder: (context) => SuccessScreen(
+                                        message: AppLocalizations.of(context)!
+                                            .cancelOrderSuccess,
                                       )),
                               (Route route) => false);
                         });
                   },
-                  color: const Color(0xffF21D53),
+                  isPadding: true,
+                  isText: true,
+                  buttonColor: const Color(0xffF21D53),
                 ),
               )
             ],

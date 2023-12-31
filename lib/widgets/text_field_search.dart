@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TextFieldSearch extends StatelessWidget {
   TextFieldSearch({
@@ -12,6 +13,8 @@ class TextFieldSearch extends StatelessWidget {
   final TextEditingController conSearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Padding(
       padding: EdgeInsets.only(top: 8.0.sp),
       child: Column(
@@ -28,11 +31,16 @@ class TextFieldSearch extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     color: const Color(0xffFFFFFF),
                   ),
-                  child: SvgPicture.asset(
+                  child: Icon(
+                    Icons.menu,
+                    size: 18,
+                  ),
+
+                  /* SvgPicture.asset(
                     'assets/images/imageDrawer.svg',
                     colorFilter: const ColorFilter.mode(
                         Color(0xff000000), BlendMode.srcIn),
-                  ),
+                  ),*/
                 ),
               ),
               SizedBox(
@@ -44,7 +52,8 @@ class TextFieldSearch extends StatelessWidget {
                 child: TextField(
                   controller: conSearch,
                   decoration: InputDecoration(
-                      hintText: 'ابحث عن وجهتك',
+                      hintText:
+                          AppLocalizations.of(context)!.findYourDestination,
                       suffixIcon: IconButton(
                         onPressed: () {
                           Navigator.push(
@@ -62,7 +71,9 @@ class TextFieldSearch extends StatelessWidget {
                       prefixIcon: SizedBox(
                         width: 12.w,
                         child: Padding(
-                          padding: EdgeInsets.only(right: 14.sp),
+                          padding: currentLanguage == "ar"
+                              ? EdgeInsets.only(right: 14.sp)
+                              : EdgeInsets.only(left: 14.sp),
                           child: Row(
                             children: [
                               InkWell(
@@ -97,9 +108,15 @@ class TextFieldSearch extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(right: 13.sp, top: 14.sp),
+            padding: currentLanguage == "ar"
+                ? EdgeInsets.only(right: 13.sp, top: 14.sp)
+                : EdgeInsets.only(left: 13.sp, top: 14.sp),
             child: Align(
-              alignment: Alignment.topRight,
+
+              alignment: currentLanguage == "ar"
+                  ? Alignment.topRight
+                  : Alignment.topLeft,
+
               child: InkWell(
                 onTap: () {},
                 child: Container(

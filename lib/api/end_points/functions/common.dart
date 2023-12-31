@@ -55,6 +55,24 @@ class CommonFunc {
           return false;
         }
 
+      case Common.filterDrivers:
+        try {
+          final uri = Uri.parse(url + endPoints.getDrivers);
+
+          final response = await http.post(uri, headers: {"token": token}, body: jsonEncode(body));
+
+          final List<DriverModel> driverModelList = [];
+          final decodedBody = jsonDecode(response.body);
+          for (var order in decodedBody) {
+            driverModelList.add(DriverModel.fromJson(order));
+          }
+
+          return driverModelList;
+        } catch (err) {
+          print(err);
+          return false;
+        }
+
       default:
         throw "exception";
     }

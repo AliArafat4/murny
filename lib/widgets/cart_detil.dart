@@ -5,8 +5,12 @@ class CartDetil extends StatelessWidget {
   final String numberOfCartSeat;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Padding(
-      padding: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
+      padding: currentLanguage == "ar"
+          ? EdgeInsets.only(right: MediaQuery.of(context).size.width / 20)
+          : EdgeInsets.only(left: MediaQuery.of(context).size.width / 20),
       child: Row(
         children: [
           Image.asset(

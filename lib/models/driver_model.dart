@@ -11,20 +11,23 @@ class DriverModel {
   double? lat;
   double? lng;
   String? type;
+  int? cartID;
 
-  DriverModel(
-      {this.id,
-      this.userId,
-      this.image,
-      this.gender,
-      this.city,
-      this.license,
-      this.phone,
-      this.email,
-      this.name,
-      this.lat,
-      this.lng,
-      this.type});
+  DriverModel({
+    this.id,
+    this.userId,
+    this.image,
+    this.gender,
+    this.city,
+    this.license,
+    this.phone,
+    this.email,
+    this.name,
+    this.lat,
+    this.lng,
+    this.type,
+    this.cartID,
+  });
 
   DriverModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -39,6 +42,7 @@ class DriverModel {
     lat = json['lat'];
     lng = json['lng'];
     type = json['type'];
+    cartID = json['cart_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -55,6 +59,7 @@ class DriverModel {
     data['lat'] = lat;
     data['lng'] = lng;
     data['type'] = type;
+    data['cart_id'] = cartID;
     return data;
   }
 }

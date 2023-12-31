@@ -4,7 +4,7 @@ import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/screens/create_driver/create_driver_account_screen.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
@@ -55,6 +55,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
                 textOne: AppLocalizations.of(context)!.user,
                 textTwo: AppLocalizations.of(context)!.driver,
                 colorSelected: const Color(0xff525884),
+                
 
                 //  isSegmentUser: true,
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TripDetil extends StatelessWidget {
   const TripDetil(
@@ -14,8 +15,8 @@ class TripDetil extends StatelessWidget {
       children: [
         Column(
           children: [
-            const Text(
-              "بداية الرحلة",
+            Text(
+              AppLocalizations.of(context)!.startTrip,
               style: TextStyle(color: Colors.grey, fontSize: 18),
             ),
             Text(
@@ -30,8 +31,8 @@ class TripDetil extends StatelessWidget {
         ),
         Column(
           children: [
-            const Text(
-              "الوصول للوجهة",
+            Text(
+              AppLocalizations.of(context)!.endTrip,
               style: TextStyle(color: Colors.grey, fontSize: 18),
             ),
             Text(

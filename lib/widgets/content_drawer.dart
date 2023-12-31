@@ -17,8 +17,12 @@ class ContentDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Padding(
-      padding: EdgeInsets.only(right: 15.sp, top: spaceTop),
+      padding: currentLanguage == 'ar'
+          ? EdgeInsets.only(right: 15.sp, top: spaceTop)
+          : EdgeInsets.only(left: 15.sp, top: spaceTop),
       child: InkWell(
         onTap: () => naviPush!(),
         child: Row(

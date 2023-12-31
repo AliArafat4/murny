@@ -27,11 +27,14 @@ class SegmentControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return BlocBuilder<SegmentCubit, SegmentState>(
       builder: (context, state) {
         return MaterialSegmentedControl(
-            horizontalPadding:
-                EdgeInsets.only(left: 50.sp, right: 20, top: 20.sp),
+            horizontalPadding: currentLanguage == "ar"
+                ? EdgeInsets.only(left: 50.sp, right: 20, top: 20.sp)
+                : EdgeInsets.only(right: 50.sp, left: 20, top: 20.sp),
             children: {
               0: Text(textOne),
               1: Text(textTwo),

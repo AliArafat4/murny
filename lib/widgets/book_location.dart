@@ -4,14 +4,17 @@ import 'package:flutter_dash/flutter_dash.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BookLocation extends StatelessWidget {
-  const BookLocation(
-      {super.key, required this.locationFrom, required this.locationTo});
+  const BookLocation({super.key, required this.locationFrom, required this.locationTo});
   final String locationFrom;
   final String locationTo;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Padding(
-      padding: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
+      padding: currentLanguage == "ar"
+          ? EdgeInsets.only(right: MediaQuery.of(context).size.width / 20)
+          : EdgeInsets.only(left: MediaQuery.of(context).size.width / 20),
       child: Container(
         decoration: BoxDecoration(
             color: const Color(0xffCDCED3).withOpacity(0.4),
@@ -24,12 +27,15 @@ class BookLocation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Location(
-                  color: const Color(0xff252C63),
-                  icon: Icons.my_location,
-                  title: locationFrom),
+                  color: const Color(0xff252C63), icon: Icons.my_location, title: locationFrom),
               Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width / 28),
+
+                padding: currentLanguage == "ar"
+                    ? EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width / 28)
+                    : EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 28),
+
                 child: Dash(
                     direction: Axis.vertical,
                     length: 1.9.h,
