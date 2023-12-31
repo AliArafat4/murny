@@ -27,124 +27,7 @@ class HomeScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             key: _scaffoldKey,
             backgroundColor: const Color.fromARGB(189, 44, 44, 205),
-            drawer: Drawer(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(80),
-                      bottomLeft: Radius.circular(80))),
-              child: ListView(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.sp, left: 180),
-                    child: const CircleAvatar(
-                      radius: 44,
-                      foregroundImage:
-                          AssetImage("assets/images/personalImage.png"),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 12.sp),
-                    child: const Text(
-                      'مروة',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 12.sp),
-                    child: Row(
-                      children: [
-                        const Text(
-                          '966548784080+',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 18),
-                        )
-                      ],
-                    ),
-                  ),
-                  ContentDrawer(
-                    text: AppLocalizations.of(context)!.editAccount,
-                    imageSvg: 'assets/images/imageEditAccount.svg',
-                    spaceTop: 0.sp,
-                    naviPush: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => EditAccount()),
-                      );
-                    },
-                  ),
-                  ContentDrawer(
-                    text: AppLocalizations.of(context)!.support,
-                    imageSvg: 'assets/images/imageSupport.svg',
-                    spaceTop: 20.sp,
-                    naviPush: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ContactWithUs()),
-                      );
-                    },
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  ContentDrawer(
-                    text: AppLocalizations.of(context)!.wallet,
-                    imageSvg: 'assets/images/imageWallet.svg',
-                    spaceTop: 15.sp,
-                    naviPush: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeBalanceScreen()),
-                      );
-                    },
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  ContentDrawer(
-                    text: AppLocalizations.of(context)!.aboutUs,
-                    imageSvg: 'assets/images/imageInfo.svg',
-                    spaceTop: 15.sp,
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  ContentDrawer(
-                    text: AppLocalizations.of(context)!.termsAndConditions,
-                    imageSvg: 'assets/images/imageConditions.svg',
-                    spaceTop: 15.sp,
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  ContentDrawer(
-                    text: AppLocalizations.of(context)!.privacyPolicy,
-                    imageSvg: 'assets/images/imagePrivacy.svg',
-                    spaceTop: 15.sp,
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  SizedBox(
-                      // height: 23,
-                      child: SegmentControl(
-                    textOne: 'العربية',
-                    textTwo: 'English',
-                    colorSelected: const Color(0xff000000),
-                    // isSegmentUser: false,
-                  )),
-                  Padding(
-                    padding: EdgeInsets.only(top: 60.sp, left: 61.sp),
-                    child: const Icon(Icons.light_mode_outlined),
-                  )
-                ],
-              ),
-            ),
+            drawer: CustomDrawer(),
             body: Padding(
               padding: EdgeInsets.only(
                 top: 40.sp,
@@ -195,5 +78,128 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             )));
+  }
+}
+
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(80), bottomLeft: Radius.circular(80))),
+      child: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 20.sp, left: 180),
+            child: const CircleAvatar(
+              radius: 44,
+              foregroundImage: AssetImage("assets/images/personalImage.png"),
+            ),
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 12.sp),
+            child: const Text(
+              'مروة',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 12.sp),
+            child: Row(
+              children: [
+                const Text(
+                  '966548784080+',
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                )
+              ],
+            ),
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.editAccount,
+            imageSvg: 'assets/images/imageEditAccount.svg',
+            spaceTop: 0.sp,
+            naviPush: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditAccount()),
+              );
+            },
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.support,
+            imageSvg: 'assets/images/imageSupport.svg',
+            spaceTop: 20.sp,
+            naviPush: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ContactWithUs()),
+              );
+            },
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.wallet,
+            imageSvg: 'assets/images/imageWallet.svg',
+            spaceTop: 15.sp,
+            naviPush: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const HomeBalanceScreen()),
+              );
+            },
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.aboutUs,
+            imageSvg: 'assets/images/imageInfo.svg',
+            spaceTop: 15.sp,
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.termsAndConditions,
+            imageSvg: 'assets/images/imageConditions.svg',
+            spaceTop: 15.sp,
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.privacyPolicy,
+            imageSvg: 'assets/images/imagePrivacy.svg',
+            spaceTop: 15.sp,
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          SizedBox(
+              // height: 23,
+              child: SegmentControl(
+            textOne: 'العربية',
+            textTwo: 'English',
+            colorSelected: const Color(0xff000000),
+            // isSegmentUser: false,
+          )),
+          Padding(
+            padding: EdgeInsets.only(top: 60.sp, left: 61.sp),
+            child: const Icon(Icons.light_mode_outlined),
+          )
+        ],
+      ),
+    );
   }
 }

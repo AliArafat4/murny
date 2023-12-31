@@ -12,9 +12,12 @@ import 'package:murny_final_project/method/show_main_bottom_sheet.dart';
 import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/screens/balance/payment_type.dart';
 import 'package:murny_final_project/screens/google_maps/components/filter_bottom_sheet.dart';
+import 'package:murny_final_project/screens/home/home_screen.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/golf_cart_detail.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
+import 'package:murny_final_project/widgets/text_field_search.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class GoogleMapScreen extends StatelessWidget {
@@ -24,16 +27,21 @@ class GoogleMapScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     List<Marker> driversMarker = [];
     String locationName = "";
 
     GoogleMapController? googleMapController;
 
     CameraPosition initialCameraPosition;
-    initialCameraPosition = const CameraPosition(target: LatLng(0, 0), zoom: 10);
+    initialCameraPosition =
+        const CameraPosition(target: LatLng(0, 0), zoom: 10);
     Map<PolylineId, Polyline> distance = {};
 
     return Scaffold(
+      drawer: CustomDrawer(),
+      key: _scaffoldKey,
       body: SafeArea(
         child: Stack(
           children: [
@@ -53,7 +61,9 @@ class GoogleMapScreen extends StatelessWidget {
                       initialCameraPosition: initialCameraPosition,
                       onMapCreated: (GoogleMapController controller) {
                         googleMapController = controller;
-                        context.read<MapBloc>().add(MapGetCurrentLocationEvent());
+                        context
+                            .read<MapBloc>()
+                            .add(MapGetCurrentLocationEvent());
                         context.read<MapBloc>().add(MapGetDriversMarkerEvent());
                       },
                       onTap: (location) async {
@@ -72,15 +82,18 @@ class GoogleMapScreen extends StatelessWidget {
                     ),
 
                     //TODO: CHECK LAST ORDER STATE
-                    panel: ("LAST ORDER " != "CANCELED OR NULL OR DECLINED")
-                        ? const FilterSheet()
-                        : ("LAST ORDER " == "JUST CREATED")
-                            ? SizedBox() // TODO: SHOW ORDER LOADING
-                            : ("LAST ORDER " == "ACCEPTED")
-                                ? SizedBox() // TODO: SHOW DRIVING IS COMING OR NOTHING
-                                : SizedBox(), // TODO: SHOW ??
+                    panel: const FilterSheet(),
+                    // ("LAST ORDER " != "CANCELED OR NULL OR DECLINED")
+                    //   ? const FilterSheet()
+                    //   : ("LAST ORDER " == "JUST CREATED")
+                    //       ? SizedBox() // TODO: SHOW ORDER LOADING
+                    //       : ("LAST ORDER " == "ACCEPTED")
+                    //           ? SizedBox() // TODO: SHOW DRIVING IS COMING OR NOTHING
+                    //           : SizedBox(), // TODO: SHOW ??
 
-                    maxHeight: ("LAST ORDER " != "ACCEPTED") ? context.getHeight(factor: 0.45) : 0,
+                    maxHeight: ("LAST ORDER " != "ACCEPTED")
+                        ? context.getHeight(factor: 0.45)
+                        : 0,
                     // backdropEnabled: true,
                   );
                 },
@@ -88,8 +101,11 @@ class GoogleMapScreen extends StatelessWidget {
                   //GO TO USER LOCATION
                   if (state is MapGetCurrentLocationState) {
                     locationName = state.locationName;
-                    googleMapController?.animateCamera(CameraUpdate.newLatLngZoom(
-                        LatLng(state.userLocation.latitude, state.userLocation.longitude), 10));
+                    googleMapController?.animateCamera(
+                        CameraUpdate.newLatLngZoom(
+                            LatLng(state.userLocation.latitude,
+                                state.userLocation.longitude),
+                            10));
                   }
 
                   //Add drivers markers to the map
@@ -100,7 +116,8 @@ class GoogleMapScreen extends StatelessWidget {
                           markerId: MarkerId((marker.userId.toString())),
                           position: LatLng(marker.lat!, marker.lng!),
                           icon: await BitmapDescriptor.fromAssetImage(
-                              const ImageConfiguration(), "assets/images/markerX3.png"),
+                              const ImageConfiguration(),
+                              "assets/images/markerX3.png"),
                           onTap: () {
                             print(marker.userId);
 
@@ -128,7 +145,8 @@ class GoogleMapScreen extends StatelessWidget {
                             markerId: MarkerId((marker.userId.toString())),
                             position: LatLng(marker.lat!, marker.lng!),
                             icon: await BitmapDescriptor.fromAssetImage(
-                                const ImageConfiguration(), "assets/images/markerX3.png"),
+                                const ImageConfiguration(),
+                                "assets/images/markerX3.png"),
                             onTap: () {
                               showOrderBottomSheet(
                                   context: context,
@@ -149,6 +167,12 @@ class GoogleMapScreen extends StatelessWidget {
                         : const SizedBox();
                   }
                 },
+              ),
+            ),
+            Positioned(
+              top: 30.sp,
+              child: TextFieldSearch(
+                fun: () => _scaffoldKey.currentState!.openDrawer(),
               ),
             ),
           ],
