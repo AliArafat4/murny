@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/checkfillOTP_bloc/cubit/checkfill_otp_cubit.dart';
 
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 
@@ -14,9 +15,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-//-----------------CONVERT To Bloc----------------------
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({super.key, required this.email});
+  OTPScreen({super.key, required this.email});
 
   final String email;
 
@@ -40,11 +40,20 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffFFFFFF),
         body: Padding(
-          padding: EdgeInsets.only(
-            top: 20.sp,
+      padding: EdgeInsets.only(
+        top: 20.sp,
+      ),
+      child: Column(children: [
+        Padding(
+          padding: EdgeInsets.only(right: 20.sp),
+          child: UpSideSigninSignup(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            visibleImage: false,
           ),
+
           child: Column(children: [
             Padding(
               padding: EdgeInsets.only(right: 20.sp),
@@ -100,10 +109,12 @@ class _OTPScreenState extends State<OTPScreen> {
                   });
                 },
               ),
+
             ),
             SizedBox(
-              height: 2.h,
+              height: 1.h,
             ),
+
             Visibility(
                 child: isVisible
                     ? Container()
@@ -158,10 +169,11 @@ class _OTPScreenState extends State<OTPScreen> {
                   listener: (context, state) {
                     state is LoadingState ? showLoadingDialog(context: context) : const SizedBox();
 
-                    if (state is AuthOTPErrorState) {
-                      Navigator.pop(context);
-                      showErrorSnackBar(context, state.errorMsg);
-                    }
+                if (state is AuthOTPErrorState) {
+                  Navigator.pop(context);
+                  showErrorSnackBar(context, state.errorMsg);
+                }
+
 
                     state is AuthOTPSuccessState
                         ? Navigator.push(
@@ -175,5 +187,6 @@ class _OTPScreenState extends State<OTPScreen> {
             )
           ]),
         ));
+
   }
 }

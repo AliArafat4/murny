@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/bloc/user_bloc/user_cubit.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
@@ -9,25 +10,20 @@ import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart'
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class PaymentTypeScreen extends StatefulWidget {
-  const PaymentTypeScreen(
-      {super.key,
+class PaymentTypeScreen extends StatelessWidget {
+  PaymentTypeScreen({super.key,
       required this.driverID,
       required this.currentLocation,
       required this.destination,
       required this.cartID});
 
-  @override
-  State<PaymentTypeScreen> createState() => _PaymentTypeScreenState();
-
   final String driverID, currentLocation, destination;
   final int cartID;
-}
-
 enum Payment { visa, wallet, applePay, cash }
+  
 
-class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
   Payment selectedValue = Payment.cash;
+
   @override
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
@@ -64,35 +60,77 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 42,
               ),
-              PaymentRadioButton(
-                value: Payment.visa,
-                selectedValue: selectedValue,
-                onChange: (value) {
-                  setState(() {});
-                  selectedValue = value!;
+              BlocBuilder<RadiobuttonCubit, RadiobuttonState>(
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      PaymentRadioButton(
+                        value: Payment.visa,
+                        selectedValue: state is RadioButtonPaymentSelectState
+                            ? state.selected
+                            : selectedValue,
+                        onChange: (value) {
+                          context
+                              .read<RadiobuttonCubit>()
+                              .radiobuttonPayment(selectedType: value!);
+                        },
+                        paymentMethod: "البطاقة الإئتمانية",
+                        imagePath: "assets/images/visa_icon.png",
+                      ),
+                      PaymentRadioButton(
+                        value: Payment.wallet,
+                        selectedValue: state is RadioButtonPaymentSelectState
+                            ? state.selected
+                            : selectedValue,
+                        onChange: (value) {
+                          context
+                              .read<RadiobuttonCubit>()
+                              .radiobuttonPayment(selectedType: value!);
+                        },
+                        paymentMethod: "المحفظة",
+                        imagePath: "assets/images/wallet_icon.png",
+                      ),
+                      PaymentRadioButton(
+                        value: Payment.cash,
+                        selectedValue: state is RadioButtonPaymentSelectState
+                            ? state.selected
+                            : selectedValue,
+                        onChange: (value) {
+                          context
+                              .read<RadiobuttonCubit>()
+                              .radiobuttonPayment(selectedType: value!);
+                        },
+                        paymentMethod: "نقداً",
+                        imagePath: "assets/images/cash_icon.png",
+                      ),
+                    ],
+                  );
                 },
-                paymentMethod: AppLocalizations.of(context)!.creditCard,
-                imagePath: "assets/images/visa_icon.png",
-              ),
-              PaymentRadioButton(
-                value: Payment.wallet,
-                selectedValue: selectedValue,
-                onChange: (value) {
-                  setState(() {});
-                  selectedValue = value!;
-                },
-                paymentMethod: AppLocalizations.of(context)!.wallet,
-                imagePath: "assets/images/wallet_icon.png",
-              ),
-              PaymentRadioButton(
-                value: Payment.cash,
-                selectedValue: selectedValue,
-                onChange: (value) {
-                  setState(() {});
-                  selectedValue = value!;
-                },
-                paymentMethod: AppLocalizations.of(context)!.cash,
-                imagePath: "assets/images/cash_icon.png",
+// <<<<<<< Arwa-Alzahrani
+// =======
+//                 paymentMethod: AppLocalizations.of(context)!.creditCard,
+//                 imagePath: "assets/images/visa_icon.png",
+//               ),
+//               PaymentRadioButton(
+//                 value: Payment.wallet,
+//                 selectedValue: selectedValue,
+//                 onChange: (value) {
+//                   setState(() {});
+//                   selectedValue = value!;
+//                 },
+//                 paymentMethod: AppLocalizations.of(context)!.wallet,
+//                 imagePath: "assets/images/wallet_icon.png",
+//               ),
+//               PaymentRadioButton(
+//                 value: Payment.cash,
+//                 selectedValue: selectedValue,
+//                 onChange: (value) {
+//                   setState(() {});
+//                   selectedValue = value!;
+//                 },
+//                 paymentMethod: AppLocalizations.of(context)!.cash,
+//                 imagePath: "assets/images/cash_icon.png",
+// >>>>>>> main
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 22,
@@ -136,3 +174,5 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
     );
   }
 }
+
+// enum Payment { visa, wallet, applePay, cash }

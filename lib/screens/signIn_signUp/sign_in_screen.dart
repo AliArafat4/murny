@@ -31,8 +31,9 @@ class SignInScreen extends StatelessWidget {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
-            backgroundColor: const Color(0xffFFFFFF),
+            // backgroundColor: const Color(0xffFFFFFF),
             body: Padding(
+
               padding: EdgeInsets.all(20.sp),
               child: SingleChildScrollView(
                 child: Column(
@@ -58,23 +59,25 @@ class SignInScreen extends StatelessWidget {
                       height: 8.h,
                     ),
 
-                    TextFieldWidget(
-                      text: AppLocalizations.of(context)!.email,
-                      typeKeyboard: TextInputType.emailAddress,
-                      scure: false,
-                      visiblePhone: false,
-                      controller: conEmail,
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    TextFieldWidget(
-                      text: AppLocalizations.of(context)!.password,
-                      typeKeyboard: TextInputType.visiblePassword,
-                      scure: true,
-                      visiblePhone: false,
-                      controller: conPass,
-                    ),
+
+                TextFieldWidget(
+                  text: AppLocalizations.of(context)!.email,
+                  typeKeyboard: TextInputType.emailAddress,
+                  scure: false,
+                  visiblePhone: false,
+                  controller: conEmail,
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                TextFieldWidget(
+                  text: AppLocalizations.of(context)!.password,
+                  typeKeyboard: TextInputType.visiblePassword,
+                  scure: true,
+                  visiblePhone: false,
+                  controller: conPass,
+                ),
+
 
                     // ),
                     SizedBox(
@@ -94,59 +97,66 @@ class SignInScreen extends StatelessWidget {
                                   AuthLoginEvent(email: conEmail.text, password: conPass.text));
                             },
                           );
-                        },
-                        listener: (context, state) {
-                          state is LoadingState
-                              ? showLoadingDialog(context: context)
-                              : const SizedBox();
 
-                          if (state is AuthLoginErrorState) {
-                            Navigator.pop(context);
-                            showErrorSnackBar(context, state.errorMsg);
-                          }
+                        },
+                      );
+                    },
+                    listener: (context, state) {
+                      state is LoadingState
+                          ? showLoadingDialog(context: context)
+                          : const SizedBox();
+
+                      if (state is AuthLoginErrorState) {
+                        Navigator.pop(context);
+                        showErrorSnackBar(context, state.errorMsg);
+                      }
+
 
                           if (state is AuthLoginSuccessState) {
                             Navigator.pop(context);
                             Navigator.push(
+
                               context,
                               MaterialPageRoute(
                                   builder: (context) => OTPScreen(
                                         email: conEmail.text,
                                       )),
+
                             );
                           }
                         },
                       ),
                     ),
 
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    const DividerSigninSignup(),
+                SizedBox(
+                  height: 3.h,
+                ),
+                const DividerSigninSignup(),
 
-                    SizedBox(
-                      height: 3.h,
-                    ),
+                SizedBox(
+                  height: 3.h,
+                ),
 
-                    PrimaryButton(
-                      buttonColor: Colors.transparent,
-                      onPressed: () {},
-                      text: AppLocalizations.of(context)!.signUpGmail,
-                      image: 'assets/images/gmail.svg',
-                      isText: false,
-                      isPadding: false,
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    PrimaryButton(
-                      buttonColor: Colors.transparent,
-                      onPressed: () {},
-                      text: AppLocalizations.of(context)!.signUpApple,
-                      image: 'assets/images/Apple.svg',
-                      isText: false,
-                      isPadding: true,
-                    ),
+                PrimaryButton(
+                  buttonColor: Colors.transparent,
+                  onPressed: () {},
+                  text: AppLocalizations.of(context)!.signUpGmail,
+                  image: 'assets/images/gmail.svg',
+                  isText: false,
+                  isPadding: false,
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                PrimaryButton(
+                  buttonColor: Colors.transparent,
+                  onPressed: () {},
+                  text: AppLocalizations.of(context)!.signUpApple,
+                  image: 'assets/images/Apple.svg',
+                  isText: false,
+                  isPadding: true,
+                ),
+
 
                     SizedBox(
                       height: 2.h,
@@ -163,8 +173,11 @@ class SignInScreen extends StatelessWidget {
                       },
                     ),
                   ],
+
                 ),
-              ),
-            )));
+              ],
+            ),
+          ),
+        )));
   }
 }

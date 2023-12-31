@@ -24,14 +24,16 @@ class SearchScreen extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     AppLocalizations.of(context)!.selectLocation,
-                    style: TextStyle(color: Colors.black),
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
                   ),
                 ),
               ],
             ),
             const Divider(
-              color: Colors.black,
-            ),
+                // color: Colors.black,
+                ),
             LocationSearchResult(
               buildingName: "كلية علوم الحاسب والمعلوماتA3",
               cityName: "الرياض، محافظة الرياض، المملكة العربية السعودية",

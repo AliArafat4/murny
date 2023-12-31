@@ -31,8 +31,10 @@ class SignUpScreen extends StatelessWidget {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
-            backgroundColor: const Color(0xffFFFFFF),
+            // backgroundColor: const Color(0xffFFFFFF),
             body: Padding(
+
+
               padding: EdgeInsets.all(20.sp),
               child: SingleChildScrollView(
                 child: Column(children: [
@@ -196,6 +198,7 @@ class SignUpScreen extends StatelessWidget {
                 ]),
               ),
             )));
+
   }
 }
 

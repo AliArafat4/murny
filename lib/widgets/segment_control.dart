@@ -49,11 +49,13 @@ class SegmentControl extends StatelessWidget {
                 const TextStyle(color: Color(0xff000000), fontSize: 14),
             borderWidth: 0.7,
             borderRadius: 4.0,
-            disabledChildren: null,
+            disabledChildren: [],
             verticalOffset: 3,
             onSegmentTapped: (index) {
-              func!.call(index);
+              print(index);
+
               context.read<SegmentCubit>().switchSegment(selectedType: index);
+              func!.call(index);
             });
       },
     );

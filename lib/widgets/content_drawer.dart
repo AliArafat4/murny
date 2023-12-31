@@ -4,7 +4,7 @@ import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ContentDrawer extends StatelessWidget {
-  const ContentDrawer(
+  ContentDrawer(
       {super.key,
       required this.imageSvg,
       required this.text,
@@ -14,6 +14,7 @@ class ContentDrawer extends StatelessWidget {
   final String text;
   final double spaceTop;
   final Function? naviPush;
+
   @override
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);

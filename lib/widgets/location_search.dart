@@ -36,7 +36,7 @@ class LocationSearch extends StatelessWidget {
                   thickness: 2,
                   endIndent: 1,
                   indent: 1,
-                  color: Colors.black,
+                  // color: Colors.black,
                 ),
               ),
               Padding(

@@ -24,12 +24,12 @@ class UpSideSigninSignup extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.arrow_back_ios_new,
-                      color: Colors.black,
+                      //  color: Colors.black,
                     ),
                     Text(
                       AppLocalizations.of(context)!.back,
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                      //style: TextStyle(
+                      // color: Colors.black, fontWeight: FontWeight.bold) ,
                     ),
                   ],
                 ),

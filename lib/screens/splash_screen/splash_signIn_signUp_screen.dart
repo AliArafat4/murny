@@ -20,7 +20,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     int selectedIndex = 0;
     return Scaffold(
-      backgroundColor: const Color(0xffEEF0F2),
+      // backgroundColor: const Color(0xffEEF0F2),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -28,6 +28,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
             children: [
               Image.asset(
                 "assets/images/splashImage.png",
+                color: Colors.grey,
                 width: 430.w,
                 fit: BoxFit.cover,
               ),
@@ -73,7 +74,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => selectedIndex == 0
                               ? SignUpScreen()
-                              : const CreateDriverAccountScreen()),
+                              : CreateDriverAccountScreen()),
                     );
                   },
                   isText: true,

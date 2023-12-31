@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/screens/editAccount/component/delete_logout_account.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
@@ -13,6 +14,7 @@ class EditAccount extends StatelessWidget {
   final TextEditingController conFullName = TextEditingController();
   final TextEditingController conUserName = TextEditingController();
   final TextEditingController conPhoneNumber = TextEditingController();
+  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,6 @@ class EditAccount extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        backgroundColor: const Color(0xffFFFFFF),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -167,7 +168,9 @@ class EditAccount extends StatelessWidget {
                   },
                   child: DeleteLogoutAccount(
                     text: AppLocalizations.of(context)!.deleteAccount,
-                    image: 'assets/images/imageDelete.svg',
+                    image: isSwitched
+                        ? 'assets/images/EditAccountImage1.svg'
+                        : 'assets/images/imageDelete.svg',
                   ),
                 ),
                 Padding(
@@ -189,7 +192,9 @@ class EditAccount extends StatelessWidget {
                     },
                     child: DeleteLogoutAccount(
                       text: AppLocalizations.of(context)!.signOut,
-                      image: 'assets/images/imageLogout.svg',
+                      image: isSwitched
+                          ? 'assets/images/EditAccountImage2.svg'
+                          : 'assets/images/imageLogout.svg',
                     ),
                   ),
                 ),
