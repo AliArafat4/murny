@@ -99,7 +99,7 @@ class TextFieldSearch extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 13.sp, top: 14.sp),
             child: Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.centerLeft,
               child: InkWell(
                 onTap: () {},
                 child: Container(
