@@ -4,7 +4,6 @@ import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/screens/success/success_message.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key, required this.message});
   final String message;
@@ -16,7 +15,7 @@ class SuccessScreen extends StatelessWidget {
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
             Image.asset("assets/images/success_blue.png"),
-            SizedBox(height: MediaQuery.of(context).size.height / 32),
+            SizedBox(height: MediaQuery.of(context).size.height / 42),
             SuccessMessage(
               message: message,
             ),

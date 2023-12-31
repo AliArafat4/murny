@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/balance/payment_radio_button.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentTypeScreen extends StatefulWidget {
   const PaymentTypeScreen({super.key});
@@ -16,6 +17,8 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
   Payment selectedValue = Payment.cash;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -27,17 +30,21 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
               ),
-              const Align(
-                alignment: Alignment.topRight,
+              Align(
+                alignment: currentLanguage == "ar"
+                    ? Alignment.topRight
+                    : Alignment.topLeft,
                 child: Text(
-                  "الدفع",
+                  AppLocalizations.of(context)!.payment,
                   style: TextStyle(fontSize: 22),
                 ),
               ),
-              const Align(
-                alignment: Alignment.topRight,
+              Align(
+                alignment: currentLanguage == "ar"
+                    ? Alignment.topRight
+                    : Alignment.topLeft,
                 child: Text(
-                  "اختر طريقة الدفع المناسبة لك",
+                  AppLocalizations.of(context)!.selectPaymentMethod,
                   style: TextStyle(fontSize: 14),
                 ),
               ),
@@ -51,7 +58,7 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
                   setState(() {});
                   selectedValue = value!;
                 },
-                paymentMethod: "البطاقة الإئتمانية",
+                paymentMethod: AppLocalizations.of(context)!.creditCard,
                 imagePath: "assets/images/visa_icon.png",
               ),
               PaymentRadioButton(
@@ -61,7 +68,7 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
                   setState(() {});
                   selectedValue = value!;
                 },
-                paymentMethod: "المحفظة",
+                paymentMethod: AppLocalizations.of(context)!.wallet,
                 imagePath: "assets/images/wallet_icon.png",
               ),
               PaymentRadioButton(
@@ -71,14 +78,14 @@ class _PaymentTypeScreenState extends State<PaymentTypeScreen> {
                   setState(() {});
                   selectedValue = value!;
                 },
-                paymentMethod: "نقداً",
+                paymentMethod: AppLocalizations.of(context)!.cash,
                 imagePath: "assets/images/cash_icon.png",
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 22,
               ),
               PrimaryButton(
-                title: "تأكيد الطلب",
+                title: AppLocalizations.of(context)!.confirmation,
                 onPressed: () {},
                 isText: true,
                 isPadding: false,

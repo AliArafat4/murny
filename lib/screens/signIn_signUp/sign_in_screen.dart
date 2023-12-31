@@ -24,6 +24,8 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -42,7 +44,9 @@ class SignInScreen extends StatelessWidget {
                       visibleImage: true,
                     ),
                     Align(
-                        alignment: Alignment.topRight,
+                        alignment: currentLanguage == "ar"
+                            ? Alignment.topRight
+                            : Alignment.topLeft,
                         child: Text(AppLocalizations.of(context)!.signIn,
                             style: TextStyle(
                               fontSize: 28,

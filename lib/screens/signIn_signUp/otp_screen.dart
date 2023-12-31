@@ -64,12 +64,14 @@ class _OTPScreenState extends State<OTPScreen> {
                       ? Text(
                           AppLocalizations.of(context)!.otpSuccessSend,
                           style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w400),
+                              fontSize: 22, fontWeight: FontWeight.w400),
                         )
                       : Text(
                           AppLocalizations.of(context)!.otpSuccessSend,
                           style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w400),
+                            fontSize: 22,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                 ),
                 SizedBox(

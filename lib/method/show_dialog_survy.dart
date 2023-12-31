@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/success/success.dart';
 import 'package:murny_final_project/widgets/comment_text_filed.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/rating.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showSurvyDiolg({required BuildContext context}) {
+  Locale myLocale = Localizations.localeOf(context);
+  String currentLanguage = myLocale.languageCode;
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -27,38 +31,51 @@ showSurvyDiolg({required BuildContext context}) {
             ),
             Image.asset("assets/images/success_blue.png"),
             SizedBox(height: MediaQuery.of(context).size.height / 62),
-            const Text(
-              "لقد وصلت الى وجهتك",
+            Text(
+              AppLocalizations.of(context)!.reachedDestination,
               style: TextStyle(fontSize: 22),
             ),
             const Divider(),
-            const Text("كيف كانت تجربتك؟"),
-            const Text("قيمها الان!"),
+            Text(
+              AppLocalizations.of(context)!.experienceRating,
+            ),
+            Text(
+              AppLocalizations.of(context)!.rateItNow,
+            ),
             Rating(),
             const Divider(),
             Padding(
               padding: EdgeInsets.only(
                   right: MediaQuery.of(context).size.width / 20),
-              child: const Align(
-                alignment: Alignment.centerRight,
-                child: Text("اضف تعليقك"),
+              child: Align(
+                alignment: currentLanguage == "ar"
+                    ? Alignment.centerRight
+                    : Alignment.centerLeft,
+                child: Text(
+                  AppLocalizations.of(context)!.comment,
+                ),
               ),
             ),
             CommentTextFiled(),
-            const Text(
-                "شكراً، سوف تساعدنا مشاركتك على تحسين تجربة القيادة للأفضل "),
+            Text(
+              AppLocalizations.of(context)!.thankSurvy,
+            ),
             SizedBox(height: MediaQuery.of(context).size.height / 42),
-            SecondButton(
-                title: "ارسال",
-                onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SuccessScreen(message: "تم ارسال تقييمك بنجاح"),
+            PrimaryButton(
+              title: AppLocalizations.of(context)!.send,
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => SuccessScreen(
+                        message: AppLocalizations.of(context)!.sendSurvySuccess,
                       ),
-                      (Route route) => false);
-                },
-                color: const Color(0xff252C63))
+                    ),
+                    (Route route) => false);
+              },
+              buttonColor: const Color(0xff252C63),
+              isPadding: true,
+              isText: true,
+            )
           ],
         ),
       ),

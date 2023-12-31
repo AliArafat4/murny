@@ -5,6 +5,7 @@ import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/extentions/size_extention.dart';
 import 'package:murny_final_project/screens/chat/components/chat_text_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatScreen extends StatelessWidget {
   ChatScreen({Key? key, required this.chatWithID}) : super(key: key);
@@ -13,9 +14,11 @@ class ChatScreen extends StatelessWidget {
   final String chatWithID;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Chat With [Ali]"),
+        title: Text(AppLocalizations.of(context)!.chatWith + " [Ali]"),
       ),
       body: Column(
         children: [
@@ -45,19 +48,22 @@ class ChatScreen extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          MessageBar(
-            onSend: (p0) {
-              print(p0);
-              MurnyApi().chat(
-                body: {
-                  //TODO: DRIVER/USER ID
-                  "sent_to": chatWithID,
-                  "message": p0
-                },
-                function: Chat.sendMessages,
-                token: '',
-              );
-            },
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: MessageBar(
+              onSend: (p0) {
+                print(p0);
+                MurnyApi().chat(
+                  body: {
+                    //TODO: DRIVER/USER ID
+                    "sent_to": chatWithID,
+                    "message": p0
+                  },
+                  function: Chat.sendMessages,
+                  token: '',
+                );
+              },
+            ),
           ),
           // ChatTextField(content: "message", controller: chatController),
           // SizedBox(height: context.getHeight(factor: 0.015)),

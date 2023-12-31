@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/balance/payment_type.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/golf_cart_detail.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showOrderBottomSheet({required BuildContext context}) {
   showModalBottomSheet(
@@ -35,8 +37,8 @@ showOrderBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                const Text(
-                  "اختر نوع العربة المناسبة لك",
+                Text(
+                  AppLocalizations.of(context)!.selectGlofCart,
                   style: TextStyle(fontSize: 18),
                 ),
                 SizedBox(
@@ -46,18 +48,18 @@ showOrderBottomSheet({required BuildContext context}) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GolfCartDetail(
-                      numberOfSeat: "8 مقاعد",
-                      price: "من 8 SAR",
+                      numberOfSeat: AppLocalizations.of(context)!.eightSseats,
+                      price: AppLocalizations.of(context)!.from3SAR,
                       onTap: () {},
                     ),
                     GolfCartDetail(
-                      numberOfSeat: "6 مقاعد",
-                      price: "من 5 SAR",
+                      numberOfSeat: AppLocalizations.of(context)!.sixSeats,
+                      price: AppLocalizations.of(context)!.from5SAR,
                       onTap: () {},
                     ),
                     GolfCartDetail(
-                      numberOfSeat: "4 مقاعد",
-                      price: "من 3 SAR",
+                      numberOfSeat: AppLocalizations.of(context)!.fourSeats,
+                      price: AppLocalizations.of(context)!.from3SAR,
                       onTap: () {},
                     ),
                   ],
@@ -66,15 +68,19 @@ showOrderBottomSheet({required BuildContext context}) {
                   height: MediaQuery.of(context).size.height / 42,
                 ),
                 Center(
-                  child: SecondButton(
-                    title: "اذهب للدفع",
+                  child: PrimaryButton(
+                    isBorderBtn: false,
+                    isText: true,
+                    isPadding: true,
+                    title: AppLocalizations.of(context)!.pay,
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => PaymentTypeScreen()),
+                            builder: (context) => PaymentTypeScreen(),
+                          ),
                           (Route route) => false);
                     },
-                    color: const Color(0xff252C63),
+                    buttonColor: const Color(0xff252C63),
                   ),
                 ),
               ],

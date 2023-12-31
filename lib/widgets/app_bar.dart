@@ -5,7 +5,7 @@ AppBar customAppBar(String title) {
   return AppBar(
     title: Text(
       title,
-      style: TextStyle(fontSize: 28),
+      style: TextStyle(fontSize: 22),
     ),
     leading: const ArrowBack(),
   );

@@ -10,8 +10,12 @@ class BookLocation extends StatelessWidget {
   final String locationTo;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Padding(
-      padding: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
+      padding: currentLanguage == "ar"
+          ? EdgeInsets.only(right: MediaQuery.of(context).size.width / 20)
+          : EdgeInsets.only(left: MediaQuery.of(context).size.width / 20),
       child: Container(
         decoration: BoxDecoration(
             color: const Color(0xffCDCED3).withOpacity(0.4),
@@ -28,8 +32,11 @@ class BookLocation extends StatelessWidget {
                   icon: Icons.my_location,
                   title: locationFrom),
               Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width / 28),
+                padding: currentLanguage == "ar"
+                    ? EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width / 28)
+                    : EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 28),
                 child: Dash(
                     direction: Axis.vertical,
                     length: 1.9.h,
