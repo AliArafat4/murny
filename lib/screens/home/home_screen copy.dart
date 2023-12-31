@@ -32,10 +32,10 @@ class HomeScreenDriver extends StatelessWidget {
             drawer: Drawer(
               shape: RoundedRectangleBorder(
                 borderRadius: currentLanguage == 'ar'
-                    ? BorderRadius.only(
+                    ? const BorderRadius.only(
                         topLeft: Radius.circular(80),
                         bottomLeft: Radius.circular(80))
-                    : BorderRadius.only(
+                    : const BorderRadius.only(
                         topRight: Radius.circular(80),
                         bottomRight: Radius.circular(80)),
               ),
@@ -105,12 +105,13 @@ class HomeScreenDriver extends StatelessWidget {
                   const Divider(
                     thickness: 1,
                   ),
-                  SizedBox(
+                  const SizedBox(
+
                       // height: 23,
                       child: SegmentControl(
                     textOne: 'العربية',
                     textTwo: 'English',
-                    colorSelected: const Color(0xff000000),
+                    colorSelected: Color(0xff000000),
                     // isSegmentUser: false,
                   )),
                   Padding(

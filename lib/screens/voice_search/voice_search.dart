@@ -20,9 +20,7 @@ class VoiceSearchScreen extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => SearchScreen()),
-                      (Route route) => false);
+                  Navigator.pop(context);
                 },
                 icon: const Icon(Icons.close),
               ),

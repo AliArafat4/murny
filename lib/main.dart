@@ -80,7 +80,7 @@ class MainApp extends StatelessWidget {
           providers: [
             BlocProvider<MapBloc>(
                 create: (context) =>
-                    MapBloc()), //..add(MapGetCurrentLocationEvent())
+                    MapBloc()..add(MapGetCurrentLocationEvent())),
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
@@ -91,7 +91,6 @@ class MainApp extends StatelessWidget {
                 create: (context) => RadiobuttonCubit()),
             BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
             BlocProvider<CardCubit>(create: (context) => CardCubit()),
-
             BlocProvider<PublicCubit>(
                 create: (context) => PublicCubit()..getAllCartsCubit()),
             BlocProvider<SelectCartCubit>(

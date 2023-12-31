@@ -1,8 +1,16 @@
-enum Auth { userSignUp, driverSignUp, signInWithApple, signInWithGoogle, otp, signIn, resendOtp }
+enum Auth {
+  userSignUp,
+  driverSignUp,
+  signInWithApple,
+  signInWithGoogle,
+  otp,
+  signIn,
+  resendOtp
+}
 
 enum Chat { getMessages, sendMessages }
 
-enum Common { getOrder, getDrivers, filterDrivers }
+enum Common { getDriverOrder, getUserOrder, getDrivers, filterDrivers }
 
 enum Driver { responseToOrder, getRating }
 

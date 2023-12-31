@@ -24,16 +24,9 @@ class FilterSheet extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height / 42,
             ),
-            BlocBuilder<MapBloc, MapState>(
-              buildWhen: (previous, current) => current is MapGetCurrentLocationState,
-              builder: (context, state) {
-                return BookLocation(
-                  locationFrom: state is MapGetCurrentLocationState
-                      ? state.locationName.toString()
-                      : "موقعك الحالي",
-                  locationTo: "الى أين تريد/ين الذهاب",
-                );
-              },
+            const BookLocation(
+              locationFrom: "موقعك الحالي",
+              locationTo: "الى أين تريد/ين الذهاب",
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 42,
@@ -49,7 +42,9 @@ class FilterSheet extends StatelessWidget {
                   IconButton(
                       onPressed: () {
                         context.read<MapBloc>().add(MapGetDriversMarkerEvent());
-                        context.read<SelectCartCubit>().selectCart(selectedCart: -1);
+                        context
+                            .read<SelectCartCubit>()
+                            .selectCart(selectedCart: -1);
                       },
                       icon: const Icon(Icons.drive_eta_outlined))
                 ],
@@ -70,7 +65,8 @@ class FilterSheet extends StatelessWidget {
                             width: MediaQuery.of(context).size.width / 20,
                           ),
                           itemBuilder: (context, index) => GolfCartDetail(
-                            numberOfSeat: "${state.cartModel[index].seats} مقاعد",
+                            numberOfSeat:
+                                "${state.cartModel[index].seats} مقاعد",
                             price: "${state.cartModel[index].price} SAR",
                             onTap: () {
                               return index;

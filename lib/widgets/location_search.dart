@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/screens/voice_search/search_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -6,8 +8,13 @@ class LocationSearch extends StatelessWidget {
   LocationSearch({super.key});
 
   final TextEditingController currentLocation = TextEditingController();
+
+  String userLocation = '';
+
   @override
   Widget build(BuildContext context) {
+    context.read<MapBloc>().add(MapGetCurrentLocationEvent());
+
     return Padding(
       padding: const EdgeInsets.all(14),
       child: Column(
@@ -22,10 +29,18 @@ class LocationSearch extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 42,
               ),
-              SearchBarWidget(
-                hint: AppLocalizations.of(context)!.currentLocation,
-                controller: currentLocation,
+              BlocBuilder<MapBloc, MapState>(
+                builder: (context, state) {
+                  if (state is MapGetCurrentLocationState) {
+                    userLocation = state.locationName.toString();
+                  }
+                  return Text(userLocation);
+                },
               ),
+              // SearchBarWidget(
+              //   hint: AppLocalizations.of(context)!.currentLocation,
+              //   controller: currentLocation,
+              // ),
             ],
           ),
           Row(
