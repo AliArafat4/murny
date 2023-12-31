@@ -40,7 +40,7 @@ class GoogleMapScreen extends StatelessWidget {
     Map<PolylineId, Polyline> distance = {};
 
     return Scaffold(
-      drawer: CustomDrawer(),
+      // drawer: CustomDrawer(),
       key: _scaffoldKey,
       body: SafeArea(
         child: Stack(

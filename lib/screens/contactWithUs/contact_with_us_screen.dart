@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
-import 'package:murny_final_project/method/alert_dialog_account.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
 
 import 'package:murny_final_project/screens/contactWithUs/component/call_phone_whatsapp.dart';
@@ -31,13 +30,15 @@ class ContactWithUs extends StatelessWidget {
                       ? 'assets/images/contactUsImageWhite1.svg'
                       : 'assets/images/contactUsImage1.svg',
                   funAlert: () {
-                    alertDialogAccount(
-                      context: context,
-                      title: 'اتصل بنا على رقمنا',
-                      subtitle: '0565553090',
-                      textButton1: 'اتصل',
-                      textButton2: 'إلغاء',
-                    );
+                    //TODO: REDIRECT TO PHONE CALL
+
+                    // alertDialogAccount(
+                    //   context: context,
+                    //   title: 'اتصل بنا على رقمنا',
+                    //   subtitle: '0565553090',
+                    //   textButton1: 'اتصل',
+                    //   textButton2: 'إلغاء',
+                    // );
                   },
                 ),
                 const Divider(),
@@ -46,7 +47,6 @@ class ContactWithUs extends StatelessWidget {
                   image: isSwitched
                       ? 'assets/images/contactUsImageWhite2.svg'
                       : 'assets/images/contactUsImage2.svg',
-
                   funAlert: () {},
                 ),
               ],

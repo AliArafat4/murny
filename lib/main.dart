@@ -32,7 +32,6 @@ import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_s
 
 import 'package:murny_final_project/bloc/user_bloc/user_cubit.dart';
 import 'package:murny_final_project/l10n/10n.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
 import 'package:murny_final_project/screens/home.dart';
 import 'package:murny_final_project/screens/home/home_screen%20copy.dart';
 import 'package:murny_final_project/screens/home/home_screen.dart';
@@ -60,7 +59,6 @@ SharedPref pref = SharedPref();
 
 late SharedPreferences prefs;
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterConfig.loadEnvVariables();
@@ -77,22 +75,27 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return MultiBlocProvider(
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return MultiBlocProvider(
           providers: [
             BlocProvider<MapBloc>(
-                create: (context) => MapBloc()), //..add(MapGetCurrentLocationEvent())
-            BlocProvider<CheckTokenCubit>(create: (context) => CheckTokenCubit()),
+                create: (context) =>
+                    MapBloc()), //..add(MapGetCurrentLocationEvent())
+            BlocProvider<CheckTokenCubit>(
+                create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
             BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
-            BlocProvider<DropdownlistCubit>(create: (context) => DropdownlistCubit()),
-            BlocProvider<RadiobuttonCubit>(create: (context) => RadiobuttonCubit()),
+            BlocProvider<DropdownlistCubit>(
+                create: (context) => DropdownlistCubit()),
+            BlocProvider<RadiobuttonCubit>(
+                create: (context) => RadiobuttonCubit()),
             BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
             BlocProvider<CardCubit>(create: (context) => CardCubit()),
-            
-            BlocProvider<PublicCubit>(create: (context) => PublicCubit()..getAllCartsCubit()),
-            BlocProvider<SelectCartCubit>(create: (context) => SelectCartCubit()),
+
+            BlocProvider<PublicCubit>(
+                create: (context) => PublicCubit()..getAllCartsCubit()),
+            BlocProvider<SelectCartCubit>(
+                create: (context) => SelectCartCubit()),
             BlocProvider<UserCubit>(create: (context) => UserCubit()),
             BlocProvider<CheckfillOtpCubit>(
                 create: (context) => CheckfillOtpCubit()),
@@ -111,12 +114,11 @@ class MainApp extends StatelessWidget {
                   ],
                   supportedLocales: L10n.all,
                   debugShowCheckedModeBanner: false,
-                  home: const SplashScreen();
+                  home: const SplashScreen());
             } else {
               return Container();
             }
           }));
-
     });
   }
 }

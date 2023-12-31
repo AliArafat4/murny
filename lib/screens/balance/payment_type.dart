@@ -11,7 +11,8 @@ import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentTypeScreen extends StatelessWidget {
-  PaymentTypeScreen({super.key,
+  PaymentTypeScreen(
+      {super.key,
       required this.driverID,
       required this.currentLocation,
       required this.destination,
@@ -19,10 +20,8 @@ class PaymentTypeScreen extends StatelessWidget {
 
   final String driverID, currentLocation, destination;
   final int cartID;
-enum Payment { visa, wallet, applePay, cash }
-  
 
-  Payment selectedValue = Payment.cash;
+  final Payment selectedValue = Payment.cash;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +134,6 @@ enum Payment { visa, wallet, applePay, cash }
               SizedBox(
                 height: MediaQuery.of(context).size.height / 22,
               ),
-
               BlocConsumer<UserCubit, UserState>(
                 listener: (context, state) {
                   if (state is UserLoadingOrderState) {
@@ -143,7 +141,8 @@ enum Payment { visa, wallet, applePay, cash }
                   }
                   if (state is UserSuccessOrderState) {
                     Navigator.pop(context);
-                    showSuccessSnackBar(context, "Order has been places successfully");
+                    showSuccessSnackBar(
+                        context, "Order has been places successfully");
                     Navigator.pop(context);
                   }
                   if (state is UserErrorOrderState) {
@@ -156,10 +155,10 @@ enum Payment { visa, wallet, applePay, cash }
                     title: AppLocalizations.of(context)!.confirmation,
                     onPressed: () {
                       context.read<UserCubit>().userPostOrder(
-                          driverId: widget.driverID,
-                          locationFrom: widget.currentLocation,
-                          locationTo: widget.destination,
-                          cartId: widget.cartID,
+                          driverId: driverID,
+                          locationFrom: currentLocation,
+                          locationTo: destination,
+                          cartId: cartID,
                           paymentMethod: selectedValue.name);
                     },
                     isText: true,
@@ -175,4 +174,4 @@ enum Payment { visa, wallet, applePay, cash }
   }
 }
 
-// enum Payment { visa, wallet, applePay, cash }
+enum Payment { visa, wallet, applePay, cash }

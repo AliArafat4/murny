@@ -49,26 +49,26 @@ showOrderBottomSheet(
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 62,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GolfCartDetail(
-                      numberOfSeat: AppLocalizations.of(context)!.eightSseats,
-                      price: AppLocalizations.of(context)!.from3SAR,
-                      onTap: () {},
-                    ),
-                    GolfCartDetail(
-                      numberOfSeat: AppLocalizations.of(context)!.sixSeats,
-                      price: AppLocalizations.of(context)!.from5SAR,
-                      onTap: () {},
-                    ),
-                    GolfCartDetail(
-                      numberOfSeat: AppLocalizations.of(context)!.fourSeats,
-                      price: AppLocalizations.of(context)!.from3SAR,
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     GolfCartDetail(
+                //       numberOfSeat: AppLocalizations.of(context)!.eightSseats,
+                //       price: AppLocalizations.of(context)!.from3SAR,
+                //       onTap: () {},
+                //     ),
+                //     GolfCartDetail(
+                //       numberOfSeat: AppLocalizations.of(context)!.sixSeats,
+                //       price: AppLocalizations.of(context)!.from5SAR,
+                //       onTap: () {},
+                //     ),
+                //     GolfCartDetail(
+                //       numberOfSeat: AppLocalizations.of(context)!.fourSeats,
+                //       price: AppLocalizations.of(context)!.from3SAR,
+                //       onTap: () {},
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
@@ -79,7 +79,6 @@ showOrderBottomSheet(
                     isPadding: true,
                     title: AppLocalizations.of(context)!.pay,
                     onPressed: () {
-
                       Navigator.of(context)
                           .push(MaterialPageRoute(
                               builder: (context) => PaymentTypeScreen(
