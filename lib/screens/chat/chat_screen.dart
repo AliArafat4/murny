@@ -4,21 +4,23 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/extentions/size_extention.dart';
+import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/screens/chat/components/chat_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatScreen extends StatelessWidget {
-  ChatScreen({Key? key, required this.chatWithID}) : super(key: key);
+  ChatScreen({Key? key, required this.chatWith}) : super(key: key);
 
   final TextEditingController chatController = TextEditingController();
-  final String chatWithID;
+  final DriverModel chatWith;
   @override
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.chatWith + " [Ali]"),
+        title:
+            Text("${AppLocalizations.of(context)!.chatWith} ${chatWith.name}"),
       ),
       body: Column(
         children: [
@@ -56,7 +58,7 @@ class ChatScreen extends StatelessWidget {
                 MurnyApi().chat(
                   body: {
                     //TODO: DRIVER/USER ID
-                    "sent_to": chatWithID,
+                    "sent_to": chatWith.userId,
                     "message": p0
                   },
                   function: Chat.sendMessages,

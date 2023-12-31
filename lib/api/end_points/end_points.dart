@@ -23,7 +23,8 @@ abstract mixin class DriverApiEndPoints {
 
 abstract mixin class CommonApiEndPoints {
   final commonRoute = "/common";
-  final getOrder = "/get_order";
+  final getUserOrder = "/get_user_order";
+  final getDriverOrder = "/get_driver_order";
   final getDrivers = "/get_drivers";
 }
 

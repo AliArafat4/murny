@@ -12,11 +12,11 @@ class DriverContact extends StatelessWidget {
   final String contactType;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ClipOval(
-          child: InkWell(
-            onTap: onTap,
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          ClipOval(
             child: Container(
               width: MediaQuery.of(context).size.width / 10,
               height: MediaQuery.of(context).size.height / 22,
@@ -27,12 +27,12 @@ class DriverContact extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width / 62,
-        ),
-        Text(contactType)
-      ],
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 62,
+          ),
+          Text(contactType)
+        ],
+      ),
     );
   }
 }
