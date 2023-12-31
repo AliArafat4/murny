@@ -81,7 +81,7 @@ class MainApp extends StatelessWidget {
             BlocProvider<CardCubit>(create: (context) => CardCubit()),
           ],
           child: MaterialApp(
-              locale: Locale("en"),
+              locale: Locale("ar"),
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
