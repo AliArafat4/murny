@@ -4,7 +4,7 @@ import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/screens/home/home_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/otp_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
@@ -48,7 +48,7 @@ class SignInScreen extends StatelessWidget {
                             ? Alignment.topRight
                             : Alignment.topLeft,
                         child: Text(AppLocalizations.of(context)!.signIn,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 28,
                               color: Color(0xff252C63),
                             )
@@ -90,9 +90,8 @@ class SignInScreen extends StatelessWidget {
                             title: AppLocalizations.of(context)!.signIn,
                             isPadding: false,
                             onPressed: () {
-                              context.read<AuthBloc>().add(AuthLoginEvent(
-                                  email: conEmail.text,
-                                  password: conPass.text));
+                              context.read<AuthBloc>().add(
+                                  AuthLoginEvent(email: conEmail.text, password: conPass.text));
                             },
                           );
                         },
@@ -106,15 +105,16 @@ class SignInScreen extends StatelessWidget {
                             showErrorSnackBar(context, state.errorMsg);
                           }
 
-                          state is AuthLoginSuccessState
-                              ? Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OTPScreen(
-                                            email: conEmail.text,
-                                          )),
-                                )
-                              : const SizedBox();
+                          if (state is AuthLoginSuccessState) {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OTPScreen(
+                                        email: conEmail.text,
+                                      )),
+                            );
+                          }
                         },
                       ),
                     ),
@@ -153,8 +153,7 @@ class SignInScreen extends StatelessWidget {
                     ),
                     AccountText(
                       firstText: AppLocalizations.of(context)!.subscribing,
-                      secondText:
-                          AppLocalizations.of(context)!.doNotHaveAccount,
+                      secondText: AppLocalizations.of(context)!.doNotHaveAccount,
                       pushNavi: () {
                         navigation(
                           context: context,

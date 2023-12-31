@@ -39,6 +39,7 @@ showSearchCartBottomSheet({required BuildContext context}) {
                         left: MediaQuery.of(context).size.width / 20),
                 child: Text(
                   AppLocalizations.of(context)!.searchGolfCart,
+
                   style: TextStyle(fontSize: 16),
                 ),
               ),
@@ -90,6 +91,7 @@ showSearchCartBottomSheet({required BuildContext context}) {
                 height: MediaQuery.of(context).size.height / 82,
               ),
               Center(
+
                   child: PrimaryButton(
                 isBorderBtn: false,
                 isText: true,
@@ -101,11 +103,12 @@ showSearchCartBottomSheet({required BuildContext context}) {
                       title: AppLocalizations.of(context)!.cancelOrderConfirm,
                       acceptFun: () {
                         Navigator.pop(context);
-                        showOrderBottomSheet(context: context);
+                       // showOrderBottomSheet(context: context);
                       });
                 },
                 buttonColor: const Color(0xffF21D53),
               ))
+
             ],
           ),
         ),

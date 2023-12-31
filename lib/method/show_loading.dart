@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 showLoadingDialog({required BuildContext context}) {
   showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (context) => const AlertDialog(
       elevation: 0,

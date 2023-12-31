@@ -112,9 +112,11 @@ class TextFieldSearch extends StatelessWidget {
                 ? EdgeInsets.only(right: 13.sp, top: 14.sp)
                 : EdgeInsets.only(left: 13.sp, top: 14.sp),
             child: Align(
+
               alignment: currentLanguage == "ar"
                   ? Alignment.topRight
                   : Alignment.topLeft,
+
               child: InkWell(
                 onTap: () {},
                 child: Container(
