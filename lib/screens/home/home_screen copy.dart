@@ -19,6 +19,8 @@ class HomeScreenDriver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -28,14 +30,21 @@ class HomeScreenDriver extends StatelessWidget {
             key: _scaffoldKey,
             backgroundColor: const Color.fromARGB(189, 44, 44, 205),
             drawer: Drawer(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(80),
-                      bottomLeft: Radius.circular(80))),
+              shape: RoundedRectangleBorder(
+                borderRadius: currentLanguage == 'ar'
+                    ? BorderRadius.only(
+                        topLeft: Radius.circular(80),
+                        bottomLeft: Radius.circular(80))
+                    : BorderRadius.only(
+                        topRight: Radius.circular(80),
+                        bottomRight: Radius.circular(80)),
+              ),
               child: ListView(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 20.sp, left: 180),
+                    padding: currentLanguage == 'ar'
+                        ? EdgeInsets.only(top: 20.sp, left: 180)
+                        : EdgeInsets.only(top: 20.sp, right: 180),
                     child: const CircleAvatar(
                       radius: 44,
                       foregroundImage:
@@ -46,7 +55,9 @@ class HomeScreenDriver extends StatelessWidget {
                     height: 2.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(right: 12.sp),
+                    padding: currentLanguage == "ar"
+                        ? EdgeInsets.only(right: 12.sp)
+                        : EdgeInsets.only(left: 12.sp),
                     child: const Text(
                       'driver name',
                       style:
@@ -103,7 +114,9 @@ class HomeScreenDriver extends StatelessWidget {
                     // isSegmentUser: false,
                   )),
                   Padding(
-                    padding: EdgeInsets.only(top: 60.sp, left: 61.sp),
+                    padding: currentLanguage == 'ar'
+                        ? EdgeInsets.only(top: 52.sp, left: 61.sp)
+                        : EdgeInsets.only(top: 52.sp, right: 61.sp),
                     child: const Icon(Icons.light_mode_outlined),
                   )
                 ],

@@ -8,6 +8,8 @@ class ArrowBackCircleContainer extends StatelessWidget {
   final double textSpace;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Row(
       children: [
         Align(
@@ -15,7 +17,9 @@ class ArrowBackCircleContainer extends StatelessWidget {
           child: Container(
               width: 8.w,
               height: 10.h,
-              margin: EdgeInsets.only(right: 17.sp),
+              margin: currentLanguage == "ar"
+                  ? EdgeInsets.only(right: 17.sp)
+                  : EdgeInsets.only(left: 17.sp),
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -32,7 +36,9 @@ class ArrowBackCircleContainer extends StatelessWidget {
               )),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 20.sp, right: textSpace),
+          padding: currentLanguage == "ar"
+              ? EdgeInsets.only(top: 20.sp, right: textSpace)
+              : EdgeInsets.only(top: 20.sp, left: textSpace),
           child: Text(
             text,
             style: TextStyle(fontSize: 28),

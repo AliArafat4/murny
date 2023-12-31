@@ -64,11 +64,12 @@ class _OTPScreenState extends State<OTPScreen> {
                   child: isVisible
                       ? Text(
                           AppLocalizations.of(context)!.otpSuccessSend,
-                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+
+                          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                         )
                       : Text(
                           AppLocalizations.of(context)!.otpSuccessSend,
-                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+                          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                         ),
                 ),
                 SizedBox(

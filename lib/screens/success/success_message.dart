@@ -5,9 +5,13 @@ class SuccessMessage extends StatelessWidget {
   final String message;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      message,
-      style: TextStyle(fontSize: 22),
+    return Column(
+      children: [
+        Text(
+          message,
+          style: TextStyle(fontSize: 22),
+        ),
+      ],
     );
   }
 }

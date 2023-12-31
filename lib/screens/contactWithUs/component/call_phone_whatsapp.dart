@@ -13,8 +13,12 @@ class CallPhoneWhatsapp extends StatelessWidget {
   final Function() funAlert;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Padding(
-      padding: EdgeInsets.only(right: 15.sp),
+      padding: currentLanguage == "ar"
+          ? EdgeInsets.only(right: 15.sp)
+          : EdgeInsets.only(left: 15.sp),
       child: InkWell(
         onTap: () => funAlert,
         child: Row(

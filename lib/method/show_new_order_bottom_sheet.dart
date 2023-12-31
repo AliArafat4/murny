@@ -4,6 +4,7 @@ import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:murny_final_project/widgets/user_info.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showNewOrderBottomSheet({required BuildContext context}) {
   showModalBottomSheet(
@@ -28,8 +29,8 @@ showNewOrderBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                const Text(
-                  "طلب جديد",
+                Text(
+                  AppLocalizations.of(context)!.newOrder,
                   style: TextStyle(
                       fontSize: 24, fontWeight: FontWeight.w400, color: Color(0xff252C63)),
                 ),
@@ -57,20 +58,21 @@ showNewOrderBottomSheet({required BuildContext context}) {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      title: "قبول",
+                      title: AppLocalizations.of(context)!.accept,
                       color: const Color(0xff252C63),
                     ),
                     SecondButton(
                       onPressed: () {
                         showConfirmDiolg(
                             context: context,
-                            title: 'هل انت متأكد انك تريد الغاء الطلب',
+                            title: AppLocalizations.of(context)!
+                                .cancelOrderConfirm,
                             acceptFun: () {
                               Navigator.pop(context);
                               // showOrderBottomSheet(context: context);
                             });
                       },
-                      title: "رفض",
+                      title: AppLocalizations.of(context)!.reject,
                       color: const Color(0xffD7053A),
                     ),
                   ],

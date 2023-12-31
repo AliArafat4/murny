@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showWaitingTripBottomSheet({required BuildContext context}) {
   showModalBottomSheet(
@@ -25,8 +27,8 @@ showWaitingTripBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                const Text(
-                  "إنتظار 2 دقيقة",
+                Text(
+                  AppLocalizations.of(context)!.watingTime + " 10 دقائق",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -42,12 +44,14 @@ showWaitingTripBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 22,
                 ),
-                SecondButton(
+                PrimaryButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  title: "أبداء الرحلة",
-                  color: Color(0xff252C63),
+                  title: AppLocalizations.of(context)!.startTrip,
+                  buttonColor: Color(0xff252C63),
+                  isText: true,
+                  isPadding: true,
                 )
               ],
             ),

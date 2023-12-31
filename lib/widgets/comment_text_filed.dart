@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // ignore: must_be_immutable
 class CommentTextFiled extends StatelessWidget {
@@ -7,7 +8,7 @@ class CommentTextFiled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+      padding: EdgeInsets.all(MediaQuery.of(context).size.width / 100),
       child: TextField(
         controller: commentController,
         maxLines: 4,
@@ -20,7 +21,7 @@ class CommentTextFiled extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             borderSide: const BorderSide(color: Color(0xff252C63), width: 1),
           ),
-          hintText: 'اكتب هنا..',
+          hintText: AppLocalizations.of(context)!.writeHere,
           hintStyle: const TextStyle(
             color: Color(0xffB8B8B8),
           ),

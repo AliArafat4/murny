@@ -55,7 +55,6 @@ flutter:
 
   assets:
     - assets/images/
-
     - .env
     - assets/images/carMurny.png
     - assets/images/carMurny.svg

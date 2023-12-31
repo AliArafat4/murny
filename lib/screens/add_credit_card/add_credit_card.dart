@@ -4,6 +4,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:murny_final_project/bloc/card_bloc/cubit/card_cubit.dart';
 import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddCreditCardScreen extends StatefulWidget {
   AddCreditCardScreen({super.key});
@@ -33,6 +34,8 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Scaffold(
@@ -42,12 +45,17 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.height / 42),
-                child: const Align(
-                    alignment: Alignment.topRight,
+                padding: currentLanguage == "ar"
+                    ? EdgeInsets.only(
+                        right: MediaQuery.of(context).size.height / 42)
+                    : EdgeInsets.only(
+                        left: MediaQuery.of(context).size.height / 42),
+                child: Align(
+                    alignment: currentLanguage == "ar"
+                        ? Alignment.topRight
+                        : Alignment.topLeft,
                     child: Text(
-                      "البطاقة الإئتمانية",
+                      AppLocalizations.of(context)!.creditCard,
                       style: TextStyle(fontSize: 20),
                     )),
               ),
@@ -96,7 +104,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
                         height: MediaQuery.of(context).size.height / 32,
                       ),
                       PrimaryButton(
-                        title: "ادفع الان",
+                        title: AppLocalizations.of(context)!.pay,
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             Navigator.of(context).pushAndRemoveUntil(

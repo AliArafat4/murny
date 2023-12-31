@@ -16,6 +16,8 @@ class EditAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -78,7 +80,9 @@ class EditAccount extends StatelessWidget {
                   child: Column(
                     children: [
                       Align(
-                          alignment: Alignment.topRight,
+                          alignment: currentLanguage == "ar"
+                              ? Alignment.topRight
+                              : Alignment.topLeft,
                           child: Text(
                             AppLocalizations.of(context)!.fullName,
                             style: TextStyle(
@@ -99,7 +103,9 @@ class EditAccount extends StatelessWidget {
                         height: 1.h,
                       ),
                       Align(
-                          alignment: Alignment.topRight,
+                          alignment: currentLanguage == "ar"
+                              ? Alignment.topRight
+                              : Alignment.topLeft,
                           child: Text(
                             AppLocalizations.of(context)!.userName,
                             style: TextStyle(
@@ -120,7 +126,9 @@ class EditAccount extends StatelessWidget {
                         height: 1.h,
                       ),
                       Align(
-                          alignment: Alignment.topRight,
+                          alignment: currentLanguage == "ar"
+                              ? Alignment.topRight
+                              : Alignment.topLeft,
                           child: Text(
                             AppLocalizations.of(context)!.mobile,
                             style: TextStyle(
@@ -163,7 +171,9 @@ class EditAccount extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 60.sp),
+                  padding: currentLanguage == "ar"
+                      ? EdgeInsets.only(left: 60.sp)
+                      : EdgeInsets.only(right: 60.sp),
                   child: InkWell(
                     onTap: () {
                       showConfirmDiolg(

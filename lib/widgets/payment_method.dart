@@ -5,6 +5,8 @@ class PaymentMethod extends StatelessWidget {
   final String paymentMethod;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     String iconPath = "";
     switch (paymentMethod) {
       case "نقداً":
@@ -13,7 +15,9 @@ class PaymentMethod extends StatelessWidget {
         iconPath = "assets/images/credit_card_icon.png";
     }
     return Padding(
-      padding: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
+      padding: currentLanguage == "ar"
+          ? EdgeInsets.only(right: MediaQuery.of(context).size.width / 20)
+          : EdgeInsets.only(left: MediaQuery.of(context).size.width / 20),
       child: Row(
         children: [
           Image.asset(iconPath),

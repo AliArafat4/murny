@@ -9,8 +9,12 @@ class DeleteLogoutAccount extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Padding(
-      padding: EdgeInsets.only(right: 19.sp, top: 15.sp),
+      padding: currentLanguage == "ar"
+          ? EdgeInsets.only(right: 19.sp, top: 15.sp)
+          : EdgeInsets.only(left: 19.sp, top: 15.sp),
       child: Row(
         children: [
           SvgPicture.asset(
