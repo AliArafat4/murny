@@ -19,7 +19,10 @@ class ProfileFunc {
         try {
           final uri = Uri.parse(url + endPoints.getProfile);
 
+          print("object");
           final response = await http.get(uri, headers: {"token": token});
+          print("object2");
+          print(response);
 
           ProfileModel profileModel =
               ProfileModel.fromJson(jsonDecode(response.body));

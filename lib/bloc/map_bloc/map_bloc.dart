@@ -66,7 +66,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<MapSearchEvent>((event, emit) async {
       final places = GoogleMapsPlaces(apiKey: dotenv.env['GoogleMapsApiKey']);
       PlacesSearchResponse response =
-          await places.searchByText(event.searchedText);
+          await places.searchByText(event.searchedText, radius: 500);
 
       print(response.status);
       print(response.errorMessage);

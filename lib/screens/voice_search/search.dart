@@ -18,26 +18,6 @@ class SearchScreen extends StatelessWidget {
           children: [
             LocationSearch(),
             const CustomDivider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/select_location.png"),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.selectLocation,
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
-                  ),
-                ),
-              ],
-            ),
-            const Divider(
-                // color: Colors.black,
-                ),
             Flexible(
               child: BlocBuilder<MapBloc, MapState>(
                 buildWhen: (previous, current) => current is MapSearchState,

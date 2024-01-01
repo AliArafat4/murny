@@ -1,18 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:murny_final_project/api/end_points/enums.dart';
-import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/extentions/size_extention.dart';
-import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/models/order_model.dart';
-import 'package:murny_final_project/screens/google_maps/components/filter_bottom_sheet.dart';
+import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/accepted_order_bottom_sheet.dart';
+import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/filter_bottom_sheet.dart';
+import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/user_waiting_bottom_sheet.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,9 +25,18 @@ class GoogleMapBody extends StatelessWidget {
   CameraPosition initialCameraPosition =
       const CameraPosition(target: LatLng(0, 0), zoom: 10);
   Map<PolylineId, Polyline> distance = {};
+  String orderState = "";
   @override
   Widget build(BuildContext context) {
     GoogleMapController? googleMapController;
+    Stream<http.Response> getOrders() async* {
+      final uri =
+          Uri.parse("https://murny-api.onrender.com/common/get_user_order");
+
+      yield* Stream.periodic(const Duration(seconds: 5), (_) {
+        return http.get(uri, headers: {"token": user.token ?? ""});
+      }).asyncMap((event) async => await event);
+    }
 
     return SizedBox(
       height: MediaQuery.of(context).size.height,
@@ -41,7 +48,7 @@ class GoogleMapBody extends StatelessWidget {
               compassEnabled: true,
               myLocationEnabled: true,
               myLocationButtonEnabled: true,
-              mapType: MapType.normal, // MapType.satellite, //,
+              mapType: MapType.normal, // MapType.satellite,
               polylines: Set<Polyline>.of(distance.values),
               markers: Set.from(driversMarker),
               initialCameraPosition: initialCameraPosition,
@@ -51,24 +58,47 @@ class GoogleMapBody extends StatelessWidget {
                 context.read<MapBloc>().add(MapGetDriversMarkerEvent());
               },
               onLongPress: (location) async {
-                // context.read<MapBloc>().add(GetDestinationFromLongPressEvent(
-                //     location: LatLng(location.latitude, location.longitude)));
-                // state is GetDestinationFromLongPressState
-                //     ? showSuccessSnackBar(
-                //         context, "Location selected ${state.destination.name}")
-                //     : const SizedBox();
                 // TODO: SIGN OUT
                 // MurnyApi().signOut(context: context);
               },
             ),
 
-            //TODO: CHECK LAST ORDER STATE
-            panel: BottomSheetStates(user: user),
+            //Check last order state
+            panel: StreamBuilder(
+                stream: getOrders(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List response = jsonDecode(snapshot.data!.body);
 
-            maxHeight: ("LAST ORDER " != "ACCEPTED")
+                    print(response.length);
+                    print(response.last);
+                    final OrderModel lastOrder =
+                        OrderModel.fromJson(response.last);
+                    orderState = lastOrder.orderState!.toUpperCase();
+                    return (lastOrder.orderState!.toUpperCase() == "CANCELED" ||
+                            lastOrder.orderState!.toUpperCase() == "DECLINED")
+                        ? const FilterSheet()
+                        : (lastOrder.orderState!.toUpperCase() ==
+                                "JUST CREATED")
+                            ? UserWaitingBottomSheet(
+                                order: lastOrder) //SHOW WAITING LOADING
+                            : (lastOrder.orderState!.toUpperCase() ==
+                                    "ACCEPTED")
+                                ? AcceptedOrderBottomSheet(
+                                    order: lastOrder) //SHOW DRIVER IS COMING
+                                : const SizedBox();
+                  } else {
+                    return const LinearProgressIndicator();
+                  }
+                }),
+
+            maxHeight: (orderState == "CANCELED" ||
+                    orderState == "DECLINED" ||
+                    orderState == "JUST CREATED")
                 ? context.getHeight(factor: 0.45)
-                : 0,
-            // backdropEnabled: true,
+                : (orderState == "ACCEPTED")
+                    ? context.getHeight(factor: 0.65)
+                    : context.getHeight(factor: 0.65),
           );
         },
         listener: (BuildContext context, MapState state) async {
@@ -83,9 +113,6 @@ class GoogleMapBody extends StatelessWidget {
           if (state is GetDestinationState) {
             destination = state.destination.name;
           }
-          // if (state is GetDestinationFromLongPressState) {
-          //   destination = state.destination.name!;
-          // }
 
           //Add drivers markers to the map
           if (state is MapGetDriversMarkerState) {
@@ -101,8 +128,6 @@ class GoogleMapBody extends StatelessWidget {
                         context: context,
                         currentLocation: locationName,
                         destination: destination,
-                        // cartID: marker.cartID!,
-                        // driverID: marker.userId!,
                         markerInfo: marker);
                   }));
             }
@@ -125,8 +150,6 @@ class GoogleMapBody extends StatelessWidget {
                           context: context,
                           currentLocation: locationName,
                           destination: destination,
-                          // cartID: marker.cartID!,
-                          // driverID: marker.userId!,
                           markerInfo: marker);
                     }));
               }
@@ -135,6 +158,7 @@ class GoogleMapBody extends StatelessWidget {
             }
           }
 
+          //show loading dialog on the map
           if (context.mounted) {
             state is MapLoadingState
                 ? showLoadingDialog(context: context)
@@ -143,49 +167,5 @@ class GoogleMapBody extends StatelessWidget {
         },
       ),
     );
-  }
-}
-
-class BottomSheetStates extends StatelessWidget {
-  const BottomSheetStates({
-    super.key,
-    required this.user,
-  });
-
-  final AuthModel user;
-  Stream<http.Response> getOrders() async* {
-    final uri =
-        Uri.parse("https://murny-api.onrender.com/common/get_user_order");
-
-    yield* Stream.periodic(const Duration(seconds: 5), (_) {
-      return http.get(uri, headers: {"token": user.token ?? ""});
-    }).asyncMap((event) async => await event);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-        initialData: null,
-        stream: getOrders(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List respones = jsonDecode(snapshot.data!.body);
-            print("respones");
-            print(respones.length);
-            print(respones.last);
-            final OrderModel lastOrder = OrderModel.fromJson(respones.last);
-            return (lastOrder.orderState!.toUpperCase() == "CANCELED" ||
-                    lastOrder.orderState!.toUpperCase() == "DECLINED")
-                ? const FilterSheet()
-                : (lastOrder.orderState!.toUpperCase() == "JUST CREATED")
-                    ? const Text("JUST CREATED") // TODO: SHOW ORDER LOADING
-                    : (lastOrder.orderState!.toUpperCase() == "ACCEPTED")
-                        ? const Text(
-                            "ACCEPTED") // TODO: SHOW DRIVING IS COMING OR NOTHING
-                        : const SizedBox(); // TODO: SHOW ??
-          } else {
-            return const Center(child: LinearProgressIndicator());
-          }
-        });
   }
 }

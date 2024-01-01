@@ -9,9 +9,9 @@ class PaymentMethod extends StatelessWidget {
     String currentLanguage = myLocale.languageCode;
     String iconPath = "";
     switch (paymentMethod) {
-      case "نقداً":
+      case "cash":
         iconPath = "assets/images/money_icon.png";
-      case "البطاقة الائتمانية":
+      case "credit card":
         iconPath = "assets/images/credit_card_icon.png";
     }
     return Padding(

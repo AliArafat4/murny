@@ -18,17 +18,17 @@ class CommonFunc {
     switch (function) {
       case Common.getUserOrder:
         try {
-          // final uri = Uri.parse(url + endPoints.getUserOrder);
+          final uri = Uri.parse(url + endPoints.getUserOrder);
 
-          // final response = await http.get(uri, headers: {"token": token});
-          //
-          // final List<OrderModel> orderModelList = [];
-          // final decodedBody = jsonDecode(response.body);
-          // for (var order in decodedBody) {
-          //   orderModelList.add(OrderModel.fromJson(order));
-          // }
-          //
-          // return orderModelList;
+          final response = await http.get(uri, headers: {"token": token});
+
+          final List<OrderModel> orderModelList = [];
+          final decodedBody = jsonDecode(response.body);
+          for (var order in decodedBody) {
+            orderModelList.add(OrderModel.fromJson(order));
+          }
+
+          return orderModelList;
           print("HERE HERE");
 
           // Stream<http.Response> getRandomNumberFact(uri) async* {
