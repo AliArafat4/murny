@@ -9,7 +9,8 @@ class MapGetCurrentLocationState extends MapState {
   final LatLng userLocation;
   final String locationName;
 
-  MapGetCurrentLocationState({required this.locationName, required this.userLocation});
+  MapGetCurrentLocationState(
+      {required this.locationName, required this.userLocation});
 }
 
 // class MapSetMarkersState extends MapState {
@@ -43,3 +44,21 @@ class MapFilterDriversMarkerState extends MapState {
 }
 
 class MapLoadingState extends MapState {}
+
+class MapSearchState extends MapState {
+  final List<PlacesSearchResult> results;
+
+  MapSearchState({required this.results});
+}
+
+class GetDestinationState extends MapState {
+  final PlacesSearchResult destination;
+
+  GetDestinationState({required this.destination});
+}
+
+class GetDestinationFromLongPressState extends MapState {
+  final Placemark destination;
+
+  GetDestinationFromLongPressState({required this.destination});
+}

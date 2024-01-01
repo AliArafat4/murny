@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/widgets/custom_divider.dart';
 import 'package:murny_final_project/widgets/location_search.dart';
 import 'package:murny_final_project/widgets/location_search_result.dart';
@@ -16,28 +18,26 @@ class SearchScreen extends StatelessWidget {
           children: [
             LocationSearch(),
             const CustomDivider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/select_location.png"),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    AppLocalizations.of(context)!.selectLocation,
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
-                  ),
-                ),
-              ],
-            ),
-            const Divider(
-                // color: Colors.black,
-                ),
-            LocationSearchResult(
-              buildingName: "كلية علوم الحاسب والمعلوماتA3",
-              cityName: "الرياض، محافظة الرياض، المملكة العربية السعودية",
-            ),
+            Flexible(
+              child: BlocBuilder<MapBloc, MapState>(
+                buildWhen: (previous, current) => current is MapSearchState,
+                builder: (context, state) {
+                  return state is MapSearchState
+                      ? ListView.builder(
+                          itemCount: state.results.length,
+                          itemBuilder: (context, index) {
+                            return LocationSearchResult(
+                              buildingName: state.results[index].name,
+                              cityName:
+                                  "${state.results[index].formattedAddress}",
+                              place: state.results[index],
+                            );
+                          },
+                        )
+                      : const SizedBox();
+                },
+              ),
+            )
           ],
         ),
       ),

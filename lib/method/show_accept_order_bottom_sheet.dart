@@ -58,10 +58,10 @@ showAcceptOrderBottomSheet({required BuildContext context}) {
               ),
               const Row(
                 children: [
-                  DriverInfo(
-                    driverImage: "assets/images/driver_profile.png",
-                    driverName: "عبدالرحمن حاتم",
-                  ),
+                  // DriverInfo(
+                  //   driverImage: "assets/images/driver_profile.png",
+                  //   driverName: "عبدالرحمن حاتم",
+                  // ),
                 ],
               ),
               SizedBox(

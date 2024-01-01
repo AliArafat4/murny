@@ -16,9 +16,40 @@ class CommonFunc {
     required String token,
   }) async {
     switch (function) {
-      case Common.getOrder:
+      case Common.getUserOrder:
         try {
-          final uri = Uri.parse(url + endPoints.getOrder);
+          final uri = Uri.parse(url + endPoints.getUserOrder);
+
+          final response = await http.get(uri, headers: {"token": token});
+
+          final List<OrderModel> orderModelList = [];
+          final decodedBody = jsonDecode(response.body);
+          for (var order in decodedBody) {
+            orderModelList.add(OrderModel.fromJson(order));
+          }
+
+          return orderModelList;
+          print("HERE HERE");
+
+          // Stream<http.Response> getRandomNumberFact(uri) async* {
+          //   yield* Stream.periodic(Duration(seconds: 5), (_) {
+          //     return http.get(uri);
+          //   }).asyncMap((event) async => await event);
+          // }
+          print("HERE HERE");
+          // print(x);
+          break;
+        } on FormatException catch (err) {
+          print(err);
+          return false;
+        } catch (err) {
+          print(err);
+
+          return false;
+        }
+      case Common.getDriverOrder:
+        try {
+          final uri = Uri.parse(url + endPoints.getDriverOrder);
 
           final response = await http.get(uri, headers: {"token": token});
 
@@ -59,7 +90,8 @@ class CommonFunc {
         try {
           final uri = Uri.parse(url + endPoints.getDrivers);
 
-          final response = await http.post(uri, headers: {"token": token}, body: jsonEncode(body));
+          final response = await http.post(uri,
+              headers: {"token": token}, body: jsonEncode(body));
 
           final List<DriverModel> driverModelList = [];
           final decodedBody = jsonDecode(response.body);

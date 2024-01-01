@@ -20,12 +20,13 @@ class CheckTokenCubit extends Cubit<CheckTokenState> {
         emit(InvalidTokenState());
       } else {
         final response = await MurnyApi().common(
-            body: {}, function: Common.getDrivers, token: currentUser.token!);
+
+            body: {}, function: Common.getUserOrder, token: currentUser.token!);
+
         if (response == false) {
           pref.clearUser();
           emit(InvalidTokenState());
         } else {
-          print("response");
           print(currentUser.token);
           emit(ValidTokenState());
         }
