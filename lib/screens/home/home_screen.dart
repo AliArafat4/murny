@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:murny_final_project/api/mury_api.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_bloc.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_event.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_state.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/theme_bloc/them_bloc.dart';
 import 'package:murny_final_project/bloc/theme_bloc/them_event.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
+import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/screens/balance/balance_home.dart';
 import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
@@ -104,6 +108,9 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
+
     return Drawer(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -210,49 +217,49 @@ class CustomDrawer extends StatelessWidget {
           //   colorSelected: const Color(0xff000000),
           //   // isSegmentUser: false,
           // )),
-                      Row(
-              children: [
-                Padding(
-                  padding: currentLanguage == "ar"
-                      ? EdgeInsets.only(right: 15.sp)
-                      : EdgeInsets.only(left: 15.sp),
-                  child: Text(
-                    "اللغة العربية",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w400, fontSize: 18),
-                  ),
+          Row(
+            children: [
+              Padding(
+                padding: currentLanguage == "ar"
+                    ? EdgeInsets.only(right: 15.sp)
+                    : EdgeInsets.only(left: 15.sp),
+                child: Text(
+                  "اللغة العربية",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w400, fontSize: 18),
                 ),
-                Spacer(),
-                BlocBuilder<LocaleBloc, LocaleState>(
-                  builder: (context, state) {
-                    if (state is LocaleUpdateState) {
-                      print("object");
-                      currentLocle = state.locale;
-                    }
+              ),
+              Spacer(),
+              BlocBuilder<LocaleBloc, LocaleState>(
+                builder: (context, state) {
+                  if (state is LocaleUpdateState) {
+                    print("object");
+                    currentLocle = state.locale;
+                  }
 
-                    return Switch(
-                      activeColor: Colors.white,
-                      activeTrackColor: Color(0xff252C63),
-                      inactiveThumbColor: Colors.white,
-                      inactiveTrackColor: Colors.grey,
-                      value: currentLocle == Locale("ar"),
-                      onChanged: (value) {
-                        value
-                            ? currentLocle = Locale("ar")
-                            : currentLocle = Locale("en");
-                        currentLocle == Locale("ar")
-                            ? context
-                                .read<LocaleBloc>()
-                                .add(ChangeLocaleEvent("ar"))
-                            : context
-                                .read<LocaleBloc>()
-                                .add(ChangeLocaleEvent("en"));
-                      },
-                    );
-                  },
-                )
-              ],
-            ),
+                  return Switch(
+                    activeColor: Colors.white,
+                    activeTrackColor: Color(0xff252C63),
+                    inactiveThumbColor: Colors.white,
+                    inactiveTrackColor: Colors.grey,
+                    value: currentLocle == Locale("ar"),
+                    onChanged: (value) {
+                      value
+                          ? currentLocle = Locale("ar")
+                          : currentLocle = Locale("en");
+                      currentLocle == Locale("ar")
+                          ? context
+                              .read<LocaleBloc>()
+                              .add(ChangeLocaleEvent("ar"))
+                          : context
+                              .read<LocaleBloc>()
+                              .add(ChangeLocaleEvent("en"));
+                    },
+                  );
+                },
+              )
+            ],
+          ),
           Padding(
             padding: EdgeInsets.only(top: 60.sp, left: 61.sp),
             child: const Icon(Icons.light_mode_outlined),
