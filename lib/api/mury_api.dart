@@ -49,9 +49,9 @@ class MurnyApi {
     required Map<String, dynamic> body,
     required Profile function,
     required String token,
-  }) {
+  }) async {
     final url = this.url + endPoints.profileRoute;
-    ProfileFunc().profileFunctionsSelector(
+    return await ProfileFunc().profileFunctionsSelector(
         function: function,
         url: url,
         endPoints: endPoints,

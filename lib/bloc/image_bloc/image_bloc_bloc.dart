@@ -23,8 +23,9 @@ class ImageBloc extends Bloc<ImageBlocEvent, ImageBlocState> {
       if (image == null) {
         return;
       }
+      //print("here is ${await image.readAsBytes()}");
       await MurnyApi().profile(
-          body: {"image": image},
+          body: {"image": await image.readAsBytes()},
           function: Profile.uploadAvatar,
           token: currentUser.token!);
 
@@ -36,6 +37,7 @@ class ImageBloc extends Bloc<ImageBlocEvent, ImageBlocState> {
 
         final ProfileModel getImage = await MurnyApi().profile(
             body: {}, function: Profile.getProfile, token: currentUser.token!);
+        //print("get my image ${getImage.image}");
         emit(ImageSuccess(image: getImage.image.toString()));
       },
     );
