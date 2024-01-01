@@ -85,7 +85,9 @@ class MainApp extends StatelessWidget {
                     MapBloc()), //..add(MapGetCurrentLocationEvent())),
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
-            BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
+            BlocProvider<ProfileBloc>(
+                create: (context) =>
+                    ProfileBloc()..add(ProfileGetCurrentUserEvent())),
             BlocProvider<SegmentCubit>(create: (context) => SegmentCubit()),
             BlocProvider<DropdownlistCubit>(
                 create: (context) => DropdownlistCubit()),
