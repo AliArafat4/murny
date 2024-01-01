@@ -80,7 +80,7 @@ class MainApp extends StatelessWidget {
           providers: [
             BlocProvider<MapBloc>(
                 create: (context) =>
-                    MapBloc()..add(MapGetCurrentLocationEvent())),
+                    MapBloc()), //..add(MapGetCurrentLocationEvent())),
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),

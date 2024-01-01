@@ -74,7 +74,7 @@
    "payment": "Payment",
    "cancelOrderConfirm": "Are you sure you want to cancel the order?",
    "cancelOrder": "Cancel Order",
-   "searchGolfCart": "Searching for the nearest golf cart",
+   "searchGolfCart": "Waiting for driver response",
    "selectGlofCart": "Select the type of golf cart",
    "fourSeats": "4 Seats",
    "sixSeats": "6 Seats",
