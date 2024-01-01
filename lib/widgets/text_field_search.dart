@@ -6,6 +6,7 @@ import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/method/show_search_cart_bottom_sheet.dart';
 import 'package:murny_final_project/method/show_success_trip_bottom_sheet.dart';
 import 'package:murny_final_project/method/show_wating_trip_bottom_sheet.dart';
+import 'package:murny_final_project/screens/voice_search/search.dart';
 import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 import 'package:murny_final_project/widgets/golf_cart_detail.dart';
 import 'package:murny_final_project/widgets/rating.dart';
@@ -18,7 +19,8 @@ class TextFieldSearch extends StatelessWidget {
     super.key,
     required this.fun,
   });
-  final Function() fun;
+  final Function fun;
+
   final TextEditingController conSearch = TextEditingController();
   bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
@@ -63,68 +65,132 @@ class TextFieldSearch extends StatelessWidget {
               ),
               SizedBox(
                 height: 5.h,
-                width: 84.w,
-                child: TextField(
-                  controller: conSearch,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.findYourDestination,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => VoiceSearchScreen()),
-                        );
-                      },
-                      //  color: const Color(0xff000000),
-                      icon: const Icon(
-                        Icons.keyboard_voice_outlined,
-                        size: 24,
-                      ),
-                    ),
-                    prefixIcon: SizedBox(
-                      width: 12.w,
-                      child: Padding(
-                        padding: currentLanguage == "ar"
-                            ? EdgeInsets.only(right: 14.sp)
-                            : EdgeInsets.only(left: 14.sp),
-                        child: Row(
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: isSwitched
-                                  ? SvgPicture.asset(
-                                      'assets/images/imageSearch.svg',
-                                      colorFilter: const ColorFilter.mode(
-                                          Colors.white, BlendMode.srcIn),
-                                      fit: BoxFit.none,
-                                    )
-                                  : SvgPicture.asset(
-                                      'assets/images/imageSearch.svg',
-                                      colorFilter: const ColorFilter.mode(
-                                          Color(0xff000000), BlendMode.srcIn),
-                                      fit: BoxFit.none,
-                                    ),
-                            ),
-                            const VerticalDivider(
-                              thickness: 1,
-                              indent: 13,
-                              endIndent: 13,
-                              color: Color(0xffCDCED3),
-                            ),
-                          ],
+             width: 84.w,
+// <<<<<<< HEAD
+//                 child: TextField(
+//                   controller: conSearch,
+//                   decoration: InputDecoration(
+//                     hintText: AppLocalizations.of(context)!.findYourDestination,
+//                     suffixIcon: IconButton(
+//                       onPressed: () {
+//                         Navigator.push(
+//                           context,
+//                           MaterialPageRoute(
+//                               builder: (context) => VoiceSearchScreen()),
+//                         );
+//                       },
+//                       //  color: const Color(0xff000000),
+//                       icon: const Icon(
+//                         Icons.keyboard_voice_outlined,
+//                         size: 24,
+//                       ),
+//                     ),
+//                     prefixIcon: SizedBox(
+//                       width: 12.w,
+//                       child: Padding(
+//                         padding: currentLanguage == "ar"
+//                             ? EdgeInsets.only(right: 14.sp)
+//                             : EdgeInsets.only(left: 14.sp),
+//                         child: Row(
+//                           children: [
+//                             InkWell(
+//                               onTap: () {},
+//                               child: isSwitched
+//                                   ? SvgPicture.asset(
+//                                       'assets/images/imageSearch.svg',
+//                                       colorFilter: const ColorFilter.mode(
+//                                           Colors.white, BlendMode.srcIn),
+//                                       fit: BoxFit.none,
+//                                     )
+//                                   : SvgPicture.asset(
+//                                       'assets/images/imageSearch.svg',
+//                                       colorFilter: const ColorFilter.mode(
+//                                           Color(0xff000000), BlendMode.srcIn),
+//                                       fit: BoxFit.none,
+//                                     ),
+//                             ),
+//                             const VerticalDivider(
+//                               thickness: 1,
+//                               indent: 13,
+//                               endIndent: 13,
+//                               color: Color(0xffCDCED3),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                     border: OutlineInputBorder(
+//                       borderSide: BorderSide.none,
+//                       borderRadius: BorderRadius.circular(20),
+//                     ),
+//                     hintStyle: isSwitched
+//                         ? TextStyle(color: Colors.grey, height: 0.1.h)
+//                         : TextStyle(color: Color(0xff000000), height: 0.1.h),
+//                     // filled: true,
+//                     // fillColor: const Color(0xffFFFFFF)
+// =======
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SearchScreen()),
+                    );
+                  },
+                  child: TextField(
+                    enabled: false,
+                    controller: conSearch,
+                    decoration: InputDecoration(
+                        hintText:
+                            AppLocalizations.of(context)!.findYourDestination,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => VoiceSearchScreen()),
+                            );
+                          },
+                          color: const Color(0xff000000),
+                          icon: const Icon(
+                            Icons.keyboard_voice_outlined,
+                            size: 24,
+                          ),
                         ),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    hintStyle: isSwitched
-                        ? TextStyle(color: Colors.grey, height: 0.1.h)
-                        : TextStyle(color: Color(0xff000000), height: 0.1.h),
-                    // filled: true,
-                    // fillColor: const Color(0xffFFFFFF)
+                        prefixIcon: SizedBox(
+                          width: 12.w,
+                          child: Padding(
+                            padding: currentLanguage == "ar"
+                                ? EdgeInsets.only(right: 14.sp)
+                                : EdgeInsets.only(left: 14.sp),
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  child: SvgPicture.asset(
+                                    'assets/images/imageSearch.svg',
+                                    colorFilter: const ColorFilter.mode(
+                                        Color(0xff000000), BlendMode.srcIn),
+                                    fit: BoxFit.none,
+                                  ),
+                                ),
+                                const VerticalDivider(
+                                  thickness: 1,
+                                  indent: 13,
+                                  endIndent: 13,
+                                  color: Color(0xffCDCED3),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        hintStyle: TextStyle(
+                            color: const Color(0xff000000), height: 0.1.h),
+                        filled: true,
+                        fillColor: const Color(0xffFFFFFF)),
+// >>>>>>> main
                   ),
                 ),
               ),

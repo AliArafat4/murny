@@ -5,6 +5,7 @@ import 'package:murny_final_project/bloc/profile_bloc/profile_bloc.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/screens/editAccount/component/delete_logout_account.dart';
+import 'package:murny_final_project/screens/editAccount/component/profile_image.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:murny_final_project/widgets/arrow_back_circle_container.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
@@ -21,6 +22,7 @@ class EditAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
+    print("----------here");
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -38,7 +40,11 @@ class EditAccount extends StatelessWidget {
                 SizedBox(
                   height: 3.h,
                 ),
-                Stack(children: [
+
+                ProfileImage(),
+
+                // ProfileImage()
+                /* Stack(children: [
                   const CircleAvatar(
                     radius: 60,
                     foregroundImage:
@@ -60,6 +66,7 @@ class EditAccount extends StatelessWidget {
                         ),
                       ))
                 ]),
+                */
                 SizedBox(
                   height: 1.h,
                 ),

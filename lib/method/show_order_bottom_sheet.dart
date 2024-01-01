@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/method/alert_snackbar.dart';
+import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/screens/balance/payment_type.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
+import 'package:murny_final_project/widgets/driver_info.dart';
 import 'package:murny_final_project/widgets/golf_cart_detail.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-showOrderBottomSheet(
-    {required BuildContext context,
-    required String currentLocation,
-    required String destination,
-    required String driverID,
-    required int cartID}) {
+showOrderBottomSheet({
+  required BuildContext context,
+  required String currentLocation,
+  required String destination,
+  // required String driverID,
+  //   required int cartID,
+  required DriverModel markerInfo,
+}) {
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -37,38 +42,17 @@ showOrderBottomSheet(
                 ),
                 BookLocation(
                   locationFrom: currentLocation,
-                  locationTo: destination,
+                  locationTo: destination != ""
+                      ? destination
+                      : AppLocalizations.of(context)!.destination,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                Text(
-                  AppLocalizations.of(context)!.selectGlofCart,
-                  style: TextStyle(fontSize: 18),
-                ),
+                DriverInfo(driver: markerInfo),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 62,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     GolfCartDetail(
-                //       numberOfSeat: AppLocalizations.of(context)!.eightSseats,
-                //       price: AppLocalizations.of(context)!.from3SAR,
-                //       onTap: () {},
-                //     ),
-                //     GolfCartDetail(
-                //       numberOfSeat: AppLocalizations.of(context)!.sixSeats,
-                //       price: AppLocalizations.of(context)!.from5SAR,
-                //       onTap: () {},
-                //     ),
-                //     GolfCartDetail(
-                //       numberOfSeat: AppLocalizations.of(context)!.fourSeats,
-                //       price: AppLocalizations.of(context)!.from3SAR,
-                //       onTap: () {},
-                //     ),
-                //   ],
-                // ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
@@ -79,14 +63,24 @@ showOrderBottomSheet(
                     isPadding: true,
                     title: AppLocalizations.of(context)!.pay,
                     onPressed: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(
-                              builder: (context) => PaymentTypeScreen(
-                                  driverID: driverID,
+                      if (destination != "") {
+                        Navigator.of(context)
+                            .push(
+                              MaterialPageRoute(
+                                builder: (context) => PaymentTypeScreen(
+                                  driverID: markerInfo.userId!,
                                   currentLocation: currentLocation,
                                   destination: destination,
-                                  cartID: cartID)))
-                          .then((value) => Navigator.pop(context));
+                                  cartID: markerInfo.cartID!,
+                                ),
+                              ),
+                            )
+                            .then((value) => Navigator.pop(context));
+                      } else {
+                        Navigator.pop(context);
+                        showErrorSnackBar(
+                            context, "Please Select a destination");
+                      }
                     },
                     buttonColor: const Color(0xff252C63),
                   ),

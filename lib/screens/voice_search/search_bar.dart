@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -22,6 +24,10 @@ class SearchBarWidget extends StatelessWidget {
             fillColor: Colors.transparent,
             hintStyle: TextStyle(color: Color(0xffCDCED3))),
         controller: controller,
+        onChanged: (val) {
+          context.read<MapBloc>().add(MapSearchEvent(searchedText: val));
+          print(val);
+        },
       ),
     );
   }

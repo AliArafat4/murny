@@ -6,6 +6,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/bloc/theme_bloc/them_bloc.dart';
 import 'package:murny_final_project/bloc/theme_bloc/them_event.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_bloc.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_event.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_state.dart';
+import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/screens/balance/balance_home.dart';
 import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
@@ -36,10 +40,10 @@ class HomeScreenDriver extends StatelessWidget {
             drawer: Drawer(
               shape: RoundedRectangleBorder(
                 borderRadius: currentLanguage == 'ar'
-                    ? BorderRadius.only(
+                    ? const BorderRadius.only(
                         topLeft: Radius.circular(80),
                         bottomLeft: Radius.circular(80))
-                    : BorderRadius.only(
+                    : const BorderRadius.only(
                         topRight: Radius.circular(80),
                         bottomRight: Radius.circular(80)),
               ),
@@ -116,7 +120,38 @@ class HomeScreenDriver extends StatelessWidget {
                     textTwo: 'English',
                     colorSelected: Color(0xff000000),
                     // isSegmentUser: false,
-                  )),
+                  )),*/
+
+                  Row(
+                    children: [
+                      Text("اللغة العربية"),
+                      Spacer(),
+                      BlocBuilder<LocaleBloc, LocaleState>(
+                        builder: (context, state) {
+                          if (state is LocaleUpdateState) {
+                            print("object");
+                            currentLocle = state.locale;
+                          }
+
+                          return Switch(
+                            value: currentLocle == Locale("ar"),
+                            onChanged: (value) {
+                              value
+                                  ? currentLocle = Locale("ar")
+                                  : currentLocle = Locale("en");
+                              currentLocle == Locale("ar")
+                                  ? context
+                                      .read<LocaleBloc>()
+                                      .add(ChangeLocaleEvent("ar"))
+                                  : context
+                                      .read<LocaleBloc>()
+                                      .add(ChangeLocaleEvent("en"));
+                            },
+                          );
+                        },
+                      )
+                    ],
+                  ),
                   Padding(
                     padding: currentLanguage == 'ar'
                         ? EdgeInsets.only(top: 77.sp, left: 61.sp)

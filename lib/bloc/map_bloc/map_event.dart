@@ -20,8 +20,26 @@ class MapResetMarkersEvent extends MapEvent {}
 
 class MapGetDriversMarkerEvent extends MapEvent {}
 
+class MapSearchEvent extends MapEvent {
+  final String searchedText;
+
+  MapSearchEvent({required this.searchedText});
+}
+
 class MapFilterDriversMarkerEvent extends MapEvent {
   final String cartTierID;
 
   MapFilterDriversMarkerEvent({required this.cartTierID});
+}
+
+class GetDestinationEvent extends MapEvent {
+  final PlacesSearchResult place;
+
+  GetDestinationEvent({required this.place});
+}
+
+class GetDestinationFromLongPressEvent extends MapEvent {
+  final LatLng location;
+
+  GetDestinationFromLongPressEvent({required this.location});
 }

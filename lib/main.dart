@@ -8,6 +8,9 @@ import 'package:murny_final_project/bloc/check_box_bloc/cubit/checkbox_cubit.dar
 import 'package:murny_final_project/bloc/checkfillOTP_bloc/cubit/checkfill_otp_cubit.dart';
 import 'package:murny_final_project/bloc/dropdownlist_bloc/cubit/dropdownlist_cubit.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
+import 'package:murny_final_project/bloc/image_bloc/image_bloc_bloc.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_bloc.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_state.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/public_bloc/public_cubit.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
@@ -55,6 +58,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 SharedPref pref = SharedPref();
 
 late SharedPreferences prefs;
+Locale? currentLocle;
+ThemeData? theme;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,7 +82,7 @@ class MainApp extends StatelessWidget {
           providers: [
             BlocProvider<MapBloc>(
                 create: (context) =>
-                    MapBloc()), //..add(MapGetCurrentLocationEvent())
+                    MapBloc()), //..add(MapGetCurrentLocationEvent())),
             BlocProvider<CheckTokenCubit>(
                 create: (context) => CheckTokenCubit()),
             BlocProvider<ProfileBloc>(create: (context) => ProfileBloc()),
@@ -88,7 +93,6 @@ class MainApp extends StatelessWidget {
                 create: (context) => RadiobuttonCubit()),
             BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
             BlocProvider<CardCubit>(create: (context) => CardCubit()),
-
             BlocProvider<PublicCubit>(
                 create: (context) => PublicCubit()..getAllCartsCubit()),
             BlocProvider<SelectCartCubit>(
@@ -97,22 +101,35 @@ class MainApp extends StatelessWidget {
             BlocProvider<CheckfillOtpCubit>(
                 create: (context) => CheckfillOtpCubit()),
             BlocProvider(create: (context) => ThemeBloc()),
+
             BlocProvider<CheckboxCubit>(create: (context) => CheckboxCubit()),
+
+            BlocProvider(create: (context) => ImageBloc()),
+            BlocProvider(create: (context) => LocaleBloc()),
           ],
           child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
             if (state is GetThemeState) {
-              return MaterialApp(
-                  theme: state.themeData,
-                  locale: const Locale('en'),
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: L10n.all,
-                  debugShowCheckedModeBanner: false,
-                  home: SignUpScreen());
+              theme = state.themeData;
+              return BlocBuilder<LocaleBloc, LocaleState>(
+                builder: (context, state) {
+                  if (state is GetLocaleState) {
+                    currentLocle = state.locale;
+                  }
+                  return MaterialApp(
+                      theme: theme,
+                      locale: currentLocle,
+                      localizationsDelegates: const [
+                        AppLocalizations.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                      ],
+                      supportedLocales: L10n.all,
+                      debugShowCheckedModeBanner: false,
+                      home: SplashScreen());
+                },
+              );
+
             } else {
               return Container();
             }

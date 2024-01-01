@@ -1,21 +1,21 @@
-// import 'dart:math';
+import 'dart:math';
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:murny_final_project/api/mury_api.dart';
-// import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
-// import 'package:murny_final_project/bloc/theme_bloc/them_bloc.dart';
-// import 'package:murny_final_project/bloc/theme_bloc/them_event.dart';
-// import 'package:murny_final_project/local_storage/shared_prefrences.dart';
-// import 'package:murny_final_project/screens/balance/balance_home.dart';
-// import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
-// import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
-// import 'package:murny_final_project/widgets/content_drawer.dart';
-// import 'package:murny_final_project/widgets/segment_control.dart';
-// import 'package:murny_final_project/widgets/text_field_search.dart';
-// import 'package:responsive_sizer/responsive_sizer.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:murny_final_project/api/mury_api.dart';
+import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
+import 'package:murny_final_project/bloc/theme_bloc/them_bloc.dart';
+import 'package:murny_final_project/bloc/theme_bloc/them_event.dart';
+import 'package:murny_final_project/local_storage/shared_prefrences.dart';
+import 'package:murny_final_project/screens/balance/balance_home.dart';
+import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
+import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
+import 'package:murny_final_project/widgets/content_drawer.dart';
+import 'package:murny_final_project/widgets/segment_control.dart';
+import 'package:murny_final_project/widgets/text_field_search.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // class HomeScreen extends StatelessWidget {
 //   HomeScreen({super.key});
@@ -97,159 +97,168 @@
 //   }
 // }
 
-// class CustomDrawer extends StatelessWidget {
-//   const CustomDrawer({
-//     super.key,
-//     required this.currentLanguage,
-//     required this.isSwitched,
-//   });
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({
+    super.key,
+  });
 
-//   final String currentLanguage;
-//   final bool isSwitched;
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(80), bottomLeft: Radius.circular(80))),
+      child: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 20.sp, left: 180),
+            child: const CircleAvatar(
+              radius: 44,
+              foregroundImage: AssetImage("assets/images/personalImage.png"),
+            ),
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 12.sp),
+            child: const Text(
+              'مروة',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 12.sp),
+            child: Row(
+              children: [
+                const Text(
+                  '966548784080+',
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                )
+              ],
+            ),
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.editAccount,
+            imageSvg: 'assets/images/imageEditAccount.svg',
+            spaceTop: 0.sp,
+            naviPush: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditAccount()),
+              );
+            },
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.support,
+            imageSvg: 'assets/images/imageSupport.svg',
+            spaceTop: 20.sp,
+            naviPush: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ContactWithUs()),
+              );
+            },
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.wallet,
+            imageSvg: 'assets/images/imageWallet.svg',
+            spaceTop: 15.sp,
+            naviPush: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const HomeBalanceScreen()),
+              );
+            },
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.aboutUs,
+            imageSvg: 'assets/images/imageInfo.svg',
+            spaceTop: 15.sp,
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.termsAndConditions,
+            imageSvg: 'assets/images/imageConditions.svg',
+            spaceTop: 15.sp,
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          ContentDrawer(
+            text: AppLocalizations.of(context)!.privacyPolicy,
+            imageSvg: 'assets/images/imagePrivacy.svg',
+            spaceTop: 15.sp,
+          ),
+          const Divider(
+            thickness: 1,
+          ),
+          // SizedBox(
+          //     // height: 23,
+          //     child: SegmentControl(
+          //   textOne: 'العربية',
+          //   textTwo: 'English',
+          //   colorSelected: const Color(0xff000000),
+          //   // isSegmentUser: false,
+          // )),
+                      Row(
+              children: [
+                Padding(
+                  padding: currentLanguage == "ar"
+                      ? EdgeInsets.only(right: 15.sp)
+                      : EdgeInsets.only(left: 15.sp),
+                  child: Text(
+                    "اللغة العربية",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w400, fontSize: 18),
+                  ),
+                ),
+                Spacer(),
+                BlocBuilder<LocaleBloc, LocaleState>(
+                  builder: (context, state) {
+                    if (state is LocaleUpdateState) {
+                      print("object");
+                      currentLocle = state.locale;
+                    }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Drawer(
-//       shape: RoundedRectangleBorder(
-//         borderRadius: currentLanguage == 'ar'
-//             ? BorderRadius.only(
-//                 topLeft: Radius.circular(80),
-//                 bottomLeft: Radius.circular(80))
-//             : BorderRadius.only(
-//                 topRight: Radius.circular(80),
-//                 bottomRight: Radius.circular(80)),
-//       ),
-//       child: ListView(
-//         children: [
-//           Padding(
-//             padding: currentLanguage == 'ar'
-//                 ? EdgeInsets.only(top: 20.sp, left: 180)
-//                 : EdgeInsets.only(top: 20.sp, right: 180),
-//             child: const CircleAvatar(
-//               radius: 44,
-//               foregroundImage:
-//                   AssetImage("assets/images/personalImage.png"),
-//             ),
-//           ),
-//           SizedBox(
-//             height: 2.h,
-//           ),
-//           Padding(
-//             padding: currentLanguage == 'ar'
-//                 ? EdgeInsets.only(right: 12.sp)
-//                 : EdgeInsets.only(left: 12.sp),
-//             child: const Text(
-//               'مروة',
-//               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-//             ),
-//           ),
-//           Padding(
-//             padding: currentLanguage == 'ar'
-//                 ? EdgeInsets.only(right: 12.sp)
-//                 : EdgeInsets.only(left: 12.sp),
-//             child: Row(
-//               children: [
-//                 const Text(
-//                   '966548784080+',
-//                   style: TextStyle(
-//                       fontWeight: FontWeight.w400, fontSize: 18),
-//                 )
-//               ],
-//             ),
-//           ),
-//           ContentDrawer(
-//             text: AppLocalizations.of(context)!.editAccount,
-//             imageSvg: 'assets/images/editAccount.png',
-//             spaceTop: 0.sp,
-//             naviPush: () {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (context) => EditAccount()),
-//               );
-//             },
-//           ),
-//           ContentDrawer(
-//             text: AppLocalizations.of(context)!.support,
-//             imageSvg: 'assets/images/support.png',
-//             spaceTop: 20.sp,
-//             naviPush: () {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(builder: (context) => ContactWithUs()),
-//               );
-//             },
-//           ),
-//           const Divider(
-//             thickness: 1,
-//           ),
-//           ContentDrawer(
-//             text: AppLocalizations.of(context)!.wallet,
-//             imageSvg: 'assets/images/wallet.png',
-//             spaceTop: 15.sp,
-//             naviPush: () {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(
-//                     builder: (context) => const HomeBalanceScreen()),
-//               );
-//             },
-//           ),
-//           const Divider(
-//             thickness: 1,
-//           ),
-//           ContentDrawer(
-//             text: AppLocalizations.of(context)!.aboutUs,
-//             imageSvg: 'assets/images/aboutUs.png',
-//             spaceTop: 15.sp,
-//           ),
-//           const Divider(
-//             thickness: 1,
-//           ),
-//           ContentDrawer(
-//             text: AppLocalizations.of(context)!.termsAndConditions,
-//             imageSvg: 'assets/images/terms.png',
-//             spaceTop: 15.sp,
-//           ),
-//           const Divider(
-//             thickness: 1,
-//           ),
-//           ContentDrawer(
-//             text: AppLocalizations.of(context)!.privacyPolicy,
-//             imageSvg: 'assets/images/privacy.png',
-//             spaceTop: 15.sp,
-//           ),
-//           const Divider(
-//             thickness: 1,
-//           ),
-//           const SizedBox(
-//               // height: 23,
-//               child: SegmentControl(
-//             textOne: 'العربية',
-//             textTwo: 'English',
-//             colorSelected: Color(0xff000000),
-//             // isSegmentUser: false,
-//           )),
-//           Padding(
-//             padding: currentLanguage == 'ar'
-//                 ? EdgeInsets.only(top: 52.sp, left: 61.sp)
-//                 : EdgeInsets.only(top: 52.sp, right: 66.sp),
-//             child: InkWell(
-//               onTap: () {
-//                 isSwitched
-//                     ? context
-//                         .read<ThemeBloc>()
-//                         .add(ChangeThemeEvent(themeText: "light"))
-//                     : context
-//                         .read<ThemeBloc>()
-//                         .add(ChangeThemeEvent(themeText: "dark"));
-//               },
-//               child: isSwitched
-//                   ? Icon(Icons.light_mode_outlined)
-//                   : Icon(Icons.dark_mode_outlined),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
+                    return Switch(
+                      activeColor: Colors.white,
+                      activeTrackColor: Color(0xff252C63),
+                      inactiveThumbColor: Colors.white,
+                      inactiveTrackColor: Colors.grey,
+                      value: currentLocle == Locale("ar"),
+                      onChanged: (value) {
+                        value
+                            ? currentLocle = Locale("ar")
+                            : currentLocle = Locale("en");
+                        currentLocle == Locale("ar")
+                            ? context
+                                .read<LocaleBloc>()
+                                .add(ChangeLocaleEvent("ar"))
+                            : context
+                                .read<LocaleBloc>()
+                                .add(ChangeLocaleEvent("en"));
+                      },
+                    );
+                  },
+                )
+              ],
+            ),
+          Padding(
+            padding: EdgeInsets.only(top: 60.sp, left: 61.sp),
+            child: const Icon(Icons.light_mode_outlined),
+          )
+        ],
+      ),
+    );
+  }
+}
