@@ -11,7 +11,6 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       SharedPref().setTheme(event.themeText);
       emit(GetThemeState(appThemeMap[event.themeText]));
     });
-
     on<GetThemeEvent>(
       (event, emit) async {
         final currentThemeText = await SharedPref().getCurrentTheme();

@@ -45,6 +45,8 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>هل تريد السماح لتطبيق &quot;مرني&quot; باستخدام موقعك؟</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>هل تريد السماح لتطبيق &quot;مرني&quot; بالوصول للصور الخاصة بك؟</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>

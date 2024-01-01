@@ -49,4 +49,12 @@ class SharedPref {
   setTheme(String themeText) async {
     prefs.setString("theme", themeText);
   }
+
+  setLocale(String locale) async {
+    prefs.setString("locale", locale);
+  }
+
+  getCurrentLocale() {
+    return prefs.getString("locale") ?? "ar";
+  }
 }

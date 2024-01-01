@@ -1,7 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_bloc.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_event.dart';
+import 'package:murny_final_project/bloc/locale_bloc/locale_state.dart';
+import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/screens/balance/balance_home.dart';
 import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
@@ -105,7 +110,8 @@ class HomeScreenDriver extends StatelessWidget {
                   const Divider(
                     thickness: 1,
                   ),
-                  const SizedBox(
+
+                  /* SizedBox(
 
                       // height: 23,
                       child: SegmentControl(
@@ -113,7 +119,38 @@ class HomeScreenDriver extends StatelessWidget {
                     textTwo: 'English',
                     colorSelected: Color(0xff000000),
                     // isSegmentUser: false,
-                  )),
+                  )),*/
+
+                  Row(
+                    children: [
+                      Text("اللغة العربية"),
+                      Spacer(),
+                      BlocBuilder<LocaleBloc, LocaleState>(
+                        builder: (context, state) {
+                          if (state is LocaleUpdateState) {
+                            print("object");
+                            currentLocle = state.locale;
+                          }
+
+                          return Switch(
+                            value: currentLocle == Locale("ar"),
+                            onChanged: (value) {
+                              value
+                                  ? currentLocle = Locale("ar")
+                                  : currentLocle = Locale("en");
+                              currentLocle == Locale("ar")
+                                  ? context
+                                      .read<LocaleBloc>()
+                                      .add(ChangeLocaleEvent("ar"))
+                                  : context
+                                      .read<LocaleBloc>()
+                                      .add(ChangeLocaleEvent("en"));
+                            },
+                          );
+                        },
+                      )
+                    ],
+                  ),
                   Padding(
                     padding: currentLanguage == 'ar'
                         ? EdgeInsets.only(top: 52.sp, left: 61.sp)
