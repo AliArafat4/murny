@@ -107,67 +107,42 @@ class PaymentTypeScreen extends StatelessWidget {
                     ],
                   );
                 },
-// <<<<<<< Arwa-Alzahrani
-// =======
-//                 paymentMethod: AppLocalizations.of(context)!.creditCard,
-//                 imagePath: "assets/images/visa_icon.png",
-//               ),
-//               PaymentRadioButton(
-//                 value: Payment.wallet,
-//                 selectedValue: selectedValue,
-//                 onChange: (value) {
-//                   setState(() {});
-//                   selectedValue = value!;
-//                 },
-//                 paymentMethod: AppLocalizations.of(context)!.wallet,
-//                 imagePath: "assets/images/wallet_icon.png",
-//               ),
-//               PaymentRadioButton(
-//                 value: Payment.cash,
-//                 selectedValue: selectedValue,
-//                 onChange: (value) {
-//                   setState(() {});
-//                   selectedValue = value!;
-//                 },
-//                 paymentMethod: AppLocalizations.of(context)!.cash,
-//                 imagePath: "assets/images/cash_icon.png",
-// >>>>>>> main
               ),
-              // SizedBox(
-              //   height: MediaQuery.of(context).size.height / 22,
-              // ),
-              // BlocConsumer<UserCubit, UserState>(
-              //   listener: (context, state) {
-              //     if (state is UserLoadingOrderState) {
-              //       showLoadingDialog(context: context);
-              //     }
-              //     if (state is UserSuccessOrderState) {
-              //       Navigator.pop(context);
-              //       showSuccessSnackBar(
-              //           context, "Order has been places successfully");
-              //       Navigator.pop(context);
-              //     }
-              //     if (state is UserErrorOrderState) {
-              //       showLoadingDialog(context: context);
-              //       showErrorSnackBar(context, state.errMsg);
-              //     }
-              //   },
-              //   builder: (context, state) {
-              //     return PrimaryButton(
-              //       title: AppLocalizations.of(context)!.confirmation,
-              //       onPressed: () {
-              //         context.read<UserCubit>().userPostOrder(
-              //             driverId: driverID,
-              //             locationFrom: currentLocation,
-              //             locationTo: destination,
-              //             cartId: cartID,
-              //             paymentMethod: selectedValue.name);
-              //       },
-              //       isText: true,
-              //       isPadding: false,
-              //     );
-              //   },
-              // )
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 22,
+              ),
+              BlocConsumer<UserCubit, UserState>(
+                listener: (context, state) {
+                  if (state is UserLoadingOrderState) {
+                    showLoadingDialog(context: context);
+                  }
+                  if (state is UserSuccessOrderState) {
+                    Navigator.pop(context);
+                    showSuccessSnackBar(
+                        context, "Order has been places successfully");
+                    Navigator.pop(context);
+                  }
+                  if (state is UserErrorOrderState) {
+                    showLoadingDialog(context: context);
+                    showErrorSnackBar(context, state.errMsg);
+                  }
+                },
+                builder: (context, state) {
+                  return PrimaryButton(
+                    title: AppLocalizations.of(context)!.confirmation,
+                    onPressed: () {
+                      context.read<UserCubit>().userPostOrder(
+                          driverId: driverID,
+                          locationFrom: currentLocation,
+                          locationTo: destination,
+                          cartId: cartID,
+                          paymentMethod: selectedValue.name);
+                    },
+                    isText: true,
+                    isPadding: false,
+                  );
+                },
+              )
             ],
           ),
         ),
