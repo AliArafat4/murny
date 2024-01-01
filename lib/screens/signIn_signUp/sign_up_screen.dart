@@ -96,15 +96,12 @@ class SignUpScreen extends StatelessWidget {
                   BlocBuilder<CheckboxCubit, CheckboxState>(
                     builder: (context, state) {
                       return Checkbox(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100)),
                         value: state is CheckboxSignupSelectState
                             ? state.selected
-                            : true,
+                            : false,
                         onChanged: (value) {
-                          // print(value);
-                          // print(state is RadioButtonSignupSelectState
-                          //     ? state.selected
-                          //     : 0);
-
                           context
                               .read<CheckboxCubit>()
                               .checkboxSignUp(select: value!);
