@@ -113,7 +113,7 @@ class HomeScreenDriver extends StatelessWidget {
                   const Divider(
                     thickness: 1,
                   ),
-                  const SizedBox(
+                  /*  const SizedBox(
                       // height: 23,
                       child: SegmentControl(
                     textOne: 'العربية',
