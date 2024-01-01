@@ -19,3 +19,9 @@ class MapGetMarkerLocationEvent extends MapEvent {
 class MapResetMarkersEvent extends MapEvent {}
 
 class MapGetDriversMarkerEvent extends MapEvent {}
+
+class MapFilterDriversMarkerEvent extends MapEvent {
+  final String cartTierID;
+
+  MapFilterDriversMarkerEvent({required this.cartTierID});
+}

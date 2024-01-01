@@ -9,6 +9,8 @@ class UpSideSigninSignup extends StatelessWidget {
   final Function() onTap;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Column(
       children: [
         Padding(
@@ -38,11 +40,16 @@ class UpSideSigninSignup extends StatelessWidget {
         Visibility(
           visible: visibleImage,
           child: Padding(
-            padding: EdgeInsets.only(
-              right: 63.sp,
-            ),
+            padding: currentLanguage == "ar"
+                ? EdgeInsets.only(
+                    right: 63.sp,
+                  )
+                : EdgeInsets.only(
+                    left: 63.sp,
+                  ),
             child: Image.asset(
               'assets/images/carMurny.png',
+
               alignment: Alignment.topRight,
               // colorFilter:
               //     const ColorFilter.mode(Colors.red, BlendMode.srcIn),

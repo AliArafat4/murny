@@ -26,6 +26,7 @@ class ProfileFunc {
           return profileModel;
         } catch (err) {
           print(err);
+          return err;
         }
 
       case Profile.updateUserProfile:

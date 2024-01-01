@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showMainBottomSheet({required BuildContext context}) {
   showModalBottomSheet(
@@ -25,8 +26,8 @@ showMainBottomSheet({required BuildContext context}) {
                 "assets/images/waiting_icon.png",
                 width: MediaQuery.of(context).size.width / 4,
               ),
-              const Text(
-                "انتظر طلبك القادم",
+              Text(
+                AppLocalizations.of(context)!.watiingUpcomingOrder,
                 style: TextStyle(fontSize: 18, color: Color(0xff252C63)),
               ),
             ],

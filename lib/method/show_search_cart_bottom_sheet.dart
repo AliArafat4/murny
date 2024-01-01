@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/cart_detil.dart';
 import 'package:murny_final_project/widgets/payment_method.dart';
-import 'package:murny_final_project/widgets/second_button.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showSearchCartBottomSheet({required BuildContext context}) {
+  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
+
+  Locale myLocale = Localizations.localeOf(context);
+  String currentLanguage = myLocale.languageCode;
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -15,7 +21,7 @@ showSearchCartBottomSheet({required BuildContext context}) {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.5,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          //color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(32),
             topRight: Radius.circular(32),
@@ -29,10 +35,13 @@ showSearchCartBottomSheet({required BuildContext context}) {
                 height: MediaQuery.of(context).size.height / 42,
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width / 20),
-                child: const Text(
-                  "العثور على أقرب عربة لتصل إلى وجهتك",
+                padding: currentLanguage == "ar"
+                    ? EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width / 20)
+                    : EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 20),
+                child: Text(
+                  AppLocalizations.of(context)!.searchGolfCart,
                   style: TextStyle(fontSize: 16),
                 ),
               ),
@@ -59,14 +68,16 @@ showSearchCartBottomSheet({required BuildContext context}) {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 42,
               ),
-              const Divider(
+              Divider(
                 thickness: 8,
-                color: Color(0xffF4F4F4),
+                color: isSwitched
+                    ? Color(0xffCDCED3)
+                    : Color(0xffCDCED3).withOpacity(0.4),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 120,
               ),
-              const CartDetil(
+              CartDetil(
                 numberOfCartSeat: "عربة جولف 4 مقاعد",
               ),
               const Divider(
@@ -76,28 +87,31 @@ showSearchCartBottomSheet({required BuildContext context}) {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 120,
               ),
-              const Divider(
-                thickness: 8,
-                color: Color(0xffF4F4F4),
-              ),
+              Divider(
+                  thickness: 8,
+                  color: isSwitched
+                      ? Color(0xffCDCED3)
+                      : Color(0xffCDCED3).withOpacity(0.4)),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 82,
               ),
               Center(
-                child: SecondButton(
-                  title: "إلغاء الطلب",
-                  onPressed: () {
-                    showConfirmDiolg(
-                        context: context,
-                        title: 'هل انت متأكد انك تريد الغاء الطلب',
-                        acceptFun: () {
-                          Navigator.pop(context);
-                          showOrderBottomSheet(context: context);
-                        });
-                  },
-                  color: const Color(0xffF21D53),
-                ),
-              )
+                  child: PrimaryButton(
+                isBorderBtn: false,
+                isText: true,
+                isPadding: true,
+                title: AppLocalizations.of(context)!.cancelOrder,
+                onPressed: () {
+                  showConfirmDiolg(
+                      context: context,
+                      title: AppLocalizations.of(context)!.cancelOrderConfirm,
+                      acceptFun: () {
+                        Navigator.pop(context);
+                        // showOrderBottomSheet(context: context);
+                      });
+                },
+                buttonColor: const Color(0xffF21D53),
+              ))
             ],
           ),
         ),

@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:murny_final_project/main.dart';
-import 'package:murny_final_project/models/user_model.dart';
+import 'package:murny_final_project/models/auth_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
@@ -25,12 +25,12 @@ class SharedPref {
     await _preferences.setString("token", "");
   }
 
-  void setUser(UserModel user) async {
+  void setUser(AuthModel user) async {
     await _preferences.setString("user", jsonEncode(user));
   }
 
   String getUser() {
-    UserModel user = UserModel();
+    AuthModel user = AuthModel();
     return _preferences.getString("user") ?? jsonEncode(user);
   }
 

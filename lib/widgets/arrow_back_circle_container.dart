@@ -12,6 +12,8 @@ class ArrowBackCircleContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Row(
       children: [
         Align(
@@ -19,30 +21,45 @@ class ArrowBackCircleContainer extends StatelessWidget {
           child: Container(
               width: 8.w,
               height: 10.h,
-              margin: EdgeInsets.only(right: 17.sp),
-              decoration: isSwitched
-                  ? const BoxDecoration(
-                      color: Color(0xffFFFFFF), shape: BoxShape.circle)
-                  : BoxDecoration(boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 4,
-                        offset: const Offset(3, 2),
-                      ),
-                    ], color: const Color(0xffFFFFFF), shape: BoxShape.circle),
+// <<<<<<< Arwa-Alzahrani
+//               margin: EdgeInsets.only(right: 17.sp),
+//               decoration: isSwitched
+//                   ? const BoxDecoration(
+//                       color: Color(0xffFFFFFF), shape: BoxShape.circle)
+//                   : BoxDecoration(boxShadow: [
+//                       BoxShadow(
+//                         color: Colors.grey.withOpacity(0.5),
+//                         blurRadius: 4,
+//                         offset: const Offset(3, 2),
+//                       ),
+//                     ], color: const Color(0xffFFFFFF), shape: BoxShape.circle),
+// =======
+              margin: currentLanguage == "ar"
+                  ? EdgeInsets.only(right: 17.sp)
+                  : EdgeInsets.only(left: 17.sp),
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 4,
+                  offset: const Offset(3, 2),
+                ),
+              ], color: const Color(0xffFFFFFF), shape: BoxShape.circle),
               child: InkWell(
                 onTap: () => Navigator.pop(context),
                 child: const Icon(
                   Icons.arrow_back_rounded,
                   size: 30,
+                  color: Colors.black,
                 ),
               )),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 20.sp, right: textSpace),
+          padding: currentLanguage == "ar"
+              ? EdgeInsets.only(top: 20.sp, right: textSpace)
+              : EdgeInsets.only(top: 20.sp, left: textSpace),
           child: Text(
             text,
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
           ),

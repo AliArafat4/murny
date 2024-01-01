@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/screens/balance/balance_home.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showSuccessAddBalanceDiolg(
     {required BuildContext context, required String balance}) {
@@ -26,17 +28,17 @@ showSuccessAddBalanceDiolg(
               ),
               Image.asset("assets/images/success_blue.png"),
               SizedBox(height: MediaQuery.of(context).size.height / 62),
-              const Text(
-                "إضافة ناجحة",
+              Text(
+                AppLocalizations.of(context)!.addBalanceSucc,
                 style: TextStyle(fontSize: 22),
               ),
-              const Text(
-                "تمت إضافة مبلغك بنجاح",
+              Text(
+                AppLocalizations.of(context)!.addBalanceSuccdescription,
                 style: TextStyle(color: Color(0xff898989), fontSize: 12),
               ),
               SizedBox(height: MediaQuery.of(context).size.height / 62),
-              const Text(
-                "الكمية",
+              Text(
+                AppLocalizations.of(context)!.amount,
                 style: TextStyle(color: Color(0xff5A5A5A)),
               ),
               Text(
@@ -44,15 +46,18 @@ showSuccessAddBalanceDiolg(
                 style: TextStyle(fontSize: 22),
               ),
               SizedBox(height: MediaQuery.of(context).size.height / 32),
-              SecondButton(
-                  title: "الرجوع",
-                  onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => HomeBalanceScreen()),
-                        (Route route) => false);
-                  },
-                  color: const Color(0xff252C63))
+              PrimaryButton(
+                title: AppLocalizations.of(context)!.back,
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => HomeBalanceScreen()),
+                      (Route route) => false);
+                },
+                buttonColor: const Color(0xff252C63),
+                isPadding: true,
+                isText: true,
+              )
             ],
           ),
         ),

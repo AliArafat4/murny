@@ -9,14 +9,15 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../bloc/segment_bloc/cubit/segment_cubit.dart';
 
 class SegmentControl extends StatelessWidget {
-  const SegmentControl(
-      {super.key,
-      required this.textOne,
-      required this.textTwo,
-      required this.colorSelected,
-      //required this.isSegmentUser
+  const SegmentControl({
+    super.key,
+    required this.textOne,
+    required this.textTwo,
+    required this.colorSelected,
+    //required this.isSegmentUser
 
-      this.func});
+    this.func,
+  });
   final String textOne;
   final String textTwo;
   final Color colorSelected;
@@ -27,11 +28,14 @@ class SegmentControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return BlocBuilder<SegmentCubit, SegmentState>(
       builder: (context, state) {
         return MaterialSegmentedControl(
-            horizontalPadding:
-                EdgeInsets.only(left: 50.sp, right: 20, top: 20.sp),
+            horizontalPadding: currentLanguage == "ar"
+                ? EdgeInsets.only(left: 50.sp, right: 20, top: 20.sp)
+                : EdgeInsets.only(right: 50.sp, left: 20, top: 20.sp),
             children: {
               0: Text(textOne),
               1: Text(textTwo),

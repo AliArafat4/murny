@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/bloc/check_box_bloc/cubit/checkbox_cubit.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
@@ -22,12 +22,15 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
+    //  print(currentLanguage.runtimeType);
+
     return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
-            // backgroundColor: const Color(0xffFFFFFF),
             body: Padding(
           padding: EdgeInsets.all(20.sp),
           child: SingleChildScrollView(
@@ -39,11 +42,13 @@ class SignUpScreen extends StatelessWidget {
                 },
               ),
               Align(
-                  alignment: Alignment.topRight,
-                  child: Text(AppLocalizations.of(context)!.backToHome,
+                  alignment: currentLanguage == 'ar'
+                      ? Alignment.topRight
+                      : Alignment.topLeft,
+                  child: Text(AppLocalizations.of(context)!.signUp,
                       style: TextStyle(
                         fontSize: 28,
-                        color: Color(0xff252C63),
+                        //  color: Color(0xff252C63),
                       ))),
               SizedBox(
                 height: 3.h,
@@ -85,40 +90,35 @@ class SignUpScreen extends StatelessWidget {
                 visiblePhone: false,
                 controller: conPass,
               ),
-              SizedBox(
-                height: 1.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 2.sp),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    BlocBuilder<RadiobuttonCubit, RadiobuttonState>(
-                      builder: (context, state) {
-                        return Radio(
-                          groupValue: 1,
-                          activeColor: const Color(0xff252C63),
-                          value: state is RadioButtonSignupSelectState
-                              ? state.selected
-                              : 0,
-                          onChanged: (value) {
-                            context
-                                .read<RadiobuttonCubit>()
-                                .radiobuttonSignup(selectedType: value ?? 1);
-                          },
-                          toggleable: true,
-                        );
-                      },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  BlocBuilder<CheckboxCubit, CheckboxState>(
+                    builder: (context, state) {
+                      return Checkbox(
+                        value: state is CheckboxSignupSelectState
+                            ? state.selected
+                            : true,
+                        onChanged: (value) {
+                          // print(value);
+                          // print(state is RadioButtonSignupSelectState
+                          //     ? state.selected
+                          //     : 0);
+
+                          context
+                              .read<CheckboxCubit>()
+                              .checkboxSignUp(select: value!);
+                        },
+                      );
+                    },
+                  ),
+                  Flexible(
+                    child: Text(
+                      AppLocalizations.of(context)!.subscribingAgree,
+                      style: TextStyle(fontSize: 12),
                     ),
-                    Flexible(
-                      child: Text(
-                        AppLocalizations.of(context)!.subscribingAgree,
-                        // style: const TextStyle(
-                        //     color: Color(0xff000000), fontSize: 12),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(height: 1.h),
               BlocConsumer<AuthBloc, AuthState>(
@@ -151,7 +151,8 @@ class SignUpScreen extends StatelessWidget {
                   state is AuthRegisterSuccessState
                       ? Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => GoogleMapScreen()),
                         )
                       : const SizedBox();
                 },
@@ -159,35 +160,35 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(
                 height: 1.h,
               ),
-              const DividerSigninSignup(),
-              SizedBox(
-                height: 1.h,
-              ),
-              PrimaryButton(
-                buttonColor: Colors.transparent,
-                onPressed: () {},
-                text: AppLocalizations.of(context)!.signUpGmail,
-                image: 'assets/images/gmail.svg',
-                isText: false,
-                isPadding: false,
-              ),
-              SizedBox(
-                height: 1.h,
-              ),
-              PrimaryButton(
-                buttonColor: Colors.transparent,
-                onPressed: () {},
-                text: AppLocalizations.of(context)!.signUpApple,
-                image: 'assets/images/Apple.svg',
-                isText: false,
-                isPadding: true,
-              ),
+              // const DividerSigninSignup(),
+              // SizedBox(
+              //   height: 1.h,
+              // ),
+              // PrimaryButton(
+              //   buttonColor: Colors.transparent,
+              //   onPressed: () {},
+              //   text: AppLocalizations.of(context)!.signUpGmail,
+              //   image: 'assets/images/gmail.svg',
+              //   isText: false,
+              //   isPadding: false,
+              // ),
+              // SizedBox(
+              //   height: 1.h,
+              // ),
+              // PrimaryButton(
+              //   buttonColor: Colors.transparent,
+              //   onPressed: () {},
+              //   text: AppLocalizations.of(context)!.signUpApple,
+              //   image: 'assets/images/Apple.svg',
+              //   isText: false,
+              //   isPadding: true,
+              // ),
               SizedBox(
                 height: 2.h,
               ),
               AccountText(
                 firstText: AppLocalizations.of(context)!.signIn,
-                secondText: AppLocalizations.of(context)!.doNotHaveAccount,
+                secondText: AppLocalizations.of(context)!.doHaveAccount,
                 pushNavi: () {
                   navigation(
                     context: context,

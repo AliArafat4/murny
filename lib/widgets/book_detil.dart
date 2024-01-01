@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookDetil extends StatelessWidget {
   const BookDetil(
@@ -20,8 +21,8 @@ class BookDetil extends StatelessWidget {
       children: [
         Column(
           children: [
-            const Text(
-              "التكلفة",
+            Text(
+              AppLocalizations.of(context)!.total,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
             ),
             Text(
@@ -37,8 +38,8 @@ class BookDetil extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 4),
         Column(
           children: [
-            const Text(
-              "طريقة الدفع",
+            Text(
+              AppLocalizations.of(context)!.payment,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
             ),
             Row(

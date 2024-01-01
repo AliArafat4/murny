@@ -4,7 +4,7 @@ import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/screens/create_driver/create_driver_account_screen.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
@@ -20,7 +20,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     int selectedIndex = 0;
     return Scaffold(
-      // backgroundColor: const Color(0xffEEF0F2),
+      backgroundColor: const Color(0xffEEF0F2),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -28,7 +28,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
             children: [
               Image.asset(
                 "assets/images/splashImage.png",
-                color: Colors.grey,
+                //  color: Colors.grey,
                 width: 430.w,
                 fit: BoxFit.cover,
               ),
@@ -82,6 +82,7 @@ class SplashSignInSignUpScreen extends StatelessWidget {
             Positioned(
                 top: 220,
                 child: PrimaryButton(
+                  isBorderBtn: true,
                   title: AppLocalizations.of(context)!.signIn,
                   buttonColor: Colors.transparent,
                   textColor: const Color(0xff000000),

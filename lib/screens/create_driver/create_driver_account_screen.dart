@@ -4,19 +4,18 @@ import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
-import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/city_dropdown_menu.dart';
-import 'package:murny_final_project/widgets/divider_signin_signup.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateDriverAccountScreen extends StatelessWidget {
   CreateDriverAccountScreen({super.key});
@@ -33,6 +32,8 @@ class CreateDriverAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return Scaffold(
       // backgroundColor: const Color(0xffFFFFFF),
       body: Padding(
@@ -49,18 +50,20 @@ class CreateDriverAccountScreen extends StatelessWidget {
                       (Route route) => false);
                 },
               ),
-              const Align(
-                  alignment: Alignment.topRight,
-                  child: Text('إنشاء حساب',
-                      style: TextStyle(
-                        fontSize: 28,
-                        color: Color(0xff252C63),
+              Align(
+                  alignment: currentLanguage == "ar"
+                      ? Alignment.topRight
+                      : Alignment.topLeft,
+                  child: Text(AppLocalizations.of(context)!.createDriverAccount,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        // color: Color(0xff252C63),
                       ))),
               SizedBox(
                 height: 3.h,
               ),
               TextFieldWidget(
-                text: 'الإسم الثلاثي',
+                text: AppLocalizations.of(context)!.fullName,
                 typeKeyboard: TextInputType.name,
                 scure: false,
                 visiblePhone: false,
@@ -70,7 +73,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 height: 1.h,
               ),
               TextFieldWidget(
-                text: 'ادخل رقم جوالك',
+                text: AppLocalizations.of(context)!.mobilNumber,
                 typeKeyboard: TextInputType.phone,
                 scure: false,
                 visiblePhone: true,
@@ -80,7 +83,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 height: 1.h,
               ),
               TextFieldWidget(
-                text: 'ادخل ايميلك',
+                text: AppLocalizations.of(context)!.email,
                 typeKeyboard: TextInputType.emailAddress,
                 scure: false,
                 visiblePhone: false,
@@ -90,7 +93,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 height: 1.h,
               ),
               TextFieldWidget(
-                text: 'ادخل كلمة المرور',
+                text: AppLocalizations.of(context)!.password,
                 typeKeyboard: TextInputType.visiblePassword,
                 scure: true,
                 visiblePhone: false,
@@ -100,10 +103,12 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 height: 2.h,
               ),
               Align(
-                alignment: Alignment.topRight,
-                child: const Text(
-                  "الجنس",
-                  style: TextStyle(fontSize: 20),
+                alignment: currentLanguage == "ar"
+                    ? Alignment.topRight
+                    : Alignment.topLeft,
+                child: Text(
+                  AppLocalizations.of(context)!.gender,
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
               BlocBuilder<RadiobuttonCubit, RadiobuttonState>(
@@ -149,11 +154,13 @@ class CreateDriverAccountScreen extends StatelessWidget {
               SizedBox(
                 height: 2.h,
               ),
-              const Align(
-                alignment: Alignment.topRight,
+              Align(
+                alignment: currentLanguage == "ar"
+                    ? Alignment.topRight
+                    : Alignment.topLeft,
                 child: Text(
-                  "ارفق رخصة القيادة",
-                  style: TextStyle(fontSize: 20),
+                  AppLocalizations.of(context)!.uploadDriverLicense,
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
               SizedBox(
@@ -161,7 +168,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
               ),
               Center(
                 child: SecondButton(
-                  title: "رخصة القيادة",
+                  title: AppLocalizations.of(context)!.driverLicense,
                   onPressed: () {},
                   color: Colors.white,
                   isFill: false,
@@ -170,9 +177,9 @@ class CreateDriverAccountScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 82,
               ),
-              const Center(
+              Center(
                 child: Text(
-                  "(ميغابايت 2) PDF,DOCX,DOC",
+                  AppLocalizations.of(context)!.allowedFiles,
                   style: TextStyle(color: Color(0xff8E98A8)),
                 ),
               ),
@@ -184,21 +191,24 @@ class CreateDriverAccountScreen extends StatelessWidget {
                     current is AuthDriverRegisterErrorState,
                 builder: (context, state) {
                   return PrimaryButton(
-                      isText: true,
-                      isPadding: false,
-                      title: "اشتراك",
-                      onPressed: () {
-                        context.read<AuthBloc>().add(AuthRegisterDriverEvent(
-                            phone: conPhone.text,
-                            email: conEmail.text,
-                            password: conPass.text,
-                            userName: conName.text,
-                            gender: selectedOption!,
-                            //TODO: GET LICENSE
-                            license: '',
-                            //TODO: GET CITY
-                            city: ''));
-                      });
+                    isText: true,
+                    isPadding: false,
+                    title: AppLocalizations.of(context)!.subscribing,
+                    onPressed: () {
+                      context.read<AuthBloc>().add(
+                            AuthRegisterDriverEvent(
+                                phone: conPhone.text,
+                                email: conEmail.text,
+                                password: conPass.text,
+                                userName: conName.text,
+                                gender: selectedOption!,
+                                //TODO: GET LICENSE
+                                license: '',
+                                //TODO: GET CITY
+                                city: ''),
+                          );
+                    },
+                  );
                 },
                 listener: (BuildContext context, AuthState state) {
                   state is LoadingState
@@ -214,7 +224,8 @@ class CreateDriverAccountScreen extends StatelessWidget {
                       ? Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const GoogleMapScreen()),
+                            builder: (context) => const GoogleMapScreen(),
+                          ),
                         )
                       : const SizedBox();
                 },

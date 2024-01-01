@@ -17,6 +17,8 @@ class TextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    String currentLanguage = myLocale.languageCode;
     return TextField(
       obscureText: scure ? true : false,
       keyboardType: typeKeyboard,
@@ -30,7 +32,9 @@ class TextFieldWidget extends StatelessWidget {
                   width: 17.w,
                   child: IntrinsicHeight(
                     child: Padding(
-                      padding: EdgeInsets.only(right: 15.sp),
+                      padding: currentLanguage == "ar"
+                          ? EdgeInsets.only(right: 15.sp)
+                          : EdgeInsets.only(left: 15.sp),
                       child: const Row(
                         children: [
                           Flexible(
@@ -52,13 +56,13 @@ class TextFieldWidget extends StatelessWidget {
                 ))
             : null,
         focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xff252C63)),
+            borderSide: BorderSide(color: Theme.of(context).primaryColorDark),
             borderRadius: BorderRadius.circular(8)),
         disabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xff252C63)),
+            borderSide: BorderSide(color: Theme.of(context).primaryColorDark),
             borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xff252C63)),
+            borderSide: BorderSide(color: Theme.of(context).primaryColorDark),
             borderRadius: BorderRadius.circular(8)),
       ),
     );

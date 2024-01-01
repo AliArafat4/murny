@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showConfirmDiolg(
     {required BuildContext context,
@@ -18,20 +19,23 @@ showConfirmDiolg(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 4.h),
-            Text(title),
+            Text(
+              title,
+              style: TextStyle(color: Color(0xff2B2B62)),
+            ),
             SizedBox(height: 4.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SecondButton(
-                  title: "لا تراجع",
+                  title: AppLocalizations.of(context)!.cancel,
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   color: const Color(0xff252C63),
                 ),
                 SecondButton(
-                  title: "نعم",
+                  title: AppLocalizations.of(context)!.yes,
                   onPressed: acceptFun,
                   color: const Color(0xffD7053A),
                 ),

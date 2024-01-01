@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:murny_final_project/method/show_dialog_success_add_balanc.dart';
+import 'package:murny_final_project/screens/balance/balance_add.dart';
 import 'package:murny_final_project/widgets/app_bar.dart';
-import 'package:murny_final_project/widgets/second_button.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeBalanceScreen extends StatelessWidget {
   const HomeBalanceScreen({super.key});
@@ -9,7 +10,9 @@ class HomeBalanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar("المحفظة"),
+      appBar: customAppBar(
+        AppLocalizations.of(context)!.wallet,
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -30,13 +33,16 @@ class HomeBalanceScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-            SecondButton(
-              title: "إضافة رصيد",
-              onPressed: () {
-                showSuccessAddBalanceDiolg(context: context, balance: "50SAR");
-              },
-              color: const Color(0xff252C63),
-            )
+            PrimaryButton(
+                title: AppLocalizations.of(context)!.addBalance,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BalanceAddScreen()),
+                  );
+                },
+                isText: true,
+                isPadding: true),
           ],
         ),
       ),

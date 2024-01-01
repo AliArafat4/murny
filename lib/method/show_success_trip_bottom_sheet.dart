@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:murny_final_project/method/show_main_bottom_sheet.dart';
 import 'package:murny_final_project/widgets/book_detil.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
+import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showSuccessfulTripBottomSheet({required BuildContext context}) {
   showModalBottomSheet(
@@ -13,7 +15,7 @@ showSuccessfulTripBottomSheet({required BuildContext context}) {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.6,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          //  color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(32),
             topRight: Radius.circular(32),
@@ -34,8 +36,8 @@ showSuccessfulTripBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 90,
                 ),
-                const Text(
-                  "تمت الرحلة بنجاح",
+                Text(
+                  AppLocalizations.of(context)!.successTrip,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
@@ -52,13 +54,16 @@ showSuccessfulTripBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 200,
                 ),
-                SecondButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      showMainBottomSheet(context: context);
-                    },
-                    title: "إنهاء الرحلة",
-                    color: Color(0xff252C63))
+                PrimaryButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showMainBottomSheet(context: context);
+                  },
+                  title: AppLocalizations.of(context)!.endTrip,
+                  buttonColor: Color(0xff252C63),
+                  isText: true,
+                  isPadding: true,
+                )
               ],
             ),
           ),

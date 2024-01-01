@@ -5,6 +5,7 @@ abstract mixin class AuthApiEndPoints {
   final signInWithApple = "/sign_in_with_apple";
   final signInWithGoogle = "/sign_in_with_google";
   final otp = "/otp";
+  final resendOtp = "/resend_otp";
   final signIn = "/sign_in";
 }
 

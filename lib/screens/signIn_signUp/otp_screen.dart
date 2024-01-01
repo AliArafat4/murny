@@ -7,7 +7,7 @@ import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubi
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 
 import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
@@ -40,20 +40,17 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: EdgeInsets.only(
-        top: 20.sp,
-      ),
-      child: Column(children: [
-        Padding(
-          padding: EdgeInsets.only(right: 20.sp),
-          child: UpSideSigninSignup(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            visibleImage: false,
-          ),
+        body: Column(children: [
+      Padding(
+        padding: EdgeInsets.all(20.sp),
+        child: UpSideSigninSignup(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          visibleImage: false,
         ),
+      ),
+      Column(children: [
         SizedBox(
           height: 3.h,
         ),
@@ -64,18 +61,20 @@ class _OTPScreenState extends State<OTPScreen> {
                   ? Text(
                       AppLocalizations.of(context)!.otpSuccessSend,
                       style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.w400),
+                          fontSize: 22, fontWeight: FontWeight.w400),
                     )
                   : Text(
                       AppLocalizations.of(context)!.otpSuccessSend,
                       style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.w400),
+                          fontSize: 22, fontWeight: FontWeight.w400),
                     ),
             ),
             SizedBox(
               height: 1.h,
             ),
-            Text(AppLocalizations.of(context)!.enterOTP,
+            Text(
+                "${AppLocalizations.of(context)!.enterOTP}\nsent to ${widget.email}",
+                textAlign: TextAlign.center,
                 style: const TextStyle(color: Color(0xff8E98A8), fontSize: 16),
                 textDirection: TextDirection.rtl),
           ],
@@ -85,7 +84,6 @@ class _OTPScreenState extends State<OTPScreen> {
           width: 77.w,
           height: 5.5.h,
           child: PinFieldAutoFill(
-            keyboardType: TextInputType.number,
             currentCode: conOtp.text,
             decoration: BoxLooseDecoration(
                 strokeWidth: 0.71,
@@ -94,8 +92,6 @@ class _OTPScreenState extends State<OTPScreen> {
             codeLength: 6,
             onCodeChanged: (value) {
               print(value);
-
-              context.read<CheckfillOtpCubit>().checkFillOTP();
               setState(() {
                 conOtp.text = value!;
                 updateButtonVisibility();
@@ -104,15 +100,35 @@ class _OTPScreenState extends State<OTPScreen> {
           ),
         ),
         SizedBox(
-          height: 2.h,
+          height: 1.h,
         ),
         Visibility(
             child: isVisible
                 ? Container()
-                : AccountText(
-                    firstText: AppLocalizations.of(context)!.reSendOtp,
-                    secondText: AppLocalizations.of(context)!.notReceiveOtp,
-                    pushNavi: () {},
+                : BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthResendOTPErrorState) {
+                        Navigator.pop(context);
+                        showErrorSnackBar(context, state.errorMsg);
+                      }
+
+                      if (state is AuthResendOTPSuccessState) {
+                        Navigator.pop(context);
+                        showSuccessSnackBar(context,
+                            "OTP has been re-sent to ${widget.email} successfully");
+                      }
+                    },
+                    builder: (context, state) {
+                      return AccountText(
+                        firstText: AppLocalizations.of(context)!.reSendOtp,
+                        secondText: AppLocalizations.of(context)!.notReceiveOtp,
+                        pushNavi: () {
+                          context
+                              .read<AuthBloc>()
+                              .add(AuthResendOTPEvent(email: widget.email));
+                        },
+                      );
+                    },
                   )),
         const SizedBox(
           height: 100,
@@ -164,6 +180,6 @@ class _OTPScreenState extends State<OTPScreen> {
           ),
         )
       ]),
-    ));
+    ]));
   }
 }

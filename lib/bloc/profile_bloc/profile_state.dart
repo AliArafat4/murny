@@ -5,7 +5,7 @@ abstract class ProfileState {}
 class ProfileInitial extends ProfileState {}
 
 class ProfileGetCurrentUserState extends ProfileState {
-  final UserModel user;
+  final ProfileModel user;
 
   ProfileGetCurrentUserState({required this.user});
 }

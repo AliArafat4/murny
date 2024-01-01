@@ -18,6 +18,8 @@ class SearchBarWidget extends StatelessWidget {
             enabledBorder: InputBorder.none,
             errorBorder: InputBorder.none,
             hintText: hint,
+            filled: true,
+            fillColor: Colors.transparent,
             hintStyle: TextStyle(color: Color(0xffCDCED3))),
         controller: controller,
       ),
