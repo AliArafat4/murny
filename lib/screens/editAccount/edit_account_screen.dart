@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/profile_bloc/profile_bloc.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
@@ -41,7 +42,7 @@ class EditAccount extends StatelessWidget {
                   height: 3.h,
                 ),
 
-                ProfileImage(),
+                const ProfileImage(),
 
                 // ProfileImage()
                 /* Stack(children: [
@@ -70,15 +71,19 @@ class EditAccount extends StatelessWidget {
                 SizedBox(
                   height: 1.h,
                 ),
-                Text(
-                  'hhh',
+
+                const Text(
+                  '',
+
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
                   height: 0.5.h,
                 ),
-                Text(
-                  'iii',
+
+                const Text(
+                  '',
+
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
@@ -94,7 +99,7 @@ class EditAccount extends StatelessWidget {
                               : Alignment.topLeft,
                           child: Text(
                             AppLocalizations.of(context)!.fullName,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xff8E98A8),
                             ),
                           )),
@@ -117,7 +122,7 @@ class EditAccount extends StatelessWidget {
                               : Alignment.topLeft,
                           child: Text(
                             AppLocalizations.of(context)!.userName,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xff8E98A8),
                             ),
                           )),
@@ -140,7 +145,7 @@ class EditAccount extends StatelessWidget {
                               : Alignment.topLeft,
                           child: Text(
                             AppLocalizations.of(context)!.mobile,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xff8E98A8),
                             ),
                           )),
@@ -170,7 +175,7 @@ class EditAccount extends StatelessWidget {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      SplashSignInSignUpScreen()),
+                                      const SplashSignInSignUpScreen()),
                               (Route route) => false);
                         });
                   },
@@ -189,11 +194,7 @@ class EditAccount extends StatelessWidget {
                           context: context,
                           title: AppLocalizations.of(context)!.signOutConfirm,
                           acceptFun: () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        SplashSignInSignUpScreen()),
-                                (Route route) => false);
+                            MurnyApi().signOut(context: context);
                           });
                     },
                     child: DeleteLogoutAccount(

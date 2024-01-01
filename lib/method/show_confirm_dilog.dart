@@ -9,6 +9,7 @@ showConfirmDiolg(
     required Function() acceptFun}) {
   showDialog(
     context: context,
+    barrierDismissible: false,
     builder: (context) => AlertDialog(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -21,7 +22,7 @@ showConfirmDiolg(
             SizedBox(height: 4.h),
             Text(
               title,
-              style: TextStyle(color: Color(0xff2B2B62)),
+              style: const TextStyle(color: Color(0xff2B2B62)),
             ),
             SizedBox(height: 4.h),
             Row(
