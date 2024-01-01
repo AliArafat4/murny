@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/bloc/profile_bloc/profile_bloc.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/screens/editAccount/component/delete_logout_account.dart';
@@ -15,7 +17,6 @@ class EditAccount extends StatelessWidget {
   final TextEditingController conFullName = TextEditingController();
   final TextEditingController conUserName = TextEditingController();
   final TextEditingController conPhoneNumber = TextEditingController();
-  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,15 +70,15 @@ class EditAccount extends StatelessWidget {
                 SizedBox(
                   height: 1.h,
                 ),
-                const Text(
-                  'مروة',
+                Text(
+                  '',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
                   height: 0.5.h,
                 ),
-                const Text(
-                  '966548784080+',
+                Text(
+                  '',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
@@ -175,9 +176,7 @@ class EditAccount extends StatelessWidget {
                   },
                   child: DeleteLogoutAccount(
                     text: AppLocalizations.of(context)!.deleteAccount,
-                    image: isSwitched
-                        ? 'assets/images/EditAccountImage1.svg'
-                        : 'assets/images/imageDelete.svg',
+                    image: 'assets/images/delete.png',
                   ),
                 ),
                 Padding(
@@ -199,9 +198,7 @@ class EditAccount extends StatelessWidget {
                     },
                     child: DeleteLogoutAccount(
                       text: AppLocalizations.of(context)!.signOut,
-                      image: isSwitched
-                          ? 'assets/images/EditAccountImage2.svg'
-                          : 'assets/images/imageLogout.svg',
+                      image: 'assets/images/LogOut.png',
                     ),
                   ),
                 ),
@@ -220,10 +217,18 @@ class EditAccount extends StatelessWidget {
                         const Color(0xff252C63),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      //take data from textfield and update to supabase
+                      context.read<ProfileBloc>().add(UpdateUserProfileEvent(
+                            fullName: conFullName.text,
+                            userName: conUserName.text,
+                            phone: conPhoneNumber.text,
+                          ));
+                    },
                     child: Text(
                       AppLocalizations.of(context)!.save,
-                      style: TextStyle(color: Color(0xffFFFFFF), fontSize: 20),
+                      style: const TextStyle(
+                          color: Color(0xffFFFFFF), fontSize: 20),
                     ),
                   ),
                 ),

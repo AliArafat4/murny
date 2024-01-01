@@ -14,7 +14,7 @@ showSurvyDiolg({required BuildContext context}) {
     builder: (context) => AlertDialog(
       scrollable: true,
       elevation: 0,
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       content: SizedBox(
         height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width,
@@ -27,20 +27,31 @@ showSurvyDiolg({required BuildContext context}) {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.close)),
+                  icon: Icon(
+                    Icons.close,
+                  )),
             ),
             Image.asset("assets/images/success_blue.png"),
             SizedBox(height: MediaQuery.of(context).size.height / 62),
             Text(
               AppLocalizations.of(context)!.reachedDestination,
-              style: TextStyle(fontSize: 22),
+              // onSecondary
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
             ),
             const Divider(),
             Text(
               AppLocalizations.of(context)!.experienceRating,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
             ),
             Text(
               AppLocalizations.of(context)!.rateItNow,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
             ),
             Rating(),
             const Divider(),
@@ -53,12 +64,18 @@ showSurvyDiolg({required BuildContext context}) {
                     : Alignment.centerLeft,
                 child: Text(
                   AppLocalizations.of(context)!.comment,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                 ),
               ),
             ),
             CommentTextFiled(),
             Text(
               AppLocalizations.of(context)!.thankSurvy,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height / 42),
             PrimaryButton(

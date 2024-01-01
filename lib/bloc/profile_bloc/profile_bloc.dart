@@ -5,28 +5,36 @@ import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/models/auth_model.dart';
+import 'package:murny_final_project/models/profile_model.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(ProfileInitial()) {
-    final AuthModel currentUser = AuthModel.fromJson(jsonDecode(pref.getUser()));
+    final AuthModel currentUser =
+        AuthModel.fromJson(jsonDecode(pref.getUser()));
 
     on<ProfileGetCurrentUserEvent>((event, emit) async {
-      final user = await MurnyApi()
-          .profile(body: {}, token: currentUser.token ?? "", function: Profile.getProfile);
+      final user = await MurnyApi().profile(
+          body: {},
+          token: currentUser.token ?? "",
+          function: Profile.getProfile);
       print("user info");
       print(user);
-      emit(ProfileGetCurrentUserState(user: user));
+      if (user != null) {
+        final ProfileModel profileModel = ProfileModel.fromJson(user);
+        emit(ProfileGetCurrentUserState(user: profileModel));
+      } else {}
     });
 
     on<UpdateUserProfileEvent>((event, emit) async {
       await MurnyApi().profile(body: {
+        "": event.fullName
         //TODO: GET BODY
       }, function: Profile.updateUserProfile, token: currentUser.token ?? "");
     });
-
+////
     on<UpdateDriverProfileEvent>((event, emit) async {
       await MurnyApi().profile(body: {
         //TODO: GET BODY

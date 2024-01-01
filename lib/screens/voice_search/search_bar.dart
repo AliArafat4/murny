@@ -20,7 +20,9 @@ class SearchBarWidget extends StatelessWidget {
             enabledBorder: InputBorder.none,
             errorBorder: InputBorder.none,
             hintText: hint,
-            hintStyle: const TextStyle(color: Color(0xffCDCED3))),
+            filled: true,
+            fillColor: Colors.transparent,
+            hintStyle: TextStyle(color: Color(0xffCDCED3))),
         controller: controller,
         onChanged: (val) {
           context.read<MapBloc>().add(MapSearchEvent(searchedText: val));

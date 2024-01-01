@@ -19,7 +19,10 @@ showConfirmDiolg(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 4.h),
-            Text(title),
+            Text(
+              title,
+              style: TextStyle(color: Color(0xff2B2B62)),
+            ),
             SizedBox(height: 4.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

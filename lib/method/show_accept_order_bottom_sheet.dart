@@ -82,7 +82,7 @@ showAcceptOrderBottomSheet({required BuildContext context}) {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 140,
               ),
-              const CartDetil(
+              CartDetil(
                 numberOfCartSeat: "عربة جولف 4 مقاعد",
               ),
               const Divider(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/check_box_bloc/cubit/checkbox_cubit.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
-
 import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
@@ -31,7 +31,6 @@ class SignUpScreen extends StatelessWidget {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
-            // backgroundColor: const Color(0xffFFFFFF),
             body: Padding(
           padding: EdgeInsets.all(20.sp),
           child: SingleChildScrollView(
@@ -49,7 +48,7 @@ class SignUpScreen extends StatelessWidget {
                   child: Text(AppLocalizations.of(context)!.signUp,
                       style: TextStyle(
                         fontSize: 28,
-                        color: Color(0xff252C63),
+                        //  color: Color(0xff252C63),
                       ))),
               SizedBox(
                 height: 3.h,
@@ -94,22 +93,21 @@ class SignUpScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  BlocBuilder<RadiobuttonCubit, RadiobuttonState>(
+                  BlocBuilder<CheckboxCubit, CheckboxState>(
                     builder: (context, state) {
-                      return Radio(
-                        groupValue: 1,
-                        activeColor: const Color(0xff252C63),
-                        value: state is RadioButtonSignupSelectState
+                      return Checkbox(
+                        value: state is CheckboxSignupSelectState
                             ? state.selected
-                            : 0,
+                            : true,
                         onChanged: (value) {
-                          print(value);
-                          print(state is RadioButtonSignupSelectState
-                              ? state.selected
-                              : "hhh");
+                          // print(value);
+                          // print(state is RadioButtonSignupSelectState
+                          //     ? state.selected
+                          //     : 0);
+
                           context
-                              .read<RadiobuttonCubit>()
-                              .radiobuttonSignup(selectedType: value!);
+                              .read<CheckboxCubit>()
+                              .checkboxSignUp(select: value!);
                         },
                       );
                     },
@@ -117,7 +115,7 @@ class SignUpScreen extends StatelessWidget {
                   Flexible(
                     child: Text(
                       AppLocalizations.of(context)!.subscribingAgree,
-                      style: TextStyle(color: Color(0xff000000), fontSize: 12),
+                      style: TextStyle(fontSize: 12),
                     ),
                   ),
                 ],
@@ -162,35 +160,35 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(
                 height: 1.h,
               ),
-              const DividerSigninSignup(),
-              SizedBox(
-                height: 1.h,
-              ),
-              PrimaryButton(
-                buttonColor: Colors.transparent,
-                onPressed: () {},
-                text: AppLocalizations.of(context)!.signUpGmail,
-                image: 'assets/images/gmail.svg',
-                isText: false,
-                isPadding: false,
-              ),
-              SizedBox(
-                height: 1.h,
-              ),
-              PrimaryButton(
-                buttonColor: Colors.transparent,
-                onPressed: () {},
-                text: AppLocalizations.of(context)!.signUpApple,
-                image: 'assets/images/Apple.svg',
-                isText: false,
-                isPadding: true,
-              ),
+              // const DividerSigninSignup(),
+              // SizedBox(
+              //   height: 1.h,
+              // ),
+              // PrimaryButton(
+              //   buttonColor: Colors.transparent,
+              //   onPressed: () {},
+              //   text: AppLocalizations.of(context)!.signUpGmail,
+              //   image: 'assets/images/gmail.svg',
+              //   isText: false,
+              //   isPadding: false,
+              // ),
+              // SizedBox(
+              //   height: 1.h,
+              // ),
+              // PrimaryButton(
+              //   buttonColor: Colors.transparent,
+              //   onPressed: () {},
+              //   text: AppLocalizations.of(context)!.signUpApple,
+              //   image: 'assets/images/Apple.svg',
+              //   isText: false,
+              //   isPadding: true,
+              // ),
               SizedBox(
                 height: 2.h,
               ),
               AccountText(
                 firstText: AppLocalizations.of(context)!.signIn,
-                secondText: AppLocalizations.of(context)!.doNotHaveAccount,
+                secondText: AppLocalizations.of(context)!.doHaveAccount,
                 pushNavi: () {
                   navigation(
                     context: context,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -14,6 +15,7 @@ class ContentDrawer extends StatelessWidget {
   final String text;
   final double spaceTop;
   final Function? naviPush;
+  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,10 @@ class ContentDrawer extends StatelessWidget {
         onTap: () => naviPush!(),
         child: Row(
           children: [
-            SvgPicture.asset(imageSvg),
+            Image.asset(
+              imageSvg,
+              color: isSwitched ? Colors.white : Colors.black,
+            ),
             SizedBox(
               width: 2.w,
             ),

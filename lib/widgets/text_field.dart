@@ -56,13 +56,13 @@ class TextFieldWidget extends StatelessWidget {
                 ))
             : null,
         focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xff252C63)),
+            borderSide: BorderSide(color: Theme.of(context).primaryColorDark),
             borderRadius: BorderRadius.circular(8)),
         disabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xff252C63)),
+            borderSide: BorderSide(color: Theme.of(context).primaryColorDark),
             borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color(0xff252C63)),
+            borderSide: BorderSide(color: Theme.of(context).primaryColorDark),
             borderRadius: BorderRadius.circular(8)),
       ),
     );

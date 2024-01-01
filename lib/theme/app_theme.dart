@@ -3,10 +3,13 @@ import 'package:flutter_svg/svg.dart';
 
 final Map appThemeMap = {
   "light": ThemeData(
+    fontFamily: 'SFArabic',
     dividerColor: Colors.black,
     brightness: Brightness.light,
+    primaryColorDark: Color(0xff252C63),
+    inputDecorationTheme:
+        InputDecorationTheme(filled: true, fillColor: Color(0xffFFFFFF)),
     drawerTheme: const DrawerThemeData(backgroundColor: Color(0xffFFFFFF)),
-    //scaffoldBackgroundColor: const Color.fromARGB(239, 22, 22, 217),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
         iconColor: MaterialStateProperty.resolveWith<Color>(
@@ -18,9 +21,9 @@ final Map appThemeMap = {
         foregroundColor: const Color(0xff62c1c7),
       ),
     ),
-    radioTheme: const RadioThemeData(
-      fillColor: MaterialStatePropertyAll<Color>(Color(0xff62c1c7)),
-    ),
+    // radioTheme: const RadioThemeData(
+    //   fillColor: MaterialStatePropertyAll<Color>(Color(0xff62c1c7)),
+    // ),
     segmentedButtonTheme: const SegmentedButtonThemeData(style: ButtonStyle()),
     iconTheme: IconThemeData(
       color: Colors.black.withOpacity(0.8),
@@ -30,10 +33,10 @@ final Map appThemeMap = {
       backgroundColor: Colors.transparent,
       elevation: 0,
     ),
-
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xff62c1c7),
+        side: BorderSide(color: (Color(0xff252C63))),
+        backgroundColor: const Color(0xffFFFFFF),
         elevation: 0,
       ),
     ),
@@ -41,14 +44,19 @@ final Map appThemeMap = {
       onSecondary: Colors.black,
       secondary: Color(0xff252C63),
       onPrimary: Colors.black,
+      background: const Color(0xffFFFFFF),
     ),
     primaryTextTheme: TextTheme(
       titleSmall: TextStyle(color: Colors.black.withOpacity(0.6)),
     ),
   ),
   "dark": ThemeData(
+      fontFamily: 'SFArabic',
       brightness: Brightness.dark,
+      inputDecorationTheme:
+          InputDecorationTheme(filled: true, fillColor: Color(0xff393f44)),
       dividerColor: Colors.white,
+      primaryColorDark: Colors.white,
       segmentedButtonTheme: const SegmentedButtonThemeData(
           style: ButtonStyle(
               backgroundColor:
@@ -72,8 +80,7 @@ final Map appThemeMap = {
       iconTheme: const IconThemeData(color: Colors.white),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff62c1c7),
-          elevation: 0,
+          side: BorderSide(color: Color(0xffFFFFFF)),
         ),
       ),
       datePickerTheme: const DatePickerThemeData(

@@ -14,7 +14,6 @@ class FilterSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<PublicCubit>().getAllCartsCubit();
-
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -24,9 +23,17 @@ class FilterSheet extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height / 42,
             ),
-            const BookLocation(
-              locationFrom: "موقعك الحالي",
-              locationTo: "الى أين تريد/ين الذهاب",
+            BlocBuilder<MapBloc, MapState>(
+              buildWhen: (previous, current) =>
+                  current is MapGetCurrentLocationState,
+              builder: (context, state) {
+                return BookLocation(
+                  locationFrom: state is MapGetCurrentLocationState
+                      ? state.locationName.toString()
+                      : "موقعك الحالي",
+                  locationTo: "الى أين تريد/ين الذهاب",
+                );
+              },
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 42,

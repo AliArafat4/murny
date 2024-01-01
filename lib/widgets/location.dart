@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class Location extends StatelessWidget {
-  const Location({super.key, required this.color, required this.icon, required this.title});
+  const Location(
+      {super.key,
+      required this.color,
+      required this.icon,
+      required this.title});
   final Color color;
   final IconData icon;
   final String title;
@@ -23,6 +27,7 @@ class Location extends StatelessWidget {
         SizedBox(width: MediaQuery.of(context).size.width / 42),
         Text(
           title,
+          //change color text
           style: TextStyle(fontSize: 18.sp),
         )
       ],

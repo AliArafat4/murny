@@ -35,7 +35,7 @@ class CallPhoneWhatsapp extends StatelessWidget {
             ),
             Text(
               text,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
             )

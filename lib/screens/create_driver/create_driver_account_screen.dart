@@ -55,9 +55,9 @@ class CreateDriverAccountScreen extends StatelessWidget {
                       ? Alignment.topRight
                       : Alignment.topLeft,
                   child: Text(AppLocalizations.of(context)!.createDriverAccount,
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Color(0xff252C63),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        // color: Color(0xff252C63),
                       ))),
               SizedBox(
                 height: 3.h,

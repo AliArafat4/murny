@@ -50,7 +50,7 @@ class SignInScreen extends StatelessWidget {
                       child: Text(AppLocalizations.of(context)!.signIn,
                           style: const TextStyle(
                             fontSize: 28,
-                            color: Color(0xff252C63),
+                            // color: Color(0xff252C63),
                           )
                           //fontWeight: FontWeight.bold),
                           )),
@@ -122,31 +122,31 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(
                     height: 3.h,
                   ),
-                  const DividerSigninSignup(),
+                  // const DividerSigninSignup(),
 
-                  SizedBox(
-                    height: 3.h,
-                  ),
+                  // SizedBox(
+                  //   height: 3.h,
+                  // ),
 
-                  PrimaryButton(
-                    buttonColor: Colors.transparent,
-                    onPressed: () {},
-                    text: AppLocalizations.of(context)!.signUpGmail,
-                    image: 'assets/images/gmail.svg',
-                    isText: false,
-                    isPadding: false,
-                  ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
-                  PrimaryButton(
-                    buttonColor: Colors.transparent,
-                    onPressed: () {},
-                    text: AppLocalizations.of(context)!.signUpApple,
-                    image: 'assets/images/Apple.svg',
-                    isText: false,
-                    isPadding: true,
-                  ),
+                  // PrimaryButton(
+                  //   buttonColor: Colors.transparent,
+                  //   onPressed: () {},
+                  //   text: AppLocalizations.of(context)!.signUpGmail,
+                  //   image: 'assets/images/gmail.svg',
+                  //   isText: false,
+                  //   isPadding: false,
+                  // ),
+                  // SizedBox(
+                  //   height: 1.h,
+                  // ),
+                  // PrimaryButton(
+                  //   buttonColor: Colors.transparent,
+                  //   onPressed: () {},
+                  //   text: AppLocalizations.of(context)!.signUpApple,
+                  //   image: 'assets/images/Apple.svg',
+                  //   isText: false,
+                  //   isPadding: true,
+                  // ),
 
                   SizedBox(height: 2.h),
                   AccountText(

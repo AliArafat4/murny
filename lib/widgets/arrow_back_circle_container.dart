@@ -49,6 +49,7 @@ class ArrowBackCircleContainer extends StatelessWidget {
                 child: const Icon(
                   Icons.arrow_back_rounded,
                   size: 30,
+                  color: Colors.black,
                 ),
               )),
         ),
@@ -58,7 +59,7 @@ class ArrowBackCircleContainer extends StatelessWidget {
               : EdgeInsets.only(top: 20.sp, left: textSpace),
           child: Text(
             text,
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
           ),

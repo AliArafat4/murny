@@ -19,8 +19,8 @@ class MurnyApi {
   signIn({required Map<String, dynamic> body, required Auth function}) async {
     try {
       final url = this.url + endPoints.authRoute;
-      final res = await Authentication()
-          .authFunctionsSelector(function: function, body: body, endPoints: endPoints, url: url);
+      final res = await Authentication().authFunctionsSelector(
+          function: function, body: body, endPoints: endPoints, url: url);
       print("done");
 
       return true;
@@ -38,7 +38,11 @@ class MurnyApi {
   }) {
     final url = this.url + endPoints.chatRoute;
     ChatFunc().chatFunctionsSelector(
-        function: function, url: url, endPoints: endPoints, body: body, token: token);
+        function: function,
+        url: url,
+        endPoints: endPoints,
+        body: body,
+        token: token);
   }
 
   profile({
@@ -48,7 +52,11 @@ class MurnyApi {
   }) {
     final url = this.url + endPoints.profileRoute;
     ProfileFunc().profileFunctionsSelector(
-        function: function, url: url, endPoints: endPoints, body: body, token: token);
+        function: function,
+        url: url,
+        endPoints: endPoints,
+        body: body,
+        token: token);
   }
 
   user({
@@ -58,7 +66,11 @@ class MurnyApi {
   }) {
     final url = this.url + endPoints.userRoute;
     UserFunc().userFunctionsSelector(
-        function: function, url: url, endPoints: endPoints, body: body, token: token);
+        function: function,
+        url: url,
+        endPoints: endPoints,
+        body: body,
+        token: token);
   }
 
   driver({
@@ -68,13 +80,17 @@ class MurnyApi {
   }) {
     final url = this.url + endPoints.driverRoute;
     DriverFunc().driverFunctionsSelector(
-        function: function, url: url, endPoints: endPoints, body: body, token: token);
+        function: function,
+        url: url,
+        endPoints: endPoints,
+        body: body,
+        token: token);
   }
 
   public({
     required Public function,
   }) {
-    final url = this.url + endPoints.publicRoute;
+    final url = this.url + endPoints.profileRoute;
     return PublicFunc().publicFunctionsSelector(
       function: function,
       url: url,
@@ -89,14 +105,19 @@ class MurnyApi {
   }) async {
     final url = this.url + endPoints.commonRoute;
     return await CommonFunc().commonFunctionsSelector(
-        function: function, url: url, endPoints: endPoints, body: body, token: token);
+        function: function,
+        url: url,
+        endPoints: endPoints,
+        body: body,
+        token: token);
   }
 
   signOut({required BuildContext context}) {
     pref.clearUser();
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const SplashSignInSignUpScreen()),
+        MaterialPageRoute(
+            builder: (context) => const SplashSignInSignUpScreen()),
         (route) => false);
   }
 }
