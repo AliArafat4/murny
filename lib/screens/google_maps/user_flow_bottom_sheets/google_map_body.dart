@@ -69,6 +69,7 @@ class GoogleMapBody extends StatelessWidget {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List response = jsonDecode(snapshot.data!.body);
+
                     if (response.isNotEmpty) {
                       print(response.length);
                       print(response.last);
