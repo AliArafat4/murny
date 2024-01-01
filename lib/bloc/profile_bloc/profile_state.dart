@@ -12,6 +12,8 @@ class ProfileGetCurrentUserState extends ProfileState {
 
 class UpdateUserProfileState extends ProfileState {}
 
+class SuccessUpdateUserProfileState extends ProfileState {}
+
 class UpdateDriverProfileState extends ProfileState {}
 
 class UploadAvatarState extends ProfileState {}

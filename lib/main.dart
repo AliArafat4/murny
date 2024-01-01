@@ -126,10 +126,9 @@ class MainApp extends StatelessWidget {
                       ],
                       supportedLocales: L10n.all,
                       debugShowCheckedModeBanner: false,
-                      home: SplashScreen());
+                      home: GoogleMapScreen());
                 },
               );
-
             } else {
               return Container();
             }
