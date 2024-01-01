@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/screens/success/success_message.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,8 +14,12 @@ class SuccessScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
-            Image.asset("assets/images/success_blue.png"),
-            SizedBox(height: MediaQuery.of(context).size.height / 42),
+
+            Image.asset(
+              "assets/images/success_blue.png",
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 32),
+
             SuccessMessage(
               message: message,
             ),
@@ -23,7 +27,8 @@ class SuccessScreen extends StatelessWidget {
             PrimaryButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => GoogleMapScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const GoogleMapScreen()),
                     (Route route) => false);
               },
               title: AppLocalizations.of(context)!.backToHome,

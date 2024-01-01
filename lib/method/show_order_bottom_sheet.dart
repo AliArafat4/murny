@@ -6,7 +6,12 @@ import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-showOrderBottomSheet({required BuildContext context}) {
+showOrderBottomSheet(
+    {required BuildContext context,
+    required String currentLocation,
+    required String destination,
+    required String driverID,
+    required int cartID}) {
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -30,9 +35,9 @@ showOrderBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                const BookLocation(
-                  locationFrom: "موقعك الحالي",
-                  locationTo: "الى أين تريد/ين الذهاب",
+                BookLocation(
+                  locationFrom: currentLocation,
+                  locationTo: destination,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
@@ -44,26 +49,26 @@ showOrderBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 62,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GolfCartDetail(
-                      numberOfSeat: AppLocalizations.of(context)!.eightSseats,
-                      price: AppLocalizations.of(context)!.from3SAR,
-                      onTap: () {},
-                    ),
-                    GolfCartDetail(
-                      numberOfSeat: AppLocalizations.of(context)!.sixSeats,
-                      price: AppLocalizations.of(context)!.from5SAR,
-                      onTap: () {},
-                    ),
-                    GolfCartDetail(
-                      numberOfSeat: AppLocalizations.of(context)!.fourSeats,
-                      price: AppLocalizations.of(context)!.from3SAR,
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     GolfCartDetail(
+                //       numberOfSeat: AppLocalizations.of(context)!.eightSseats,
+                //       price: AppLocalizations.of(context)!.from3SAR,
+                //       onTap: () {},
+                //     ),
+                //     GolfCartDetail(
+                //       numberOfSeat: AppLocalizations.of(context)!.sixSeats,
+                //       price: AppLocalizations.of(context)!.from5SAR,
+                //       onTap: () {},
+                //     ),
+                //     GolfCartDetail(
+                //       numberOfSeat: AppLocalizations.of(context)!.fourSeats,
+                //       price: AppLocalizations.of(context)!.from3SAR,
+                //       onTap: () {},
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
@@ -74,11 +79,14 @@ showOrderBottomSheet({required BuildContext context}) {
                     isPadding: true,
                     title: AppLocalizations.of(context)!.pay,
                     onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => PaymentTypeScreen(),
-                          ),
-                          (Route route) => false);
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(
+                              builder: (context) => PaymentTypeScreen(
+                                  driverID: driverID,
+                                  currentLocation: currentLocation,
+                                  destination: destination,
+                                  cartID: cartID)))
+                          .then((value) => Navigator.pop(context));
                     },
                     buttonColor: const Color(0xff252C63),
                   ),

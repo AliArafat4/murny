@@ -2,11 +2,13 @@
 
 import 'dart:convert';
 
-import 'package:murny_final_project/models/user_model.dart';
+import 'package:murny_final_project/main.dart';
+import 'package:murny_final_project/models/auth_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
-  late final SharedPreferences _preferences;
+  late SharedPreferences _preferences;
+
   initializePref() async {
     _preferences = await SharedPreferences.getInstance();
   }
@@ -23,12 +25,12 @@ class SharedPref {
     await _preferences.setString("token", "");
   }
 
-  void setUser(UserModel user) async {
+  void setUser(AuthModel user) async {
     await _preferences.setString("user", jsonEncode(user));
   }
 
   String getUser() {
-    UserModel user = UserModel();
+    AuthModel user = AuthModel();
     return _preferences.getString("user") ?? jsonEncode(user);
   }
 
@@ -38,5 +40,21 @@ class SharedPref {
 
   void cleanSharedPref() {
     _preferences.clear();
+  }
+
+  getCurrentTheme() {
+    return prefs.getString("theme") ?? "light";
+  }
+
+  setTheme(String themeText) async {
+    prefs.setString("theme", themeText);
+  }
+
+  setLocale(String locale) async {
+    prefs.setString("locale", locale);
+  }
+
+  getCurrentLocale() {
+    return prefs.getString("locale") ?? "ar";
   }
 }

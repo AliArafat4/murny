@@ -13,6 +13,11 @@ class AuthOTPEvent extends AuthEvent {
   AuthOTPEvent({required this.email, required this.otp});
 }
 
+class AuthResendOTPEvent extends AuthEvent {
+  final String email;
+  AuthResendOTPEvent({required this.email});
+}
+
 class AuthRegisterUserEvent extends AuthEvent {
   final String phone, email, password, userName; //, confirmPassword;
 

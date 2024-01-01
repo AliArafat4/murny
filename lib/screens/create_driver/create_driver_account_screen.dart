@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
+import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
-import 'package:murny_final_project/screens/google_maps_screen.dart';
+import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
+import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
+import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:murny_final_project/widgets/city_dropdown_menu.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
@@ -13,18 +17,17 @@ import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CreateDriverAccountScreen extends StatefulWidget {
-  const CreateDriverAccountScreen({super.key});
+class CreateDriverAccountScreen extends StatelessWidget {
+  CreateDriverAccountScreen({super.key});
 
-  @override
-  State<CreateDriverAccountScreen> createState() => _CreateAccountState();
-}
-
-class _CreateAccountState extends State<CreateDriverAccountScreen> {
   String? selectedOption = "";
+
   TextEditingController conName = TextEditingController();
+
   TextEditingController conPhone = TextEditingController();
+
   TextEditingController conEmail = TextEditingController();
+
   TextEditingController conPass = TextEditingController();
 
   @override
@@ -32,7 +35,7 @@ class _CreateAccountState extends State<CreateDriverAccountScreen> {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
     return Scaffold(
-      backgroundColor: const Color(0xffFFFFFF),
+      // backgroundColor: const Color(0xffFFFFFF),
       body: Padding(
         padding: EdgeInsets.all(20.sp),
         child: SingleChildScrollView(
@@ -108,41 +111,45 @@ class _CreateAccountState extends State<CreateDriverAccountScreen> {
                   style: TextStyle(fontSize: 18),
                 ),
               ),
-              Row(
-                children: [
-                  Radio(
-                    value: "male",
-                    groupValue: selectedOption,
-                    onChanged: (value) {
-                      setState(
-                        () {
-                          selectedOption = value;
+              BlocBuilder<RadiobuttonCubit, RadiobuttonState>(
+                builder: (context, state) {
+                  return Row(
+                    children: [
+                      Radio(
+                        value: "male",
+                        groupValue: state is RadioButtonGenderSelectState
+                            ? state.selected
+                            : selectedOption,
+                        onChanged: (value) {
+                          context
+                              .read<RadiobuttonCubit>()
+                              .radiobuttonGender(selectedType: value!);
                         },
-                      );
-                    },
-                  ),
-                  const Icon(
-                    Icons.boy,
-                    size: 32,
-                  ),
-                  Radio(
-                    value: "female",
-                    groupValue: selectedOption,
-                    onChanged: (value) {
-                      setState(
-                        () {
-                          selectedOption = value;
+                      ),
+                      const Icon(
+                        Icons.boy,
+                        size: 32,
+                      ),
+                      Radio(
+                        value: "female",
+                        groupValue: state is RadioButtonGenderSelectState
+                            ? state.selected
+                            : selectedOption,
+                        onChanged: (value) {
+                          context
+                              .read<RadiobuttonCubit>()
+                              .radiobuttonGender(selectedType: value!);
                         },
-                      );
-                    },
-                  ),
-                  const Icon(
-                    Icons.girl,
-                    size: 32,
-                  ),
-                  const Spacer(),
-                  const CityDropDownMenu(),
-                ],
+                      ),
+                      const Icon(
+                        Icons.girl,
+                        size: 32,
+                      ),
+                      const Spacer(),
+                      const CityDropDownMenu(),
+                    ],
+                  );
+                },
               ),
               SizedBox(
                 height: 2.h,

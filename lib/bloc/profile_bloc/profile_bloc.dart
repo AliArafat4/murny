@@ -4,21 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/main.dart';
-import 'package:murny_final_project/models/user_model.dart';
+import 'package:murny_final_project/models/auth_model.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(ProfileInitial()) {
-    final UserModel currentUser =
-        UserModel.fromJson(jsonDecode(pref.getUser()));
+    final AuthModel currentUser = AuthModel.fromJson(jsonDecode(pref.getUser()));
 
     on<ProfileGetCurrentUserEvent>((event, emit) async {
-      final user = await MurnyApi().profile(
-          body: {},
-          token: currentUser.token ?? "",
-          function: Profile.getProfile);
+      final user = await MurnyApi()
+          .profile(body: {}, token: currentUser.token ?? "", function: Profile.getProfile);
       print("user info");
       print(user);
       emit(ProfileGetCurrentUserState(user: user));
