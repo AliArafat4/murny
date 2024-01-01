@@ -19,6 +19,8 @@ class PublicFunc {
           final uri = Uri.parse(url + endPoints.getCarts);
 
           final response = await http.get(uri);
+          print("carts response");
+          print(response.body);
 
           final List<CartModel> cartModelList = [];
           final decodedBody = jsonDecode(response.body);

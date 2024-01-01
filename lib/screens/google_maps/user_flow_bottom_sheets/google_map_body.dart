@@ -70,23 +70,28 @@ class GoogleMapBody extends StatelessWidget {
                   if (snapshot.hasData) {
                     List response = jsonDecode(snapshot.data!.body);
 
-                    print('${response.length} hhhhh');
-                    print(response.last);
-                    final OrderModel lastOrder =
-                        OrderModel.fromJson(response.last);
-                    orderState = lastOrder.orderState!.toUpperCase();
-                    return (lastOrder.orderState!.toUpperCase() == "CANCELED" ||
-                            lastOrder.orderState!.toUpperCase() == "DECLINED")
-                        ? const FilterSheet()
-                        : (lastOrder.orderState!.toUpperCase() ==
-                                "JUST CREATED")
-                            ? UserWaitingBottomSheet(
-                                order: lastOrder) //SHOW WAITING LOADING
-                            : (lastOrder.orderState!.toUpperCase() ==
-                                    "ACCEPTED")
-                                ? AcceptedOrderBottomSheet(
-                                    order: lastOrder) //SHOW DRIVER IS COMING
-                                : const SizedBox();
+                    if (response.isNotEmpty) {
+                      print(response.length);
+                      print(response.last);
+                      final OrderModel lastOrder =
+                          OrderModel.fromJson(response.last);
+                      orderState = lastOrder.orderState!.toUpperCase();
+                      return (lastOrder.orderState!.toUpperCase() ==
+                                  "CANCELED" ||
+                              lastOrder.orderState!.toUpperCase() == "DECLINED")
+                          ? const FilterSheet()
+                          : (lastOrder.orderState!.toUpperCase() ==
+                                  "JUST CREATED")
+                              ? UserWaitingBottomSheet(
+                                  order: lastOrder) //SHOW WAITING LOADING
+                              : (lastOrder.orderState!.toUpperCase() ==
+                                      "ACCEPTED")
+                                  ? AcceptedOrderBottomSheet(
+                                      order: lastOrder) //SHOW DRIVER IS COMING
+                                  : const SizedBox();
+                    } else {
+                      return const FilterSheet();
+                    }
                   } else {
                     return const LinearProgressIndicator();
                   }
@@ -98,7 +103,7 @@ class GoogleMapBody extends StatelessWidget {
                 ? context.getHeight(factor: 0.45)
                 : (orderState == "ACCEPTED")
                     ? context.getHeight(factor: 0.65)
-                    : context.getHeight(factor: 0.65),
+                    : context.getHeight(factor: 0.45),
           );
         },
         listener: (BuildContext context, MapState state) async {
