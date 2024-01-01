@@ -29,9 +29,12 @@ class ContentDrawer extends StatelessWidget {
         onTap: () => naviPush!(),
         child: Row(
           children: [
-            Image.asset(
+            SvgPicture.asset(
               imageSvg,
-              color: isSwitched ? Colors.white : Colors.black,
+              colorFilter: ColorFilter.mode(
+                  isSwitched ? Colors.white : Colors.black, BlendMode.srcIn),
+              //, Color(0xff000000),
+              // color: isSwitched ? Colors.white : Colors.black,
             ),
             SizedBox(
               width: 2.w,
