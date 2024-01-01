@@ -136,9 +136,9 @@ class CustomDrawer extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(right: 12.sp),
-            child: Row(
+            child: const Row(
               children: [
-                const Text(
+                Text(
                   '966548784080+',
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
                 )
@@ -223,13 +223,12 @@ class CustomDrawer extends StatelessWidget {
                 padding: currentLanguage == "ar"
                     ? EdgeInsets.only(right: 15.sp)
                     : EdgeInsets.only(left: 15.sp),
-                child: Text(
+                child: const Text(
                   "اللغة العربية",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w400, fontSize: 18),
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               BlocBuilder<LocaleBloc, LocaleState>(
                 builder: (context, state) {
                   if (state is LocaleUpdateState) {
@@ -239,15 +238,15 @@ class CustomDrawer extends StatelessWidget {
 
                   return Switch(
                     activeColor: Colors.white,
-                    activeTrackColor: Color(0xff252C63),
+                    activeTrackColor: const Color(0xff252C63),
                     inactiveThumbColor: Colors.white,
                     inactiveTrackColor: Colors.grey,
-                    value: currentLocle == Locale("ar"),
+                    value: currentLocle == const Locale("ar"),
                     onChanged: (value) {
                       value
-                          ? currentLocle = Locale("ar")
-                          : currentLocle = Locale("en");
-                      currentLocle == Locale("ar")
+                          ? currentLocle = const Locale("ar")
+                          : currentLocle = const Locale("en");
+                      currentLocle == const Locale("ar")
                           ? context
                               .read<LocaleBloc>()
                               .add(ChangeLocaleEvent("ar"))

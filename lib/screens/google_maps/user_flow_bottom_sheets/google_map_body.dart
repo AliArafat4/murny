@@ -57,10 +57,7 @@ class GoogleMapBody extends StatelessWidget {
                 context.read<MapBloc>().add(MapGetCurrentLocationEvent());
                 context.read<MapBloc>().add(MapGetDriversMarkerEvent());
               },
-              onLongPress: (location) async {
-                // TODO: SIGN OUT
-                // MurnyApi().signOut(context: context);
-              },
+              onLongPress: (location) async {},
             ),
 
             //Check last order state
