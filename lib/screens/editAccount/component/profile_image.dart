@@ -8,6 +8,7 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<ImageBloc>();
+    bloc.add(GetImageEvent());
     // bloc.state is! ImageSuccess ? bloc.add(GetImageEvent()) : SizedBox();
     if (bloc.state is ImageSuccess) {
       bloc.add(GetImageEvent());
@@ -58,7 +59,7 @@ class ProfileImage extends StatelessWidget {
         );
       },
       listener: (BuildContext context, ImageBlocState state) {
-        state is ImageSuccess
+        state is! ImageSuccess
             ? SizedBox()
             : context.read<ImageBloc>().add(GetImageEvent());
       },
