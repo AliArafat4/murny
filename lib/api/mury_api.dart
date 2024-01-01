@@ -90,7 +90,7 @@ class MurnyApi {
   public({
     required Public function,
   }) {
-    final url = this.url + endPoints.profileRoute;
+    final url = this.url + endPoints.publicRoute;
     return PublicFunc().publicFunctionsSelector(
       function: function,
       url: url,
