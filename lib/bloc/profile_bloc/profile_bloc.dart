@@ -29,10 +29,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     });
 
     on<UpdateUserProfileEvent>((event, emit) async {
-      await MurnyApi().profile(body: {
-        "": event.fullName
-        //TODO: GET BODY
-      }, function: Profile.updateUserProfile, token: currentUser.token ?? "");
+      await MurnyApi().profile(
+          body: {"": event.fullName, "": event.userName, "": event.phone},
+          function: Profile.updateUserProfile,
+          token: currentUser.token ?? "");
+      emit(SuccessUpdateUserProfileState());
     });
 ////
     on<UpdateDriverProfileEvent>((event, emit) async {

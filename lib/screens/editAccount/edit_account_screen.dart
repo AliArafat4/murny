@@ -71,15 +71,19 @@ class EditAccount extends StatelessWidget {
                 SizedBox(
                   height: 1.h,
                 ),
+
                 const Text(
                   '',
+
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
                   height: 0.5.h,
                 ),
+
                 const Text(
                   '',
+
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
@@ -215,7 +219,6 @@ class EditAccount extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      //take data from textfield and update to supabase
                       context.read<ProfileBloc>().add(UpdateUserProfileEvent(
                             fullName: conFullName.text,
                             userName: conUserName.text,

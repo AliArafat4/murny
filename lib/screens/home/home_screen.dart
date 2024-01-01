@@ -10,6 +10,7 @@ import 'package:murny_final_project/bloc/locale_bloc/locale_state.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/theme_bloc/them_bloc.dart';
 import 'package:murny_final_project/bloc/theme_bloc/them_event.dart';
+import 'package:murny_final_project/data/data.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/screens/balance/balance_home.dart';
@@ -260,8 +261,29 @@ class CustomDrawer extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(top: 60.sp, left: 61.sp),
-            child: const Icon(Icons.light_mode_outlined),
+            padding: currentLanguage == 'ar'
+                ? EdgeInsets.only(top: 53.sp, left: 67.sp)
+                : EdgeInsets.only(top: 77.sp, right: 66.sp),
+            child: InkWell(
+              onTap: () {
+                isSwitched
+                    ? context
+                        .read<ThemeBloc>()
+                        .add(ChangeThemeEvent(themeText: "light"))
+                    : context
+                        .read<ThemeBloc>()
+                        .add(ChangeThemeEvent(themeText: "dark"));
+              },
+              child: isSwitched
+                  ? const Icon(
+                      Icons.light_mode_outlined,
+                      color: Colors.white,
+                    )
+                  : const Icon(
+                      Icons.dark_mode_outlined,
+                      color: Colors.black,
+                    ),
+            ),
           )
         ],
       ),
