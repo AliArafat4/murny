@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/order_state_bloc/order_state_cubit.dart';
+import 'package:murny_final_project/bloc/order_state_bloc/order_state_cubit.dart';
 
 import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/order_state_stream.dart';
@@ -28,12 +31,13 @@ class GoogleMapScreen extends StatelessWidget {
                   children: [
                     GoogleMapBody(),
                     GoogleMapSearchBar(scaffoldKey: scaffoldKey),
+                    OrderStateStream(user: user),
                   ],
                 )
               : const CircularProgressIndicator() // TODO: DRIVER FLOW,
           ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: OrderStateStream(user: user),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton:
     );
   }
 }

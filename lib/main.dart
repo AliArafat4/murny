@@ -8,6 +8,7 @@ import 'package:murny_final_project/bloc/check_box_bloc/cubit/checkbox_cubit.dar
 import 'package:murny_final_project/bloc/checkfillOTP_bloc/cubit/checkfill_otp_cubit.dart';
 import 'package:murny_final_project/bloc/dropdownlist_bloc/cubit/dropdownlist_cubit.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
+import 'package:murny_final_project/bloc/get_by_id_bloc/get_by_id_cubit.dart';
 import 'package:murny_final_project/bloc/image_bloc/image_bloc_bloc.dart';
 import 'package:murny_final_project/bloc/locale_bloc/locale_bloc.dart';
 import 'package:murny_final_project/bloc/locale_bloc/locale_state.dart';
@@ -62,6 +63,7 @@ class MainApp extends StatelessWidget {
 
             BlocProvider<OrderStateCubit>(
                 create: (context) => OrderStateCubit()),
+            BlocProvider<GetByIdCubit>(create: (context) => GetByIdCubit()),
 
             BlocProvider<ProfileBloc>(
                 create: (context) =>

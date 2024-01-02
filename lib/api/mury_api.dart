@@ -77,9 +77,9 @@ class MurnyApi {
     required Map<String, dynamic> body,
     required Driver function,
     required String token,
-  }) {
+  }) async {
     final url = this.url + endPoints.driverRoute;
-    DriverFunc().driverFunctionsSelector(
+    return await DriverFunc().driverFunctionsSelector(
         function: function,
         url: url,
         endPoints: endPoints,

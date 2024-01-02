@@ -22,21 +22,22 @@ class OrderStateStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double panelHeight = context.getHeight(factor: 0.65);
+    double panelHeight = context.getHeight(factor: 0.45);
 
     Stream<http.Response> getOrders() async* {
-      final uri =
-          Uri.parse("https://murny-api.onrender.com/common/get_user_order");
+      final uri = Uri.parse(
+          "https://murny-api.onrender.com/common/get_last_user_order");
 
-      yield* Stream.periodic(const Duration(seconds: 5), (_) async {
+      yield* Stream.periodic(const Duration(seconds: 3), (_) async {
         final res = http.get(uri, headers: {"token": user.token ?? ""});
         final body = await res;
-        final order = jsonDecode(body.body).first['order_state'];
-
+        final order = OrderModel.fromJson(jsonDecode(body.body));
+        print(order.runtimeType);
+        print(body.body);
         if (context.mounted) {
           context
               .read<OrderStateCubit>()
-              .checkOrderState(orderState: order.toUpperCase());
+              .checkOrderState(orderState: order.orderState!.toUpperCase());
         }
 
         return res;
@@ -44,17 +45,19 @@ class OrderStateStream extends StatelessWidget {
     }
 
     return BlocConsumer<OrderStateCubit, OrderStateState>(
+      buildWhen: (previous, current) =>
+          current != previous || current is OrderStateInitial,
       builder: (context, state) {
         return SlidingUpPanel(
           panel: StreamBuilder(
               stream: getOrders(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  List response = jsonDecode(snapshot.data!.body);
+                  Map<String, dynamic> response =
+                      jsonDecode(snapshot.data!.body);
 
                   if (response.isNotEmpty) {
-                    final OrderModel lastOrder =
-                        OrderModel.fromJson(response.last);
+                    final OrderModel lastOrder = OrderModel.fromJson(response);
 
                     return state is OrderFilterState
                         ? const FilterSheet()
@@ -73,7 +76,7 @@ class OrderStateStream extends StatelessWidget {
                     return const FilterSheet();
                   }
                 } else {
-                  return const LinearProgressIndicator();
+                  return const FilterSheet();
                 }
               }),
           maxHeight: panelHeight,
@@ -85,6 +88,9 @@ class OrderStateStream extends StatelessWidget {
             : state is OrderWaitingState
                 ? panelHeight = context.getHeight(factor: 0.45)
                 : panelHeight = context.getHeight(factor: 0.65);
+        if (state is OrderStateInitial) {
+          panelHeight = context.getHeight(factor: 0.45);
+        }
       },
     );
   }

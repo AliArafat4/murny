@@ -29,6 +29,7 @@ abstract mixin class CommonApiEndPoints {
   final getUserOrder = "/get_user_order";
   final getDriverOrder = "/get_driver_order";
   final getDrivers = "/get_drivers";
+  final getLastUserOrder = "/get_last_user_order";
 }
 
 abstract mixin class ChatApiEndPoints {
