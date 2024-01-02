@@ -12,7 +12,7 @@ enum Chat { getMessages, sendMessages }
 
 enum Common { getDriverOrder, getUserOrder, getDrivers, filterDrivers }
 
-enum Driver { responseToOrder, getRating }
+enum Driver { responseToOrder, getRating, getDriverByID }
 
 enum Profile {
   updateUserProfile,
@@ -23,6 +23,6 @@ enum Profile {
   deleteUserAccount
 }
 
-enum Public { getCarts }
+enum Public { getCarts, getCartByID }
 
-enum User { postRating, postUserOrder }
+enum User { postRating, postUserOrder, getUserByID, cancelOrder }

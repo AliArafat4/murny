@@ -89,12 +89,14 @@ class MurnyApi {
 
   public({
     required Public function,
+    required Map<String, dynamic> body,
   }) {
     final url = this.url + endPoints.publicRoute;
     return PublicFunc().publicFunctionsSelector(
       function: function,
       url: url,
       endPoints: endPoints,
+      body: body,
     );
   }
 

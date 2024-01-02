@@ -11,7 +11,7 @@ class PublicCubit extends Cubit<PublicState> {
 
   getAllCartsCubit() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    final carts = await MurnyApi().public(function: Public.getCarts);
+    final carts = await MurnyApi().public(function: Public.getCarts, body: {});
 
     emit(PublicGetCartsState(cartModel: carts));
   }

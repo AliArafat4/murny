@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:murny_final_project/api/end_points/enums.dart';
+import 'package:murny_final_project/api/mury_api.dart';
+import 'package:murny_final_project/models/auth_model.dart';
+import 'package:murny_final_project/models/cart_model.dart';
 
 import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/models/order_model.dart';
@@ -11,17 +15,45 @@ import 'package:murny_final_project/widgets/payment_method.dart';
 import 'package:murny_final_project/widgets/trip_detil.dart';
 
 class AcceptedOrderBottomSheet extends StatelessWidget {
-  const AcceptedOrderBottomSheet({Key? key, required this.order})
+  const AcceptedOrderBottomSheet(
+      {Key? key, required this.order, required this.user})
       : super(key: key);
 
   final OrderModel order;
+  final AuthModel user;
 
   //TODO: GET DRIVER BY ID FROM API // NOT IMPLEMENTED IN API //
   //TODO: GET CART BY ID // NOT IMPLEMENTED IN API //
+
   @override
   Widget build(BuildContext context) {
+    CartModel cart = CartModel();
+    DriverModel driver = DriverModel();
+
+    getCartByID({required String cartID}) async {
+      cart = await MurnyApi()
+          .public(body: {"cart_id": cartID}, function: Public.getCartByID);
+
+      print("cart");
+      print(cart.name);
+    }
+
+    getDriverByID({required String driverID}) async {
+      driver = await MurnyApi().driver(
+          body: {"driver_id": driverID},
+          function: Driver.getDriverByID,
+          token: user.token ?? "");
+
+      print("driver");
+      print(driver.name);
+    }
+
+    // getCartByID(cartID: lastOrder.cartId.toString());
+    // getDriverByID(driverID: lastOrder.driverId.toString());
+
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
+
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.7,

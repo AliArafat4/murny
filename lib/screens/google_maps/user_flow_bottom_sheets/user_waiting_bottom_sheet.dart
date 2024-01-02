@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
+import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
+import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/models/order_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:murny_final_project/models/profile_model.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/cart_detil.dart';
 import 'package:murny_final_project/widgets/payment_method.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 
 class UserWaitingBottomSheet extends StatelessWidget {
-  const UserWaitingBottomSheet({Key? key, required this.order})
+  const UserWaitingBottomSheet(
+      {Key? key, required this.order, required this.user})
       : super(key: key);
   final OrderModel order;
+  final AuthModel user;
   @override
   Widget build(BuildContext context) {
     final Locale myLocale = Localizations.localeOf(context);
@@ -74,20 +80,20 @@ class UserWaitingBottomSheet extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height / 120,
             ),
-            CartDetil(
-              numberOfCartSeat: order.cartId.toString(),
-            ),
-            const Divider(
-              color: Color(0xffF4F4F4),
-            ),
-            PaymentMethod(paymentMethod: order.paymentMethod ?? ""),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 120,
-            ),
-            const Divider(
-              thickness: 8,
-              color: Color(0xffF4F4F4),
-            ),
+            // CartDetil(
+            //   numberOfCartSeat: order.cartId.toString(),
+            // ),
+            // const Divider(
+            //   color: Color(0xffF4F4F4),
+            // ),
+            // PaymentMethod(paymentMethod: order.paymentMethod ?? ""),
+            // SizedBox(
+            //   height: MediaQuery.of(context).size.height / 120,
+            // ),
+            // const Divider(
+            //   thickness: 8,
+            //   color: Color(0xffF4F4F4),
+            // ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 82,
             ),
@@ -101,9 +107,21 @@ class UserWaitingBottomSheet extends StatelessWidget {
                 showConfirmDiolg(
                     context: context,
                     title: AppLocalizations.of(context)!.cancelOrderConfirm,
-                    acceptFun: () {
+                    acceptFun: () async {
                       //TODO: MAKE ABLE TO CANCEL
-                      Navigator.pop(context);
+
+                      await MurnyApi().user(body: {
+                        "order_from_id": order.orderFromId,
+                        "id": order.id,
+                        "order_state": "canceled",
+                        "driver_id": order.driverId,
+                      }, function: User.cancelOrder, token: user.token ?? "");
+
+                      if (context.mounted) {
+                        showSuccessSnackBar(
+                            context, "Order Canceled Successfully");
+                        Navigator.pop(context);
+                      }
                       // showOrderBottomSheet(context: context);
                     });
               },

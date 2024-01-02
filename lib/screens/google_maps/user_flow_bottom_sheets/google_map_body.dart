@@ -1,23 +1,14 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
-import 'package:murny_final_project/extentions/size_extention.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/models/auth_model.dart';
-import 'package:murny_final_project/models/order_model.dart';
-import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/accepted_order_bottom_sheet.dart';
-import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/filter_bottom_sheet.dart';
-import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/user_waiting_bottom_sheet.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:http/http.dart' as http;
 
 class GoogleMapBody extends StatelessWidget {
-  GoogleMapBody({Key? key, required this.user}) : super(key: key);
+  GoogleMapBody({Key? key}) : super(key: key);
 
-  final AuthModel user;
   final List<Marker> driversMarker = [];
   String locationName = "";
   String destination = "";
@@ -26,82 +17,33 @@ class GoogleMapBody extends StatelessWidget {
       const CameraPosition(target: LatLng(0, 0), zoom: 10);
   Map<PolylineId, Polyline> distance = {};
   String orderState = "";
+
   @override
   Widget build(BuildContext context) {
     GoogleMapController? googleMapController;
-    Stream<http.Response> getOrders() async* {
-      final uri =
-          Uri.parse("https://murny-api.onrender.com/common/get_user_order");
-
-      yield* Stream.periodic(const Duration(seconds: 5), (_) {
-        return http.get(uri, headers: {"token": user.token ?? ""});
-      }).asyncMap((event) async => await event);
-    }
 
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: double.infinity,
       child: BlocConsumer<MapBloc, MapState>(
         builder: (context, state) {
-          return SlidingUpPanel(
-            body: GoogleMap(
-              compassEnabled: true,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              mapType: MapType.normal, // MapType.satellite,
-              polylines: Set<Polyline>.of(distance.values),
-              markers: Set.from(driversMarker),
-              initialCameraPosition: initialCameraPosition,
-              onMapCreated: (GoogleMapController controller) {
-                googleMapController = controller;
-                context.read<MapBloc>().add(MapGetCurrentLocationEvent());
-                context.read<MapBloc>().add(MapGetDriversMarkerEvent());
-              },
-              onLongPress: (location) async {},
-            ),
-
-            //Check last order state
-            panel: StreamBuilder(
-                stream: getOrders(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List response = jsonDecode(snapshot.data!.body);
-
-                    if (response.isNotEmpty) {
-                      print(response.length);
-                      print(response.last);
-                      final OrderModel lastOrder =
-                          OrderModel.fromJson(response.last);
-                      orderState = lastOrder.orderState!.toUpperCase();
-                      return (lastOrder.orderState!.toUpperCase() ==
-                                  "CANCELED" ||
-                              lastOrder.orderState!.toUpperCase() == "DECLINED")
-                          ? const FilterSheet()
-                          : (lastOrder.orderState!.toUpperCase() ==
-                                  "JUST CREATED")
-                              ? UserWaitingBottomSheet(
-                                  order: lastOrder) //SHOW WAITING LOADING
-                              : (lastOrder.orderState!.toUpperCase() ==
-                                      "ACCEPTED")
-                                  ? AcceptedOrderBottomSheet(
-                                      order: lastOrder) //SHOW DRIVER IS COMING
-                                  : const SizedBox();
-                    } else {
-                      return const FilterSheet();
-                    }
-                  } else {
-                    return const LinearProgressIndicator();
-                  }
-                }),
-
-            maxHeight: (orderState == "CANCELED" ||
-                    orderState == "DECLINED" ||
-                    orderState == "JUST CREATED")
-                ? context.getHeight(factor: 0.45)
-                : (orderState == "ACCEPTED")
-                    ? context.getHeight(factor: 0.65)
-                    : context.getHeight(factor: 0.45),
+          return GoogleMap(
+            compassEnabled: true,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            mapType: MapType.normal, // MapType.satellite,
+            polylines: Set<Polyline>.of(distance.values),
+            markers: Set.from(driversMarker),
+            initialCameraPosition: initialCameraPosition,
+            onMapCreated: (GoogleMapController controller) {
+              googleMapController = controller;
+              context.read<MapBloc>().add(MapGetCurrentLocationEvent());
+              context.read<MapBloc>().add(MapGetDriversMarkerEvent());
+            },
+            onLongPress: (location) async {},
           );
+
+          //Check last order state
         },
         listener: (BuildContext context, MapState state) async {
           //GO TO USER LOCATION

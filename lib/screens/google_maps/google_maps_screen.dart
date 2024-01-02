@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:murny_final_project/main.dart';
+import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/order_state_stream.dart';
 
 import 'package:murny_final_project/screens/home/home_screen.dart';
 
@@ -25,12 +26,14 @@ class GoogleMapScreen extends StatelessWidget {
           child: user.userType == "user"
               ? Stack(
                   children: [
-                    GoogleMapBody(user: user),
+                    GoogleMapBody(),
                     GoogleMapSearchBar(scaffoldKey: scaffoldKey),
                   ],
                 )
               : const CircularProgressIndicator() // TODO: DRIVER FLOW,
           ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: OrderStateStream(user: user),
     );
   }
 }
