@@ -6,5 +6,7 @@ part 'checkbox_state.dart';
 class CheckboxCubit extends Cubit<CheckboxState> {
   CheckboxCubit() : super(CheckboxInitial());
 
-  checkboxSignUp({required bool select}) {}
+  checkboxSignUp({required bool select}) {
+    emit(CheckboxSignupSelectState(selected: select));
+  }
 }

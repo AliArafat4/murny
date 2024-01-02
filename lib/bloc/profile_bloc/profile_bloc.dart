@@ -22,10 +22,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           function: Profile.getProfile);
       print("user info");
       print(user);
-      if (user != null) {
-        final ProfileModel profileModel = ProfileModel.fromJson(user);
-        emit(ProfileGetCurrentUserState(user: profileModel));
-      } else {}
+
+      final ProfileModel profileModel = ProfileModel.fromJson(user);
+      emit(ProfileGetCurrentUserState(user: profileModel));
     });
 
     on<UpdateUserProfileEvent>((event, emit) async {
