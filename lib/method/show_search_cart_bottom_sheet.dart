@@ -77,9 +77,9 @@ showSearchCartBottomSheet({required BuildContext context}) {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 120,
               ),
-              CartDetil(
-                numberOfCartSeat: "عربة جولف 4 مقاعد",
-              ),
+              // CartDetail(
+              //   numberOfCartSeat: "عربة جولف 4 مقاعد",
+              // ),
               const Divider(
                 color: Color(0xffF4F4F4),
               ),

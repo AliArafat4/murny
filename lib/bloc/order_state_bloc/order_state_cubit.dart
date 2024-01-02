@@ -7,8 +7,6 @@ class OrderStateCubit extends Cubit<OrderStateState> {
   OrderStateCubit() : super(OrderStateInitial());
 
   checkOrderState({required String orderState}) {
-    print("orderState");
-    print(orderState);
     if (orderState.toUpperCase() == "CANCELED" ||
         orderState.toUpperCase() == "DECLINED") {
       emit(OrderFilterState());

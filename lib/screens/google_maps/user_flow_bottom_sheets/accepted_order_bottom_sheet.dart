@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
+import 'package:murny_final_project/bloc/get_by_id_bloc/get_by_id_cubit.dart';
 import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/models/cart_model.dart';
 
@@ -27,32 +29,19 @@ class AcceptedOrderBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CartModel cart = CartModel();
-    DriverModel driver = DriverModel();
-
-    getCartByID({required String cartID}) async {
-      cart = await MurnyApi()
-          .public(body: {"cart_id": cartID}, function: Public.getCartByID);
-
-      print("cart");
-      print(cart.name);
-    }
-
-    getDriverByID({required String driverID}) async {
-      driver = await MurnyApi().driver(
-          body: {"driver_id": driverID},
-          function: Driver.getDriverByID,
-          token: user.token ?? "");
-
-      print("driver");
-      print(driver.name);
-    }
-
     // getCartByID(cartID: lastOrder.cartId.toString());
     // getDriverByID(driverID: lastOrder.driverId.toString());
 
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
+
+    final bloc = context.read<GetByIdCubit>();
+
+    bloc.getCartByID(cartID: order.cartId.toString());
+    bloc.getDriverByID(driverID: order.driverId!, token: user.token!);
+
+    CartModel cart = CartModel();
+    DriverModel driver = DriverModel();
 
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -94,12 +83,16 @@ class AcceptedOrderBottomSheet extends StatelessWidget {
             ),
             Row(
               children: [
-                DriverInfo(driver: DriverModel()
-                    // MurnyApi().common(
-                    //     body: {},
-                    //     function: Common.getDrivers,
-                    //     token: order.driverId),
-                    ),
+                BlocBuilder<GetByIdCubit, GetByIdState>(
+                  buildWhen: (previous, current) =>
+                      current is GetDriverByIdSuccessState,
+                  builder: (context, state) {
+                    return DriverInfo(
+                        driver: state is GetDriverByIdSuccessState
+                            ? state.getDriverByID
+                            : DriverModel());
+                  },
+                ),
               ],
             ),
             SizedBox(
@@ -120,8 +113,16 @@ class AcceptedOrderBottomSheet extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height / 140,
             ),
-            CartDetil(
-              numberOfCartSeat: order.cartId.toString(),
+            BlocBuilder<GetByIdCubit, GetByIdState>(
+              buildWhen: (previous, current) =>
+                  current is GetCartByIdSuccessState,
+              builder: (context, state) {
+                return CartDetail(
+                  cart: state is GetCartByIdSuccessState
+                      ? state.getCartByID
+                      : CartModel(),
+                );
+              },
             ),
             const Divider(color: Color(0xffF4F4F4)),
             PaymentMethod(paymentMethod: order.paymentMethod ?? ""),
