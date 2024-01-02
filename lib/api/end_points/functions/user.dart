@@ -3,6 +3,7 @@ import 'package:murny_final_project/api/end_points/end_points.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:murny_final_project/models/order_model.dart';
+import 'package:murny_final_project/models/profile_model.dart';
 
 import '../../../models/cart_model.dart';
 import '../enums.dart';
@@ -29,6 +30,27 @@ class UserFunc {
       case User.postUserOrder:
         try {
           final uri = Uri.parse(url + endPoints.postUserOrder);
+
+          final res = await http
+              .post(uri, body: jsonEncode(body), headers: {"token": token});
+          print(res.body);
+        } catch (err) {
+          print(err);
+        }
+      case User.getUserByID:
+        try {
+          final uri = Uri.parse(url + endPoints.getUserByID);
+
+          final res = await http
+              .post(uri, body: jsonEncode(body), headers: {"token": token});
+          print(res.body);
+          return ProfileModel.fromJson(jsonDecode(res.body));
+        } catch (err) {
+          print(err);
+        }
+      case User.cancelOrder:
+        try {
+          final uri = Uri.parse(url + endPoints.cancelOrder);
 
           final res = await http
               .post(uri, body: jsonEncode(body), headers: {"token": token});
