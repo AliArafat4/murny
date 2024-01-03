@@ -9,16 +9,20 @@ class TextFieldWidget extends StatelessWidget {
     this.scure = false,
     this.visiblePhone = false,
     required this.controller,
+    required this.isEditAccount,
   });
   final String? text;
   final TextInputType typeKeyboard;
   final bool scure;
   final bool visiblePhone;
   final TextEditingController controller;
+  final bool isEditAccount;
   @override
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
+
+    isEditAccount ? controller.text = text! : null;
     return TextField(
       obscureText: scure ? true : false,
       keyboardType: typeKeyboard,
