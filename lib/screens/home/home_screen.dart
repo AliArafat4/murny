@@ -13,6 +13,17 @@ import 'package:murny_final_project/bloc/theme_bloc/them_event.dart';
 import 'package:murny_final_project/data/data.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/main.dart';
+import 'package:murny_final_project/method/show_accept_order_bottom_sheet.dart';
+import 'package:murny_final_project/method/show_confirm_dilog.dart';
+import 'package:murny_final_project/method/show_dialog_success_add_balanc.dart';
+import 'package:murny_final_project/method/show_dialog_survy.dart';
+import 'package:murny_final_project/method/show_loading.dart';
+import 'package:murny_final_project/method/show_main_bottom_sheet.dart';
+import 'package:murny_final_project/method/show_new_order_bottom_sheet.dart';
+import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
+import 'package:murny_final_project/method/show_search_cart_bottom_sheet.dart';
+import 'package:murny_final_project/method/show_success_trip_bottom_sheet.dart';
+import 'package:murny_final_project/method/show_wating_trip_bottom_sheet.dart';
 import 'package:murny_final_project/screens/balance/balance_home.dart';
 import 'package:murny_final_project/screens/contactWithUs/contact_with_us_screen.dart';
 import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
@@ -151,10 +162,13 @@ class CustomDrawer extends StatelessWidget {
             imageSvg: 'assets/images/imageEditAccount.svg',
             spaceTop: 0.sp,
             naviPush: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EditAccount()),
-              );
+              /*  Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => EditAccount()),
+                      );*/
+
+              //MurnyApi().signOut(context: context);
+              showMainBottomSheet(context: context);
             },
           ),
           ContentDrawer(

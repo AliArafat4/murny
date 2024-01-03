@@ -7,6 +7,7 @@ import 'package:murny_final_project/widgets/user_info.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showNewOrderBottomSheet({required BuildContext context}) {
+  
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -32,7 +33,9 @@ showNewOrderBottomSheet({required BuildContext context}) {
                 Text(
                   AppLocalizations.of(context)!.newOrder,
                   style: TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.w400, color: Color(0xff252C63)),
+                      fontSize: 24,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff252C63)),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width / 20,

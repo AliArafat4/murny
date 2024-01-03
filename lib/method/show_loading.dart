@@ -13,7 +13,7 @@ showLoadingDialog({required BuildContext context}) {
         height: 50,
         child: Center(
           child: CircularProgressIndicator(
-            color: Color(0xff62c1c7),
+            color: Color(0xff252C63),
           ),
         ),
       ),

@@ -20,6 +20,7 @@ import 'package:murny_final_project/bloc/theme_bloc/them_.state.dart';
 import 'package:murny_final_project/bloc/theme_bloc/them_bloc.dart';
 import 'package:murny_final_project/bloc/select_cart_bloc/select_cart_cubit.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
+import 'package:murny_final_project/bloc/upload_licen_bloc/upload_licen_bloc_bloc.dart';
 import 'package:murny_final_project/bloc/user_bloc/user_cubit.dart';
 import 'package:murny_final_project/l10n/10n.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
@@ -87,6 +88,7 @@ class MainApp extends StatelessWidget {
 
             BlocProvider(create: (context) => ImageBloc()),
             BlocProvider(create: (context) => LocaleBloc()),
+            BlocProvider(create: (context) => UploadLicenBloc()),
           ],
           child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
             if (state is GetThemeState) {
