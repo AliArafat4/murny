@@ -47,6 +47,35 @@ class CommonFunc {
 
           return false;
         }
+      case Common.getLastUserOrder:
+        try {
+          final uri = Uri.parse(url + endPoints.getLastUserOrder);
+
+          final response = await http.get(uri, headers: {"token": token});
+
+          final decodedBody = jsonDecode(response.body);
+          print("last order");
+          print("decodedBody");
+          return decodedBody;
+
+          print("HERE HERE");
+
+          // Stream<http.Response> getRandomNumberFact(uri) async* {
+          //   yield* Stream.periodic(Duration(seconds: 5), (_) {
+          //     return http.get(uri);
+          //   }).asyncMap((event) async => await event);
+          // }
+          print("HERE HERE");
+          // print(x);
+          break;
+        } on FormatException catch (err) {
+          print(err);
+          return false;
+        } catch (err) {
+          print(err);
+
+          return false;
+        }
       case Common.getDriverOrder:
         try {
           final uri = Uri.parse(url + endPoints.getDriverOrder);

@@ -13,8 +13,8 @@ class GoogleMapSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 30.sp,
-      right: 10.sp,
+      top: 35.sp,
+      right: 15.sp,
       child: TextFieldSearch(
         fun: () => _scaffoldKey.currentState!.openDrawer(),
       ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
+import 'package:murny_final_project/models/cart_model.dart';
 
-class CartDetil extends StatelessWidget {
-  CartDetil({super.key, required this.numberOfCartSeat});
-  final String numberOfCartSeat;
+class CartDetail extends StatelessWidget {
+  CartDetail({super.key, required this.cart});
+  final CartModel cart;
   bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
   @override
@@ -27,7 +28,7 @@ class CartDetil extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width / 22,
           ),
-          Text(numberOfCartSeat)
+          Text("${cart.name}, ${cart.price} SAR")
         ],
       ),
     );

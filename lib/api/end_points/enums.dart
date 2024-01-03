@@ -10,7 +10,13 @@ enum Auth {
 
 enum Chat { getMessages, sendMessages }
 
-enum Common { getDriverOrder, getUserOrder, getDrivers, filterDrivers }
+enum Common {
+  getDriverOrder,
+  getUserOrder,
+  getDrivers,
+  filterDrivers,
+  getLastUserOrder
+}
 
 enum Driver { responseToOrder, getRating, getDriverByID }
 

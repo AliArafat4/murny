@@ -52,7 +52,7 @@ showWaitingTripBottomSheet({required BuildContext context}) {
                 ),
                 PrimaryButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
                   },
                   title: AppLocalizations.of(context)!.startTrip,
                   buttonColor: Color(0xff252C63),
