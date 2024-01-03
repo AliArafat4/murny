@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/profile_bloc/profile_bloc.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
+import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/screens/editAccount/component/delete_logout_account.dart';
@@ -26,6 +27,7 @@ class EditAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
+    context.read<ProfileBloc>().add(ProfileGetCurrentUserEvent());
     print("----------here");
     return GestureDetector(
         onTap: () {
@@ -242,6 +244,8 @@ class EditAccount extends StatelessWidget {
                                       userName: conUserName.text,
                                       phone: conPhoneNumber.text,
                                     ));
+                                showSuccessSnackBar(
+                                    context, "Profile Updated Successfully");
                               },
                               child: Text(
                                 AppLocalizations.of(context)!.save,
@@ -254,7 +258,9 @@ class EditAccount extends StatelessWidget {
                       ),
                     ));
                   }
-                  return Container();
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 })));
   }
 }
