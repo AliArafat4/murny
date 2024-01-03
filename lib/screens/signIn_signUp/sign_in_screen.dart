@@ -64,6 +64,7 @@ class SignInScreen extends StatelessWidget {
                     scure: false,
                     visiblePhone: false,
                     controller: conEmail,
+                    isEditAccount: false,
                   ),
                   SizedBox(
                     height: 2.h,
@@ -74,6 +75,7 @@ class SignInScreen extends StatelessWidget {
                     scure: true,
                     visiblePhone: false,
                     controller: conPass,
+                    isEditAccount: false,
                   ),
 
                   // ),

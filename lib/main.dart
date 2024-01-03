@@ -113,7 +113,9 @@ class MainApp extends StatelessWidget {
                       ],
                       supportedLocales: L10n.all,
                       debugShowCheckedModeBanner: false,
+
                       home: const SplashScreen());
+
                 },
               );
             } else {

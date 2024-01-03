@@ -66,6 +66,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 scure: false,
                 visiblePhone: false,
                 controller: conName,
+                isEditAccount: false,
               ),
               SizedBox(
                 height: 1.h,
@@ -76,6 +77,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 scure: false,
                 visiblePhone: true,
                 controller: conPhone,
+                isEditAccount: false,
               ),
               SizedBox(
                 height: 1.h,
@@ -86,6 +88,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 scure: false,
                 visiblePhone: false,
                 controller: conEmail,
+                isEditAccount: false,
               ),
               SizedBox(
                 height: 1.h,
@@ -96,6 +99,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 scure: true,
                 visiblePhone: false,
                 controller: conPass,
+                isEditAccount: false,
               ),
               SizedBox(
                 height: 2.h,

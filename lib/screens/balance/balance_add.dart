@@ -43,6 +43,7 @@ class BalanceAddScreen extends StatelessWidget {
               scure: false,
               visiblePhone: false,
               controller: balanceController,
+              isEditAccount: false,
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.4),
