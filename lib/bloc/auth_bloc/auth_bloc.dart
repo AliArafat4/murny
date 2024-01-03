@@ -20,13 +20,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event.email.trim().isEmpty) {
         emit(AuthUserRegisterErrorState(errorMsg: "Please Enter Your Email"));
       } else if (!event.email.trim().isValidEmail()) {
-        emit(AuthUserRegisterErrorState(errorMsg: "Please Enter a Valid Email"));
+        emit(
+            AuthUserRegisterErrorState(errorMsg: "Please Enter a Valid Email"));
       } else if (event.password.isEmpty) {
-        emit(AuthUserRegisterErrorState(errorMsg: "Please Enter Your Password"));
+        emit(
+            AuthUserRegisterErrorState(errorMsg: "Please Enter Your Password"));
       } else if (event.password.trim().length < 6) {
-        emit(AuthUserRegisterErrorState(errorMsg: "Password Must be Greater Than 6 characters"));
+        emit(AuthUserRegisterErrorState(
+            errorMsg: "Password Must be Greater Than 6 characters"));
       } else if (event.phone.isEmpty) {
-        emit(AuthUserRegisterErrorState(errorMsg: "Please Enter Your Phone Number"));
+        emit(AuthUserRegisterErrorState(
+            errorMsg: "Please Enter Your Phone Number"));
       } else {
         final response = await MurnyApi().signIn(body: {
           "email": event.email,
@@ -39,7 +43,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthRegisterSuccessState());
         } else {
           emit(AuthUserRegisterErrorState(
-              errorMsg: "A user with this email address has already been registered"));
+              errorMsg:
+                  "A user with this email address has already been registered"));
         }
       }
     });
@@ -49,13 +54,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event.email.trim().isEmpty) {
         emit(AuthDriverRegisterErrorState(errorMsg: "Please Enter Your Email"));
       } else if (!event.email.trim().isValidEmail()) {
-        emit(AuthDriverRegisterErrorState(errorMsg: "Please Enter a Valid Email"));
+        emit(AuthDriverRegisterErrorState(
+            errorMsg: "Please Enter a Valid Email"));
       } else if (event.password.isEmpty) {
-        emit(AuthDriverRegisterErrorState(errorMsg: "Please Enter Your Password"));
+        emit(AuthDriverRegisterErrorState(
+            errorMsg: "Please Enter Your Password"));
       } else if (event.password.trim().length < 6) {
-        emit(AuthDriverRegisterErrorState(errorMsg: "Password Must be Greater Than 6 characters"));
+        emit(AuthDriverRegisterErrorState(
+            errorMsg: "Password Must be Greater Than 6 characters"));
       } else if (event.phone.isEmpty) {
-        emit(AuthDriverRegisterErrorState(errorMsg: "Please Enter Your Phone Number"));
+        emit(AuthDriverRegisterErrorState(
+            errorMsg: "Please Enter Your Phone Number"));
       } else {
         final response = await MurnyApi().signIn(body: {
           "email": event.email,
@@ -65,7 +74,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           "gender": event.gender.toLowerCase() == "male" ? true : false,
           "city": event.city,
           "license": ""
-        }, function: Auth.userSignUp);
+        }, function: Auth.driverSignUp);
 
         if (response) {
           await MurnyApi().profile(
@@ -84,7 +93,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event.email.trim().isEmpty) {
         emit(AuthOTPErrorState(errorMsg: "Please Enter Your Email"));
       } else if (event.otp.isEmpty) {
-        emit(AuthOTPErrorState(errorMsg: "Please Enter the OTP Sent to The email ${event.email}"));
+        emit(AuthOTPErrorState(
+            errorMsg: "Please Enter the OTP Sent to The email ${event.email}"));
       } else {
         final response = await MurnyApi().signIn(body: {
           "email": event.email,
@@ -128,7 +138,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (response) {
           emit(AuthLoginSuccessState());
         } else {
-          emit(AuthLoginErrorState(errorMsg: "Email or Password are incorrect"));
+          emit(
+              AuthLoginErrorState(errorMsg: "Email or Password are incorrect"));
         }
       }
     });

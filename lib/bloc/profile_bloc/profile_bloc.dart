@@ -5,6 +5,7 @@ import 'package:murny_final_project/api/end_points/enums.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/models/auth_model.dart';
+import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/models/profile_model.dart';
 
 part 'profile_event.dart';

@@ -18,7 +18,17 @@ class Authentication {
         return await signUp(url: url + endPoints.userSignUp, body: body);
 
       case Auth.driverSignUp:
-        return await signUp(url: url + endPoints.driverSignUp, body: body);
+        final uri = Uri.parse(url + endPoints.driverSignUp);
+        final response = await http.post(uri, body: jsonEncode(body));
+
+        final AuthModel authModel =
+            AuthModel.fromJson(jsonDecode(response.body));
+        pref.setUser(authModel);
+        if (response.statusCode >= 400 && response.statusCode < 500) {
+          throw "err";
+        } else {
+          return authModel;
+        }
 
       case Auth.signInWithApple:
         return await signUp(url: url + endPoints.signInWithApple, body: body);

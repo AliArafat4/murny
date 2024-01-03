@@ -64,75 +64,10 @@ class TextFieldSearch extends StatelessWidget {
                   ),*/
                     ),
               ),
-              SizedBox(
-                width: 1.5.w,
-              ),
+              SizedBox(width: 1.5.w),
               SizedBox(
                 height: 5.h,
                 width: 84.w,
-// <<<<<<< HEAD
-//                 child: TextField(
-//                   controller: conSearch,
-//                   decoration: InputDecoration(
-//                     hintText: AppLocalizations.of(context)!.findYourDestination,
-//                     suffixIcon: IconButton(
-//                       onPressed: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) => VoiceSearchScreen()),
-//                         );
-//                       },
-//                       //  color: const Color(0xff000000),
-//                       icon: const Icon(
-//                         Icons.keyboard_voice_outlined,
-//                         size: 24,
-//                       ),
-//                     ),
-//                     prefixIcon: SizedBox(
-//                       width: 12.w,
-//                       child: Padding(
-//                         padding: currentLanguage == "ar"
-//                             ? EdgeInsets.only(right: 14.sp)
-//                             : EdgeInsets.only(left: 14.sp),
-//                         child: Row(
-//                           children: [
-//                             InkWell(
-//                               onTap: () {},
-//                               child: isSwitched
-//                                   ? SvgPicture.asset(
-//                                       'assets/images/imageSearch.svg',
-//                                       colorFilter: const ColorFilter.mode(
-//                                           Colors.white, BlendMode.srcIn),
-//                                       fit: BoxFit.none,
-//                                     )
-//                                   : SvgPicture.asset(
-//                                       'assets/images/imageSearch.svg',
-//                                       colorFilter: const ColorFilter.mode(
-//                                           Color(0xff000000), BlendMode.srcIn),
-//                                       fit: BoxFit.none,
-//                                     ),
-//                             ),
-//                             const VerticalDivider(
-//                               thickness: 1,
-//                               indent: 13,
-//                               endIndent: 13,
-//                               color: Color(0xffCDCED3),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                     border: OutlineInputBorder(
-//                       borderSide: BorderSide.none,
-//                       borderRadius: BorderRadius.circular(20),
-//                     ),
-//                     hintStyle: isSwitched
-//                         ? TextStyle(color: Colors.grey, height: 0.1.h)
-//                         : TextStyle(color: Color(0xff000000), height: 0.1.h),
-//                     // filled: true,
-//                     // fillColor: const Color(0xffFFFFFF)
-// =======
                 child: BlocBuilder<OrderStateCubit, OrderStateState>(
                   builder: (context, state) {
                     return state is OrderFilterState ||
@@ -203,7 +138,6 @@ class TextFieldSearch extends StatelessWidget {
                                       height: 0.1.h),
                                   filled: true,
                                   fillColor: const Color(0xffFFFFFF)),
-// >>>>>>> main
                             ),
                           )
                         : const SizedBox();
