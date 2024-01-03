@@ -6,6 +6,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:murny_final_project/bloc/card_bloc/cubit/card_cubit.dart';
 import 'package:murny_final_project/bloc/check_box_bloc/cubit/checkbox_cubit.dart';
 import 'package:murny_final_project/bloc/checkfillOTP_bloc/cubit/checkfill_otp_cubit.dart';
+import 'package:murny_final_project/bloc/driver_bloc/driver_cubit.dart';
+import 'package:murny_final_project/bloc/driver_map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/dropdownlist_bloc/cubit/dropdownlist_cubit.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/bloc/get_by_id_bloc/get_by_id_cubit.dart';
@@ -55,6 +57,7 @@ class MainApp extends StatelessWidget {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return MultiBlocProvider(
           providers: [
+            BlocProvider<DriverMapBloc>(create: (context) => DriverMapBloc()),
             BlocProvider<MapBloc>(
                 create: (context) =>
                     MapBloc()), //..add(MapGetCurrentLocationEvent())),
@@ -86,6 +89,7 @@ class MainApp extends StatelessWidget {
             BlocProvider(create: (context) => ThemeBloc()),
 
             BlocProvider<CheckboxCubit>(create: (context) => CheckboxCubit()),
+            BlocProvider<DriverCubit>(create: (context) => DriverCubit()),
 
             BlocProvider(create: (context) => ImageBloc()),
             BlocProvider(create: (context) => LocaleBloc()),
