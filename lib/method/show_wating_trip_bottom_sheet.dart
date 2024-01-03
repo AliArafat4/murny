@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showWaitingTripBottomSheet({required BuildContext context}) {
+  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
+
   showModalBottomSheet(
     isScrollControlled: true,
     context: context,
@@ -27,13 +30,16 @@ showWaitingTripBottomSheet({required BuildContext context}) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                Text(
-                  AppLocalizations.of(context)!.watingTime + " 10 دقائق",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff252C63)),
-                ),
+                Text(AppLocalizations.of(context)!.watingTime + " 10 دقائق",
+                    style: isSwitched
+                        ? TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white)
+                        : TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xff252C63))),
                 SizedBox(
                   height: MediaQuery.of(context).size.width / 20,
                 ),

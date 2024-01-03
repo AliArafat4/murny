@@ -41,7 +41,7 @@ class ProfileImage extends StatelessWidget {
                   child: Container(
                     width: 40,
                     height: 40,
-                    color: const Color(0xff62c1c7),
+                    color: const Color(0xff252C63),
                     child: IconButton(
                         onPressed: () {
                           context.read<ImageBloc>().add(AddImageEvent());

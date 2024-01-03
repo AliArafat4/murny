@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,12 +8,14 @@ showConfirmDiolg(
     {required BuildContext context,
     required String title,
     required Function() acceptFun}) {
+  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
+
   showDialog(
     context: context,
     barrierDismissible: false,
     builder: (context) => AlertDialog(
       elevation: 0,
-      backgroundColor: Colors.white,
+      backgroundColor: isSwitched ? null : Colors.white,
       content: SizedBox(
         height: MediaQuery.of(context).size.height * 0.2,
         width: MediaQuery.of(context).size.width,
@@ -22,7 +25,9 @@ showConfirmDiolg(
             SizedBox(height: 4.h),
             Text(
               title,
-              style: const TextStyle(color: Color(0xff2B2B62)),
+              style: TextStyle(
+                color: isSwitched ? Colors.white : Color(0xff2B2B62),
+              ),
             ),
             SizedBox(height: 4.h),
             Row(

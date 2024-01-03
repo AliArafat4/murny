@@ -51,40 +51,42 @@ final Map appThemeMap = {
     ),
   ),
   "dark": ThemeData(
-      fontFamily: 'SFArabic',
-      brightness: Brightness.dark,
-      inputDecorationTheme:
-          InputDecorationTheme(filled: true, fillColor: Color(0xff393f44)),
-      dividerColor: Colors.white,
-      primaryColorDark: Colors.white,
-      segmentedButtonTheme: const SegmentedButtonThemeData(
-          style: ButtonStyle(
-              backgroundColor:
-                  MaterialStatePropertyAll(Color.fromARGB(255, 172, 19, 19)))),
-      colorScheme: const ColorScheme.dark(
-          onSecondary: Colors.black,
-          secondary: Colors.grey,
-          onPrimary: Colors.white),
-      appBarTheme: const AppBarTheme(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+    fontFamily: 'SFArabic',
+    brightness: Brightness.dark,
+    inputDecorationTheme:
+        InputDecorationTheme(filled: true, fillColor: Color(0xff393f44)),
+    dividerColor: Colors.white,
+    primaryColorDark: Colors.white,
+    segmentedButtonTheme: const SegmentedButtonThemeData(
+        style: ButtonStyle(
+            backgroundColor:
+                MaterialStatePropertyAll(Color.fromARGB(255, 172, 19, 19)))),
+    colorScheme: const ColorScheme.dark(
+        onSecondary: Colors.black,
+        secondary: Colors.grey,
+        onPrimary: Colors.white),
+    appBarTheme: const AppBarTheme(
+      iconTheme: IconThemeData(
+        color: Colors.white,
       ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: const Color(0xff62c1c7),
-        ),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: const Color(0xff62c1c7),
       ),
-      iconTheme: const IconThemeData(color: Colors.white),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          side: BorderSide(color: Color(0xffFFFFFF)),
-        ),
+    ),
+    iconTheme: const IconThemeData(color: Colors.white),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        side: BorderSide(color: Color(0xffFFFFFF)),
       ),
-      datePickerTheme: const DatePickerThemeData(
-          dayOverlayColor: MaterialStatePropertyAll<Color>(Color(0xff62c1c7)),
-          weekdayStyle: TextStyle(color: Colors.white),
-          rangePickerBackgroundColor: Color(0xff62c1c7))),
+    ),
+    datePickerTheme: const DatePickerThemeData(
+      dayOverlayColor: MaterialStatePropertyAll<Color>(Color(0xff62c1c7)),
+      weekdayStyle: TextStyle(color: Colors.white),
+      rangePickerBackgroundColor: Color(0xff62c1c7),
+    ),
+  ),
 };

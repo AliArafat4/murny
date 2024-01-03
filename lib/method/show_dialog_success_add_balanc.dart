@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/screens/balance/balance_home.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/second_button.dart';
@@ -6,11 +7,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showSuccessAddBalanceDiolg(
     {required BuildContext context, required String balance}) {
+  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
+
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
       elevation: 0,
-      backgroundColor: Colors.white,
+      backgroundColor: isSwitched ? null : Colors.white,
       content: SizedBox(
         height: MediaQuery.of(context).size.height * 0.5,
         width: MediaQuery.of(context).size.width,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
+import 'package:murny_final_project/bloc/image_bloc/image_bloc_bloc.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
+import 'package:murny_final_project/bloc/upload_licen_bloc/upload_licen_bloc_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
@@ -168,12 +170,25 @@ class CreateDriverAccountScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 52,
               ),
-              Center(
-                child: SecondButton(
-                  title: AppLocalizations.of(context)!.driverLicense,
-                  onPressed: () {},
-                  color: Colors.white,
-                  isFill: false,
+              BlocListener<UploadLicenBloc, UploadLicenState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+
+                  if (state is UploadLicenSuccess) {
+                    showSuccessSnackBar(
+                        context, "Driver license has been added successfully");
+                  }
+                  ;
+                },
+                child: Center(
+                  child: SecondButton(
+                    title: AppLocalizations.of(context)!.driverLicense,
+                    onPressed: () {
+                      context.read<UploadLicenBloc>().add(UploadLicen());
+                    },
+                    color: Colors.white,
+                    isFill: false,
+                  ),
                 ),
               ),
               SizedBox(
