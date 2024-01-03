@@ -25,10 +25,12 @@ class Location extends StatelessWidget {
           ),
         ),
         SizedBox(width: MediaQuery.of(context).size.width / 42),
-        Text(
-          title,
-          //change color text
-          style: TextStyle(fontSize: 18.sp),
+        Flexible(
+          child: Text(
+            title,
+            //change color text
+            style: TextStyle(fontSize: 18.sp),
+          ),
         )
       ],
     );

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:murny_final_project/api/end_points/end_points.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/models/order_model.dart';
 
 import '../../../models/cart_model.dart';
@@ -32,6 +33,18 @@ class DriverFunc {
           final res = await http
               .post(uri, body: jsonEncode(body), headers: {"token": token});
           print(res.body);
+        } catch (err) {
+          print(err);
+        }
+      case Driver.getDriverByID:
+        try {
+          final uri = Uri.parse(url + endPoints.getDriverByID);
+
+          final res = await http
+              .post(uri, body: jsonEncode(body), headers: {"token": token});
+          print("driver body res");
+          print(res.body);
+          return DriverModel.fromJson(jsonDecode(res.body));
         } catch (err) {
           print(err);
         }

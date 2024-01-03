@@ -27,7 +27,7 @@ showSurvyDiolg({required BuildContext context}) {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.close,
                   )),
             ),
@@ -53,7 +53,7 @@ showSurvyDiolg({required BuildContext context}) {
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
             ),
-            Rating(),
+            const Rating(),
             const Divider(),
             Padding(
               padding: EdgeInsets.only(

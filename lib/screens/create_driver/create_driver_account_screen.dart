@@ -5,9 +5,6 @@ import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubi
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
-import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
-import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
-import 'package:murny_final_project/screens/splash_screen/splash_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:murny_final_project/widgets/city_dropdown_menu.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
@@ -22,13 +19,13 @@ class CreateDriverAccountScreen extends StatelessWidget {
 
   String? selectedOption = "";
 
-  TextEditingController conName = TextEditingController();
+  final TextEditingController conName = TextEditingController();
 
-  TextEditingController conPhone = TextEditingController();
+  final TextEditingController conPhone = TextEditingController();
 
-  TextEditingController conEmail = TextEditingController();
+  final TextEditingController conEmail = TextEditingController();
 
-  TextEditingController conPass = TextEditingController();
+  final TextEditingController conPass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +43,8 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                          builder: (context) => SplashSignInSignUpScreen()),
+                          builder: (context) =>
+                              const SplashSignInSignUpScreen()),
                       (Route route) => false);
                 },
               ),
@@ -112,7 +110,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                     : Alignment.topLeft,
                 child: Text(
                   AppLocalizations.of(context)!.gender,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
               BlocBuilder<RadiobuttonCubit, RadiobuttonState>(
@@ -164,7 +162,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                     : Alignment.topLeft,
                 child: Text(
                   AppLocalizations.of(context)!.uploadDriverLicense,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
               SizedBox(
@@ -184,7 +182,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
               Center(
                 child: Text(
                   AppLocalizations.of(context)!.allowedFiles,
-                  style: TextStyle(color: Color(0xff8E98A8)),
+                  style: const TextStyle(color: Color(0xff8E98A8)),
                 ),
               ),
               SizedBox(
@@ -208,8 +206,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                                 gender: selectedOption!,
                                 //TODO: GET LICENSE
                                 license: '',
-                                //TODO: GET CITY
-                                city: ''),
+                                city: selectedOption ?? ""),
                           );
                     },
                   );

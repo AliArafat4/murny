@@ -13,12 +13,15 @@ abstract mixin class UserApiEndPoints {
   final userRoute = "/user";
   final postRating = "/post_rating";
   final postUserOrder = "/post_user_order";
+  final getUserByID = "/get_user_by_id";
+  final cancelOrder = "/cancel_order";
 }
 
 abstract mixin class DriverApiEndPoints {
   final driverRoute = "/driver";
   final responseToOrder = "/response_to_order";
   final getRating = "/get_rating";
+  final getDriverByID = "/get_driver_by_id";
 }
 
 abstract mixin class CommonApiEndPoints {
@@ -26,6 +29,7 @@ abstract mixin class CommonApiEndPoints {
   final getUserOrder = "/get_user_order";
   final getDriverOrder = "/get_driver_order";
   final getDrivers = "/get_drivers";
+  final getLastUserOrder = "/get_last_user_order";
 }
 
 abstract mixin class ChatApiEndPoints {
@@ -47,6 +51,7 @@ abstract mixin class ProfileApiEndPoints {
 abstract mixin class PublicApiEndPoints {
   final publicRoute = "/public";
   final getCarts = "/get_carts";
+  final getCartByID = "/get_cart_by_id";
 }
 
 class EndPoints extends AuthApiEndPoints

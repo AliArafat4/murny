@@ -1,12 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:murny_final_project/bloc/order_state_bloc/order_state_cubit.dart';
+import 'package:murny_final_project/bloc/order_state_bloc/order_state_cubit.dart';
 
 import 'package:murny_final_project/main.dart';
+import 'package:murny_final_project/screens/google_maps/driver_flow_bottom_sheets/google_maps_driver.dart';
+import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/order_state_stream.dart';
 
 import 'package:murny_final_project/screens/home/home_screen.dart';
 
 import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/google_map_body.dart';
+import 'driver_flow_bottom_sheets/drawer.dart';
+import 'driver_flow_bottom_sheets/driver_order_state_stream.dart';
 import 'user_flow_bottom_sheets/google_maps_search.dart';
 
 class GoogleMapScreen extends StatelessWidget {
@@ -21,16 +28,27 @@ class GoogleMapScreen extends StatelessWidget {
     return Scaffold(
       drawer: const CustomDrawer(),
       key: scaffoldKey,
+
       body: SafeArea(
           child: user.userType == "user"
+              //  USER FLOW,
               ? Stack(
                   children: [
-                    GoogleMapBody(user: user),
+                    GoogleMapBody(),
                     GoogleMapSearchBar(scaffoldKey: scaffoldKey),
+                    OrderStateStream(user: user),
                   ],
                 )
-              : const CircularProgressIndicator() // TODO: DRIVER FLOW,
-          ),
+              //  DRIVER FLOW,
+              : Stack(
+                  children: [
+                    GoogleMapDriverBody(user: user),
+                    DriverDrawer(scaffoldKey: scaffoldKey),
+                    DriverOrderStateStream(user: user),
+                  ],
+                )),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton:
     );
   }
 }

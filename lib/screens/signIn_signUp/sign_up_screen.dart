@@ -46,7 +46,7 @@ class SignUpScreen extends StatelessWidget {
                       ? Alignment.topRight
                       : Alignment.topLeft,
                   child: Text(AppLocalizations.of(context)!.signUp,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 28,
                         //  color: Color(0xff252C63),
                       ))),
@@ -116,7 +116,7 @@ class SignUpScreen extends StatelessWidget {
                   Flexible(
                     child: Text(
                       AppLocalizations.of(context)!.subscribingAgree,
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   ),
                 ],
@@ -139,7 +139,7 @@ class SignUpScreen extends StatelessWidget {
                       });
                 },
                 listener: (BuildContext context, AuthState state) {
-                  print(state);
+
                   state is LoadingState
                       ? showLoadingDialog(context: context)
                       : const SizedBox();
@@ -153,7 +153,7 @@ class SignUpScreen extends StatelessWidget {
                       ? Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => GoogleMapScreen()),
+                              builder: (context) => const GoogleMapScreen()),
                         )
                       : const SizedBox();
                 },

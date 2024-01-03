@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:murny_final_project/api/end_points/end_points.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/models/profile_model.dart';
 
 import '../enums.dart';
@@ -19,10 +20,19 @@ class ProfileFunc {
         try {
           final uri = Uri.parse(url + endPoints.getProfile);
 
+          if (body!.containsKey("gender")) {
+            final response = await http.get(uri, headers: {"token": token});
+            //print("object2");
+            print(response.body);
+
+            DriverModel driverModel =
+                DriverModel.fromJson(jsonDecode(response.body));
+            return driverModel;
+          }
           //print("object");
           final response = await http.get(uri, headers: {"token": token});
           //print("object2");
-          //print(response.body);
+          print(response.body);
 
           ProfileModel profileModel =
               ProfileModel.fromJson(jsonDecode(response.body));

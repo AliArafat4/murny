@@ -77,10 +77,10 @@ class HomeScreenDriver extends StatelessWidget {
                     imageSvg: 'assets/images/editAccount.png',
                     spaceTop: 0.sp,
                     naviPush: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => EditAccount()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => EditAccount()),
+                      // );
                     },
                   ),
                   ContentDrawer(

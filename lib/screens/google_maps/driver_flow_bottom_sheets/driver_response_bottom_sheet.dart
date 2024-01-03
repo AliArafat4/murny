@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:murny_final_project/models/order_model.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 
 class DriverResponseBottomSheet extends StatelessWidget {
-  const DriverResponseBottomSheet({Key? key}) : super(key: key);
+  const DriverResponseBottomSheet({Key? key, required this.order})
+      : super(key: key);
 
+  final OrderModel order;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,16 +39,16 @@ class DriverResponseBottomSheet extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.width / 20,
               ),
-              const BookLocation(
-                locationFrom: "A2 كلية الصيدلة",
-                locationTo: "A3 كلية علوم الحاسب والمعلومات",
+              BookLocation(
+                locationFrom: order.locationFrom ?? "",
+                locationTo: order.locationTo ?? "",
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 22,
               ),
               PrimaryButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                 },
                 title: AppLocalizations.of(context)!.startTrip,
                 buttonColor: const Color(0xff252C63),

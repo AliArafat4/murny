@@ -12,6 +12,7 @@ class PublicFunc {
     required Public function,
     required EndPoints endPoints,
     required String url,
+    required Map<String, dynamic> body,
   }) async {
     switch (function) {
       case Public.getCarts:
@@ -19,8 +20,8 @@ class PublicFunc {
           final uri = Uri.parse(url + endPoints.getCarts);
 
           final response = await http.get(uri);
-          print("carts response");
-          print(response.body);
+          // print("carts response");
+          // print(response.body);
 
           final List<CartModel> cartModelList = [];
           final decodedBody = jsonDecode(response.body);
@@ -29,6 +30,19 @@ class PublicFunc {
           }
 
           return cartModelList;
+        } catch (err) {
+          print(err);
+        }
+      case Public.getCartByID:
+        try {
+          final uri = Uri.parse(url + endPoints.getCartByID);
+
+          final response = await http.post(uri, body: jsonEncode(body));
+          print("cart response");
+          print(response.body);
+          CartModel cart = CartModel.fromJson(jsonDecode(response.body));
+
+          return cart;
         } catch (err) {
           print(err);
         }
