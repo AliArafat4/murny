@@ -151,10 +151,10 @@ class CustomDrawer extends StatelessWidget {
             imageSvg: 'assets/images/imageEditAccount.svg',
             spaceTop: 0.sp,
             naviPush: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => EditAccount()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditAccount()),
+              );
             },
           ),
           ContentDrawer(
