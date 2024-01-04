@@ -5,7 +5,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:murny_final_project/bloc/card_bloc/cubit/card_cubit.dart';
 import 'package:murny_final_project/bloc/check_box_bloc/cubit/checkbox_cubit.dart';
-import 'package:murny_final_project/bloc/checkfillOTP_bloc/cubit/checkfill_otp_cubit.dart';
 import 'package:murny_final_project/bloc/driver_bloc/driver_cubit.dart';
 import 'package:murny_final_project/bloc/driver_map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/dropdownlist_bloc/cubit/dropdownlist_cubit.dart';
@@ -85,8 +84,7 @@ class MainApp extends StatelessWidget {
             BlocProvider<SelectCartCubit>(
                 create: (context) => SelectCartCubit()),
             BlocProvider<UserCubit>(create: (context) => UserCubit()),
-            BlocProvider<CheckfillOtpCubit>(
-                create: (context) => CheckfillOtpCubit()),
+
             BlocProvider(create: (context) => ThemeBloc()),
 
             BlocProvider<CheckboxCubit>(create: (context) => CheckboxCubit()),
@@ -115,9 +113,7 @@ class MainApp extends StatelessWidget {
                       ],
                       supportedLocales: L10n.all,
                       debugShowCheckedModeBanner: false,
-
                       home: const SplashScreen());
-
                 },
               );
             } else {

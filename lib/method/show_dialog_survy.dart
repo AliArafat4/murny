@@ -35,7 +35,6 @@ showSurvyDiolg({required BuildContext context}) {
             SizedBox(height: MediaQuery.of(context).size.height / 62),
             Text(
               AppLocalizations.of(context)!.reachedDestination,
-              // onSecondary
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),

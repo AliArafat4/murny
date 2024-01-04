@@ -33,15 +33,15 @@ final Map appThemeMap = {
       backgroundColor: Colors.transparent,
       elevation: 0,
     ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        side: BorderSide(color: (Color(0xff252C63))),
-        backgroundColor: const Color(0xffFFFFFF),
-        elevation: 0,
-      ),
-    ),
+    // elevatedButtonTheme: ElevatedButtonThemeData(
+    //   style: ElevatedButton.styleFrom(
+    //     side: BorderSide(color: (Color(0xff252C63))),
+    //     backgroundColor: const Color(0xffFFFFFF),
+    //     elevation: 0,
+    //   ),
+    // ),
     colorScheme: const ColorScheme.light(
-      onSecondary: Colors.black,
+      onSecondary: Color(0xff252C63),
       secondary: Color(0xff252C63),
       onPrimary: Colors.black,
       background: const Color(0xffFFFFFF),
@@ -62,7 +62,7 @@ final Map appThemeMap = {
             backgroundColor:
                 MaterialStatePropertyAll(Color.fromARGB(255, 172, 19, 19)))),
     colorScheme: const ColorScheme.dark(
-        onSecondary: Colors.black,
+        onSecondary: Colors.white,
         secondary: Colors.grey,
         onPrimary: Colors.white),
     appBarTheme: const AppBarTheme(
@@ -83,10 +83,10 @@ final Map appThemeMap = {
         side: BorderSide(color: Color(0xffFFFFFF)),
       ),
     ),
-    datePickerTheme: const DatePickerThemeData(
-      dayOverlayColor: MaterialStatePropertyAll<Color>(Color(0xff62c1c7)),
-      weekdayStyle: TextStyle(color: Colors.white),
-      rangePickerBackgroundColor: Color(0xff62c1c7),
-    ),
+    // datePickerTheme: const DatePickerThemeData(
+    //   dayOverlayColor: MaterialStatePropertyAll<Color>(Color(0xff62c1c7)),
+    //   weekdayStyle: TextStyle(color: Colors.white),
+    //   rangePickerBackgroundColor: Color(0xff62c1c7),
+    // ),
   ),
 };

@@ -39,15 +39,15 @@ class TextFieldWidget extends StatelessWidget {
                       padding: currentLanguage == "ar"
                           ? EdgeInsets.only(right: 15.sp)
                           : EdgeInsets.only(left: 15.sp),
-                      child: const Row(
+                      child: Row(
                         children: [
                           Flexible(
                             child: Text(
-                              '966+',
+                              currentLanguage == "ar" ? '966+' : '+966',
                               // style: TextStyle(color: Color(0xff000000)),
                             ),
                           ),
-                          VerticalDivider(
+                          const VerticalDivider(
                             thickness: 1,
                             indent: 3,
                             endIndent: 3,

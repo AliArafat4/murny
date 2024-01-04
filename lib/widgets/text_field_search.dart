@@ -8,6 +8,7 @@ import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/method/show_search_cart_bottom_sheet.dart';
 import 'package:murny_final_project/method/show_success_trip_bottom_sheet.dart';
 import 'package:murny_final_project/method/show_wating_trip_bottom_sheet.dart';
+import 'package:murny_final_project/screens/home/home_screen.dart';
 import 'package:murny_final_project/screens/voice_search/search.dart';
 import 'package:murny_final_project/screens/voice_search/voice_search.dart';
 import 'package:murny_final_project/widgets/golf_cart_detail.dart';
@@ -25,12 +26,13 @@ class TextFieldSearch extends StatelessWidget {
   final Function fun;
 
   final TextEditingController conSearch = TextEditingController();
-  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
   @override
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
+    bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
+
     return Padding(
       padding: EdgeInsets.only(top: 8.0.sp),
       child: Column(
@@ -94,7 +96,9 @@ class TextFieldSearch extends StatelessWidget {
                                                 VoiceSearchScreen()),
                                       );
                                     },
-                                    color: const Color(0xff000000),
+                                    color: isSwitched
+                                        ? Colors.white
+                                        : const Color(0xff000000),
                                     icon: const Icon(
                                       Icons.keyboard_voice_outlined,
                                       size: 24,
@@ -104,21 +108,18 @@ class TextFieldSearch extends StatelessWidget {
                                     width: 12.w,
                                     child: Padding(
                                       padding: currentLanguage == "ar"
-                                          ? EdgeInsets.only(right: 14.sp)
+                                          ? EdgeInsets.only(right: 11.sp)
                                           : EdgeInsets.only(left: 14.sp),
                                       child: Row(
                                         children: [
                                           InkWell(
-                                            onTap: () {},
-                                            child: SvgPicture.asset(
-                                              'assets/images/imageSearch.svg',
-                                              colorFilter:
-                                                  const ColorFilter.mode(
-                                                      Color(0xff000000),
-                                                      BlendMode.srcIn),
-                                              fit: BoxFit.none,
-                                            ),
-                                          ),
+                                              onTap: () {},
+                                              child: isSwitched
+                                                  ? Icon(
+                                                      Icons.search,
+                                                      color: Colors.white,
+                                                    )
+                                                  : Icon(Icons.search)),
                                           const VerticalDivider(
                                             thickness: 1,
                                             indent: 13,
@@ -133,11 +134,18 @@ class TextFieldSearch extends StatelessWidget {
                                     borderSide: BorderSide.none,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  hintStyle: TextStyle(
-                                      color: const Color(0xff000000),
-                                      height: 0.1.h),
+                                  hintStyle: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                      ),
                                   filled: true,
-                                  fillColor: const Color(0xffFFFFFF)),
+                                  fillColor: isSwitched
+                                      ? const Color(0xff393f44)
+                                      : const Color(0xffFFFFFF)),
                             ),
                           )
                         : const SizedBox();
@@ -148,8 +156,8 @@ class TextFieldSearch extends StatelessWidget {
           ),
           Padding(
             padding: currentLanguage == "ar"
-                ? EdgeInsets.only(right: 13.sp, top: 14.sp)
-                : EdgeInsets.only(left: 13.sp, top: 14.sp),
+                ? EdgeInsets.only(top: 14.sp)
+                : EdgeInsets.only(top: 14.sp),
             child: Align(
               alignment: currentLanguage == "ar"
                   ? Alignment.topRight
