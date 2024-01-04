@@ -11,7 +11,10 @@ import 'package:murny_final_project/widgets/user_info.dart';
 
 class DriverResponseBottomSheet extends StatelessWidget {
   const DriverResponseBottomSheet(
-      {Key? key, required this.order, required this.orderFrom, required this.user})
+      {Key? key,
+      required this.order,
+      required this.orderFrom,
+      required this.user})
       : super(key: key);
 
   final OrderModel order;
@@ -54,12 +57,25 @@ class DriverResponseBottomSheet extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 22,
               ),
-              UserInfo(
-                  userName: orderFrom.name ?? "",
-                  userPhone: orderFrom.phone ?? ""),
-              IconButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => DriverChatScreen(chatWith: orderFrom, user:user),));
-              }, icon: Icon(Icons.chat))
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  UserInfo(
+                      userName: orderFrom.name ?? "",
+                      userPhone: orderFrom.phone ?? ""),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DriverChatScreen(
+                                  chatWith: orderFrom, user: user),
+                            ));
+                      },
+                      icon: const Icon(Icons.chat, color: Color(0xff252C63)))
+                ],
+              ),
+
               // PrimaryButton(
               //   onPressed: () {
               //     // Navigator.pop(context);
