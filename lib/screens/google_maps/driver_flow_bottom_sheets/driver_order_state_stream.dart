@@ -40,16 +40,16 @@ class DriverOrderStateStream extends StatelessWidget {
         final order = OrderModel.fromJson(jsonDecode(body.body));
         print(order.runtimeType);
         print(body.body);
+        getUser = await MurnyApi().user(
+            body: {"user_id": order.orderFromId},
+            function: User.getUserByID,
+            token: user.token ?? "");
         if (context.mounted) {
           context
               .read<OrderStateCubit>()
               .checkOrderState(orderState: order.orderState!.toUpperCase());
         }
 
-        getUser = await MurnyApi().user(
-            body: {"user_id": order.orderFromId},
-            function: User.getUserByID,
-            token: user.token ?? "");
         return res;
       }).asyncMap((event) async => await event);
     }
@@ -98,10 +98,10 @@ class DriverOrderStateStream extends StatelessWidget {
         state is OrderFilterState
             ? panelHeight = context.getHeight(factor: 0.45)
             : state is OrderWaitingState
-                ? panelHeight = context.getHeight(factor: 0.5)
-                : panelHeight = context.getHeight(factor: 0.65);
+                ? panelHeight = context.getHeight(factor: 0.25)
+                : panelHeight = context.getHeight(factor: 0.45);
         if (state is OrderStateInitial) {
-          panelHeight = context.getHeight(factor: 0.45);
+          panelHeight = context.getHeight(factor: 0.25);
         }
       },
     );

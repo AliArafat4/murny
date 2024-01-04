@@ -24,7 +24,10 @@ class DriverDrawer extends StatelessWidget {
         child: Column(
           children: [
             InkWell(
-              onTap: () => _scaffoldKey.currentState!.openDrawer(),
+              onTap: () {
+                _scaffoldKey.currentState!.openDrawer();
+                print("here");
+              },
               child: Container(
                   width: 8.w,
                   height: 4.h,

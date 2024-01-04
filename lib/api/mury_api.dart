@@ -63,9 +63,9 @@ class MurnyApi {
     required Map<String, dynamic> body,
     required User function,
     required String token,
-  }) {
+  }) async {
     final url = this.url + endPoints.userRoute;
-    UserFunc().userFunctionsSelector(
+    return await UserFunc().userFunctionsSelector(
         function: function,
         url: url,
         endPoints: endPoints,
