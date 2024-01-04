@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 showMainBottomSheet({required BuildContext context}) {
   showModalBottomSheet(
@@ -10,7 +11,7 @@ showMainBottomSheet({required BuildContext context}) {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.2,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          //color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(32),
             topRight: Radius.circular(32),
@@ -26,9 +27,14 @@ showMainBottomSheet({required BuildContext context}) {
                 "assets/images/waiting_icon.png",
                 width: MediaQuery.of(context).size.width / 4,
               ),
+              SizedBox(
+                height: 1.h,
+              ),
               Text(
                 AppLocalizations.of(context)!.watiingUpcomingOrder,
-                style: TextStyle(fontSize: 18, color: Color(0xff252C63)),
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
               ),
             ],
           ),

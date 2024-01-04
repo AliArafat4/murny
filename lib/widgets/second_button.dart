@@ -23,7 +23,7 @@ class SecondButton extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  // backgroundColor: color,
+                  backgroundColor: color,
                   foregroundColor: Colors.white,
                   elevation: 0)
               : ElevatedButton.styleFrom(
@@ -31,15 +31,10 @@ class SecondButton extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   // side: const BorderSide(color: Color(0xff252C63), width: 1.5),
-                  //  foregroundColor: const Color(0xff252C63),
+                  // foregroundColor: const Color(0xff252C63),
                   elevation: 0),
           onPressed: onPressed,
-          child: Text(
-            title,
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-          ),
+          child: Text(title, style: TextStyle(color: Color(0xffFFFFFF))),
         ));
   }
 }

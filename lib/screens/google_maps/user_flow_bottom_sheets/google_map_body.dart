@@ -33,6 +33,7 @@ class GoogleMapBody extends StatelessWidget {
             compassEnabled: true,
             myLocationEnabled: true,
             myLocationButtonEnabled: true,
+
             mapType: MapType.normal, // MapType.satellite,
             polylines: Set<Polyline>.of(distance.values),
             markers: Set.from(driversMarker),

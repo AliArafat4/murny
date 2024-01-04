@@ -52,7 +52,7 @@ class EditAccount extends StatelessWidget {
                             height: 3.h,
                           ),
 
-                          //   ProfileImage(),
+                          // ProfileImage(),
 
                           // ProfileImage()
                           /* Stack(children: [
@@ -90,7 +90,9 @@ class EditAccount extends StatelessWidget {
                             height: 0.5.h,
                           ),
                           Text(
-                            '+${state.user.phone}',
+                            currentLanguage == "ar"
+                                ? '966${state.user.phone}+'
+                                : '+966${state.user.phone}',
                             style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w400),
                           ),
