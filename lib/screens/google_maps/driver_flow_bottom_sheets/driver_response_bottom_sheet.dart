@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/models/order_model.dart';
+import 'package:murny_final_project/models/profile_model.dart';
+import 'package:murny_final_project/screens/chat/chat_screen.dart';
+import 'package:murny_final_project/screens/google_maps/driver_flow_bottom_sheets/driver_chat_screen.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
+import 'package:murny_final_project/widgets/user_info.dart';
 
 class DriverResponseBottomSheet extends StatelessWidget {
-  const DriverResponseBottomSheet({Key? key, required this.order})
+  const DriverResponseBottomSheet(
+      {Key? key, required this.order, required this.orderFrom, required this.user})
       : super(key: key);
 
   final OrderModel order;
+  final ProfileModel orderFrom;
+  final AuthModel user;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,16 +37,16 @@ class DriverResponseBottomSheet extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 42,
               ),
-              Text(
-                "${AppLocalizations.of(context)!.watingTime} 10 دقائق",
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff252C63)),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.width / 20,
-              ),
+              // Text(
+              //   "${AppLocalizations.of(context)!.watingTime} 10 دقائق",
+              //   style: const TextStyle(
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.w400,
+              //       color: Color(0xff252C63)),
+              // ),
+              // SizedBox(
+              //   height: MediaQuery.of(context).size.width / 20,
+              // ),
               BookLocation(
                 locationFrom: order.locationFrom ?? "",
                 locationTo: order.locationTo ?? "",
@@ -46,15 +54,21 @@ class DriverResponseBottomSheet extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 22,
               ),
-              PrimaryButton(
-                onPressed: () {
-                  // Navigator.pop(context);
-                },
-                title: AppLocalizations.of(context)!.startTrip,
-                buttonColor: const Color(0xff252C63),
-                isText: true,
-                isPadding: true,
-              )
+              UserInfo(
+                  userName: orderFrom.name ?? "",
+                  userPhone: orderFrom.phone ?? ""),
+              IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DriverChatScreen(chatWith: orderFrom, user:user),));
+              }, icon: Icon(Icons.chat))
+              // PrimaryButton(
+              //   onPressed: () {
+              //     // Navigator.pop(context);
+              //   },
+              //   title: AppLocalizations.of(context)!.startTrip,
+              //   buttonColor: const Color(0xff252C63),
+              //   isText: true,
+              //   isPadding: true,
+              // )
             ],
           ),
         ),

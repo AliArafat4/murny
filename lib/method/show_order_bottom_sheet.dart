@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
+import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/screens/balance/payment_type.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
@@ -15,6 +16,7 @@ showOrderBottomSheet({
   required String destination,
   // required String driverID,
   //   required int cartID,
+  required AuthModel user,
   required DriverModel markerInfo,
 }) {
   showModalBottomSheet(
@@ -49,7 +51,10 @@ showOrderBottomSheet({
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
                 ),
-                DriverInfo(driver: markerInfo),
+                DriverInfo(
+                  driver: markerInfo,
+                  user: user,
+                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 62,
                 ),

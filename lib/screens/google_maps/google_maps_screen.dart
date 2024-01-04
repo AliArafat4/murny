@@ -34,7 +34,7 @@ class GoogleMapScreen extends StatelessWidget {
               //  USER FLOW,
               ? Stack(
                   children: [
-                    GoogleMapBody(),
+                    GoogleMapBody(user: user),
                     GoogleMapSearchBar(scaffoldKey: scaffoldKey),
                     OrderStateStream(user: user),
                   ],

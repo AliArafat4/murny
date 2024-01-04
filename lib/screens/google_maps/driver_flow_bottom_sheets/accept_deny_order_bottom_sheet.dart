@@ -55,9 +55,9 @@ class AcceptDenyOrderBottomSheet extends StatelessWidget {
                 height: MediaQuery.of(context).size.width / 20,
               ),
               //TODO: FIX USER INFO
-              const UserInfo(
-                userName: "عبدالله احمد",
-                userPhone: "0543874565",
+              UserInfo(
+                userName: orderFrom.name ?? "",
+                userPhone: orderFrom.phone ?? "",
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 32,
