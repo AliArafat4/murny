@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:murny_final_project/api/end_points/enums.dart';
+import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/order_state_bloc/order_state_cubit.dart';
 import 'package:murny_final_project/extentions/size_extention.dart';
 import 'package:murny_final_project/models/auth_model.dart';
@@ -23,11 +25,11 @@ class DriverOrderStateStream extends StatelessWidget {
   });
 
   final AuthModel user;
-
   @override
   Widget build(BuildContext context) {
     double panelHeight = context.getHeight(factor: 0.45);
 
+    var getUser = ProfileModel();
     Stream<http.Response> getOrders() async* {
       final uri = Uri.parse(
           "https://murny-api.onrender.com/common/get_last_driver_order");
@@ -38,6 +40,10 @@ class DriverOrderStateStream extends StatelessWidget {
         final order = OrderModel.fromJson(jsonDecode(body.body));
         print(order.runtimeType);
         print(body.body);
+        getUser = await MurnyApi().user(
+            body: {"user_id": order.orderFromId},
+            function: User.getUserByID,
+            token: user.token ?? "");
         if (context.mounted) {
           context
               .read<OrderStateCubit>()
@@ -69,11 +75,12 @@ class DriverOrderStateStream extends StatelessWidget {
                             ? AcceptDenyOrderBottomSheet(
                                 order: lastOrder,
                                 user: user,
-                                orderFrom: ProfileModel(),
+                                orderFrom: getUser,
                               ) //SHOW WAITING LOADING
                             : state is OrderAcceptState
                                 ? DriverResponseBottomSheet(
-                                    order: lastOrder,
+                                    order: lastOrder, orderFrom: getUser,
+                                    user: user,
                                     // user: user,
                                   )
                                 : const SizedBox();
@@ -91,10 +98,10 @@ class DriverOrderStateStream extends StatelessWidget {
         state is OrderFilterState
             ? panelHeight = context.getHeight(factor: 0.45)
             : state is OrderWaitingState
-                ? panelHeight = context.getHeight(factor: 0.5)
-                : panelHeight = context.getHeight(factor: 0.65);
+                ? panelHeight = context.getHeight(factor: 0.25)
+                : panelHeight = context.getHeight(factor: 0.45);
         if (state is OrderStateInitial) {
-          panelHeight = context.getHeight(factor: 0.45);
+          panelHeight = context.getHeight(factor: 0.25);
         }
       },
     );

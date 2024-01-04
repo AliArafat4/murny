@@ -28,11 +28,11 @@ class UserInfo extends StatelessWidget {
           children: [
             Text(
               userName,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
             Text(
               userPhone,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             )
           ],
         ),

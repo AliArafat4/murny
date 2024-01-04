@@ -28,21 +28,22 @@ class ChatFunc {
         }
 
       //TODO: FIX THIS CASE
-      case Chat.getMessages:
-        try {
-          final uri = Uri.parse(url + endPoints.getMessages);
-
-          final response = await http.post(uri,
-              headers: {"token": token}, body: jsonEncode(body));
-
-          final bodyDecode = jsonDecode(response.body);
-          print(bodyDecode);
-          // response.map((items) => items.map((item) => print(item)));
-
-          // return response.body;
-        } catch (err) {
-          print(err);
-        }
+      // case Chat.getMessages:
+      //   try {
+      //     final uri = Uri.parse(url + endPoints.getMessages);
+      //
+      //     final response = await http.post(uri,
+      //         headers: {"token": token}, body: jsonEncode(body));
+      //
+      //     final bodyDecode = jsonDecode(response.body);
+      //     print(bodyDecode);
+      //
+      //     // response.map((items) => items.map((item) => print(item)));
+      //
+      //     // return response.body;
+      //   } catch (err) {
+      //     print(err);
+      //   }
 
       default:
         throw "exception";

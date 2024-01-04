@@ -19,7 +19,7 @@ class StartTripBottomSheet extends StatelessWidget {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
     return const Column(
-      children: [Text("Waiting For Order")],
+      children: [Text("Waiting For Order"), LinearProgressIndicator()],
     );
   }
 }
