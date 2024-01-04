@@ -8,7 +8,8 @@ import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/models/auth_model.dart';
 
 class GoogleMapBody extends StatelessWidget {
-  GoogleMapBody({Key? key}) : super(key: key);
+  GoogleMapBody({Key? key, required this.user}) : super(key: key);
+  final AuthModel user;
 
   final List<Marker> driversMarker = [];
   String locationName = "";
@@ -73,7 +74,8 @@ class GoogleMapBody extends StatelessWidget {
                         context: context,
                         currentLocation: locationName,
                         destination: destination,
-                        markerInfo: marker);
+                        markerInfo: marker,
+                        user: user);
                   }));
             }
           }
@@ -95,7 +97,8 @@ class GoogleMapBody extends StatelessWidget {
                           context: context,
                           currentLocation: locationName,
                           destination: destination,
-                          markerInfo: marker);
+                          markerInfo: marker,
+                          user: user);
                     }));
               }
             } else {

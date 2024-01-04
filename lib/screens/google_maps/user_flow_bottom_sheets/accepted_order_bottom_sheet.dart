@@ -88,6 +88,7 @@ class AcceptedOrderBottomSheet extends StatelessWidget {
                       current is GetDriverByIdSuccessState,
                   builder: (context, state) {
                     return DriverInfo(
+                        user: user,
                         driver: state is GetDriverByIdSuccessState
                             ? state.getDriverByID
                             : DriverModel());

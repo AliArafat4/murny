@@ -11,13 +11,14 @@ import 'package:murny_final_project/models/chat_model.dart';
 import 'package:murny_final_project/models/driver_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:murny_final_project/models/order_model.dart';
+import 'package:murny_final_project/models/profile_model.dart';
 
-class ChatScreen extends StatelessWidget {
-  ChatScreen({Key? key, required this.chatWith, required this.user})
+class DriverChatScreen extends StatelessWidget {
+  DriverChatScreen({Key? key, required this.chatWith, required this.user})
       : super(key: key);
 
   final TextEditingController chatController = TextEditingController();
-  final DriverModel chatWith;
+  final ProfileModel chatWith;
   final AuthModel user;
   @override
   Widget build(BuildContext context) {
