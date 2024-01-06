@@ -96,12 +96,12 @@ class DriverOrderStateStream extends StatelessWidget {
       },
       listener: (BuildContext context, OrderStateState state) {
         state is OrderFilterState
-            ? panelHeight = context.getHeight(factor: 0.45)
+            ? panelHeight = context.getHeight(factor: 0.55)
             : state is OrderWaitingState
-                ? panelHeight = context.getHeight(factor: 0.25)
-                : panelHeight = context.getHeight(factor: 0.45);
+                ? panelHeight = context.getHeight(factor: 0.55)
+                : panelHeight = context.getHeight(factor: 0.55);
         if (state is OrderStateInitial) {
-          panelHeight = context.getHeight(factor: 0.25);
+          panelHeight = context.getHeight(factor: 0.55);
         }
       },
     );

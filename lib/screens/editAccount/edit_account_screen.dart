@@ -188,7 +188,7 @@ class EditAccount extends StatelessWidget {
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SplashSignInSignUpScreen()),
+                                                const SplashSignInSignUpScreen()),
                                         (Route route) => false);
                                   });
                             },
@@ -208,11 +208,7 @@ class EditAccount extends StatelessWidget {
                                     title: AppLocalizations.of(context)!
                                         .signOutConfirm,
                                     acceptFun: () {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SplashSignInSignUpScreen()),
-                                          (Route route) => false);
+                                      MurnyApi().signOut(context: context);
                                     });
                               },
                               child: DeleteLogoutAccount(
@@ -260,7 +256,7 @@ class EditAccount extends StatelessWidget {
                       ),
                     ));
                   }
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 })));
