@@ -5,9 +5,7 @@ import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/screens/balance/payment_type.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/driver_info.dart';
-import 'package:murny_final_project/widgets/golf_cart_detail.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
-import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showOrderBottomSheet({
@@ -44,9 +42,8 @@ showOrderBottomSheet({
                 ),
                 BookLocation(
                   locationFrom: currentLocation,
-                  locationTo: destination != ""
-                      ? destination
-                      : AppLocalizations.of(context)!.destination,
+                  locationTo:
+                      destination != "" ? destination : AppLocalizations.of(context)!.destination,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 42,
@@ -83,8 +80,7 @@ showOrderBottomSheet({
                             .then((value) => Navigator.pop(context));
                       } else {
                         Navigator.pop(context);
-                        showErrorSnackBar(
-                            context, "Please Select a destination");
+                        showErrorSnackBar(context, "Please Select a destination");
                       }
                     },
                     buttonColor: const Color(0xff252C63),

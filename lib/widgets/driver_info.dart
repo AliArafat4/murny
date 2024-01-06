@@ -66,11 +66,7 @@ class DriverInfo extends StatelessWidget {
                 onTap: () async {
                   Uri phoneNo = Uri.parse('tel:${driver.phone}');
                   if (await launchUrl(phoneNo)) {
-                    //dialer opened
-                    print("good");
-                  } else {
-                    print("err");
-                  }
+                  } else {}
                 },
                 icon: Icons.phone,
                 contactType: AppLocalizations.of(context)!.call,
@@ -83,7 +79,10 @@ class DriverInfo extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ChatScreen(chatWith: driver, user: user,)));
+                          builder: (context) => ChatScreen(
+                                chatWith: driver,
+                                user: user,
+                              )));
                 },
                 icon: Icons.chat,
                 contactType: AppLocalizations.of(context)!.chat,

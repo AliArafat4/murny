@@ -22,8 +22,7 @@ class ProfileImage extends StatelessWidget {
                   ? state.image == "Not Found"
                       ? const CircleAvatar(
                           radius: 55,
-                          foregroundImage: AssetImage(
-                              "assets/images/placeHolderAvatar-noback.png"),
+                          foregroundImage: AssetImage("assets/images/placeHolderAvatar-noback.png"),
                         )
                       : CircleAvatar(
                           radius: 55,
@@ -31,8 +30,7 @@ class ProfileImage extends StatelessWidget {
                         )
                   : const CircleAvatar(
                       radius: 55,
-                      foregroundImage: AssetImage(
-                          "assets/images/placeHolderAvatar-noback.png"),
+                      foregroundImage: AssetImage("assets/images/placeHolderAvatar-noback.png"),
                     ),
               Positioned(
                 top: 70,
@@ -59,9 +57,7 @@ class ProfileImage extends StatelessWidget {
         );
       },
       listener: (BuildContext context, ImageBlocState state) {
-        state is! ImageSuccess
-            ? SizedBox()
-            : context.read<ImageBloc>().add(GetImageEvent());
+        state is! ImageSuccess ? const SizedBox() : context.read<ImageBloc>().add(GetImageEvent());
       },
     );
   }

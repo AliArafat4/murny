@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 final Map appThemeMap = {
   "light": ThemeData(
     fontFamily: 'SFArabic',
     dividerColor: Colors.black,
     brightness: Brightness.light,
-    primaryColorDark: Color(0xff252C63),
-    inputDecorationTheme:
-        InputDecorationTheme(filled: true, fillColor: Color(0xffFFFFFF)),
+    primaryColorDark: const Color(0xff252C63),
+    inputDecorationTheme: const InputDecorationTheme(filled: true, fillColor: Color(0xffFFFFFF)),
     drawerTheme: const DrawerThemeData(backgroundColor: Color(0xffFFFFFF)),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        iconColor: MaterialStateProperty.resolveWith<Color>(
-            (states) => Colors.black.withOpacity(0.6)),
+        iconColor:
+            MaterialStateProperty.resolveWith<Color>((states) => Colors.black.withOpacity(0.6)),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -44,7 +42,7 @@ final Map appThemeMap = {
       onSecondary: Color(0xff252C63),
       secondary: Color(0xff252C63),
       onPrimary: Colors.black,
-      background: const Color(0xffFFFFFF),
+      background: Color(0xffFFFFFF),
     ),
     primaryTextTheme: TextTheme(
       titleSmall: TextStyle(color: Colors.black.withOpacity(0.6)),
@@ -53,18 +51,14 @@ final Map appThemeMap = {
   "dark": ThemeData(
     fontFamily: 'SFArabic',
     brightness: Brightness.dark,
-    inputDecorationTheme:
-        InputDecorationTheme(filled: true, fillColor: Color(0xff393f44)),
+    inputDecorationTheme: const InputDecorationTheme(filled: true, fillColor: Color(0xff393f44)),
     dividerColor: Colors.white,
     primaryColorDark: Colors.white,
     segmentedButtonTheme: const SegmentedButtonThemeData(
         style: ButtonStyle(
-            backgroundColor:
-                MaterialStatePropertyAll(Color.fromARGB(255, 172, 19, 19)))),
+            backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 172, 19, 19)))),
     colorScheme: const ColorScheme.dark(
-        onSecondary: Colors.white,
-        secondary: Colors.grey,
-        onPrimary: Colors.white),
+        onSecondary: Colors.white, secondary: Colors.grey, onPrimary: Colors.white),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(
         color: Colors.white,
@@ -80,7 +74,7 @@ final Map appThemeMap = {
     iconTheme: const IconThemeData(color: Colors.white),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        side: BorderSide(color: Color(0xffFFFFFF)),
+        side: const BorderSide(color: Color(0xffFFFFFF)),
       ),
     ),
     // datePickerTheme: const DatePickerThemeData(

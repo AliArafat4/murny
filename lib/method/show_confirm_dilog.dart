@@ -5,9 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showConfirmDiolg(
-    {required BuildContext context,
-    required String title,
-    required Function() acceptFun}) {
+    {required BuildContext context, required String title, required Function() acceptFun}) {
   bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
   showDialog(
@@ -26,7 +24,7 @@ showConfirmDiolg(
             Text(
               title,
               style: TextStyle(
-                color: isSwitched ? Colors.white : Color(0xff2B2B62),
+                color: isSwitched ? Colors.white : const Color(0xff2B2B62),
               ),
             ),
             SizedBox(height: 4.h),

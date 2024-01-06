@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/models/order_model.dart';
 import 'package:murny_final_project/models/profile_model.dart';
-import 'package:murny_final_project/screens/chat/chat_screen.dart';
 import 'package:murny_final_project/screens/google_maps/driver_flow_bottom_sheets/driver_chat_screen.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
-import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/user_info.dart';
 
 class DriverResponseBottomSheet extends StatelessWidget {
   const DriverResponseBottomSheet(
-      {Key? key,
-      required this.order,
-      required this.orderFrom,
-      required this.user})
+      {Key? key, required this.order, required this.orderFrom, required this.user})
       : super(key: key);
 
   final OrderModel order;
@@ -60,16 +54,14 @@ class DriverResponseBottomSheet extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  UserInfo(
-                      userName: orderFrom.name ?? "",
-                      userPhone: orderFrom.phone ?? ""),
+                  UserInfo(userName: orderFrom.name ?? "", userPhone: orderFrom.phone ?? ""),
                   IconButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DriverChatScreen(
-                                  chatWith: orderFrom, user: user),
+                              builder: (context) =>
+                                  DriverChatScreen(chatWith: orderFrom, user: user),
                             ));
                       },
                       icon: const Icon(Icons.chat, color: Color(0xff252C63)))

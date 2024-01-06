@@ -16,12 +16,12 @@ class ChatModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['sent_from'] = this.sentFrom;
-    data['sent_to'] = this.sentTo;
-    data['message'] = this.message;
-    data['sent_at'] = this.sentAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['sent_from'] = sentFrom;
+    data['sent_to'] = sentTo;
+    data['message'] = message;
+    data['sent_at'] = sentAt;
     return data;
   }
 }

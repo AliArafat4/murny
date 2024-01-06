@@ -6,15 +6,11 @@ import 'package:murny_final_project/method/show_confirm_dilog.dart';
 import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/models/order_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:murny_final_project/models/profile_model.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
-import 'package:murny_final_project/widgets/cart_detil.dart';
-import 'package:murny_final_project/widgets/payment_method.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 
 class UserWaitingBottomSheet extends StatelessWidget {
-  const UserWaitingBottomSheet(
-      {Key? key, required this.order, required this.user})
+  const UserWaitingBottomSheet({Key? key, required this.order, required this.user})
       : super(key: key);
   final OrderModel order;
   final AuthModel user;
@@ -41,10 +37,8 @@ class UserWaitingBottomSheet extends StatelessWidget {
             ),
             Padding(
               padding: currentLanguage == "ar"
-                  ? EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width / 20)
-                  : EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 20),
+                  ? EdgeInsets.only(right: MediaQuery.of(context).size.width / 20)
+                  : EdgeInsets.only(left: MediaQuery.of(context).size.width / 20),
               child: Text(
                 AppLocalizations.of(context)!.searchGolfCart,
                 style: const TextStyle(fontSize: 16),
@@ -118,8 +112,7 @@ class UserWaitingBottomSheet extends StatelessWidget {
                       }, function: User.cancelOrder, token: user.token ?? "");
 
                       if (context.mounted) {
-                        showSuccessSnackBar(
-                            context, "Order Canceled Successfully");
+                        showSuccessSnackBar(context, "Order Canceled Successfully");
                         Navigator.pop(context);
                       }
                       // showOrderBottomSheet(context: context);

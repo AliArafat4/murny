@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:murny_final_project/data/data.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
-import 'package:murny_final_project/widgets/text_field_search.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class DriverDrawer extends StatelessWidget {
-  const DriverDrawer({
+class DriverDrawerMaps extends StatelessWidget {
+  const DriverDrawerMaps({
     super.key,
     required GlobalKey<ScaffoldState> scaffoldKey,
   }) : _scaffoldKey = scaffoldKey;
@@ -26,16 +24,13 @@ class DriverDrawer extends StatelessWidget {
             InkWell(
               onTap: () {
                 _scaffoldKey.currentState!.openDrawer();
-                print("here");
               },
               child: Container(
                   width: 8.w,
                   height: 4.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: isSwitched
-                        ? const Color(0xff393f44)
-                        : const Color(0xffFFFFFF),
+                    color: isSwitched ? const Color(0xff393f44) : const Color(0xffFFFFFF),
                   ),
                   child: isSwitched
                       ? Image.asset(
@@ -56,9 +51,7 @@ class DriverDrawer extends StatelessWidget {
                   ? EdgeInsets.only(right: 13.sp, top: 14.sp)
                   : EdgeInsets.only(left: 13.sp, top: 14.sp),
               child: Align(
-                alignment: currentLanguage == "ar"
-                    ? Alignment.topRight
-                    : Alignment.topLeft,
+                alignment: currentLanguage == "ar" ? Alignment.topRight : Alignment.topLeft,
                 child: InkWell(
                   onTap: () {},
                   child: Container(
@@ -66,9 +59,7 @@ class DriverDrawer extends StatelessWidget {
                     height: 4.h,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: isSwitched
-                          ? const Color(0xff393f44)
-                          : const Color(0xffFFFFFF),
+                      color: isSwitched ? const Color(0xff393f44) : const Color(0xffFFFFFF),
                     ),
                     child: isSwitched
                         ? SvgPicture.asset('assets/images/satellite.svg',

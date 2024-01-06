@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
@@ -15,8 +14,7 @@ class GoogleMapBody extends StatelessWidget {
   String locationName = "";
   String destination = "";
 
-  CameraPosition initialCameraPosition =
-      const CameraPosition(target: LatLng(0, 0), zoom: 10);
+  CameraPosition initialCameraPosition = const CameraPosition(target: LatLng(0, 0), zoom: 10);
   Map<PolylineId, Polyline> distance = {};
   String orderState = "";
 
@@ -53,9 +51,7 @@ class GoogleMapBody extends StatelessWidget {
           if (state is MapGetCurrentLocationState) {
             locationName = state.locationName;
             googleMapController?.animateCamera(CameraUpdate.newLatLngZoom(
-                LatLng(
-                    state.userLocation.latitude, state.userLocation.longitude),
-                10));
+                LatLng(state.userLocation.latitude, state.userLocation.longitude), 10));
           }
           if (state is GetDestinationState) {
             destination = state.destination.name;
@@ -91,8 +87,7 @@ class GoogleMapBody extends StatelessWidget {
                     markerId: MarkerId((marker.userId.toString())),
                     position: LatLng(marker.lat!, marker.lng!),
                     icon: await BitmapDescriptor.fromAssetImage(
-                        const ImageConfiguration(),
-                        "assets/images/markerX3.png"),
+                        const ImageConfiguration(), "assets/images/markerX3.png"),
                     onTap: () {
                       showOrderBottomSheet(
                           context: context,
@@ -109,9 +104,7 @@ class GoogleMapBody extends StatelessWidget {
 
           //show loading dialog on the map
           if (context.mounted) {
-            state is MapLoadingState
-                ? showLoadingDialog(context: context)
-                : const SizedBox();
+            state is MapLoadingState ? showLoadingDialog(context: context) : const SizedBox();
           }
         },
       ),

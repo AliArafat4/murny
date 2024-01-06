@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
-
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
-
 import 'package:murny_final_project/widgets/account_text.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -62,23 +58,19 @@ class _OTPScreenState extends State<OTPScreen> {
                     child: isVisible
                         ? Text(
                             AppLocalizations.of(context)!.otpSuccessSend,
-                            style: const TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w400),
+                            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                           )
                         : Text(
                             AppLocalizations.of(context)!.otpSuccessSend,
-                            style: const TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w400),
+                            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                           ),
                   ),
                   SizedBox(
                     height: 1.h,
                   ),
-                  Text(
-                      "${AppLocalizations.of(context)!.enterOTP}\nsent to ${widget.email}",
+                  Text("${AppLocalizations.of(context)!.enterOTP}\nsent to ${widget.email}",
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: Color(0xff8E98A8), fontSize: 16),
+                      style: const TextStyle(color: Color(0xff8E98A8), fontSize: 16),
                       textDirection: TextDirection.rtl),
                 ],
               ),
@@ -91,11 +83,9 @@ class _OTPScreenState extends State<OTPScreen> {
                   decoration: BoxLooseDecoration(
                       strokeWidth: 0.71,
                       radius: const Radius.circular(7.08),
-                      strokeColorBuilder:
-                          const FixedColorBuilder(Color(0xffD0D0D0))),
+                      strokeColorBuilder: const FixedColorBuilder(Color(0xffD0D0D0))),
                   codeLength: 6,
                   onCodeChanged: (value) {
-                    print(value);
                     setState(() {
                       conOtp.text = value!;
                       updateButtonVisibility();
@@ -118,19 +108,18 @@ class _OTPScreenState extends State<OTPScreen> {
 
                             if (state is AuthResendOTPSuccessState) {
                               Navigator.pop(context);
-                              showSuccessSnackBar(context,
-                                  "OTP has been re-sent to ${widget.email} successfully");
+                              showSuccessSnackBar(
+                                  context, "OTP has been re-sent to ${widget.email} successfully");
                             }
                           },
                           builder: (context, state) {
                             return AccountText(
-                              firstText:
-                                  AppLocalizations.of(context)!.reSendOtp,
-                              secondText:
-                                  AppLocalizations.of(context)!.notReceiveOtp,
+                              firstText: AppLocalizations.of(context)!.reSendOtp,
+                              secondText: AppLocalizations.of(context)!.notReceiveOtp,
                               pushNavi: () {
-                                context.read<AuthBloc>().add(
-                                    AuthResendOTPEvent(email: widget.email));
+                                context
+                                    .read<AuthBloc>()
+                                    .add(AuthResendOTPEvent(email: widget.email));
                               },
                             );
                           },
@@ -147,20 +136,17 @@ class _OTPScreenState extends State<OTPScreen> {
                     builder: (context, state) {
                       return ElevatedButton(
                           style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8))),
-                              backgroundColor: MaterialStateProperty.all(
-                                  const Color(0xff252C63))),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                              backgroundColor: MaterialStateProperty.all(const Color(0xff252C63))),
                           onPressed: () {
-                            context.read<AuthBloc>().add(AuthOTPEvent(
-                                email: widget.email, otp: conOtp.text));
+                            context
+                                .read<AuthBloc>()
+                                .add(AuthOTPEvent(email: widget.email, otp: conOtp.text));
                           },
                           child: Text(
                             AppLocalizations.of(context)!.verify,
-                            style: const TextStyle(
-                                color: Color(0xffFFFFFF), fontSize: 16),
+                            style: const TextStyle(color: Color(0xffFFFFFF), fontSize: 16),
                           ));
                     },
                     listener: (context, state) {
@@ -176,9 +162,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       state is AuthOTPSuccessState
                           ? Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const GoogleMapScreen()),
+                              MaterialPageRoute(builder: (context) => const GoogleMapScreen()),
                             )
                           : const SizedBox();
                     },

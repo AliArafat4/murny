@@ -20,15 +20,11 @@ class HomeBalanceScreen extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height / 22),
             Stack(
               children: [
-                Container(
-                  child: Image.asset("assets/images/balance_card.png"),
-                ),
+                Image.asset("assets/images/balance_card.png"),
                 Positioned(
                   top: MediaQuery.of(context).size.height / 22,
                   right: MediaQuery.of(context).size.width / 22,
-                  child: Container(
-                    child: Image.asset("assets/images/balanc_icon.png"),
-                  ),
+                  child: Image.asset("assets/images/balanc_icon.png"),
                 )
               ],
             ),

@@ -3,8 +3,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpSideSigninSignup extends StatelessWidget {
-  const UpSideSigninSignup(
-      {super.key, required this.visibleImage, required this.onTap});
+  const UpSideSigninSignup({super.key, required this.visibleImage, required this.onTap});
   final bool visibleImage;
   final Function() onTap;
   @override
@@ -22,7 +21,7 @@ class UpSideSigninSignup extends StatelessWidget {
                 onTap: onTap,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.arrow_back_ios_new,
                       //  color: Colors.black,
                     ),

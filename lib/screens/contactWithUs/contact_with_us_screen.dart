@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
-import 'package:murny_final_project/method/show_confirm_dilog.dart';
 
 import 'package:murny_final_project/screens/contactWithUs/component/call_phone_whatsapp.dart';
 import 'package:murny_final_project/widgets/arrow_back_circle_container.dart';
@@ -8,11 +7,11 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactWithUs extends StatelessWidget {
-  ContactWithUs({super.key});
-  bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
+  const ContactWithUs({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
     return Scaffold(
       body: SafeArea(
         child: Column(children: [

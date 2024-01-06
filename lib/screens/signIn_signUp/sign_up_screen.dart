@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/bloc/check_box_bloc/cubit/checkbox_cubit.dart';
-import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
 import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_in_screen.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
-import 'package:murny_final_project/screens/home/home_screen.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
-import 'package:murny_final_project/widgets/divider_signin_signup.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
@@ -18,13 +15,12 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
-    //  print(currentLanguage.runtimeType);
 
     return GestureDetector(
         onTap: () {
@@ -42,9 +38,7 @@ class SignUpScreen extends StatelessWidget {
                 },
               ),
               Align(
-                  alignment: currentLanguage == 'ar'
-                      ? Alignment.topRight
-                      : Alignment.topLeft,
+                  alignment: currentLanguage == 'ar' ? Alignment.topRight : Alignment.topLeft,
                   child: Text(AppLocalizations.of(context)!.signUp,
                       style: const TextStyle(
                         fontSize: 28,
@@ -100,15 +94,10 @@ class SignUpScreen extends StatelessWidget {
                   BlocBuilder<CheckboxCubit, CheckboxState>(
                     builder: (context, state) {
                       return Checkbox(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100)),
-                        value: state is CheckboxSignupSelectState
-                            ? state.selected
-                            : false,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                        value: state is CheckboxSignupSelectState ? state.selected : false,
                         onChanged: (value) {
-                          context
-                              .read<CheckboxCubit>()
-                              .checkboxSignUp(select: value!);
+                          context.read<CheckboxCubit>().checkboxSignUp(select: value!);
                         },
                       );
                     },
@@ -123,8 +112,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               SizedBox(height: 1.h),
               BlocConsumer<AuthBloc, AuthState>(
-                buildWhen: (previous, current) =>
-                    current is AuthUserRegisterErrorState,
+                buildWhen: (previous, current) => current is AuthUserRegisterErrorState,
                 builder: (context, state) {
                   return PrimaryButton(
                       isText: true,
@@ -139,10 +127,7 @@ class SignUpScreen extends StatelessWidget {
                       });
                 },
                 listener: (BuildContext context, AuthState state) {
-
-                  state is LoadingState
-                      ? showLoadingDialog(context: context)
-                      : const SizedBox();
+                  state is LoadingState ? showLoadingDialog(context: context) : const SizedBox();
 
                   if (state is AuthUserRegisterErrorState) {
                     Navigator.pop(context);
@@ -152,8 +137,7 @@ class SignUpScreen extends StatelessWidget {
                   state is AuthRegisterSuccessState
                       ? Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const GoogleMapScreen()),
+                          MaterialPageRoute(builder: (context) => const GoogleMapScreen()),
                         )
                       : const SizedBox();
                 },

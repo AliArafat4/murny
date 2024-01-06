@@ -19,35 +19,29 @@ part 'map_state.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
   MapBloc() : super(MapInitial()) {
-    final AuthModel currentUser =
-        AuthModel.fromJson(jsonDecode(pref.getUser()));
+    final AuthModel currentUser = AuthModel.fromJson(jsonDecode(pref.getUser()));
 
     on<MapGetCurrentLocationEvent>((event, emit) async {
       try {
         if (await userPermission()) {
           await Geolocator.getCurrentPosition().then((currLocation) async {
-            final currentLatLng =
-                LatLng(currLocation.latitude, currLocation.longitude);
-            List<Placemark> locationName = await placemarkFromCoordinates(
-                currLocation.latitude, currLocation.longitude);
+            final currentLatLng = LatLng(currLocation.latitude, currLocation.longitude);
+            List<Placemark> locationName =
+                await placemarkFromCoordinates(currLocation.latitude, currLocation.longitude);
             emit(MapGetCurrentLocationState(
                 userLocation: currentLatLng,
-                locationName:
-                    "${locationName.first.name}, ${locationName.first.locality}"));
+                locationName: "${locationName.first.name}, ${locationName.first.locality}"));
           });
         }
       } catch (err) {
-        print(err);
+        // print(err);
       }
     });
 
     on<MapGetDriversMarkerEvent>((event, emit) async {
       emit(MapLoadingState());
-      final List<DriverModel> driversList = await MurnyApi().common(
-          body: {},
-          function: Common.getDrivers,
-          token: currentUser.token ?? "");
-      print(driversList.first.name);
+      final List<DriverModel> driversList = await MurnyApi()
+          .common(body: {}, function: Common.getDrivers, token: currentUser.token ?? "");
       emit(MapGetDriversMarkerState(driverModelList: driversList));
     });
 
@@ -57,20 +51,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     on<GetDestinationFromLongPressEvent>((event, emit) async {
       emit(MapLoadingState());
-      List<Placemark> locationName = await placemarkFromCoordinates(
-          event.location.latitude, event.location.longitude);
+      List<Placemark> locationName =
+          await placemarkFromCoordinates(event.location.latitude, event.location.longitude);
 
       emit(GetDestinationFromLongPressState(destination: locationName.first));
     });
 
     on<MapSearchEvent>((event, emit) async {
       final places = GoogleMapsPlaces(apiKey: dotenv.env['GoogleMapsApiKey']);
-      PlacesSearchResponse response =
-          await places.searchByText(event.searchedText, radius: 500);
+      PlacesSearchResponse response = await places.searchByText(event.searchedText, radius: 500);
 
-      print(response.status);
-      print(response.errorMessage);
-      print(response.results.first.name);
       emit(MapSearchState(results: response.results));
     });
 
@@ -80,7 +70,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           body: {'cart_id': event.cartTierID},
           function: Common.filterDrivers,
           token: currentUser.token ?? "");
-      print(driversList);
       emit(MapFilterDriversMarkerState(driverModelList: driversList));
     });
   }

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:murny_final_project/api/end_points/enums.dart';
-import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/get_by_id_bloc/get_by_id_cubit.dart';
 import 'package:murny_final_project/models/auth_model.dart';
 import 'package:murny_final_project/models/cart_model.dart';
-
 import 'package:murny_final_project/models/driver_model.dart';
 import 'package:murny_final_project/models/order_model.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
@@ -17,8 +14,7 @@ import 'package:murny_final_project/widgets/payment_method.dart';
 import 'package:murny_final_project/widgets/trip_detil.dart';
 
 class AcceptedOrderBottomSheet extends StatelessWidget {
-  const AcceptedOrderBottomSheet(
-      {Key? key, required this.order, required this.user})
+  const AcceptedOrderBottomSheet({Key? key, required this.order, required this.user})
       : super(key: key);
 
   final OrderModel order;
@@ -40,9 +36,6 @@ class AcceptedOrderBottomSheet extends StatelessWidget {
     bloc.getCartByID(cartID: order.cartId.toString());
     bloc.getDriverByID(driverID: order.driverId!, token: user.token!);
 
-    CartModel cart = CartModel();
-    DriverModel driver = DriverModel();
-
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.7,
@@ -62,10 +55,8 @@ class AcceptedOrderBottomSheet extends StatelessWidget {
             ),
             Padding(
               padding: currentLanguage == "ar"
-                  ? EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width / 20)
-                  : EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 20),
+                  ? EdgeInsets.only(right: MediaQuery.of(context).size.width / 20)
+                  : EdgeInsets.only(left: MediaQuery.of(context).size.width / 20),
               child: Text(
                 AppLocalizations.of(context)!.glofCartOnWay,
                 style: const TextStyle(fontSize: 16),
@@ -84,8 +75,7 @@ class AcceptedOrderBottomSheet extends StatelessWidget {
             Row(
               children: [
                 BlocBuilder<GetByIdCubit, GetByIdState>(
-                  buildWhen: (previous, current) =>
-                      current is GetDriverByIdSuccessState,
+                  buildWhen: (previous, current) => current is GetDriverByIdSuccessState,
                   builder: (context, state) {
                     return DriverInfo(
                         user: user,
@@ -115,13 +105,10 @@ class AcceptedOrderBottomSheet extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 140,
             ),
             BlocBuilder<GetByIdCubit, GetByIdState>(
-              buildWhen: (previous, current) =>
-                  current is GetCartByIdSuccessState,
+              buildWhen: (previous, current) => current is GetCartByIdSuccessState,
               builder: (context, state) {
                 return CartDetail(
-                  cart: state is GetCartByIdSuccessState
-                      ? state.getCartByID
-                      : CartModel(),
+                  cart: state is GetCartByIdSuccessState ? state.getCartByID : CartModel(),
                 );
               },
             ),

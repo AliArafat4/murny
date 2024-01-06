@@ -25,15 +25,13 @@ class OrderStateStream extends StatelessWidget {
     double panelHeight = context.getHeight(factor: 0.45);
 
     Stream<http.Response> getOrders() async* {
-      final uri = Uri.parse(
-          "https://murny-api.onrender.com/common/get_last_user_order");
+      final uri = Uri.parse("https://murny-api.onrender.com/common/get_last_user_order");
 
       yield* Stream.periodic(const Duration(seconds: 3), (_) async {
         final res = http.get(uri, headers: {"token": user.token ?? ""});
         final body = await res;
         final order = OrderModel.fromJson(jsonDecode(body.body));
-        print(order.runtimeType);
-        print(body.body);
+
         if (context.mounted) {
           context
               .read<OrderStateCubit>()
@@ -45,16 +43,14 @@ class OrderStateStream extends StatelessWidget {
     }
 
     return BlocConsumer<OrderStateCubit, OrderStateState>(
-      buildWhen: (previous, current) =>
-          current != previous || current is OrderStateInitial,
+      buildWhen: (previous, current) => current != previous || current is OrderStateInitial,
       builder: (context, state) {
         return SlidingUpPanel(
           panel: StreamBuilder(
               stream: getOrders(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  Map<String, dynamic> response =
-                      jsonDecode(snapshot.data!.body);
+                  Map<String, dynamic> response = jsonDecode(snapshot.data!.body);
 
                   if (response.isNotEmpty) {
                     final OrderModel lastOrder = OrderModel.fromJson(response);

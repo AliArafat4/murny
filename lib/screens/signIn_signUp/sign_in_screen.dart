@@ -4,12 +4,9 @@ import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/navigations/navigation_methods.dart';
-import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
-import 'package:murny_final_project/screens/home/home_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/otp_screen.dart';
 import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
 import 'package:murny_final_project/widgets/account_text.dart';
-import 'package:murny_final_project/widgets/divider_signin_signup.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
 import 'package:murny_final_project/widgets/up_side_signin_siginup.dart';
@@ -44,9 +41,7 @@ class SignInScreen extends StatelessWidget {
                     visibleImage: true,
                   ),
                   Align(
-                      alignment: currentLanguage == "ar"
-                          ? Alignment.topRight
-                          : Alignment.topLeft,
+                      alignment: currentLanguage == "ar" ? Alignment.topRight : Alignment.topLeft,
                       child: Text(AppLocalizations.of(context)!.signIn,
                           style: const TextStyle(
                             fontSize: 28,
@@ -92,8 +87,9 @@ class SignInScreen extends StatelessWidget {
                           title: AppLocalizations.of(context)!.signIn,
                           isPadding: false,
                           onPressed: () {
-                            context.read<AuthBloc>().add(AuthLoginEvent(
-                                email: conEmail.text, password: conPass.text));
+                            context
+                                .read<AuthBloc>()
+                                .add(AuthLoginEvent(email: conEmail.text, password: conPass.text));
                           },
                         );
                       },
@@ -158,7 +154,7 @@ class SignInScreen extends StatelessWidget {
                       navigation(
                         context: context,
                         type: 'push',
-                        screen: SignUpScreen(),
+                        screen: const SignUpScreen(),
                       );
                     },
                   ),

@@ -29,22 +29,9 @@ class CommonFunc {
           }
 
           return orderModelList;
-          print("HERE HERE");
-
-          // Stream<http.Response> getRandomNumberFact(uri) async* {
-          //   yield* Stream.periodic(Duration(seconds: 5), (_) {
-          //     return http.get(uri);
-          //   }).asyncMap((event) async => await event);
-          // }
-          print("HERE HERE");
-          // print(x);
-          break;
-        } on FormatException catch (err) {
-          print(err);
+        } on FormatException catch (_) {
           return false;
         } catch (err) {
-          print(err);
-
           return false;
         }
       case Common.getLastUserOrder:
@@ -54,26 +41,11 @@ class CommonFunc {
           final response = await http.get(uri, headers: {"token": token});
 
           final decodedBody = jsonDecode(response.body);
-          print("last order");
-          print("decodedBody");
+
           return decodedBody;
-
-          print("HERE HERE");
-
-          // Stream<http.Response> getRandomNumberFact(uri) async* {
-          //   yield* Stream.periodic(Duration(seconds: 5), (_) {
-          //     return http.get(uri);
-          //   }).asyncMap((event) async => await event);
-          // }
-          print("HERE HERE");
-          // print(x);
-          break;
-        } on FormatException catch (err) {
-          print(err);
+        } on FormatException catch (_) {
           return false;
         } catch (err) {
-          print(err);
-
           return false;
         }
       case Common.getDriverOrder:
@@ -89,12 +61,9 @@ class CommonFunc {
           }
 
           return orderModelList;
-        } on FormatException catch (err) {
-          print(err);
+        } on FormatException catch (_) {
           return false;
         } catch (err) {
-          print(err);
-
           return false;
         }
       case Common.getDrivers:
@@ -111,7 +80,6 @@ class CommonFunc {
 
           return driverModelList;
         } catch (err) {
-          print(err);
           return false;
         }
 
@@ -119,8 +87,7 @@ class CommonFunc {
         try {
           final uri = Uri.parse(url + endPoints.getDrivers);
 
-          final response = await http.post(uri,
-              headers: {"token": token}, body: jsonEncode(body));
+          final response = await http.post(uri, headers: {"token": token}, body: jsonEncode(body));
 
           final List<DriverModel> driverModelList = [];
           final decodedBody = jsonDecode(response.body);
@@ -130,7 +97,6 @@ class CommonFunc {
 
           return driverModelList;
         } catch (err) {
-          print(err);
           return false;
         }
 

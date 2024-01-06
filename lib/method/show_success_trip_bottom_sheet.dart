@@ -3,7 +3,6 @@ import 'package:murny_final_project/method/show_main_bottom_sheet.dart';
 import 'package:murny_final_project/widgets/book_detil.dart';
 import 'package:murny_final_project/widgets/book_location.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
-import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showSuccessfulTripBottomSheet({required BuildContext context}) {
@@ -38,7 +37,7 @@ showSuccessfulTripBottomSheet({required BuildContext context}) {
                 ),
                 Text(
                   AppLocalizations.of(context)!.successTrip,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width / 20,
@@ -60,7 +59,7 @@ showSuccessfulTripBottomSheet({required BuildContext context}) {
                     showMainBottomSheet(context: context);
                   },
                   title: AppLocalizations.of(context)!.endTrip,
-                  buttonColor: Color(0xff252C63),
+                  buttonColor: const Color(0xff252C63),
                   isText: true,
                   isPadding: true,
                 )

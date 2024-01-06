@@ -14,7 +14,7 @@ class SecondButton extends StatelessWidget {
   bool isFill;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         width: MediaQuery.of(context).size.width * 0.3,
         height: MediaQuery.of(context).size.height / 18,
         child: ElevatedButton(
@@ -34,7 +34,7 @@ class SecondButton extends StatelessWidget {
                   // foregroundColor: const Color(0xff252C63),
                   elevation: 0),
           onPressed: onPressed,
-          child: Text(title, style: TextStyle(color: Color(0xffFFFFFF))),
+          child: Text(title, style: const TextStyle(color: Color(0xffFFFFFF))),
         ));
   }
 }

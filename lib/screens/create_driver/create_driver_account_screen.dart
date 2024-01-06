@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/bloc/auth_bloc/auth_bloc.dart';
-import 'package:murny_final_project/bloc/image_bloc/image_bloc_bloc.dart';
 import 'package:murny_final_project/bloc/radiobutton_bloc/cubit/radiobutton_cubit.dart';
 import 'package:murny_final_project/bloc/upload_licen_bloc/upload_licen_bloc_bloc.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
@@ -34,7 +33,6 @@ class CreateDriverAccountScreen extends StatelessWidget {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
     return Scaffold(
-      // backgroundColor: const Color(0xffFFFFFF),
       body: Padding(
         padding: EdgeInsets.all(20.sp),
         child: SingleChildScrollView(
@@ -44,20 +42,15 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 visibleImage: true,
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const SplashSignInSignUpScreen()),
+                      MaterialPageRoute(builder: (context) => const SplashSignInSignUpScreen()),
                       (Route route) => false);
                 },
               ),
               Align(
-                  alignment: currentLanguage == "ar"
-                      ? Alignment.topRight
-                      : Alignment.topLeft,
+                  alignment: currentLanguage == "ar" ? Alignment.topRight : Alignment.topLeft,
                   child: Text(AppLocalizations.of(context)!.createDriverAccount,
                       style: const TextStyle(
                         fontSize: 24,
-                        // color: Color(0xff252C63),
                       ))),
               SizedBox(
                 height: 3.h,
@@ -107,9 +100,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 height: 2.h,
               ),
               Align(
-                alignment: currentLanguage == "ar"
-                    ? Alignment.topRight
-                    : Alignment.topLeft,
+                alignment: currentLanguage == "ar" ? Alignment.topRight : Alignment.topLeft,
                 child: Text(
                   AppLocalizations.of(context)!.gender,
                   style: const TextStyle(fontSize: 18),
@@ -121,13 +112,10 @@ class CreateDriverAccountScreen extends StatelessWidget {
                     children: [
                       Radio(
                         value: "male",
-                        groupValue: state is RadioButtonGenderSelectState
-                            ? state.selected
-                            : selectedOption,
+                        groupValue:
+                            state is RadioButtonGenderSelectState ? state.selected : selectedOption,
                         onChanged: (value) {
-                          context
-                              .read<RadiobuttonCubit>()
-                              .radiobuttonGender(selectedType: value!);
+                          context.read<RadiobuttonCubit>().radiobuttonGender(selectedType: value!);
                         },
                       ),
                       const Icon(
@@ -136,13 +124,10 @@ class CreateDriverAccountScreen extends StatelessWidget {
                       ),
                       Radio(
                         value: "female",
-                        groupValue: state is RadioButtonGenderSelectState
-                            ? state.selected
-                            : selectedOption,
+                        groupValue:
+                            state is RadioButtonGenderSelectState ? state.selected : selectedOption,
                         onChanged: (value) {
-                          context
-                              .read<RadiobuttonCubit>()
-                              .radiobuttonGender(selectedType: value!);
+                          context.read<RadiobuttonCubit>().radiobuttonGender(selectedType: value!);
                         },
                       ),
                       const Icon(
@@ -159,9 +144,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 height: 2.h,
               ),
               Align(
-                alignment: currentLanguage == "ar"
-                    ? Alignment.topRight
-                    : Alignment.topLeft,
+                alignment: currentLanguage == "ar" ? Alignment.topRight : Alignment.topLeft,
                 child: Text(
                   AppLocalizations.of(context)!.uploadDriverLicense,
                   style: const TextStyle(fontSize: 18),
@@ -175,10 +158,8 @@ class CreateDriverAccountScreen extends StatelessWidget {
                   // TODO: implement listener
 
                   if (state is UploadLicenSuccess) {
-                    showSuccessSnackBar(
-                        context, "Driver license has been added successfully");
+                    showSuccessSnackBar(context, "Driver license has been added successfully");
                   }
-                  ;
                 },
                 child: Center(
                   child: SecondButton(
@@ -204,8 +185,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                 height: 4.h,
               ),
               BlocConsumer<AuthBloc, AuthState>(
-                buildWhen: (previous, current) =>
-                    current is AuthDriverRegisterErrorState,
+                buildWhen: (previous, current) => current is AuthDriverRegisterErrorState,
                 builder: (context, state) {
                   return PrimaryButton(
                     isText: true,
@@ -227,9 +207,7 @@ class CreateDriverAccountScreen extends StatelessWidget {
                   );
                 },
                 listener: (BuildContext context, AuthState state) {
-                  state is LoadingState
-                      ? showLoadingDialog(context: context)
-                      : const SizedBox();
+                  state is LoadingState ? showLoadingDialog(context: context) : const SizedBox();
 
                   if (state is AuthDriverRegisterErrorState) {
                     Navigator.pop(context);

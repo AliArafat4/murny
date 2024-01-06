@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:murny_final_project/screens/voice_search/search.dart';
 import 'package:murny_final_project/screens/voice_search/search_bar.dart';
 import 'package:murny_final_project/screens/voice_search/voice_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

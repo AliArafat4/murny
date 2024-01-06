@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
-import 'package:murny_final_project/extentions/size_extention.dart';
 import 'package:murny_final_project/widgets/location.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BookLocation extends StatelessWidget {
-  const BookLocation(
-      {super.key, required this.locationFrom, required this.locationTo});
+  const BookLocation({super.key, required this.locationFrom, required this.locationTo});
   final String locationFrom;
   final String locationTo;
   @override
@@ -32,8 +30,7 @@ class BookLocation extends StatelessWidget {
             children: [
               Flexible(
                 child: BlocBuilder<MapBloc, MapState>(
-                  buildWhen: (previous, current) =>
-                      current is MapGetCurrentLocationState,
+                  buildWhen: (previous, current) => current is MapGetCurrentLocationState,
                   builder: (context, state) {
                     return Location(
                         color: const Color(0xff252C63),
@@ -46,10 +43,8 @@ class BookLocation extends StatelessWidget {
               ),
               Padding(
                 padding: currentLanguage == "ar"
-                    ? EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width / 20.sp)
-                    : EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 20.sp),
+                    ? EdgeInsets.only(right: MediaQuery.of(context).size.width / 20.sp)
+                    : EdgeInsets.only(left: MediaQuery.of(context).size.width / 20.sp),
                 child: Dash(
                     direction: Axis.vertical,
                     length: 1.9.h,
@@ -64,15 +59,12 @@ class BookLocation extends StatelessWidget {
               ),
               Flexible(
                 child: BlocBuilder<MapBloc, MapState>(
-                  buildWhen: (previous, current) =>
-                      current is GetDestinationState,
+                  buildWhen: (previous, current) => current is GetDestinationState,
                   builder: (context, state) {
                     return Location(
                       color: const Color(0xffF21D53),
                       icon: Icons.location_on_outlined,
-                      title: state is GetDestinationState
-                          ? state.destination.name
-                          : locationTo,
+                      title: state is GetDestinationState ? state.destination.name : locationTo,
                     );
                   },
                 ),
