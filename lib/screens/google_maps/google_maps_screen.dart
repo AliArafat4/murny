@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:murny_final_project/main.dart';
-import 'package:murny_final_project/screens/google_maps/driver_drawer.dart';
 import 'package:murny_final_project/screens/google_maps/driver_flow_bottom_sheets/drawer.dart';
 import 'package:murny_final_project/screens/google_maps/user_drawer.dart';
 import 'package:murny_final_project/screens/google_maps/driver_flow_bottom_sheets/google_maps_driver.dart';
@@ -21,7 +20,7 @@ class GoogleMapScreen extends StatelessWidget {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final AuthModel user = AuthModel.fromJson(jsonDecode(pref.getUser()));
     return Scaffold(
-      drawer: user.userType == "user" ? const UserDrawer() : const DriverDrawer(),
+      drawer: const UserDrawer(),
       key: scaffoldKey,
 
       body: SafeArea(
