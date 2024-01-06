@@ -129,9 +129,14 @@ class CustomDrawer extends StatelessWidget {
 
     return Drawer(
 // <<<<<<< Arwa-Alzahrani
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(80), bottomLeft: Radius.circular(80))),
+        shape: RoundedRectangleBorder(
+            borderRadius: currentLanguage == 'ar'
+                ? const BorderRadius.only(
+                    topLeft: Radius.circular(80),
+                    bottomLeft: Radius.circular(80))
+                : const BorderRadius.only(
+                    topRight: Radius.circular(80),
+                    bottomRight: Radius.circular(80))),
         child: ListView(children: [
           BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
             return Column(
@@ -164,8 +169,8 @@ class CustomDrawer extends StatelessWidget {
                       state is ProfileGetCurrentUserState
                           ? '${state.user.name}'
                           : '',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w400),
                     ),
                   ),
                   Padding(
@@ -178,8 +183,8 @@ class CustomDrawer extends StatelessWidget {
                               ? '966${state.user.phone}+'
                               : '+966${state.user.phone}'
                           : '',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w400, fontSize: 18),
                     ),
                   ),
 
@@ -190,68 +195,68 @@ class CustomDrawer extends StatelessWidget {
                     naviPush: () {
                       Navigator.push(
 // =======
-      shape: RoundedRectangleBorder(
-          borderRadius: currentLanguage == 'ar'
-              ? BorderRadius.only(
-                  topLeft: Radius.circular(80), bottomLeft: Radius.circular(80))
-              : BorderRadius.only(
-                  topRight: Radius.circular(80),
-                  bottomRight: Radius.circular(80))),
-      child: ListView(
-        children: [
-          Padding(
-            padding: currentLanguage == 'ar'
-                ? EdgeInsets.only(top: 20.sp, left: 180)
-                : EdgeInsets.only(top: 20.sp, right: 180),
-            child: const CircleAvatar(
-              radius: 44,
-              foregroundImage: AssetImage("assets/images/personalImage.png"),
-            ),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 12.sp),
-            child: Padding(
-              padding: currentLanguage == 'ar'
-                  ? EdgeInsets.only(right: 15.sp)
-                  : EdgeInsets.only(left: 15.sp),
-              child: const Text(
-                'مروة',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 12.sp),
-            child: Row(
-              children: [
-                Padding(
-                  padding: currentLanguage == 'ar'
-                      ? EdgeInsets.only(right: 15.sp)
-                      : EdgeInsets.only(left: 15.sp),
-                  child: Text(
-                    '966548784080+',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
-                  ),
-                )
-              ],
-            ),
-          ),
-          ContentDrawer(
-            text: AppLocalizations.of(context)!.editAccount,
-            imageSvg: 'assets/images/imageEditAccount.svg',
-            spaceTop: 0.sp,
-            naviPush: () {
-              /*  Navigator.push(
+//       shape: RoundedRectangleBorder(
+//           borderRadius: currentLanguage == 'ar'
+//               ? BorderRadius.only(
+//                   topLeft: Radius.circular(80), bottomLeft: Radius.circular(80))
+//               : BorderRadius.only(
+//                   topRight: Radius.circular(80),
+//                   bottomRight: Radius.circular(80))),
+//       child: ListView(
+//         children: [
+//           Padding(
+//             padding: currentLanguage == 'ar'
+//                 ? EdgeInsets.only(top: 20.sp, left: 180)
+//                 : EdgeInsets.only(top: 20.sp, right: 180),
+//             child: const CircleAvatar(
+//               radius: 44,
+//               foregroundImage: AssetImage("assets/images/personalImage.png"),
+//             ),
+//           ),
+//           SizedBox(
+//             height: 2.h,
+//           ),
+//           Padding(
+//             padding: EdgeInsets.only(right: 12.sp),
+//             child: Padding(
+//               padding: currentLanguage == 'ar'
+//                   ? EdgeInsets.only(right: 15.sp)
+//                   : EdgeInsets.only(left: 15.sp),
+//               child: const Text(
+//                 'مروة',
+//                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+//               ),
+//             ),
+//           ),
+//           Padding(
+//             padding: EdgeInsets.only(right: 12.sp),
+//             child: Row(
+//               children: [
+//                 Padding(
+//                   padding: currentLanguage == 'ar'
+//                       ? EdgeInsets.only(right: 15.sp)
+//                       : EdgeInsets.only(left: 15.sp),
+//                   child: Text(
+//                     '966548784080+',
+//                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+//                   ),
+//                 )
+//               ],
+//             ),
+//           ),
+//           ContentDrawer(
+//             text: AppLocalizations.of(context)!.editAccount,
+//             imageSvg: 'assets/images/imageEditAccount.svg',
+//             spaceTop: 0.sp,
+//             naviPush: () {
+//               /*  Navigator.push(
 // >>>>>>> main
                         context,
                         MaterialPageRoute(builder: (context) => EditAccount()),
                       );
 
                       // //MurnyApi().signOut(context: context);
-                      showMainBottomSheet(context: context);
+                      // showMainBottomSheet(context: context);
                     },
                   ),
                   ContentDrawer(
