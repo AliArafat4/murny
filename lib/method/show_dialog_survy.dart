@@ -3,7 +3,6 @@ import 'package:murny_final_project/screens/success/success.dart';
 import 'package:murny_final_project/widgets/comment_text_filed.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:murny_final_project/widgets/rating.dart';
-import 'package:murny_final_project/widgets/second_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 showSurvyDiolg({required BuildContext context}) {
@@ -55,12 +54,9 @@ showSurvyDiolg({required BuildContext context}) {
             const Rating(),
             const Divider(),
             Padding(
-              padding: EdgeInsets.only(
-                  right: MediaQuery.of(context).size.width / 20),
+              padding: EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
               child: Align(
-                alignment: currentLanguage == "ar"
-                    ? Alignment.centerRight
-                    : Alignment.centerLeft,
+                alignment: currentLanguage == "ar" ? Alignment.centerRight : Alignment.centerLeft,
                 child: Text(
                   AppLocalizations.of(context)!.comment,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(

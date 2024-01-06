@@ -10,11 +10,11 @@ class DriverRate extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: Color(0xff252C63), width: 2)),
+          border: Border.all(color: const Color(0xff252C63), width: 2)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.star_rounded,
             color: Color(0xffFFC212),
           ),

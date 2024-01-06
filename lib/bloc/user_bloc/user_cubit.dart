@@ -21,7 +21,7 @@ class UserCubit extends Cubit<UserState> {
   }) async {
     emit(UserLoadingOrderState());
 
-    final response = await MurnyApi().user(body: {
+    await MurnyApi().user(body: {
       "driver_id": driverId,
       "location_from": locationFrom,
       "location_to": locationTo,

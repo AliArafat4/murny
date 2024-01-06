@@ -20,8 +20,7 @@ class Rating extends StatelessWidget {
         color: Colors.amber,
       ),
       onRatingUpdate: (rating) {
-        double saveRating = rating;
-        print(saveRating);
+        // double saveRating = rating;
       },
     );
   }

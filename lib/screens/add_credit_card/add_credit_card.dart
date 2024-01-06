@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:murny_final_project/bloc/card_bloc/cubit/card_cubit.dart';
 import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
 import 'package:murny_final_project/widgets/primary_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddCreditCardScreen extends StatefulWidget {
-  AddCreditCardScreen({super.key});
+  const AddCreditCardScreen({super.key});
 
   @override
   State<AddCreditCardScreen> createState() => _AddCreditCardScreenState();
@@ -46,17 +44,13 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
             children: [
               Padding(
                 padding: currentLanguage == "ar"
-                    ? EdgeInsets.only(
-                        right: MediaQuery.of(context).size.height / 42)
-                    : EdgeInsets.only(
-                        left: MediaQuery.of(context).size.height / 42),
+                    ? EdgeInsets.only(right: MediaQuery.of(context).size.height / 42)
+                    : EdgeInsets.only(left: MediaQuery.of(context).size.height / 42),
                 child: Align(
-                    alignment: currentLanguage == "ar"
-                        ? Alignment.topRight
-                        : Alignment.topLeft,
+                    alignment: currentLanguage == "ar" ? Alignment.topRight : Alignment.topLeft,
                     child: Text(
                       AppLocalizations.of(context)!.creditCard,
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     )),
               ),
               SizedBox(height: MediaQuery.of(context).size.height / 400),
@@ -108,8 +102,7 @@ class _AddCreditCardScreenState extends State<AddCreditCardScreen> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => GoogleMapScreen()),
+                                MaterialPageRoute(builder: (context) => const GoogleMapScreen()),
                                 (Route route) => false);
                           }
                         },

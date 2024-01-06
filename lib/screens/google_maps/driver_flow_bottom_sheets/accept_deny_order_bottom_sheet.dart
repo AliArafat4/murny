@@ -13,10 +13,7 @@ import 'package:murny_final_project/widgets/user_info.dart';
 
 class AcceptDenyOrderBottomSheet extends StatelessWidget {
   const AcceptDenyOrderBottomSheet(
-      {Key? key,
-      required this.order,
-      required this.user,
-      required this.orderFrom})
+      {Key? key, required this.order, required this.user, required this.orderFrom})
       : super(key: key);
 
   final OrderModel order;
@@ -24,8 +21,6 @@ class AcceptDenyOrderBottomSheet extends StatelessWidget {
   final ProfileModel orderFrom;
   @override
   Widget build(BuildContext context) {
-    Locale myLocale = Localizations.localeOf(context);
-    String currentLanguage = myLocale.languageCode;
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.5,
@@ -47,9 +42,7 @@ class AcceptDenyOrderBottomSheet extends StatelessWidget {
               Text(
                 AppLocalizations.of(context)!.newOrder,
                 style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff252C63)),
+                    fontSize: 24, fontWeight: FontWeight.w400, color: Color(0xff252C63)),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.width / 20,
@@ -74,19 +67,15 @@ class AcceptDenyOrderBottomSheet extends StatelessWidget {
                 children: [
                   SecondButton(
                     onPressed: () async {
-                      await MurnyApi().driver(
-                          body: {
-                            "order_from_id": order.orderFromId,
-                            "id": order.id,
-                            "cart_id": order.cartId,
-                            "order_state": "accepted"
-                          },
-                          function: Driver.responseToOrder,
-                          token: user.token ?? "");
+                      await MurnyApi().driver(body: {
+                        "order_from_id": order.orderFromId,
+                        "id": order.id,
+                        "cart_id": order.cartId,
+                        "order_state": "accepted"
+                      }, function: Driver.responseToOrder, token: user.token ?? "");
 
                       if (context.mounted) {
-                        showSuccessSnackBar(
-                            context, "Order Accepted Successfully");
+                        showSuccessSnackBar(context, "Order Accepted Successfully");
                       }
                       // showOrderBottomSheet(context: context);
                     },
@@ -97,22 +86,17 @@ class AcceptDenyOrderBottomSheet extends StatelessWidget {
                     onPressed: () {
                       showConfirmDiolg(
                           context: context,
-                          title:
-                              AppLocalizations.of(context)!.cancelOrderConfirm,
+                          title: AppLocalizations.of(context)!.cancelOrderConfirm,
                           acceptFun: () async {
-                            await MurnyApi().driver(
-                                body: {
-                                  "order_from_id": order.orderFromId,
-                                  "id": order.id,
-                                  "cart_id": order.cartId,
-                                  "order_state": "canceled"
-                                },
-                                function: Driver.responseToOrder,
-                                token: user.token ?? "");
+                            await MurnyApi().driver(body: {
+                              "order_from_id": order.orderFromId,
+                              "id": order.id,
+                              "cart_id": order.cartId,
+                              "order_state": "canceled"
+                            }, function: Driver.responseToOrder, token: user.token ?? "");
 
                             if (context.mounted) {
-                              showSuccessSnackBar(
-                                  context, "Order Canceled Successfully");
+                              showSuccessSnackBar(context, "Order Canceled Successfully");
                               Navigator.pop(context);
                             }
                             // showOrderBottomSheet(context: context);

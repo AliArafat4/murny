@@ -28,7 +28,7 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 40,
       height: MediaQuery.of(context).size.height / 18,
       child: ElevatedButton(
@@ -47,8 +47,7 @@ class PrimaryButton extends StatelessWidget {
             foregroundColor: Colors.white),
         onPressed: onPressed,
         child: isText
-            ? Text(title ?? "",
-                style: TextStyle(color: textColor ?? const Color(0xffFFFFFF)))
+            ? Text(title ?? "", style: TextStyle(color: textColor ?? const Color(0xffFFFFFF)))
             : Padding(
                 padding: isPadding
                     ? currentLanguage == "ar"

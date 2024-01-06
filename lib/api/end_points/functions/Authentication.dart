@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'package:murny_final_project/api/end_points/end_points.dart';
 import 'package:murny_final_project/main.dart';
 import 'package:murny_final_project/models/auth_model.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../enums.dart';
 
@@ -21,8 +21,7 @@ class Authentication {
         final uri = Uri.parse(url + endPoints.driverSignUp);
         final response = await http.post(uri, body: jsonEncode(body));
 
-        final AuthModel authModel =
-            AuthModel.fromJson(jsonDecode(response.body));
+        final AuthModel authModel = AuthModel.fromJson(jsonDecode(response.body));
         pref.setUser(authModel);
         if (response.statusCode >= 400 && response.statusCode < 500) {
           throw "err";
@@ -51,7 +50,6 @@ class Authentication {
         final uri = Uri.parse(url + endPoints.resendOtp);
 
         final response = await http.post(uri, body: jsonEncode(body));
-        print(response.body);
         if (response.statusCode >= 400 && response.statusCode < 500) {
           throw "err";
         } else {

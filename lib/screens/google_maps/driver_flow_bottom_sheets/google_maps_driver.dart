@@ -2,24 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:murny_final_project/api/end_points/enums.dart';
-import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/driver_bloc/driver_cubit.dart';
 import 'package:murny_final_project/bloc/driver_map_bloc/map_bloc.dart';
-import 'package:murny_final_project/bloc/profile_bloc/profile_bloc.dart';
-
 import 'package:murny_final_project/method/show_loading.dart';
-import 'package:murny_final_project/method/show_order_bottom_sheet.dart';
 import 'package:murny_final_project/models/auth_model.dart';
-import 'package:murny_final_project/models/driver_model.dart';
-import 'package:murny_final_project/models/profile_model.dart';
 
 class GoogleMapDriverBody extends StatelessWidget {
   GoogleMapDriverBody({Key? key, required this.user}) : super(key: key);
 
   final AuthModel user;
-  CameraPosition initialCameraPosition =
-      const CameraPosition(target: LatLng(0, 0), zoom: 10);
+  CameraPosition initialCameraPosition = const CameraPosition(target: LatLng(0, 0), zoom: 10);
   @override
   Widget build(BuildContext context) {
     GoogleMapController? googleMapController;
@@ -34,9 +26,7 @@ class GoogleMapDriverBody extends StatelessWidget {
               const ImageConfiguration(), "assets/images/markerX3.png")));
       if (context.mounted) {
         context.read<DriverMapBloc>().add(MapGetCurrentLocationEvent());
-        context
-            .read<DriverCubit>()
-            .getDriver(token: user.token ?? "", newLocation: newLocation);
+        context.read<DriverCubit>().getDriver(token: user.token ?? "", newLocation: newLocation);
       }
     });
     return SizedBox(
@@ -55,9 +45,7 @@ class GoogleMapDriverBody extends StatelessWidget {
                 markers: Set.from(location),
                 onMapCreated: (GoogleMapController controller) {
                   googleMapController = controller;
-                  context
-                      .read<DriverMapBloc>()
-                      .add(MapGetCurrentLocationEvent());
+                  context.read<DriverMapBloc>().add(MapGetCurrentLocationEvent());
                 },
               ),
             ],
@@ -67,16 +55,12 @@ class GoogleMapDriverBody extends StatelessWidget {
           //GO TO USER LOCATION
           if (state is MapGetCurrentLocationState) {
             googleMapController?.animateCamera(CameraUpdate.newLatLngZoom(
-                LatLng(
-                    state.userLocation.latitude, state.userLocation.longitude),
-                20));
+                LatLng(state.userLocation.latitude, state.userLocation.longitude), 20));
           }
 
           //show loading dialog on the map
           if (context.mounted) {
-            state is MapLoadingState
-                ? showLoadingDialog(context: context)
-                : const SizedBox();
+            state is MapLoadingState ? showLoadingDialog(context: context) : const SizedBox();
           }
         },
       ),

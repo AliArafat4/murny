@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/profile_bloc/profile_bloc.dart';
-import 'package:murny_final_project/local_storage/shared_prefrences.dart';
 import 'package:murny_final_project/method/alert_snackbar.dart';
 import 'package:murny_final_project/method/show_confirm_dilog.dart';
-import 'package:murny_final_project/method/show_loading.dart';
 import 'package:murny_final_project/screens/editAccount/component/delete_logout_account.dart';
-import 'package:murny_final_project/screens/editAccount/component/profile_image.dart';
-import 'package:murny_final_project/screens/home/home_screen%20copy.dart';
-import 'package:murny_final_project/screens/signIn_signUp/sign_up_screen.dart';
 import 'package:murny_final_project/screens/splash_screen/splash_signIn_signUp_screen.dart';
 import 'package:murny_final_project/widgets/arrow_back_circle_container.dart';
 import 'package:murny_final_project/widgets/text_field.dart';
@@ -28,15 +22,13 @@ class EditAccount extends StatelessWidget {
     Locale myLocale = Localizations.localeOf(context);
     String currentLanguage = myLocale.languageCode;
     context.read<ProfileBloc>().add(ProfileGetCurrentUserEvent());
-    print("----------here");
     return GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
             body: BlocBuilder<ProfileBloc, ProfileState>(
-                buildWhen: (previous, current) =>
-                    current is ProfileGetCurrentUserState,
+                buildWhen: (previous, current) => current is ProfileGetCurrentUserState,
                 builder: (context, state) {
                   if (state is ProfileGetCurrentUserState) {
                     return SafeArea(
@@ -51,40 +43,12 @@ class EditAccount extends StatelessWidget {
                           SizedBox(
                             height: 3.h,
                           ),
-
-                          // ProfileImage(),
-
-                          // ProfileImage()
-                          /* Stack(children: [
-                                  const CircleAvatar(
-                                    radius: 60,
-                                    foregroundImage:
-                                        AssetImage("assets/images/personalImage.png"),
-                                  ),
-                                  Positioned(
-                                      top: 35.sp,
-                                      left: 35.sp,
-                                      child: Container(
-                                        width: 46,
-                                        height: 46,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xffF5F5F5),
-                                            borderRadius: BorderRadius.circular(30)),
-                                        child: SvgPicture.asset(
-                                          'assets/images/editImage.svg',
-                                          colorFilter: const ColorFilter.mode(
-                                              Color(0xff000000), BlendMode.srcIn),
-                                        ),
-                                      ))
-                                ]),
-                                */
                           SizedBox(
                             height: 1.h,
                           ),
                           Text(
                             '${state.user.name}',
-                            style: const TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w400),
+                            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
                           ),
                           SizedBox(
                             height: 0.5.h,
@@ -93,8 +57,7 @@ class EditAccount extends StatelessWidget {
                             currentLanguage == "ar"
                                 ? '966${state.user.phone}+'
                                 : '+966${state.user.phone}',
-                            style: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w400),
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                           ),
                           SizedBox(
                             height: 2.h,
@@ -182,13 +145,11 @@ class EditAccount extends StatelessWidget {
                             onTap: () {
                               showConfirmDiolg(
                                   context: context,
-                                  title: AppLocalizations.of(context)!
-                                      .deleteAccountConfirm,
+                                  title: AppLocalizations.of(context)!.deleteAccountConfirm,
                                   acceptFun: () {
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SplashSignInSignUpScreen()),
+                                            builder: (context) => const SplashSignInSignUpScreen()),
                                         (Route route) => false);
                                   });
                             },
@@ -205,8 +166,7 @@ class EditAccount extends StatelessWidget {
                               onTap: () {
                                 showConfirmDiolg(
                                     context: context,
-                                    title: AppLocalizations.of(context)!
-                                        .signOutConfirm,
+                                    title: AppLocalizations.of(context)!.signOutConfirm,
                                     acceptFun: () {
                                       MurnyApi().signOut(context: context);
                                     });
@@ -225,30 +185,23 @@ class EditAccount extends StatelessWidget {
                             width: 85.w,
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8))),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                                 backgroundColor: MaterialStateProperty.all(
                                   const Color(0xff252C63),
                                 ),
                               ),
                               onPressed: () {
-                                context
-                                    .read<ProfileBloc>()
-                                    .add(UpdateUserProfileEvent(
+                                context.read<ProfileBloc>().add(UpdateUserProfileEvent(
                                       fullName: conFullName.text,
                                       userName: conUserName.text,
                                       phone: conPhoneNumber.text,
                                     ));
-                                showSuccessSnackBar(
-                                    context, "Profile Updated Successfully");
+                                showSuccessSnackBar(context, "Profile Updated Successfully");
                               },
                               child: Text(
                                 AppLocalizations.of(context)!.save,
-                                style: const TextStyle(
-                                    color: Color(0xffFFFFFF), fontSize: 20),
+                                style: const TextStyle(color: Color(0xffFFFFFF), fontSize: 20),
                               ),
                             ),
                           ),

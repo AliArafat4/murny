@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
-import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
-import 'package:murny_final_project/bloc/segment_bloc/cubit/segment_cubit.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import '../bloc/segment_bloc/cubit/segment_cubit.dart';
 
 class SegmentControl extends StatelessWidget {
   const SegmentControl({
@@ -44,17 +40,13 @@ class SegmentControl extends StatelessWidget {
             borderColor: const Color(0xff000000),
             selectedColor: colorSelected,
             unselectedColor: Colors.white,
-            selectedTextStyle:
-                const TextStyle(color: Color(0xffFFFFFF), fontSize: 14),
-            unselectedTextStyle:
-                const TextStyle(color: Color(0xff000000), fontSize: 14),
+            selectedTextStyle: const TextStyle(color: Color(0xffFFFFFF), fontSize: 14),
+            unselectedTextStyle: const TextStyle(color: Color(0xff000000), fontSize: 14),
             borderWidth: 0.7,
             borderRadius: 4.0,
-            disabledChildren: [],
+            disabledChildren: const [],
             verticalOffset: 3,
             onSegmentTapped: (index) {
-              print(index);
-
               context.read<SegmentCubit>().switchSegment(selectedType: index);
               func!.call(index);
             });

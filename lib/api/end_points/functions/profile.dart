@@ -22,23 +22,16 @@ class ProfileFunc {
 
           if (body!.containsKey("gender")) {
             final response = await http.get(uri, headers: {"token": token});
-            //print("object2");
-            print(response.body);
 
-            DriverModel driverModel =
-                DriverModel.fromJson(jsonDecode(response.body));
+            DriverModel driverModel = DriverModel.fromJson(jsonDecode(response.body));
             return driverModel;
           }
-          //print("object");
-          final response = await http.get(uri, headers: {"token": token});
-          //print("object2");
-          print(response.body);
 
-          ProfileModel profileModel =
-              ProfileModel.fromJson(jsonDecode(response.body));
+          final response = await http.get(uri, headers: {"token": token});
+
+          ProfileModel profileModel = ProfileModel.fromJson(jsonDecode(response.body));
           return profileModel;
         } catch (err) {
-          print(err);
           return err;
         }
 
@@ -47,13 +40,11 @@ class ProfileFunc {
         break;
 
       case Profile.updateDriverProfile:
-        await uploadProfileData(
-            url, endPoints.updateDriverProfile, token, body);
+        await uploadProfileData(url, endPoints.updateDriverProfile, token, body);
         break;
 
       case Profile.uploadDriverLicense:
-        await uploadProfileData(
-            url, endPoints.uploadDriverLicense, token, body);
+        await uploadProfileData(url, endPoints.uploadDriverLicense, token, body);
         break;
 
       case Profile.uploadAvatar:
@@ -70,14 +61,14 @@ class ProfileFunc {
     }
   }
 
-  Future<void> uploadProfileData(String url, String endPoints, String token,
-      Map<String, dynamic>? body) async {
+  Future<void> uploadProfileData(
+      String url, String endPoints, String token, Map<String, dynamic>? body) async {
     try {
       final uri = Uri.parse(url + endPoints);
 
       await http.post(uri, headers: {"token": token}, body: jsonEncode(body));
     } catch (err) {
-      print(err);
+      // print(err);
     }
   }
 }

@@ -14,14 +14,14 @@ class VoiceSearchButton extends StatelessWidget {
           AvatarGlow(
             glowCount: 1,
             duration: const Duration(milliseconds: 1000),
-            glowColor: Color(0xff252C63),
+            glowColor: const Color(0xff252C63),
             child: Container(
               width: MediaQuery.of(context).size.width * 0.6,
               height: MediaQuery.of(context).size.height / 3,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Color(0xff252C63),
+                  color: const Color(0xff252C63),
                   width: 2,
                 ),
               ),
@@ -30,7 +30,7 @@ class VoiceSearchButton extends StatelessWidget {
           AvatarGlow(
             glowCount: 1,
             duration: const Duration(milliseconds: 1000),
-            glowColor: Color(0xff252C63),
+            glowColor: const Color(0xff252C63),
             child: ClipOval(
               child: Container(
                 width: MediaQuery.of(context).size.width / 2,

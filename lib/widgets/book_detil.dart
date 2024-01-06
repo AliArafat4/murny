@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookDetil extends StatelessWidget {
-  const BookDetil(
-      {super.key, required this.price, required this.paymentMethod});
+  const BookDetil({super.key, required this.price, required this.paymentMethod});
   final String price;
   final String paymentMethod;
 
@@ -23,7 +22,7 @@ class BookDetil extends StatelessWidget {
           children: [
             Text(
               AppLocalizations.of(context)!.total,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
             ),
             Text(
               price,
@@ -40,7 +39,7 @@ class BookDetil extends StatelessWidget {
           children: [
             Text(
               AppLocalizations.of(context)!.payment,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
             ),
             Row(
               children: [

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:murny_final_project/local_storage/shared_prefrences.dart';
-import 'package:murny_final_project/screens/editAccount/edit_account_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ContentDrawer extends StatelessWidget {
@@ -10,11 +9,11 @@ class ContentDrawer extends StatelessWidget {
       required this.imageSvg,
       required this.text,
       required this.spaceTop,
-      this.naviPush});
+      required this.naviPush});
   final String imageSvg;
   final String text;
   final double spaceTop;
-  final Function? naviPush;
+  final Function() naviPush;
   bool isSwitched = SharedPref().getCurrentTheme() == "dark" ? true : false;
 
   @override
@@ -26,13 +25,13 @@ class ContentDrawer extends StatelessWidget {
           ? EdgeInsets.only(right: 15.sp, top: spaceTop)
           : EdgeInsets.only(left: 15.sp, top: spaceTop),
       child: InkWell(
-        onTap: () => naviPush!(),
+        onTap: () => naviPush(),
         child: Row(
           children: [
             SvgPicture.asset(
               imageSvg,
-              colorFilter: ColorFilter.mode(
-                  isSwitched ? Colors.white : Colors.black, BlendMode.srcIn),
+              colorFilter:
+                  ColorFilter.mode(isSwitched ? Colors.white : Colors.black, BlendMode.srcIn),
               //, Color(0xff000000),
               // color: isSwitched ? Colors.white : Colors.black,
             ),

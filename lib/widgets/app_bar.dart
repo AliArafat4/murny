@@ -7,7 +7,7 @@ AppBar customAppBar(String title) {
       padding: const EdgeInsets.all(8.0),
       child: Text(
         title,
-        style: TextStyle(fontSize: 22),
+        style: const TextStyle(fontSize: 22),
       ),
     ),
     leading: const ArrowBack(),

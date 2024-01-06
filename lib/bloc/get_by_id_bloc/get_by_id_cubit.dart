@@ -11,22 +11,16 @@ class GetByIdCubit extends Cubit<GetByIdState> {
   GetByIdCubit() : super(GetByIdInitial());
 
   getCartByID({required String cartID}) async {
-    CartModel cart = await MurnyApi()
-        .public(body: {"cart_id": cartID}, function: Public.getCartByID);
+    CartModel cart =
+        await MurnyApi().public(body: {"cart_id": cartID}, function: Public.getCartByID);
 
-    print("cart");
-    print(cart.name);
     emit(GetCartByIdSuccessState(getCartByID: cart));
   }
 
   getDriverByID({required String driverID, required String token}) async {
-    DriverModel driver = await MurnyApi().driver(
-        body: {"driver_id": driverID},
-        function: Driver.getDriverByID,
-        token: token);
+    DriverModel driver = await MurnyApi()
+        .driver(body: {"driver_id": driverID}, function: Driver.getDriverByID, token: token);
 
-    print("driver");
-    print(driver.name);
     emit(GetDriverByIdSuccessState(getDriverByID: driver));
   }
 }

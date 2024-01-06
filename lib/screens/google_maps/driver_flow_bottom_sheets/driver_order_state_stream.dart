@@ -13,9 +13,7 @@ import 'package:murny_final_project/models/profile_model.dart';
 import 'package:murny_final_project/screens/google_maps/driver_flow_bottom_sheets/accept_deny_order_bottom_sheet.dart';
 import 'package:murny_final_project/screens/google_maps/driver_flow_bottom_sheets/driver_response_bottom_sheet.dart';
 import 'package:murny_final_project/screens/google_maps/driver_flow_bottom_sheets/start_trip_bottom_sheet.dart';
-import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/accepted_order_bottom_sheet.dart';
-import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/filter_bottom_sheet.dart';
-import 'package:murny_final_project/screens/google_maps/user_flow_bottom_sheets/user_waiting_bottom_sheet.dart';
+
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class DriverOrderStateStream extends StatelessWidget {
@@ -31,15 +29,12 @@ class DriverOrderStateStream extends StatelessWidget {
 
     var getUser = ProfileModel();
     Stream<http.Response> getOrders() async* {
-      final uri = Uri.parse(
-          "https://murny-api.onrender.com/common/get_last_driver_order");
+      final uri = Uri.parse("https://murny-api.onrender.com/common/get_last_driver_order");
 
       yield* Stream.periodic(const Duration(seconds: 3), (_) async {
         final res = http.get(uri, headers: {"token": user.token ?? ""});
         final body = await res;
         final order = OrderModel.fromJson(jsonDecode(body.body));
-        print(order.runtimeType);
-        print(body.body);
         getUser = await MurnyApi().user(
             body: {"user_id": order.orderFromId},
             function: User.getUserByID,
@@ -55,16 +50,14 @@ class DriverOrderStateStream extends StatelessWidget {
     }
 
     return BlocConsumer<OrderStateCubit, OrderStateState>(
-      buildWhen: (previous, current) =>
-          current != previous || current is OrderStateInitial,
+      buildWhen: (previous, current) => current != previous || current is OrderStateInitial,
       builder: (context, state) {
         return SlidingUpPanel(
           panel: StreamBuilder(
               stream: getOrders(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  Map<String, dynamic> response =
-                      jsonDecode(snapshot.data!.body);
+                  Map<String, dynamic> response = jsonDecode(snapshot.data!.body);
 
                   if (response.isNotEmpty) {
                     final OrderModel lastOrder = OrderModel.fromJson(response);

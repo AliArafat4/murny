@@ -1,8 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:murny_final_project/api/mury_api.dart';
 import 'package:murny_final_project/bloc/map_bloc/map_bloc.dart';
 import 'package:murny_final_project/bloc/token_bloc/check_token_cubit.dart';
 import 'package:murny_final_project/screens/google_maps/google_maps_screen.dart';
@@ -88,10 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 430.w,
               fit: BoxFit.cover,
             ),
-            Positioned(
-                top: 48.7.sp,
-                right: move,
-                child: Image.asset('assets/images/carRight.png'))
+            Positioned(top: 48.7.sp, right: move, child: Image.asset('assets/images/carRight.png'))
           ]),
           Container(
             width: MediaQuery.of(context).size.width,
@@ -109,8 +104,7 @@ class _SplashScreenState extends State<SplashScreen> {
       context.read<CheckTokenCubit>().state is InvalidTokenState
           ? Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                  builder: (context) => const SplashSignInSignUpScreen()),
+              MaterialPageRoute(builder: (context) => const SplashSignInSignUpScreen()),
               (route) => false,
             )
           : Navigator.pushAndRemoveUntil(
